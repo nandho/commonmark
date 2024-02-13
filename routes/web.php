@@ -19,3 +19,6 @@ Route::get('/', function () {
 Route::get('tes/', function () {
     return view('tes');
 });
+Route::get('daftar/', function () {
+    return view('pendaftaran');
+});
