@@ -1,0 +1,65 @@
+{
+    "openapi":"3.0.3",
+    "info":{
+        "title": "User Api",
+        "description": "User Api",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/"
+        }
+    ],
+    "paths": {
+        "api/users":{
+            "post":{
+                "description":"register new user",
+                "requestBody":{
+                    "content":{
+                        "application/json" : {
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "username":{
+                                        "type":"string"
+                                    },
+                                    "password":{
+                                        "type":"string"
+                                    },
+                                    "email":{
+                                        "type":"string"
+                                    },
+                                    "role":{
+                                        "type":"string"
+                                    },
+                                    "token":{
+                                        
+                                    }
+                                }
+                            }   
+                        }
+                    }
+                }
+            }
+        },
+        "api/users/login":{
+            "post":{
+                "description":"login user"
+            }
+        },
+        "api/users/current":{
+            "get":{
+                "description":"get current user"
+            },
+            "patch":{
+                "description":"update current user"
+            }
+        },
+        "api/user/logout":{
+            "delete":{
+                "description":"logout user"
+            }
+        }
+    }
+
+}
