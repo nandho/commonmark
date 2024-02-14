@@ -2,10 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserModel extends Model
+class User extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'username',
+        'password',
+        'email',
+        'role',
+        'token',
+    ];
+
+    protected $hidden = [
+        'password', // Jangan tampilkan password saat model di-convert ke array atau JSON
+        'token',    // Jangan tampilkan token saat model di-convert ke array atau JSON
+    ];
 }
