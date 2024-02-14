@@ -28,7 +28,15 @@ class PmbApiController extends Controller
      */
     public function create(Request $request)
     {
-        return response()->json($request, 200);
+        // Mendapatkan semua data yang dikirim dengan permintaan
+        $requestData = $request->all();
+        
+        // Mengembalikan data yang diterima dalam respons JSON
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil diterima',
+            'data' => $requestData,
+        ], 200);
     }
 
     /**
