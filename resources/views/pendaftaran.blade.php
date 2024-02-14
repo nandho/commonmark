@@ -363,7 +363,7 @@
                                 </div>
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="container mx-auto px-4 md:px-6" x-data="{ showSchoolInput: false }">
+                                <div class="container mx-auto px-4 md:px-6" x-data="{ showSchoolInput: false }">
                                     <div x-data="select({ data: { ht: 'HTML', css: 'CSS', php: 'PHP', java: 'JavaScript', py: 'Python', lara: 'Laravel' }, emptyOptionsMessage: 'No Course Match Your Search.', name: 'school', placeholder: 'Pilih Program Studi', showSchoolInput: showSchoolInput })" x-init="init()" @click.away="closeListbox()" @keydown.escape="closeListbox()" class="relative">
                                         <label for="school" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Program Studi
                                             <span class="text-red-500">*</span>
@@ -404,6 +404,7 @@
             </main>
         </div>
     </div>
+
 
     <!-- Alpine.js script -->
     <script>
