@@ -22,3 +22,6 @@ Route::get('tes/', function () {
 Route::get('daftar/', function () {
     return view('pendaftaran');
 });
+Route::get('login/', function () {
+    return view('login');
+});

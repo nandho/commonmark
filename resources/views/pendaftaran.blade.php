@@ -5,18 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PMB Akprada</title>
-    <!-- <link rel="stylesheet" href="{{ asset('css/tailwind.output.css') }}"> -->
-    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"> -->
     @vite('resources/css/app.css')
-    @vite('resources/js/app.js')
+    <!-- @vite('resources/js/app.js') -->
     <!-- Alpine.js (required for Select2 with Alpine) -->
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2"></script>
+
 </head>
 
 <body>
     <div class="flex h-screen bg-gray-50 light:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
         <div class="flex flex-col flex-1">
-            <nav x-data="{ open: false }" class="bg-white border-gray-200 light:bg-gray-900">
+            <nav class="bg-white border-gray-200 light:bg-gray-900">
                 <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <div class="flex items-center space-x-3 rtl:space-x-reverse">
                         <a href="https://flowbite.com/" class="flex items-center space-x-3">
@@ -32,32 +31,54 @@
                             <span class="text-base md:text-lg font-semibold whitespace-nowrap light:text-white">Yogyakarta</span>
                         </div>
                     </div>
-                    <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                        <a href="" type="button" id="loginButton" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center light:bg-blue-600 light:hover:bg-blue-700 light:focus:ring-blue-800">Login</a>
-                        <button @click="open = !open" data-collapse-toggle="navbar-cta" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 light:text-gray-400 light:hover:bg-gray-700 light:focus:ring-gray-600" aria-controls="navbar-cta" aria-expanded="false">
-                            <span class="sr-only">Open main menu</span>
-                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
-                            </svg>
-                        </button>
+                    <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 light:text-gray-400 light:hover:bg-gray-700 light:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
+                        </svg>
+                    </button>
+
+                    <div class="w-full md:block md:w-auto hidden" id="navbar-default">
+                        <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white light:bg-gray-800 md:light:bg-gray-900 light:border-gray-700">
+                            <li>
+                                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 light:text-white md:light:hover:text-blue-500 light:hover:bg-gray-700 light:hover:text-white md:light:hover:bg-transparent">About</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 light:text-white md:light:hover:text-blue-500 light:hover:bg-gray-700 light:hover:text-white md:light:hover:bg-transparent">Services</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 light:text-white md:light:hover:text-blue-500 light:hover:bg-gray-700 light:hover:text-white md:light:hover:bg-transparent">Pricing</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 light:text-white md:light:hover:text-blue-500 light:hover:bg-gray-700 light:hover:text-white md:light:hover:bg-transparent">Contact</a>
+                            </li>
+                            <li>
+                                <a href="/login" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 light:text-white md:light:hover:text-blue-500 light:hover:bg-gray-700 light:hover:text-white md:light:hover:bg-transparent">Login</a>
+                            </li>
+                        </ul>
                     </div>
-                    <div :class="{ 'hidden': !open }" class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
-                        <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white light:bg-gray-800 md:light:bg-gray-900 light:border-gray-700">
+                    <div id="navdesktop" class="hidden md:block md:w-auto"> <!-- Tambahkan class 'hidden' untuk menyembunyikan menu desktop pada tampilan mobile -->
+                        <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white light:bg-gray-800 md:light:bg-gray-900 light:border-gray-700">
                             <li>
-                                <a href="#" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:light:hover:text-blue-500 light:text-white light:hover:bg-gray-700 light:hover:text-white md:light:hover:bg-transparent light:border-gray-700">Beranda</a>
+                                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 light:text-white md:light:hover:text-blue-500 light:hover:bg-gray-700 light:hover:text-white md:light:hover:bg-transparent">About</a>
                             </li>
                             <li>
-                                <a href="#" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 d:light:hover:text-blue-500 light:text-white light:hover:bg-gray-700 light:hover:text-white md:light:hover:bg-transparent light:border-gray-700">Pendaftaran</a>
+                                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 light:text-white md:light:hover:text-blue-500 light:hover:bg-gray-700 light:hover:text-white md:light:hover:bg-transparent">Services</a>
                             </li>
                             <li>
-                                <a href="#" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:light:hover:text-blue-500 light:text-white light:hover:bg-gray-700 light:hover:text-white md:light:hover:bg-transparent light:border-gray-700">Informasi</a>
+                                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 light:text-white md:light:hover:text-blue-500 light:hover:bg-gray-700 light:hover:text-white md:light:hover:bg-transparent">Pricing</a>
                             </li>
-                            <li><a href="" type="button" id="login" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center light:bg-blue-600 light:hover:bg-blue-700 light:focus:ring-blue-800">Login</a>
+                            <li>
+                                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 light:text-white md:light:hover:text-blue-500 light:hover:bg-gray-700 light:hover:text-white md:light:hover:bg-transparent">Contact</a>
+                            </li>
+                            <li>
+                                <a href="/login" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 light:text-white md:light:hover:text-blue-500 light:hover:bg-gray-700 light:hover:text-white md:light:hover:bg-transparent">Login</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
+
             <br>
             <main class="h-full pb-16 overflow-y-auto">
                 <div class="container px-6 mx-auto grid">
@@ -73,455 +94,329 @@
                                 </div>
                             </div>
                         </div>
-                        <form>
-                            <div class="container mx-auto px-4 md:px-6">
-                                <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 light:bg-gray-800 light:text-blue-400" role="alert">
-                                    <span class="font-medium">Lengkapi Datamu Sekarang. <br></span>Jangan sampai
-                                    kehabisan kuota! Sedikit lagi kamu akan terdaftar di perguruan tinggi impianmu.
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Form inputan untuk nama sekolah -->
+                        <div class="container mx-auto px-4 md:px-6" x-data="{ schoolName: '', schools: [], NamaL : [], NIK:[], NISN:[],jk : [],HP : [], email : [],selectedSchool: '', selectedProvince: '', selectedCity: '', provinces: [], cities: [],selectedType: '',jurusan:[], lulus:[],NamaW:[], NIKW:[], NOHPW:[]  }">
+                            <form class="mb-4" id="schoolForm">
                                 <div class="container mx-auto px-4 md:px-6">
-                                    <label for="Name" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Nama
-                                        Lengkap <span class="text-red-500">*</span></label>
-                                    <input type="text" id="Name" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-blue-500 light:focus:border-blue-500" placeholder="Isi Nama Lengkap Anda">
-                                </div>
-                                <div class="container mx-auto px-4 md:px-6">
-                                    <span class="block mb-2 text-sm font-medium text-gray-900 light:text-white">
-                                        Jenis Kelamin <span class="text-red-500">*</span>
-                                    </span>
-                                    <div class="mt-2">
-                                        <label class="inline-flex items-center text-gray-900 light:text-white">
-                                            <input type="radio" class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="jenis_kelamin" value="Laki-Laki" />
-                                            <span class="ml-2">Laki-Laki</span>
-                                        </label>
-                                        <label class="inline-flex items-center ml-6 text-gray-900 light:text-white">
-                                            <input type="radio" class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="jenis_kelamin" value="Perempuan" />
-                                            <span class="ml-2">Perempuan</span>
-                                        </label>
+                                    <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 light:bg-gray-800 light:text-blue-400" role="alert">
+                                        <span class="font-medium">Lengkapi Datamu Sekarang. <br></span>Jangan sampai
+                                        kehabisan kuota! Sedikit lagi kamu akan terdaftar di perguruan tinggi impianmu.
                                     </div>
                                 </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div x-model="NamaL" class="container mx-auto px-4 md:px-6">
+                                        <label for="NamaL" class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap: <span class="text-red-500">*</span></label>
+                                        <input type="text" x-model="NamaL" id="NamaL" name="NamaL" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="Isikan Nama Lengkap Anda">
 
-                                <div class="container mx-auto px-4 md:px-6">
-                                    <label for="hp" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">No. HP
-                                        <span class="text-red-500">*</span></label>
-                                    <input type="nomor" id="hp" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-blue-500 light:focus:border-blue-500" placeholder="0821xxxxxxxx">
-                                </div>
-                                <div class="container mx-auto px-4 md:px-6">
-                                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Alamat
-                                        Email <span class="text-red-500">*</span></label>
-                                    <input type="email" id="email" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-blue-500 light:focus:border-blue-500" placeholder="email@domain.com">
-                                </div>
-                                <div class="container mx-auto px-4 md:px-6">
-                                    <label for="ttl" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Tanggal
-                                        Lahir <span class="text-red-500">*</span></label>
-                                    <input type="date" id="ttl" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-blue-500 light:focus:border-blue-500" placeholder="0821xxxxxxxx">
-                                </div>
-                                <div class="container mx-auto px-4 md:px-6">
-                                    <label for="tempt" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Tempat
-                                        Lahir <span class="text-red-500">*</span></label>
-                                    <input type="text" id="tempat" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-blue-500 light:focus:border-blue-500" placeholder="email@domain.com">
-                                </div>
-                                <div class="container mx-auto px-4 md:px-6">
-                                    <label for="negara" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Kabupaten / Kota
-                                        <span class="text-red-500">*</span>
-                                    </label>
-                                    <div x-data="select({ data: { ht: 'HTML', css: 'CSS', php: 'PHP', java: 'JavaScript', py: 'Python', lara: 'Laravel' }, emptyOptionsMessage: 'No Course Match Your Search.', name: 'course', placeholder: 'Pilih Kewarganegaraan' })" x-init="init()" @click.away="closeListbox()" @keydown.escape="closeListbox()" class="relative">
-                                        <span class="inline-block w-full rounded-md shadow-sm">
-                                            <button x-ref="button" @click="toggleListboxVisibility($event)" :aria-expanded="open" aria-haspopup="listbox" class="relative z-0 w-full py-2 pl-3 pr-10 text-left transition duration-150 ease-in-out bg-gray-50 border border-gray-300 text-gray-900 rounded-md cursor-default focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5">
-                                                <span x-show="!open" x-text="value in options ? options[value] : placeholder" :class="{ 'text-gray-500': !(value in options) }" class="block truncate"></span>
-                                            </button>
-                                        </span>
-                                        <div x-show="open" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-cloak class="absolute z-10 w-full mt-1 bg-white rounded-md shadow-lg">
-                                            <input x-ref="search" x-show="open" x-model="search" @keydown.enter.stop.prevent="selectOption()" @keydown.arrow-up.prevent="focusPreviousOption()" @keydown.arrow-down.prevent="focusNextOption()" type="search" class="relative z-0 w-full py-2 pl-3 pr-10 text-left transition duration-150 ease-in-out bg-gray-50 border border-gray-300 text-gray-900 rounded-md cursor-default focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5" />
-                                            <ul x-ref="listbox" @keydown.enter.stop.prevent="selectOption()" @keydown.arrow-up.prevent="focusPreviousOption()" @keydown.arrow-down.prevent="focusNextOption()" role="listbox" :aria-activedescendant="focusedOptionIndex ? name + 'Option' + focusedOptionIndex : null" tabindex="-1" class="py-1 overflow-auto text-base leading-6 rounded-md shadow-xs max-h-60 focus:outline-none sm:text-sm sm:leading-5">
-                                                <template x-for="(key, index) in Object.keys(options)" :key="index">
-                                                    <li :id="name + 'Option' + focusedOptionIndex" @click="selectOption()" @mouseenter="focusedOptionIndex = index" @mouseleave="focusedOptionIndex = null" role="option" :aria-selected="focusedOptionIndex === index" :class="{ 'text-white bg-indigo-600': index === focusedOptionIndex, 'text-gray-900': index !== focusedOptionIndex }" class="relative py-2 pl-3 text-gray-900 cursor-default select-none pr-9">
-                                                        <span x-text="Object.values(options)[index]" :class="{ 'font-semibold': index === focusedOptionIndex, 'font-normal': index !== focusedOptionIndex }" class="block font-normal truncate"></span>
-                                                        <span x-show="key === value" :class="{ 'text-white': index === focusedOptionIndex, 'text-indigo-600': index !== focusedOptionIndex }" class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">
-                                                            <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                                                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                                            </svg>
-                                                        </span>
-                                                    </li>
-                                                </template>
-                                                <div x-show="!Object.keys(options).length" x-text="emptyOptionsMessage" class="px-3 py-2 text-gray-900 cursor-default select-none"></div>
-                                            </ul>
-                                        </div>
                                     </div>
-                                </div>
+                                    <div x-model="NIK" class="container mx-auto px-4 md:px-6">
+                                        <label for="NIK" class="block text-sm font-medium text-gray-700 mb-2">NIK: <span class="text-red-500">*</span></label>
+                                        <input type="nomor" x-model="NIK" id="NIK" name="NIK" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="Isikan NIK Anda">
 
+                                    </div>
+                                    <div x-model="NISN" class="container mx-auto px-4 md:px-6">
+                                        <label for="NISN" class="block text-sm font-medium text-gray-700 mb-2">NISN: <span class="text-red-500">*</span></label>
+                                        <input type="nomor" x-model="NISN" id="NISN" name="NISN" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="Isikan NISN Anda">
+
+                                    </div>
+                                    <div class="container mx-auto px-4 md:px-6">
+                                        <span class="block mb-2 text-sm font-medium text-gray-900 light:text-white">
+                                            Jenis Kelamin <span class="text-red-500">*</span>
+                                        </span>
+                                        <div x-model="jk" id="jk" name="jk" class="mt-2">
+                                            <label class="inline-flex items-center text-gray-900 light:text-white">
+                                                <input type="radio" class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple light:focus:shadow-outline-gray" name="jenis_kelamin" value="Laki-Laki" />
+                                                <span class="ml-2">Laki-Laki</span>
+                                            </label>
+                                            <label class="inline-flex items-center ml-6 text-gray-900 light:text-white">
+                                                <input type="radio" class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple light:focus:shadow-outline-gray" name="jenis_kelamin" value="Perempuan" />
+                                                <span class="ml-2">Perempuan</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div x-model="HP" class="container mx-auto px-4 md:px-6">
+                                        <label for="HP" class="block text-sm font-medium text-gray-700 mb-2">No. HP: <span class="text-red-500">*</span></label>
+                                        <input type="nomor" x-model="HP" id="HP" name="HP" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="082xxxxxxxxx">
+                                    </div>
+                                    <div x-model="email" class="container mx-auto px-4 md:px-6">
+                                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">E-mail: <span class="text-red-500">*</span></label>
+                                        <input type="email" x-model="email" id="email" name="email" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="example@domaian.com">
+                                    </div>
+                                    <!-- Dropdown untuk pilihan provinsi -->
+                                    <div class="container mx-auto px-4 md:px-6">
+                                        <label for="selectedProvince" class="block text-sm font-medium text-gray-700">Provinsi: <span class="text-red-500">*</span></label>
+                                        <select x-model="selectedProvince" id="selectedProvince" name="selectedProvince" class="border border-gray-300 rounded-md px-4 py-2 w-full">
+                                            <option value="" selected>Pilih Provinsi</option>
+                                            <template x-for="province in provinces" :key="province.id">
+                                                <option x-text="province.name" :value="province.id"></option>
+                                            </template>
+                                        </select>
+                                    </div>
+                                    <!-- Dropdown untuk pilihan kabupaten/kota -->
+                                    <div class="container mx-auto px-4 md:px-6">
+                                        <label for="selectedCity" class="block text-sm font-medium text-gray-700">Kabupaten/Kota: <span class="text-red-500">*</span></label>
+                                        <select x-model="selectedCity" id="selectedCity" name="selectedCity" class="border border-gray-300 rounded-md px-4 py-2 w-full">
+                                            <option value="" selected>Pilih Kabupaten / Kota</option>
+                                            <template x-for="city in cities" :key="city.id">
+                                                <option x-text="city.name" :value="city.id"></option>
+                                            </template>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
                                 <div class="container mx-auto px-4 md:px-6">
-                                    <label for="nik" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">NIK / No.
-                                        KTP <span class="text-red-500">*</span> </label>
-                                    <input type="nomor" id="nik" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-blue-500 light:focus:border-blue-500" placeholder="Isi No. KTP Anda">
-                                </div>
-                            </div>
-                            <br>
-                            <!-- Sekolah -->
-                            <div class="container mx-auto px-4 md:px-6">
-                                <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 light:bg-gray-800 light:text-blue-400" role="alert">
-                                    <span class="font-medium">Asal Sekolah. <br></span>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <!-- Provinsi -->
-                                <div class="container mx-auto px-4 md:px-6" x-data="{ showSchoolInput: false }">
-                                    <div x-data="select({ data: { ht: 'HTML', css: 'CSS', php: 'PHP', java: 'JavaScript', py: 'Python', lara: 'Laravel' }, emptyOptionsMessage: 'No Course Match Your Search.', name: 'school', placeholder: 'Pilih Provinsi', showSchoolInput: showSchoolInput })" x-init="init()" @click.away="closeListbox()" @keydown.escape="closeListbox()" class="relative">
-                                        <label for="school" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Provinsi
-                                            <span class="text-red-500">*</span>
-                                        </label>
-                                        <span class="inline-block w-full rounded-md shadow-sm">
-                                            <button x-ref="button" @click="toggleListboxVisibility($event)" :aria-expanded="open" aria-haspopup="listbox" class="relative z-0 w-full py-2 pl-3 pr-10 text-left transition duration-150 ease-in-out bg-gray-50 border border-gray-300 text-gray-900 rounded-md cursor-default focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5">
-                                                <span x-show="!open" x-text="value in options ? options[value] : placeholder" :class="{ 'text-gray-500': !(value in options) }" class="block truncate"></span>
-                                            </button>
-                                        </span>
-                                        <div x-show="open" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-cloak class="absolute z-10 w-full mt-1 bg-white rounded-md shadow-lg">
-                                            <input x-ref="search" x-show="open" x-model="search" @keydown.enter.stop.prevent="selectOption()" @keydown.arrow-up.prevent="focusPreviousOption()" @keydown.arrow-down.prevent="focusNextOption()" type="search" class="relative z-0 w-full py-2 pl-3 pr-10 text-left transition duration-150 ease-in-out bg-gray-50 border border-gray-300 text-gray-900 rounded-md cursor-default focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5" />
-                                            <ul x-ref="listbox" @keydown.enter.stop.prevent="selectOption()" @keydown.arrow-up.prevent="focusPreviousOption()" @keydown.arrow-down.prevent="focusNextOption()" role="listbox" :aria-activedescendant="focusedOptionIndex ? name + 'Option' + focusedOptionIndex : null" tabindex="-1" class="py-1 overflow-auto text-base leading-6 rounded-md shadow-xs max-h-60 focus:outline-none sm:text-sm sm:leading-5">
-                                                <template x-for="(key, index) in Object.keys(options)" :key="index">
-                                                    <li :id="name + 'Option' + focusedOptionIndex" @click="selectOption(key)" @mouseenter="focusedOptionIndex = index" @mouseleave="focusedOptionIndex = null" role="option" :aria-selected="focusedOptionIndex === index" :class="{ 'text-white bg-indigo-600': index === focusedOptionIndex, 'text-gray-900': index !== focusedOptionIndex }" class="relative py-2 pl-3 text-gray-900 cursor-default select-none pr-9">
-                                                        <span x-text="Object.values(options)[index]" :class="{ 'font-semibold': index === focusedOptionIndex, 'font-normal': index !== focusedOptionIndex }" class="block font-normal truncate"></span>
-                                                        <span x-show="key === value" :class="{ 'text-white': index === focusedOptionIndex, 'text-indigo-600': index !== focusedOptionIndex }" class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">
-                                                            <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                                                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                                            </svg>
-                                                        </span>
-                                                    </li>
-                                                </template>
-                                                <div x-show="!Object.keys(options).length" x-text="emptyOptionsMessage" class="px-3 py-2 text-gray-900 cursor-default select-none"></div>
-                                            </ul>
-                                        </div>
+                                    <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 light:bg-gray-800 light:text-blue-400" role="alert">
+                                        <span class="font-medium">Asal Sekolah. <br></span>
                                     </div>
                                 </div>
-                                <!-- Kabupaten Kota -->
-                                <div class="container mx-auto px-4 md:px-6" x-data="{ showSchoolInput: false }">
-                                    <div x-data="select({ data: { ht: 'HTML', css: 'CSS', php: 'PHP', java: 'JavaScript', py: 'Python', lara: 'Laravel' }, emptyOptionsMessage: 'No Course Match Your Search.', name: 'school', placeholder: 'Pilih Kabupaten / Kota', showSchoolInput: showSchoolInput })" x-init="init()" @click.away="closeListbox()" @keydown.escape="closeListbox()" class="relative">
-                                        <label for="school" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Kabupaten / Kota
-                                            <span class="text-red-500">*</span>
-                                        </label>
-                                        <span class="inline-block w-full rounded-md shadow-sm">
-                                            <button x-ref="button" @click="toggleListboxVisibility($event)" :aria-expanded="open" aria-haspopup="listbox" class="relative z-0 w-full py-2 pl-3 pr-10 text-left transition duration-150 ease-in-out bg-gray-50 border border-gray-300 text-gray-900 rounded-md cursor-default focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5">
-                                                <span x-show="!open" x-text="value in options ? options[value] : placeholder" :class="{ 'text-gray-500': !(value in options) }" class="block truncate"></span>
-                                            </button>
-                                        </span>
-                                        <div x-show="open" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-cloak class="absolute z-10 w-full mt-1 bg-white rounded-md shadow-lg">
-                                            <input x-ref="search" x-show="open" x-model="search" @keydown.enter.stop.prevent="selectOption()" @keydown.arrow-up.prevent="focusPreviousOption()" @keydown.arrow-down.prevent="focusNextOption()" type="search" class="relative z-0 w-full py-2 pl-3 pr-10 text-left transition duration-150 ease-in-out bg-gray-50 border border-gray-300 text-gray-900 rounded-md cursor-default focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5" />
-                                            <ul x-ref="listbox" @keydown.enter.stop.prevent="selectOption()" @keydown.arrow-up.prevent="focusPreviousOption()" @keydown.arrow-down.prevent="focusNextOption()" role="listbox" :aria-activedescendant="focusedOptionIndex ? name + 'Option' + focusedOptionIndex : null" tabindex="-1" class="py-1 overflow-auto text-base leading-6 rounded-md shadow-xs max-h-60 focus:outline-none sm:text-sm sm:leading-5">
-                                                <template x-for="(key, index) in Object.keys(options)" :key="index">
-                                                    <li :id="name + 'Option' + focusedOptionIndex" @click="selectOption(key)" @mouseenter="focusedOptionIndex = index" @mouseleave="focusedOptionIndex = null" role="option" :aria-selected="focusedOptionIndex === index" :class="{ 'text-white bg-indigo-600': index === focusedOptionIndex, 'text-gray-900': index !== focusedOptionIndex }" class="relative py-2 pl-3 text-gray-900 cursor-default select-none pr-9">
-                                                        <span x-text="Object.values(options)[index]" :class="{ 'font-semibold': index === focusedOptionIndex, 'font-normal': index !== focusedOptionIndex }" class="block font-normal truncate"></span>
-                                                        <span x-show="key === value" :class="{ 'text-white': index === focusedOptionIndex, 'text-indigo-600': index !== focusedOptionIndex }" class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">
-                                                            <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                                                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                                            </svg>
-                                                        </span>
-                                                    </li>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="container mx-auto px-4 md:px-6">
+                                        <label for="schoolName" class="block text-sm font-medium text-gray-700">Nama Sekolah: <span class="text-red-500">*</span></label>
+                                        <input type="text" x-model="schoolName" id="schoolName" name="schoolName" required class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="Masukan Nama Sekolah Dengan Lengkap">
+                                        <!-- Tempat untuk menampilkan hasil -->
+                                        <p id="result" class="text-gray-700"></p>
+                                        <!-- Tampilkan kotak inputan jika data tidak ditemukan -->
+                                        <div x-show="schools.length === 0 && schoolName !== ''" class="mb-4">
+                                            <label for="manualInput" class="block text-sm font-medium text-gray-700 mb-2">Masukkan Nama Sekolah:</label>
+                                            <input type="text" x-model="selectedSchool" id="manualInput" name="manualInput" class="border border-gray-300 rounded-md px-4 py-2 w-full">
+                                        </div>
+                                        <!-- Dropdown untuk pilihan sekolah -->
+                                        <div class="mb-4" x-show="schools.length > 0">
+                                            <label for="selectedSchool" class="block text-sm font-medium text-gray-700 mb-2">Pilih Sekolah: <span class="text-red-500">*</span></label>
+                                            <select x-model="selectedSchool" id="selectedSchool" name="selectedSchool" class="border border-gray-300 rounded-md px-4 py-2 w-full">
+                                                <option value="" disabled selected>Pilih Sekolah</option>
+                                                <template x-for="school in schools" :key="school.npsn">
+                                                    <option x-text="`${school.npsn} - ${school.sekolah}`" :value="`${school.npsn}:${school.sekolah}`"></option>
                                                 </template>
-                                                <div x-show="!Object.keys(options).length" x-text="emptyOptionsMessage" class="px-3 py-2 text-gray-900 cursor-default select-none"></div>
-                                            </ul>
+                                            </select>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- Jenis Sekolah -->
-                                <div class="container mx-auto px-4 md:px-6" x-data="{ showSchoolInput: false }">
-                                    <div x-data="select({ data: { ht: 'HTML', css: 'CSS', php: 'PHP', java: 'JavaScript', py: 'Python', lara: 'Laravel' }, emptyOptionsMessage: 'No Course Match Your Search.', name: 'school', placeholder: 'Pilih Jenis Sekolah', showSchoolInput: showSchoolInput })" x-init="init()" @click.away="closeListbox()" @keydown.escape="closeListbox()" class="relative">
-                                        <label for="school" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Jenis Sekolah
-                                            <span class="text-red-500">*</span>
-                                        </label>
-                                        <span class="inline-block w-full rounded-md shadow-sm">
-                                            <button x-ref="button" @click="toggleListboxVisibility($event)" :aria-expanded="open" aria-haspopup="listbox" class="relative z-0 w-full py-2 pl-3 pr-10 text-left transition duration-150 ease-in-out bg-gray-50 border border-gray-300 text-gray-900 rounded-md cursor-default focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5">
-                                                <span x-show="!open" x-text="value in options ? options[value] : placeholder" :class="{ 'text-gray-500': !(value in options) }" class="block truncate"></span>
-                                            </button>
-                                        </span>
-                                        <div x-show="open" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-cloak class="absolute z-10 w-full mt-1 bg-white rounded-md shadow-lg">
-                                            <input x-ref="search" x-show="open" x-model="search" @keydown.enter.stop.prevent="selectOption()" @keydown.arrow-up.prevent="focusPreviousOption()" @keydown.arrow-down.prevent="focusNextOption()" type="search" class="relative z-0 w-full py-2 pl-3 pr-10 text-left transition duration-150 ease-in-out bg-gray-50 border border-gray-300 text-gray-900 rounded-md cursor-default focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5" />
-                                            <ul x-ref="listbox" @keydown.enter.stop.prevent="selectOption()" @keydown.arrow-up.prevent="focusPreviousOption()" @keydown.arrow-down.prevent="focusNextOption()" role="listbox" :aria-activedescendant="focusedOptionIndex ? name + 'Option' + focusedOptionIndex : null" tabindex="-1" class="py-1 overflow-auto text-base leading-6 rounded-md shadow-xs max-h-60 focus:outline-none sm:text-sm sm:leading-5">
-                                                <template x-for="(key, index) in Object.keys(options)" :key="index">
-                                                    <li :id="name + 'Option' + focusedOptionIndex" @click="selectOption(key)" @mouseenter="focusedOptionIndex = index" @mouseleave="focusedOptionIndex = null" role="option" :aria-selected="focusedOptionIndex === index" :class="{ 'text-white bg-indigo-600': index === focusedOptionIndex, 'text-gray-900': index !== focusedOptionIndex }" class="relative py-2 pl-3 text-gray-900 cursor-default select-none pr-9">
-                                                        <span x-text="Object.values(options)[index]" :class="{ 'font-semibold': index === focusedOptionIndex, 'font-normal': index !== focusedOptionIndex }" class="block font-normal truncate"></span>
-                                                        <span x-show="key === value" :class="{ 'text-white': index === focusedOptionIndex, 'text-indigo-600': index !== focusedOptionIndex }" class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">
-                                                            <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                                                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                                            </svg>
-                                                        </span>
-                                                    </li>
-                                                </template>
-                                                <div x-show="!Object.keys(options).length" x-text="emptyOptionsMessage" class="px-3 py-2 text-gray-900 cursor-default select-none"></div>
-                                            </ul>
-                                        </div>
+                                    <div class="container mx-auto px-4 md:px-6">
+                                        <label for="schoolType" class="block text-sm font-medium text-gray-700 mb-2">Jenis Sekolah: <span class="text-red-500">*</span></label>
+                                        <select x-model="selectedType" id="selectedType" name="schoolType" class="border border-gray-300 rounded-md px-4 py-2 w-full">
+                                            <option value="" selected>Pilih Jenis Sekolah</option>
+                                            <option value="SMA">SMA</option>
+                                            <option value="SMK">SMK</option>
+                                            <option value="MAN">MAN </option>
+                                            <option value="SMKS">SMKS </option>
+                                            <option value="Paket C">Paket C</option>
+                                        </select>
+                                    </div>
+                                    <div x-model="jurusan" class="container mx-auto px-4 md:px-6">
+                                        <label for="jurusan" class="block text-sm font-medium text-gray-700 mb-2">Jurusan Sekolah (Cth: IPA, IPS): <span class="text-red-500">*</span></label>
+                                        <input type="text" x-model="jurusan" id="jurusan" name="jurusan" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="Isi Jurusan Anda">
+                                    </div>
+                                    <div x-model="lulus" class="container mx-auto px-4 md:px-6">
+                                        <label for="lulus" class="block text-sm font-medium text-gray-700 mb-2">Tahun Lulus (Cth: 2023): <span class="text-red-500">*</span></label>
+                                        <input type="text" x-model="lulus" id="lulus" name="lulus" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="Isi Tahun Lulus">
                                     </div>
                                 </div>
-                                <!-- NPSSS -->
-                                <div class="container mx-auto px-4 md:px-6" x-data="{ showSchoolInput: false }">
-                                    <div x-data="select({ data: { ht: 'HTML', css: 'CSS', php: 'PHP', java: 'JavaScript', py: 'Python', lara: 'Laravel' }, emptyOptionsMessage: 'No Course Match Your Search.', name: 'school', placeholder: 'Pilih ', showSchoolInput: showSchoolInput })" x-init="init()" @click.away="closeListbox()" @keydown.escape="closeListbox()" class="relative">
-                                        <label for="school" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">NPSN / Nama Sekolah
-                                            <span class="text-red-500">*</span>
-                                        </label>
-                                        <span class="inline-block w-full rounded-md shadow-sm">
-                                            <button x-ref="button" @click="toggleListboxVisibility($event)" :aria-expanded="open" aria-haspopup="listbox" class="relative z-0 w-full py-2 pl-3 pr-10 text-left transition duration-150 ease-in-out bg-gray-50 border border-gray-300 text-gray-900 rounded-md cursor-default focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5">
-                                                <span x-show="!open" x-text="value in options ? options[value] : placeholder" :class="{ 'text-gray-500': !(value in options) }" class="block truncate"></span>
-                                            </button>
-                                        </span>
-                                        <div x-show="open" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-cloak class="absolute z-10 w-full mt-1 bg-white rounded-md shadow-lg">
-                                            <input x-ref="search" x-show="open" x-model="search" @keydown.enter.stop.prevent="selectOption()" @keydown.arrow-up.prevent="focusPreviousOption()" @keydown.arrow-down.prevent="focusNextOption()" type="search" class="relative z-0 w-full py-2 pl-3 pr-10 text-left transition duration-150 ease-in-out bg-gray-50 border border-gray-300 text-gray-900 rounded-md cursor-default focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5" />
-                                            <ul x-ref="listbox" @keydown.enter.stop.prevent="selectOption()" @keydown.arrow-up.prevent="focusPreviousOption()" @keydown.arrow-down.prevent="focusNextOption()" role="listbox" :aria-activedescendant="focusedOptionIndex ? name + 'Option' + focusedOptionIndex : null" tabindex="-1" class="py-1 overflow-auto text-base leading-6 rounded-md shadow-xs max-h-60 focus:outline-none sm:text-sm sm:leading-5">
-                                                <template x-for="(key, index) in Object.keys(options)" :key="index">
-                                                    <li :id="name + 'Option' + focusedOptionIndex" @click="selectOption(key)" @mouseenter="focusedOptionIndex = index" @mouseleave="focusedOptionIndex = null" role="option" :aria-selected="focusedOptionIndex === index" :class="{ 'text-white bg-indigo-600': index === focusedOptionIndex, 'text-gray-900': index !== focusedOptionIndex }" class="relative py-2 pl-3 text-gray-900 cursor-default select-none pr-9">
-                                                        <span x-text="Object.values(options)[index]" :class="{ 'font-semibold': index === focusedOptionIndex, 'font-normal': index !== focusedOptionIndex }" class="block font-normal truncate"></span>
-                                                        <span x-show="key === value" :class="{ 'text-white': index === focusedOptionIndex, 'text-indigo-600': index !== focusedOptionIndex }" class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">
-                                                            <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                                                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                                            </svg>
-                                                        </span>
-                                                    </li>
-                                                </template>
-                                                <div x-show="!Object.keys(options).length" x-text="emptyOptionsMessage" class="px-3 py-2 text-gray-900 cursor-default select-none"></div>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <span>
-                                        <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">Jika data tidak ditemukan, silakan <button @click.prevent="showSchoolInput = true" class="font-medium text-blue-600 hover:underline dark:text-blue-500">+Tambah Sekolah</button>.</p>
-                                    </span>
-
-                                    <template x-if="showSchoolInput">
-                                        <div>
-                                            <label for="schoolInput" class="block mt-2 text-sm font-medium text-gray-900 light:text-white">Tambah Sekolah</label>
-                                            <input type="text" id="schoolInput" name="schoolInput" placeholder="Masukkan nama sekolah" class="w-full px-3 py-2 leading-6 text-gray-900 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                        </div>
-                                        <!-- Tambah input lainnya di sini -->
-                                        <div>
-                                            <label for="otherInput" class="block mt-2 text-sm font-medium text-gray-900 light:text-white">Input Lainnya</label>
-                                            <input type="text" id="otherInput" name="otherInput" placeholder="Masukkan informasi tambahan" class="w-full px-3 py-2 leading-6 text-gray-900 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                        </div>
-                                    </template>
-                                </div>
-                                <!-- Jurusan -->
-                                <div class="container mx-auto px-4 md:px-6" x-data="{ showSchoolInput: false }">
-                                    <div x-data="select({ data: { ht: 'HTML', css: 'CSS', php: 'PHP', java: 'JavaScript', py: 'Python', lara: 'Laravel' }, emptyOptionsMessage: 'No Course Match Your Search.', name: 'school', placeholder: 'Pilih Jurusan', showSchoolInput: showSchoolInput })" x-init="init()" @click.away="closeListbox()" @keydown.escape="closeListbox()" class="relative">
-                                        <label for="school" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Jurusan
-                                            <span class="text-red-500">*</span>
-                                        </label>
-                                        <span class="inline-block w-full rounded-md shadow-sm">
-                                            <button x-ref="button" @click="toggleListboxVisibility($event)" :aria-expanded="open" aria-haspopup="listbox" class="relative z-0 w-full py-2 pl-3 pr-10 text-left transition duration-150 ease-in-out bg-gray-50 border border-gray-300 text-gray-900 rounded-md cursor-default focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5">
-                                                <span x-show="!open" x-text="value in options ? options[value] : placeholder" :class="{ 'text-gray-500': !(value in options) }" class="block truncate"></span>
-                                            </button>
-                                        </span>
-                                        <div x-show="open" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-cloak class="absolute z-10 w-full mt-1 bg-white rounded-md shadow-lg">
-                                            <input x-ref="search" x-show="open" x-model="search" @keydown.enter.stop.prevent="selectOption()" @keydown.arrow-up.prevent="focusPreviousOption()" @keydown.arrow-down.prevent="focusNextOption()" type="search" class="relative z-0 w-full py-2 pl-3 pr-10 text-left transition duration-150 ease-in-out bg-gray-50 border border-gray-300 text-gray-900 rounded-md cursor-default focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5" />
-                                            <ul x-ref="listbox" @keydown.enter.stop.prevent="selectOption()" @keydown.arrow-up.prevent="focusPreviousOption()" @keydown.arrow-down.prevent="focusNextOption()" role="listbox" :aria-activedescendant="focusedOptionIndex ? name + 'Option' + focusedOptionIndex : null" tabindex="-1" class="py-1 overflow-auto text-base leading-6 rounded-md shadow-xs max-h-60 focus:outline-none sm:text-sm sm:leading-5">
-                                                <template x-for="(key, index) in Object.keys(options)" :key="index">
-                                                    <li :id="name + 'Option' + focusedOptionIndex" @click="selectOption(key)" @mouseenter="focusedOptionIndex = index" @mouseleave="focusedOptionIndex = null" role="option" :aria-selected="focusedOptionIndex === index" :class="{ 'text-white bg-indigo-600': index === focusedOptionIndex, 'text-gray-900': index !== focusedOptionIndex }" class="relative py-2 pl-3 text-gray-900 cursor-default select-none pr-9">
-                                                        <span x-text="Object.values(options)[index]" :class="{ 'font-semibold': index === focusedOptionIndex, 'font-normal': index !== focusedOptionIndex }" class="block font-normal truncate"></span>
-                                                        <span x-show="key === value" :class="{ 'text-white': index === focusedOptionIndex, 'text-indigo-600': index !== focusedOptionIndex }" class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">
-                                                            <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                                                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                                            </svg>
-                                                        </span>
-                                                    </li>
-                                                </template>
-                                                <div x-show="!Object.keys(options).length" x-text="emptyOptionsMessage" class="px-3 py-2 text-gray-900 cursor-default select-none"></div>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Tahun Lulus -->
-                                <div class="container mx-auto px-4 md:px-6" x-data="{ showSchoolInput: false }">
-                                    <div x-data="select({ data: { ht: 'HTML', css: 'CSS', php: 'PHP', java: 'JavaScript', py: 'Python', lara: 'Laravel' }, emptyOptionsMessage: 'No Course Match Your Search.', name: 'school', placeholder: 'Pilih Tahun Lulus', showSchoolInput: showSchoolInput })" x-init="init()" @click.away="closeListbox()" @keydown.escape="closeListbox()" class="relative">
-                                        <label for="school" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Tahun lulus
-                                            <span class="text-red-500">*</span>
-                                        </label>
-                                        <span class="inline-block w-full rounded-md shadow-sm">
-                                            <button x-ref="button" @click="toggleListboxVisibility($event)" :aria-expanded="open" aria-haspopup="listbox" class="relative z-0 w-full py-2 pl-3 pr-10 text-left transition duration-150 ease-in-out bg-gray-50 border border-gray-300 text-gray-900 rounded-md cursor-default focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5">
-                                                <span x-show="!open" x-text="value in options ? options[value] : placeholder" :class="{ 'text-gray-500': !(value in options) }" class="block truncate"></span>
-                                            </button>
-                                        </span>
-                                        <div x-show="open" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-cloak class="absolute z-10 w-full mt-1 bg-white rounded-md shadow-lg">
-                                            <input x-ref="search" x-show="open" x-model="search" @keydown.enter.stop.prevent="selectOption()" @keydown.arrow-up.prevent="focusPreviousOption()" @keydown.arrow-down.prevent="focusNextOption()" type="search" class="relative z-0 w-full py-2 pl-3 pr-10 text-left transition duration-150 ease-in-out bg-gray-50 border border-gray-300 text-gray-900 rounded-md cursor-default focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5" />
-                                            <ul x-ref="listbox" @keydown.enter.stop.prevent="selectOption()" @keydown.arrow-up.prevent="focusPreviousOption()" @keydown.arrow-down.prevent="focusNextOption()" role="listbox" :aria-activedescendant="focusedOptionIndex ? name + 'Option' + focusedOptionIndex : null" tabindex="-1" class="py-1 overflow-auto text-base leading-6 rounded-md shadow-xs max-h-60 focus:outline-none sm:text-sm sm:leading-5">
-                                                <template x-for="(key, index) in Object.keys(options)" :key="index">
-                                                    <li :id="name + 'Option' + focusedOptionIndex" @click="selectOption(key)" @mouseenter="focusedOptionIndex = index" @mouseleave="focusedOptionIndex = null" role="option" :aria-selected="focusedOptionIndex === index" :class="{ 'text-white bg-indigo-600': index === focusedOptionIndex, 'text-gray-900': index !== focusedOptionIndex }" class="relative py-2 pl-3 text-gray-900 cursor-default select-none pr-9">
-                                                        <span x-text="Object.values(options)[index]" :class="{ 'font-semibold': index === focusedOptionIndex, 'font-normal': index !== focusedOptionIndex }" class="block font-normal truncate"></span>
-                                                        <span x-show="key === value" :class="{ 'text-white': index === focusedOptionIndex, 'text-indigo-600': index !== focusedOptionIndex }" class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">
-                                                            <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                                                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                                            </svg>
-                                                        </span>
-                                                    </li>
-                                                </template>
-                                                <div x-show="!Object.keys(options).length" x-text="emptyOptionsMessage" class="px-3 py-2 text-gray-900 cursor-default select-none"></div>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><br>
-                            <!-- program Studi -->
-                            <div class="container mx-auto px-4 md:px-6">
-                                <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 light:bg-gray-800 light:text-blue-400" role="alert">
-                                    <span class="font-medium">Pilihan Program Studi.<br></span>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="container mx-auto px-4 md:px-6" x-data="{ showSchoolInput: false }">
-                                    <div x-data="select({ data: { ht: 'HTML', css: 'CSS', php: 'PHP', java: 'JavaScript', py: 'Python', lara: 'Laravel' }, emptyOptionsMessage: 'No Course Match Your Search.', name: 'school', placeholder: 'Pilih Program Studi', showSchoolInput: showSchoolInput })" x-init="init()" @click.away="closeListbox()" @keydown.escape="closeListbox()" class="relative">
-                                        <label for="school" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Program Studi
-                                            <span class="text-red-500">*</span>
-                                        </label>
-                                        <span class="inline-block w-full rounded-md shadow-sm">
-                                            <button x-ref="button" @click="toggleListboxVisibility($event)" :aria-expanded="open" aria-haspopup="listbox" class="relative z-0 w-full py-2 pl-3 pr-10 text-left transition duration-150 ease-in-out bg-gray-50 border border-gray-300 text-gray-900 rounded-md cursor-default focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5">
-                                                <span x-show="!open" x-text="value in options ? options[value] : placeholder" :class="{ 'text-gray-500': !(value in options) }" class="block truncate"></span>
-                                            </button>
-                                        </span>
-                                        <div x-show="open" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-cloak class="absolute z-10 w-full mt-1 bg-white rounded-md shadow-lg">
-                                            <input x-ref="search" x-show="open" x-model="search" @keydown.enter.stop.prevent="selectOption()" @keydown.arrow-up.prevent="focusPreviousOption()" @keydown.arrow-down.prevent="focusNextOption()" type="search" class="relative z-0 w-full py-2 pl-3 pr-10 text-left transition duration-150 ease-in-out bg-gray-50 border border-gray-300 text-gray-900 rounded-md cursor-default focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5" />
-                                            <ul x-ref="listbox" @keydown.enter.stop.prevent="selectOption()" @keydown.arrow-up.prevent="focusPreviousOption()" @keydown.arrow-down.prevent="focusNextOption()" role="listbox" :aria-activedescendant="focusedOptionIndex ? name + 'Option' + focusedOptionIndex : null" tabindex="-1" class="py-1 overflow-auto text-base leading-6 rounded-md shadow-xs max-h-60 focus:outline-none sm:text-sm sm:leading-5">
-                                                <template x-for="(key, index) in Object.keys(options)" :key="index">
-                                                    <li :id="name + 'Option' + focusedOptionIndex" @click="selectOption(key)" @mouseenter="focusedOptionIndex = index" @mouseleave="focusedOptionIndex = null" role="option" :aria-selected="focusedOptionIndex === index" :class="{ 'text-white bg-indigo-600': index === focusedOptionIndex, 'text-gray-900': index !== focusedOptionIndex }" class="relative py-2 pl-3 text-gray-900 cursor-default select-none pr-9">
-                                                        <span x-text="Object.values(options)[index]" :class="{ 'font-semibold': index === focusedOptionIndex, 'font-normal': index !== focusedOptionIndex }" class="block font-normal truncate"></span>
-                                                        <span x-show="key === value" :class="{ 'text-white': index === focusedOptionIndex, 'text-indigo-600': index !== focusedOptionIndex }" class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">
-                                                            <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                                                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                                            </svg>
-                                                        </span>
-                                                    </li>
-                                                </template>
-                                                <div x-show="!Object.keys(options).length" x-text="emptyOptionsMessage" class="px-3 py-2 text-gray-900 cursor-default select-none"></div>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><br>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 justify-end">
+                                <br>
                                 <div class="container mx-auto px-4 md:px-6">
-                                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                                    <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 light:bg-gray-800 light:text-blue-400" role="alert">
+                                        <span class="font-medium">Data Lainnya. <br></span>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="container mx-auto px-4 md:px-6">
+                                        <label for="schoolType" class="block text-sm font-medium text-gray-700 mb-2">Progam Studi: <span class="text-red-500">*</span></label>
+                                        <select x-model="selectedType" id="selectedType" name="schoolType" class="border border-gray-300 rounded-md px-4 py-2 w-full">
+                                            <option value="" selected>Pilih Program Studi</option>
+                                            <option value="D3 perhotelan">D3 - Perhotelan</option>
+                                        </select>
+                                    </div>
+                                    <div x-model="NamaW" class="container mx-auto px-4 md:px-6">
+                                        <label for="NamaW" class="block text-sm font-medium text-gray-700 mb-2">Nama Orang Tua/ Wali: <span class="text-red-500">*</span></label>
+                                        <input type="text" x-model="NamaW" id="NamaW" name="NamaW" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="Isi Jurusan Anda">
+                                    </div>
+                                    <div x-model="NOHPW" class="container mx-auto px-4 md:px-6">
+                                        <label for="NOHPW" class="block text-sm font-medium text-gray-700 mb-2">No. HP Orang Tua / Wali: <span class="text-red-500">*</span></label>
+                                        <input type="nomor" x-model="NOHPW" id="NOHPW" name="NOHPW" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="082xxxxxxxxx">
 
+                                    </div>
+                                    <div x-model="NIKW" class="container mx-auto px-4 md:px-6">
+                                        <label for="NIKW" class="block text-sm font-medium text-gray-700 mb-2">NIK Orang Tua / Wali: <span class="text-red-500">*</span></label>
+                                        <input type="nomor" x-model="NIKW" id="NIKW" name="NIKW" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="Isi NIK Orang Tua/Wali">
+
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 justify-end">
+                                    <div class="container mx-auto px-4 md:px-6">
+                                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center light:bg-blue-600 light:hover:bg-blue-700 light:focus:ring-blue-800">Kirim Data</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </main>
         </div>
     </div>
-
-
-    <!-- Alpine.js script -->
+    <!-- JavaScript untuk melakukan permintaan data ke API -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        function select(config) {
-            return {
-                data: config.data,
-                emptyOptionsMessage: config.emptyOptionsMessage ?? 'No results match your search.',
-                focusedOptionIndex: null,
-                name: config.name,
-                open: false,
-                options: {},
-                placeholder: config.placeholder ?? 'Select an option',
-                search: '',
-                value: config.value,
-                closeListbox() {
-                    this.open = false;
-                    this.focusedOptionIndex = null;
-                    this.search = '';
-                },
-                focusNextOption() {
-                    if (this.focusedOptionIndex === null) return this.focusedOptionIndex = Object.keys(this.options).length - 1;
+        // Fungsi untuk mengambil data dari API
+        async function fetchData(schoolName) {
+            const apiUrl = 'https://api-sekolah-indonesia.vercel.app/sekolah/s?sekolah=' + encodeURIComponent(schoolName);
 
-                    if (this.focusedOptionIndex + 1 >= Object.keys(this.options).length) return;
+            try {
+                // Melakukan permintaan GET ke API menggunakan Axios
+                const response = await axios.get(apiUrl);
 
-                    this.focusedOptionIndex++;
+                // Menyaring dan menampilkan NPSN dan nama sekolah
+                const filteredData = response.data.dataSekolah.map(school => ({
+                    npsn: school.npsn,
+                    sekolah: school.sekolah
+                }));
 
-                    this.$refs.listbox.children[this.focusedOptionIndex].scrollIntoView({
-                        block: "center"
-                    });
-                },
-                focusPreviousOption() {
-                    if (this.focusedOptionIndex === null) return this.focusedOptionIndex = 0;
+                // Mengisi data sekolah ke dalam dropdown
+                document.querySelector('[x-data]').__x.$data.schools = filteredData;
 
-                    if (this.focusedOptionIndex <= 0) return;
+                // Mengosongkan hasil jika ada
+                document.getElementById('result').innerHTML = '';
+            } catch (error) {
+                // Menampilkan pesan "Data tidak ditemukan" jika terjadi kesalahan
+                document.getElementById('result').innerHTML = 'Data tidak ditemukan';
 
-                    this.focusedOptionIndex--;
-
-                    this.$refs.listbox.children[this.focusedOptionIndex].scrollIntoView({
-                        block: "center"
-                    });
-                },
-                init() {
-                    this.options = this.data;
-
-                    if (!(this.value in this.options)) this.value = null;
-
-                    this.$watch('search', ((value) => {
-                        if (!this.open || !value) return this.options = this.data;
-
-                        this.options = Object.keys(this.data)
-                            .filter((key) => this.data[key].toLowerCase().includes(value.toLowerCase()))
-                            .reduce((options, key) => {
-                                options[key] = this.data[key];
-                                return options;
-                            }, {});
-                    }));
-                },
-                selectOption(key) {
-                    if (!this.open) return this.toggleListboxVisibility();
-
-                    if (key === this.value) {
-                        this.value = null; // Batalkan pilihan jika sudah dipilih
-                    } else {
-                        this.value = key;
-                    }
-
-                    this.closeListbox();
-                },
-                toggleListboxVisibility(event) {
-                    event.preventDefault(); // Menghentikan perilaku default dari tombol
-
-                    if (this.open) return this.closeListbox();
-
-                    this.focusedOptionIndex = Object.keys(this.options).indexOf(this.value);
-
-                    if (this.focusedOptionIndex < 0) this.focusedOptionIndex = 0;
-
-                    this.open = true;
-
-                    this.$nextTick(() => {
-                        this.$refs.search.focus();
-                    });
-                }
+                // Menyembunyikan dropdown jika data tidak ditemukan
+                document.querySelector('[x-data]').__x.$data.schools = [];
             }
         }
-    </script>
 
+        // Fungsi untuk mengambil data provinsi dari API
+        async function fetchProvinces() {
+            try {
+                const response = await axios.get('https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json');
+                document.querySelector('[x-data]').__x.$data.provinces = response.data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
 
+        // Fungsi untuk mengambil data kabupaten/kota berdasarkan id provinsi dari API
+        async function fetchCities(provinceId) {
+            try {
+                const response = await axios.get(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinceId}.json`);
+                document.querySelector('[x-data]').__x.$data.cities = response.data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
 
-    <script>
-        // Function to toggle visibility of login buttons based on window size
-        function toggleLoginButtonVisibility() {
-            var loginButton = document.getElementById('loginButton');
-            var login = document.getElementById('login');
+        // Memanggil fungsi fetchData saat pengguna mengetikkan data
+        document.getElementById('schoolName').addEventListener('input', function(event) {
+            const schoolName = event.target.value.trim(); // Mendapatkan nilai dari input
 
-            // Check window width
-            if (window.innerWidth <= 450) {
-                // Hide loginButton and show login
-                loginButton.style.display = 'none';
-                login.style.display = 'inline-block';
+            // Memanggil fetchData hanya jika ada nilai yang dimasukkan
+            if (schoolName.length > 0) {
+                fetchData(schoolName); // Panggil fungsi untuk mengambil data
             } else {
-                // Show loginButton and hide login
-                loginButton.style.display = 'inline-block';
-                login.style.display = 'none';
+                // Mengosongkan dropdown jika input kosong
+                document.querySelector('[x-data]').__x.$data.schools = [];
             }
-        }
-
-        // Add event listener for window resize
-        window.addEventListener('resize', function() {
-            toggleLoginButtonVisibility();
         });
 
-        // Initial check on page load
-        window.addEventListener('load', function() {
-            toggleLoginButtonVisibility();
+        // Memanggil fungsi fetchData saat pengguna memilih sekolah
+        document.getElementById('selectedSchool').addEventListener('change', function(event) {
+            const [npsn, sekolah] = event.target.value.split(':');
+            document.getElementById('result').innerText = `Memilih sekolah "${sekolah}" dengan NPSN: ${npsn}`;
+        });
+
+        // Memanggil fungsi fetchProvinces saat halaman dimuat
+        fetchProvinces();
+
+        // Event listener untuk memanggil fungsi fetchCities saat provinsi dipilih
+        document.getElementById('selectedProvince').addEventListener('change', function(event) {
+            const provinceId = event.target.value;
+            fetchCities(provinceId);
+        });
+
+        // Event listener untuk menangani pengiriman form
+        document.getElementById('schoolForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah pengiriman form secara default
+            const inpunama = document.getElementById('NamaL').value;
+            const inputnik = document.getElementById('NIK').value;
+            const inputnisn = document.getElementById('NISN').value;
+            const inputjk = document.getElementById('jk').value;
+            const inputhp = document.getElementById('HP').value;
+            const inputemail = document.getElementById('email').value;
+            const selectedOption = document.getElementById('selectedSchool').value.split(':');
+            const inputjensi = document.getElementById('selectedType').value; // Menggunakan nilai langsung dari variabel selectedType
+            const inputjurusan = document.getElementById('jurusan').value;
+            const inputlulusn = document.getElementById('lulus').value;
+            const inputnamaw = document.getElementById('NamaW').value;
+            const inputNikW = document.getElementById('NIKW').value;
+            const inputnohpw = document.getElementById('NOHPW').value;
+            const npsn = selectedOption[0];
+            const schoolName = selectedOption[1];
+            const inputsekolah = document.getElementById('manualInput').value;
+            // Mendapatkan nama provinsi dan nama kota yang dipilih
+            const selectedProvinceId = document.getElementById('selectedProvince').value;
+            const selectedProvinceName = document.getElementById('selectedProvince').options[document.getElementById('selectedProvince').selectedIndex].text;
+            const selectedCityId = document.getElementById('selectedCity').value;
+            const selectedCityName = document.getElementById('selectedCity').options[document.getElementById('selectedCity').selectedIndex].text;
+
+            // Kirim data menggunakan Axios
+            axios.post('/api/pmb', {
+                    inpunama: inpunama,
+                    npsn: npsn, // Mengirimkan NPSN sekolah
+                    inputjk: inputjk,
+                    inputhp: inputhp,
+                    inputemail: inputemail,
+                    inputsekolah: inputsekolah,
+                    schoolName: schoolName, // Mengirimkan nama sekolah
+                    inputjensi: inputjensi,
+                    inputjurusan: inputjurusan,
+                    inputlulusn: inputlulusn,
+                    inputnik: inputnik,
+                    inputnisn: inputnisn,
+                    inputNikW: inputNikW,
+                    inputnamaw: inputnamaw,
+                    inputnohpw: inputnohpw,
+                    selectedProvince: selectedProvinceName, // Mengirimkan nama provinsi yang dipilih
+                    selectedCity: selectedCityName // Mengirimkan nama kota yang dipilih
+                })
+                .then(function(response) {
+                    console.log(response); // Log respon dari server jika sukses
+                })
+                .catch(function(error) {
+                    console.error(error); // Log kesalahan jika terjadi
+                });
         });
     </script>
+    <script>
+        // Mengambil referensi ke tombol hamburger
+        const navbarToggle = document.querySelector('[data-collapse-toggle="navbar-default"]');
+        // Mengambil referensi ke menu navbar
+        const navbarMenu = document.getElementById('navbar-default');
+        // Mengambil referensi ke menu desktop
+        const navDesktop = document.getElementById('navdesktop');
+
+        // Menambahkan event listener untuk menghandle klik pada tombol hamburger
+        navbarToggle.addEventListener('click', function() {
+            // Toggle class 'hidden' pada menu navbar saat tombol hamburger diklik
+            navbarMenu.classList.toggle('hidden');
+            // Toggle atribut aria-expanded pada tombol hamburger
+            navbarToggle.setAttribute('aria-expanded', navbarMenu.classList.contains('hidden') ? 'false' : 'true');
+        });
+
+        // Memeriksa lebar layar saat halaman dimuat dan saat jendela diubah ukurannya
+        window.addEventListener('DOMContentLoaded', checkWidth);
+        window.addEventListener('resize', checkWidth);
+
+        function checkWidth() {
+            // Jika lebar layar lebih besar dari 800px (tampilan desktop)
+            if (window.innerWidth > 800) {
+                // Tampilkan menu desktop
+                navDesktop.classList.remove('hidden');
+            } else {
+                // Sembunyikan menu desktop
+                navDesktop.classList.add('hidden');
+            }
+        }
+    </script>
+
 </body>
 
 </html>

@@ -22,13 +22,13 @@ class PmbApiController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Store a newly created resource in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function store(Request $request)
     {
-        // Mendapatkan semua data yang dikirim dengan permintaan
         $requestData = $request->all();
         
         // Mengembalikan data yang diterima dalam respons JSON
@@ -37,17 +37,6 @@ class PmbApiController extends Controller
             'message' => 'Data berhasil diterima',
             'data' => $requestData,
         ], 200);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        // Menyimpan PMB baru ke service lain atau ke database lokal
     }
 
     /**
