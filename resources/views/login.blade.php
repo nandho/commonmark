@@ -17,7 +17,7 @@
             </div>
             <div class="w-full p-8 lg:w-1/2">
                 <h2 class="text-2xl font-semibold text-gray-700 text-center">Selamat Datang</h2>
-                <p class="text-xl text-gray-600 text-center">Calon Mahasiswa/i Akprada!</p>
+                <p class="text-xl text-gray-600 text-center">Calon Mahasiswa/i Akparda!</p>
                 <a href="/daftar" class="flex items-center justify-center mt-4 text-white rounded-lg shadow-md hover:bg-gray-100">
                     <div class="px-4 py-3">
                         <img src="{{ asset('storage/images/akprada-header.png') }}" class="object-cover h-14 w-auto md:h-10" alt="Flowbite Logo">
