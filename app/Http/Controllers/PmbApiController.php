@@ -165,7 +165,7 @@ class PmbApiController extends Controller
 
 
 
-        $pmb = PmbModel::fill($request )
+        $pmb = PmbModel::fill($request);
     }
 
     /**
