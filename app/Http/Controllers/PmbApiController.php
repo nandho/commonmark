@@ -51,8 +51,8 @@ class PmbApiController extends Controller
             'kode_pos' => 'required|string',
             'provinsi_sekolah' => 'required|string',
             'kabupaten_sekolah' => 'required|string',
-            'tahun_lulus_sekolah' => 'required|string',
-            'no_ijazah' => 'required|string',
+            'tahun_lulus_sekolah' => 'nullable|string',
+            'no_ijazah' => 'nullable|string',
             'nama_wali' => 'nullable|string',
             'no_hp_wali' => 'nullable|string',
             'no_telp_wali' => 'nullable|string',
@@ -70,6 +70,10 @@ class PmbApiController extends Controller
         }
 
         $requestData = $request->all();
+
+        //Todo if photo exist into $requestData
+        
+
         $requestData['nomor_pendaftaran'] = NomorPendaftaranGenerator::generate();
 
         try {
@@ -100,7 +104,13 @@ class PmbApiController extends Controller
      */
     public function show($id)
     {
-        // Mengambil data PMB berdasarkan ID dari service lain atau dari database lokal
+        $pmb = PmbModel::find($id);
+
+        if (!$pmb) {
+            return new PmbResource(false,'not found', null);
+        }
+
+        return new PmbResource(true,'success', $pmb);
     }
 
     /**
@@ -109,9 +119,53 @@ class PmbApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         // Menampilkan form untuk mengedit data PMB
+        $validator = Validator::make($request->all(),[
+            'nama_lengkap' => 'required|string',
+            'nomor_hp' => 'required|string',
+            'tempat_lahir' => 'required|string',
+            'tanggal_lahir' => 'required|date',
+            'jenis_kelamin' => 'required|string|in:Laki-laki,Perempuan',
+            'alamat' => 'required|string',
+            'agama' => 'required|string',
+            'kewarganegaraan' => 'required|string',
+            'jalur_pendaftaran' => 'required|string',
+            'periode_pendaftaran' => 'required|string',
+            'provinsi' => 'required|string',
+            'kabupaten' => 'required|string',
+            'kecamatan' => 'required|string',
+            'kelurahan' => 'required|string',
+            'kode_pos' => 'required|string',
+            'provinsi_sekolah' => 'required|string',
+            'kabupaten_sekolah' => 'required|string',
+            'tahun_lulus_sekolah' => 'nullable|string',
+            'no_ijazah' => 'nullable|string',
+            'nama_wali' => 'nullable|string',
+            'no_hp_wali' => 'nullable|string',
+            'no_telp_wali' => 'nullable|string',
+            'perkerjaan_wali' => 'nullable|string',
+            'sumber_b_kuliah' => 'nullable|string',
+            'npsn' => 'nullable|string',
+        ]);
+
+        if ($validator->fails()){
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menyimpan data',
+                'error' => $validator->errors(),
+            ], 422);
+        }
+
+        $requestData = $request->all();
+
+        //Todo if photo exist
+        
+
+
+
+        $pmb = PmbModel::fill($request )
     }
 
     /**
