@@ -6,6 +6,7 @@ use App\Models\PmbModel;
 use App\Services\NomorPendaftaranGenerator;
 use Illuminate\Http\Request;
 use App\Http\Resources\PmbResource;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class PmbApiController extends Controller
@@ -114,13 +115,15 @@ class PmbApiController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Update the specified resource in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function update(Request $request, $id)
     {
+        // Memperbarui data PMB berdasarkan ID di service lain atau di database lokal
         // Menampilkan form untuk mengedit data PMB
         $validator = Validator::make($request->all(),[
             'nama_lengkap' => 'required|string',
@@ -161,23 +164,31 @@ class PmbApiController extends Controller
         $requestData = $request->all();
 
         //Todo if photo exist
+
+        try {
+            // Dapatkan objek PmbModel berdasarkan ID yang diberikan
+            $pmb = PmbModel::findOrFail($id);
+            
+            // Isi objek dengan data dari request
+            $pmb->fill($requestData);
+            
+            // Simpan perubahan ke database
+            $pmb->save();
         
-
-
-
-        $pmb = PmbModel::fill($request);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        // Memperbarui data PMB berdasarkan ID di service lain atau di database lokal
+            // Jika pembaruan berhasil, kirim respons sukses
+            return response()->json([
+                'success' => true,
+                'message' => 'Data berhasil diperbarui',
+                'data' => $pmb,
+            ], 200);
+        } catch (\Exception $e) {
+            // Jika terjadi kesalahan, kirim respons error
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal memperbarui data',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**
@@ -189,5 +200,15 @@ class PmbApiController extends Controller
     public function destroy($id)
     {
         // Menghapus data PMB berdasarkan ID dari service lain atau dari database lokal
+        $pmb = PmbModel::findorfail($id);
+        //delete image
+        //Storage::delete('public/posts/'.basename($pmb->image));
+        
+
+        //delete post
+        $pmb->delete();
+
+        //return response
+        return new PmbResource(true, 'Data Post Berhasil Dihapus!', null);
     }
 }
