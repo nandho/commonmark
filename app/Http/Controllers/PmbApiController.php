@@ -6,8 +6,10 @@ use App\Models\PmbModel;
 use App\Services\NomorPendaftaranGenerator;
 use Illuminate\Http\Request;
 use App\Http\Resources\PmbResource;
+use App\Models\JurusanModel;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+
 
 class PmbApiController extends Controller
 {
@@ -42,6 +44,7 @@ class PmbApiController extends Controller
             'jenis_kelamin' => 'required|string|in:Laki-laki,Perempuan',
             'alamat' => 'required|string',
             'agama' => 'required|string',
+            'jurusan' => 'required|string',
             'kewarganegaraan' => 'required|string',
             'jalur_pendaftaran' => 'required|string',
             'periode_pendaftaran' => 'required|string',
@@ -59,6 +62,7 @@ class PmbApiController extends Controller
             'no_telp_wali' => 'nullable|string',
             'perkerjaan_wali' => 'nullable|string',
             'sumber_b_kuliah' => 'nullable|string',
+            'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif|dimensions:min_width=100,min_height=100',
             'npsn' => 'nullable|string',
         ]);
 
@@ -71,11 +75,13 @@ class PmbApiController extends Controller
         }
 
         $requestData = $request->all();
+        
+        // $kode_jurusan = new JurusanModel::find($id); //gunakan raw query
 
         //Todo if photo exist into $requestData
         
 
-        $requestData['nomor_pendaftaran'] = NomorPendaftaranGenerator::generate();
+        $requestData['nomor_pendaftaran'] = NomorPendaftaranGenerator::generate(1);
 
         try {
             // Buat objek PmbModel baru dengan data dari request
@@ -150,6 +156,7 @@ class PmbApiController extends Controller
             'no_telp_wali' => 'nullable|string',
             'perkerjaan_wali' => 'nullable|string',
             'sumber_b_kuliah' => 'nullable|string',
+            'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif|dimensions:min_width=100,min_height=100',
             'npsn' => 'nullable|string',
         ]);
 

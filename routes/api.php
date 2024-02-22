@@ -22,7 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('pmb',PmbApiController::class);
-
 Route::get('test', [test::class, 'index']);
 Route::post('test', [test::class, 'store']);
 
