@@ -16,9 +16,10 @@ class RegisterController extends Controller
     {
          //set validation
          $validator = Validator::make($request->all(), [
-            'name'      => 'required',
-            'email'     => 'required|email|unique:users',
-            'password'  => 'required|min:8|confirmed'
+            'username'  => 'required',
+            'email'     => 'required|email',
+            'password'  => 'required|min:8|confirmed',
+            'role'      => 'required|in:admin,bakcoffice,dosen,mahasiswa,calonmahasiswa',
         ]);
 
         //if validation fails
