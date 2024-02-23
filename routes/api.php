@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\PmbApiController;
 use App\Http\Controllers\test;
+use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\LogoutController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,9 +20,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+/**
+ * route "/register"
+ * @method "POST"
+ */
+Route::post('auth/register', RegisterController::class)->name('register');
+
+/**
+ * route "/login"
+ * @method "POST"
+ */
+Route::post('auth/login', LoginController::class)->name('login');
+
+Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('auth/logout', LogoutController::class)->name('logout');
 
 Route::resource('pmb',PmbApiController::class);
 Route::get('test', [test::class, 'index']);
