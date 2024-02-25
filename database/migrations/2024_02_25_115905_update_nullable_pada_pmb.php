@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('provinsi_sekolah')->nullable()->change();
             $table->string('kabupaten_sekolah')->nullable()->change();
             $table->string('no_ijazah')->nullable()->change();
-            $table->string('perkerjaan_wali')->nullable()->change();
+            $table->string('pekerjaan_wali')->nullable()->change();
             $table->string('sumber_b_kuliah')->nullable()->change();
             // Remove 'nullable' from 'foto' validation rule since it's already specified here
             $table->string('foto')->nullable()->change();
