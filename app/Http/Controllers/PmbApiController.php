@@ -36,37 +36,43 @@ class PmbApiController extends Controller
     {
         // Menyimpan PMB baru ke service lain atau ke database lokal
         // Mendapatkan semua data yang dikirim dengan permintaan
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'nama_lengkap' => 'required|string',
-            'nomor_hp' => 'required|string',
-            'tempat_lahir' => 'required|string',
-            'tanggal_lahir' => 'required|date',
+            'nik' => 'required|string',
+            'nisn' => 'required|string',
             'jenis_kelamin' => 'required|string|in:Laki-laki,Perempuan',
-            'alamat' => 'required|string',
-            'agama' => 'required|string',
-            'jurusan' => 'required|string',
-            'kewarganegaraan' => 'required|string',
-            'jalur_pendaftaran' => 'required|string',
-            'periode_pendaftaran' => 'required|string',
+            'nomor_hp' => 'required|string',
+            'email' => 'required|email',
             'provinsi' => 'required|string',
             'kabupaten' => 'required|string',
-            'kecamatan' => 'required|string',
-            'kelurahan' => 'required|string',
-            'kode_pos' => 'required|string',
-            'provinsi_sekolah' => 'required|string',
-            'kabupaten_sekolah' => 'required|string',
+            'npsn' => 'required|string', //seharusnya nama sekolah
             'tahun_lulus_sekolah' => 'nullable|string',
+            //ditambahkan jurusan asal
+            'jurusan' => 'required|string|in:jurusan',
+            'nama_wali' => 'required|string',
+            'no_hp_wali' => 'required|string',
+            'no_telp_wali' => 'required|string',
+            // tambahkan nik orang tua
+            // batas field pendaftaran
+            'tempat_lahir' => 'nullable|string',
+            'tanggal_lahir' => 'nullable|date',
+            'alamat' => 'nullable|string',
+            'agama' => 'nullable|string',
+            'kewarganegaraan' => 'nullable|string',
+            'jalur_pendaftaran' => 'nullable|string',
+            'periode_pendaftaran' => 'nullable|string',
+            'kode_pos' => 'nullable|string',
+            'provinsi_sekolah' => 'nullable|string',
+            'kabupaten_sekolah' => 'nullable|string',
             'no_ijazah' => 'nullable|string',
-            'nama_wali' => 'nullable|string',
-            'no_hp_wali' => 'nullable|string',
-            'no_telp_wali' => 'nullable|string',
             'perkerjaan_wali' => 'nullable|string',
             'sumber_b_kuliah' => 'nullable|string',
             'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif|dimensions:min_width=100,min_height=100',
-            'npsn' => 'nullable|string',
+            'kecamatan' => 'nullable|string',
+            'kelurahan' => 'nullable|string',
         ]);
 
-        if ($validator->fails()){
+        if ($validator->fails()) {
             return response()->json([
                 'success' => false,
                 'message' => 'Gagal menyimpan data',
@@ -75,11 +81,13 @@ class PmbApiController extends Controller
         }
 
         $requestData = $request->all();
-        
+
         // $kode_jurusan = new JurusanModel::find($id); //gunakan raw query
+        // path untuk menyimpan foto storage/pmbfoto/
+
 
         //Todo if photo exist into $requestData
-        
+
 
         $requestData['nomor_pendaftaran'] = NomorPendaftaranGenerator::generate(1);
 
@@ -87,10 +95,10 @@ class PmbApiController extends Controller
             // Buat objek PmbModel baru dengan data dari request
             $pmb = new PmbModel();
             $pmb->fill($requestData);
-            
+
             // Simpan objek ke database
             $pmb->save();
-    
+
             // Jika penyimpanan berhasil, kirim respons sukses
             return new PmbResource(true, 'success', $pmb);
         } catch (\Exception $e) {
@@ -114,10 +122,10 @@ class PmbApiController extends Controller
         $pmb = PmbModel::find($id);
 
         if (!$pmb) {
-            return new PmbResource(false,'not found', null);
+            return new PmbResource(false, 'not found', null);
         }
 
-        return new PmbResource(true,'success', $pmb);
+        return new PmbResource(true, 'success', $pmb);
     }
 
     /**
@@ -131,7 +139,7 @@ class PmbApiController extends Controller
     {
         // Memperbarui data PMB berdasarkan ID di service lain atau di database lokal
         // Menampilkan form untuk mengedit data PMB
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'nama_lengkap' => 'required|string',
             'nomor_hp' => 'required|string',
             'tempat_lahir' => 'required|string',
@@ -160,7 +168,7 @@ class PmbApiController extends Controller
             'npsn' => 'nullable|string',
         ]);
 
-        if ($validator->fails()){
+        if ($validator->fails()) {
             return response()->json([
                 'success' => false,
                 'message' => 'Gagal menyimpan data',
@@ -175,13 +183,13 @@ class PmbApiController extends Controller
         try {
             // Dapatkan objek PmbModel berdasarkan ID yang diberikan
             $pmb = PmbModel::findOrFail($id);
-            
+
             // Isi objek dengan data dari request
             $pmb->fill($requestData);
-            
+
             // Simpan perubahan ke database
             $pmb->save();
-        
+
             // Jika pembaruan berhasil, kirim respons sukses
             return response()->json([
                 'success' => true,
@@ -210,7 +218,7 @@ class PmbApiController extends Controller
         $pmb = PmbModel::findorfail($id);
         //delete image
         //Storage::delete('public/posts/'.basename($pmb->image));
-        
+
 
         //delete post
         $pmb->delete();

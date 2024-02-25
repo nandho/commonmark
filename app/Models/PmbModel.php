@@ -42,7 +42,7 @@ class PmbModel extends Model
         'sumber_b_kuliah',
         'npsn',
         'jurusan',
-        'foto', // tambahkan kolom 'photo' ke dalam fillable
+        'foto',
     ];
 
     protected static function boot()

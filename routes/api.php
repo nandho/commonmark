@@ -5,7 +5,7 @@ use App\Http\Controllers\test;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\LogoutController;
-
+use App\Http\Controllers\JurusanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +30,11 @@ Route::post('auth/register', RegisterController::class)->name('register');
  * route "/login"
  * @method "POST"
  */
+
+Route::resource('pmb', PmbApiController::class);
+Route::resource('jurusan', JurusanController::class);
+
+//auth
 Route::post('auth/login', LoginController::class)->name('login');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
@@ -38,7 +43,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('auth/logout', LogoutController::class)->name('logout');
 
-Route::resource('pmb',PmbApiController::class);
+
+
 Route::get('test', [test::class, 'index']);
 Route::post('test', [test::class, 'store']);
-
