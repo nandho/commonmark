@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\PmbApiController;
+use App\Http\Controllers\test;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('pmb',PmbApiController::class);
+
+Route::get('test', [TestController::class, 'index']);
+Route::post('test', [TestController::class, 'store']);
+
