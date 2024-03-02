@@ -8,6 +8,7 @@ use App\Models\nilai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class JawabanController extends Controller
 {
@@ -22,10 +23,9 @@ class JawabanController extends Controller
     {
         //will input jawaban
         $validator = Validator::make($request->all(),[
-            '*' => 'required',
-            '*.id_soal' => 'required',
-            '*.id_calon_mahasiswa' => 'required',
-            '*.jawaban' => 'required',
+            'id_soal' => 'required',
+            'id_calon_mahasiswa' => 'required',
+            'jawaban' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -48,10 +48,10 @@ class JawabanController extends Controller
 
             $id_data = $data->id;
             //proses untuk generating nilai
-            $jawaban_benar = DB::table('jawaban')
-            ->join('soals', 'jawaban.id_soal', '=', 'soals.id')
-            ->select('jawaban.*', 'soal.*') // Pilih kolom yang Anda perlukan
-            ->where('jawaban.id', $id_data)
+            $jawaban_benar = DB::table('jawabans')
+            ->join('soals', 'jawabans.id_soal', '=', 'soals.id')
+            ->select('jawabans.*', 'soal.*') // Pilih kolom yang Anda perlukan
+            ->where('jawabans.id', $id_data)
             ->count();
 
             $count_soal = DB::table('soals')->count();
@@ -60,7 +60,7 @@ class JawabanController extends Controller
 
             //input nilai
             $data_nilai['nilai'] = $nilai;
-            $data_nilai['id_nilai_mahasiswa'] = $requestData['id_calon_mahasiswa'];
+            $data_nilai['id_calon_mahasiswa'] = $requestData['id_calon_mahasiswa'];
            
             try {
                 $nilai_model = new nilai;
