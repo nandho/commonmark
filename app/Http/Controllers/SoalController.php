@@ -82,7 +82,7 @@ class SoalController extends Controller
             'pilihan3'=> 'nullable|string',
             'pilihan4'=> 'nullable|string',
             'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif',
-            'kunci_jawaban' => 'required|string|size:1|in:A,B,C,D',
+            'kunci_jawaban' => 'nullable|string|size:1|in:A,B,C,D',
         ]);
 
         if ($validator->fails()) {

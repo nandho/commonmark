@@ -5,9 +5,10 @@ use App\Http\Controllers\test;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\LogoutController;
+use App\Http\Controllers\JawabanController;
 use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\SoalController;
-use App\Http\Resources\soalResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,8 @@ Route::post('auth/register', RegisterController::class)->name('register');
 Route::resource('pmb', PmbApiController::class);
 Route::resource('jurusan', JurusanController::class);
 Route::resource('ujian', SoalController::class);
+Route::resource('pmb/jawaban', JawabanController::class);
+Route::resource('hasil_ujian/nilai', NilaiController::class);
 
 //auth
 Route::post('auth/login', LoginController::class)->name('login');

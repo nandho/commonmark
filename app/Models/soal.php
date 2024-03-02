@@ -13,7 +13,7 @@ class soal extends Model
     protected $table = 'soals';
 
     protected $fillable = [
-       'id',
+       'id ',
        'soal',
        'pilihan1',
        'pilihan2',
@@ -51,7 +51,13 @@ class soal extends Model
     protected function foto():Attribute
     {
         return Attribute::make(
-            get: fn ($image) => asset('/storage/soalfoto/' . $image),
+            get: function ($image) {
+                if ($image) {
+                    return asset('/storage/soalfoto/' . $image);
+                } else {
+                    return null;
+                }
+            }
         );
     }
 }

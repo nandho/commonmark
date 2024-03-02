@@ -224,8 +224,7 @@ class PmbApiController extends Controller
         // Menghapus data PMB berdasarkan ID dari service lain atau dari database lokal
         $pmb = PmbModel::findorfail($id);
         //delete image
-        //Storage::delete('public/posts/'.basename($pmb->image));
-
+        Storage::delete('public/pmbfoto/'.basename($pmb->image));
 
         //delete post
         $pmb->delete();
