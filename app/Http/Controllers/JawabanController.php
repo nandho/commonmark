@@ -56,7 +56,7 @@ class JawabanController extends Controller
 
             $count_soal = DB::table('soals')->count();
 
-            $nilai = 100 * ($jawaban_benar/$count_soal);
+            $nilai = ($jawaban_benar/$count_soal) * 100;
 
             //input nilai
             $data_nilai['nilai'] = $nilai;
