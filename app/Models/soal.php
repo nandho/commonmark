@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -46,18 +47,10 @@ class soal extends Model
         return 'string';
     }
 
-    public function getPhotoUrlAttribute()
+    protected function foto():Attribute
     {
-        // Ambil nama file foto dari atribut 'photo'
-        $photoName = $this->attributes['foto'];
-
-        // Jika foto tidak kosong
-        if ($photoName) {
-            // Ganti 'storage_path' dengan lokasi penyimpanan foto di proyek Laravel Anda
-            return asset('storage/soalfoto/' . $photoName);
-        }
-
-        // Jika foto kosong, return null atau URL default sesuai kebutuhan Anda
-        return null;
+        return Attribute::make(
+            get: fn ($image) => asset('/storage/soalfoto/' . $image),
+        );
     }
 }

@@ -33,6 +33,7 @@ Route::post('auth/register', RegisterController::class)->name('register');
 
 Route::resource('pmb', PmbApiController::class);
 Route::resource('jurusan', JurusanController::class);
+Route::resource('ujian');
 
 //auth
 Route::post('auth/login', LoginController::class)->name('login');
