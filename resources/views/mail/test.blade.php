@@ -30,10 +30,12 @@
         <p>Berikut adalah beberapa langkah awal yang perlu Anda ambil untuk memulai perjalanan pendidikan Anda dengan kami:<br></p>
 
         <p>Lakukan pendaftaran dan lengkapi semua dokumen yang diperlukan sebelum tanggal [Tentukan Batas Waktu]. <br></p>
+        <p>akun akses sementara anda adalah<br></p>
+        <p>Username : <strong>{{$username}}</strong></p>
+        <p>Password : <strong>{{$password}}</strong></p>
         <p>Jika Anda memiliki pertanyaan atau butuh bantuan, jangan ragu untuk menghubungi kami melalui [informasi kontak]. <br></p>
         <p>Jangan lewatkan orientasi mahasiswa baru yang akan diadakan pada tanggal [Tentukan Tanggal Orientasi]. <br></p>
         <p>Kami berharap bahwa pengalaman Anda di sini akan menjadi berkesan dan membangun. Kami yakin bahwa Anda akan menemukan banyak peluang untuk tumbuh, belajar, dan berkembang.<br></p>
-
 
         <p>Sekali lagi, selamat bergabung dan semoga sukses dalam perjalanan akademik Anda di Akademi Pariwisata Dharma Nusantara Sakti (Akparda) Yogyakarta! <br></p>
 

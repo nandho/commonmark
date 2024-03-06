@@ -61,5 +61,5 @@ Route::get('/testroute', function () {
     $name = "FunnyCoder";
 
     // The email sending is done using the to method on the Mail facade
-    Mail::to('stryn@gmail.com’')->send(new SendEmailPMB($name, $password));
+    Mail::to('stryn@gmail.com’')->send(new SendEmailPMB($name, $password,"xxx"));
 });

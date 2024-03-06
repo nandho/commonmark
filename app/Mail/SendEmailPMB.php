@@ -16,7 +16,7 @@ class SendEmailPMB extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(private $name, private $password)
+    public function __construct(private $name, private $password, private $username)
     {
         //
     }
@@ -40,6 +40,7 @@ class SendEmailPMB extends Mailable
             view: 'mail.test',
             with: [
                 'name' => $this->name,
+                'username' => $this->username,
                 'password' => $this->password,
             ],
         );
