@@ -46,7 +46,7 @@ return new class extends Migration
             $table->integer('tahun_lulus');
             $table->string('status');
             $table->string('semester');
-            $table->uuid('khs_id');
+            $table->uuid('khs_id'); //fk 
             $table->uuid('krs_id');
             $table->uuid('pembimbing_akademik');
             $table->uuid('pembimbing_skripsi');
