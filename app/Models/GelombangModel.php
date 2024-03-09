@@ -2,24 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
-class soal extends Model
+class GelombangModel extends Model
 {
     use HasFactory;
-    protected $table = 'soals';
 
     protected $fillable = [
-       'soal',
-       'pilihan1',
-       'pilihan2',
-       'pilihan3',
-       'pilihan4',
-       'foto',
-       'kunci_jawaban',
+       'gelombang',
+       'periode',
+       'semester',
+       'status',
     ];
 
     protected static function boot()
@@ -45,12 +39,5 @@ class soal extends Model
     public function getKeyType()
     {
         return 'string';
-    }
-
-    protected function foto():Attribute
-    {
-        return Attribute::make(
-            get: fn ($image) => asset('/storage/soalfoto/' . $image),
-        );
     }
 }

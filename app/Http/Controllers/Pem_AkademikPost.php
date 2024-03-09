@@ -3,30 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use App\Models\soal;
-use App\Http\Resources\soalResource;
 
-class SoalController extends Controller
+class Pem_AkademikPost extends Controller
 {
-    public function index()
+    public function index() 
     {
-        //will return all data
-        $data = soal::all();
-        return new soalResource(true,'success',$data);
+        $data = Pem_AkademikModel::all();
+        return new Pem_AkademikResource(true, 'success', $data);
     }
-
-    public function store(Request $request)
+        public function store(Request $request)
     {
         //will input jurusan
         $validator = Validator::make($request->all(),[
-            'soal'=> 'required|string',
-            'pilihan1'=> 'required|string',
-            'pilihan2'=> 'required|string',
-            'pilihan3'=> 'required|string',
-            'pilihan4'=> 'required|string',
-            'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif',
-            'kunci_jawaban' => 'required|string|size:1|in:A,B,C,D',
+            'id_dosen'=> 'required',
+            'id_mahaiswa'=> 'required',
         ]);
 
         if ($validator->fails()) {
@@ -41,14 +31,14 @@ class SoalController extends Controller
 
         try {
             // Buat objek PmbModel baru dengan data dari request
-            $data = new soal();
+            $data = new Pem_AkademikModel();
             $data->fill($requestData);
 
             // Simpan objek ke database
             $data->save();
 
             // Jika penyimpanan berhasil, kirim respons sukses
-            return new soalResource(true, 'success', $data);
+            return new Pem_AkademikResource(true, 'success', $data);
         } catch (\Exception $e) {
             // Jika terjadi kesalahan, kirim respons error
             return response()->json([
@@ -63,26 +53,21 @@ class SoalController extends Controller
     {
         //will return specified jurusan
 
-        $data = soal::find($id);
+        $data = Pem_AkademikModel::find($id);
 
         if (!$data) {
-            return new soalResource(false, 'not found', null);
+            return new Pem_AkademikResource(false, 'not found', null);
         }
 
-        return new soalResource(true, 'success', $data);
+        return new Pem_AkademikResource(true, 'success', $data);
     }
 
     public function update(Request $request, $id)
     {
         // get data and update data
         $validator = Validator::make($request->all(),[
-            'soal'=> 'nullable|string',
-            'pilihan1'=> 'nullable|string',
-            'pilihan2'=> 'nullable|string',
-            'pilihan3'=> 'nullable|string',
-            'pilihan4'=> 'nullable|string',
-            'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif',
-            'kunci_jawaban' => 'required|string|size:1|in:A,B,C,D',
+            'id_dosen'=> 'required',
+            'id_mahaiswa'=> 'required',
         ]);
 
         if ($validator->fails()) {
@@ -97,14 +82,14 @@ class SoalController extends Controller
 
         try {
             // Buat objek PmbModel baru dengan data dari request
-            $data = soal::findOrFail($id);
+            $data = Pem_AkademikModel::findOrFail($id);
             $data->fill($requestData);
 
             // Simpan objek ke database
             $data->save();
 
             // Jika penyimpanan berhasil, kirim respons sukses
-            return new soalResource(true, 'success', $data);
+            return new Pem_AkademikResource(true, 'success', $data);
         } catch (\Exception $e) {
             // Jika terjadi kesalahan, kirim respons error
             return response()->json([
@@ -118,12 +103,12 @@ class SoalController extends Controller
     public function destroy($id)
     {
         //will delete data
-        $data = soal::findorfail($id);
+        $data = Pem_AkademikModel::findorfail($id);
 
         //delete post
         $data->delete();
 
         //return response
-        return new soalResource(true, 'Data Post Berhasil Dihapus!', null);
+        return new Pem_AkademikResource(true, 'Data Post Berhasil Dihapus!', null);
     }
 }
