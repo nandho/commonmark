@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('pmb', function (Blueprint $table) {
-            $table->renameColumn('npsn', 'nam_sekolah');
+        Schema::table('users', function (Blueprint $table) {
+            $table->rememberToken();
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('pmb', function (Blueprint $table) {
-            $table->renameColumn('nam_sekolah', 'npsn');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('remember_token');
         });
     }
 };

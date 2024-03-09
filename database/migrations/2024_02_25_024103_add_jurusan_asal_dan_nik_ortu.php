@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('pmb', function (Blueprint $table) {
-            $table->renameColumn('npsn', 'nam_sekolah');
+            $table->string('jurusan_asal');
+            $table->string('nik_wali');
         });
     }
 
@@ -21,8 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('pmb', function (Blueprint $table) {
-            $table->renameColumn('nam_sekolah', 'npsn');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('jurusan_asal');
+            $table->string('nik_wali');
         });
     }
 };

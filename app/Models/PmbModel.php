@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Str;
 class PmbModel extends Model
 {
@@ -42,7 +43,9 @@ class PmbModel extends Model
         'sumber_b_kuliah',
         'npsn',
         'jurusan',
-        'foto', // tambahkan kolom 'photo' ke dalam fillable
+        'foto',
+        'jurusan_asal',
+        'nik_wali'
     ];
 
     protected static function boot()
@@ -75,18 +78,10 @@ class PmbModel extends Model
         return $this->belongsTo('App\Jurusan');
     }
 
-    public function getPhotoUrlAttribute()
+    protected function foto(): Attribute
     {
-        // Ambil nama file foto dari atribut 'photo'
-        $photoName = $this->attributes['foto'];
-
-        // Jika foto tidak kosong
-        if ($photoName) {
-            // Ganti 'storage_path' dengan lokasi penyimpanan foto di proyek Laravel Anda
-            return asset('storage/pmbfoto/' . $photoName);
-        }
-
-        // Jika foto kosong, return null atau URL default sesuai kebutuhan Anda
-        return null;
+        return Attribute::make(
+            get: fn ($image) => asset('/storage/pmbfoto/' . $image),
+        );
     }
 }

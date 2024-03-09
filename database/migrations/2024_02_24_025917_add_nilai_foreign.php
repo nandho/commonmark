@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('pmb', function (Blueprint $table) {
-            $table->renameColumn('npsn', 'nam_sekolah');
+        Schema::table('nilais', function (Blueprint $table) {
+            $table->foreign('id_calon_mahasiswa')->references('id')->on('pmb');
         });
     }
 
@@ -21,8 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('pmb', function (Blueprint $table) {
-            $table->renameColumn('nam_sekolah', 'npsn');
+        Schema::table('nilais', function (Blueprint $table) {
+            $table->dropForeign(['id_calon_mahasiswa']);
+            $table->dropColumn('id_calon_mahasiswa');
         });
     }
 };
