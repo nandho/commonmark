@@ -6,9 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\soal;
 use App\Http\Resources\soalResource;
-use Illuminate\Support\Facades\Validator;
-use App\Models\soal;
-use App\Http\Resources\soalResource;
 
 class SoalController extends Controller
 {
