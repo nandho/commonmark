@@ -112,7 +112,7 @@ class PmbApiController extends Controller
             //generating user with passing data to user model
             $user = User::create([
                 'username'      => $username,
-                'email'         => $pmb->email,
+                'email'         => $requestData['email'],
                 'password'      => bcrypt($password),
                 'role'          => "calonmahasiswa",
             ]);
