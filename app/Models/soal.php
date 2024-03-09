@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -13,6 +14,7 @@ class soal extends Model
     protected $table = 'soals';
 
     protected $fillable = [
+       'id ',
        'soal',
        'pilihan1',
        'pilihan2',
@@ -50,7 +52,13 @@ class soal extends Model
     protected function foto():Attribute
     {
         return Attribute::make(
-            get: fn ($image) => asset('/storage/soalfoto/' . $image),
+            get: function ($image) {
+                if ($image) {
+                    return asset('/storage/soalfoto/' . $image);
+                } else {
+                    return null;
+                }
+            }
         );
     }
 }

@@ -6,25 +6,37 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\soal;
 use App\Http\Resources\soalResource;
+use Illuminate\Support\Facades\Validator;
+use App\Models\soal;
+use App\Http\Resources\soalResource;
 
 class SoalController extends Controller
 {
     public function index()
     {
         //will return all data
-        $data = soal::all();
-        return new soalResource(true,'success',$data);
+        $data = soal::select(
+            'id',
+            'soal',
+            'pilihan1',
+            'pilihan2',
+            'pilihan3',
+            'pilihan4',
+            'foto'
+        )->get();
+        $data['count'] = count($data);
+        return new soalResource(true, 'success', $data);
     }
 
     public function store(Request $request)
     {
         //will input jurusan
-        $validator = Validator::make($request->all(),[
-            'soal'=> 'required|string',
-            'pilihan1'=> 'required|string',
-            'pilihan2'=> 'required|string',
-            'pilihan3'=> 'required|string',
-            'pilihan4'=> 'required|string',
+        $validator = Validator::make($request->all(), [
+            'soal' => 'required|string',
+            'pilihan1' => 'required|string',
+            'pilihan2' => 'required|string',
+            'pilihan3' => 'required|string',
+            'pilihan4' => 'required|string',
             'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif',
             'kunci_jawaban' => 'required|string|size:1|in:A,B,C,D',
         ]);
@@ -75,14 +87,14 @@ class SoalController extends Controller
     public function update(Request $request, $id)
     {
         // get data and update data
-        $validator = Validator::make($request->all(),[
-            'soal'=> 'nullable|string',
-            'pilihan1'=> 'nullable|string',
-            'pilihan2'=> 'nullable|string',
-            'pilihan3'=> 'nullable|string',
-            'pilihan4'=> 'nullable|string',
+        $validator = Validator::make($request->all(), [
+            'soal' => 'nullable|string',
+            'pilihan1' => 'nullable|string',
+            'pilihan2' => 'nullable|string',
+            'pilihan3' => 'nullable|string',
+            'pilihan4' => 'nullable|string',
             'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif',
-            'kunci_jawaban' => 'required|string|size:1|in:A,B,C,D',
+            'kunci_jawaban' => 'nullable|string|size:1|in:A,B,C,D',
         ]);
 
         if ($validator->fails()) {

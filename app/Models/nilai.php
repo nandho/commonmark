@@ -13,6 +13,7 @@ class nilai extends Model
     protected $table = 'nilais';
 
     protected $fillable = [
+       'id',
        'id_calon_mahasiswa',
        'nilai',
     ];

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Str;
+
 class PmbModel extends Model
 {
     use HasFactory;
@@ -20,6 +21,7 @@ class PmbModel extends Model
         'tempat_lahir',
         'tanggal_lahir',
         'jenis_kelamin',
+        'jenis_sekolah',
         'alamat',
         'agama',
         'kewarganegaraan',

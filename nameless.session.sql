@@ -1,3 +1,1 @@
-show tables;
-
-describe pmb;
+select * from soals;
