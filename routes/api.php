@@ -8,6 +8,8 @@ use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\MahasiswaPost;
 use App\Http\Controllers\PostDosen;
+use App\Http\Controllers\Pem_AkademikPost;
+use App\Http\Controllers\Pem_SkripsiPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +39,8 @@ Route::resource('pmb', PmbApiController::class);
 Route::resource('jurusan', JurusanController::class);
 Route::resource('mhs',MahasiswaPost::class);
 Route::resource('dosen',PostDosen::class);
+Route::resource('pem_akademik',Pem_AkademikPost::class);
+Route::resource('pem_skripsi',Pem_SkripsiPost::class);
 // Route::resource('ujian');
 
 //auth
