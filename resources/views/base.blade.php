@@ -1,1703 +1,450 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <title>PMB Akparda</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
-        *,
-        ::before,
-        ::after {
-            box-sizing: border-box;
-            /* 1 */
-            border-width: 0;
-            /* 2 */
-            border-style: solid;
-            /* 2 */
-            border-color: #e5e7eb;
-            /* 2 */
-        }
-
-        ::before,
-        ::after {
-            --tw-content: '';
-        }
-
-        html {
-            line-height: 1.5;
-            /* 1 */
-            -webkit-text-size-adjust: 100%;
-            /* 2 */
-            -moz-tab-size: 4;
-            /* 3 */
-            -o-tab-size: 4;
-            tab-size: 4;
-            /* 3 */
-            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-            /* 4 */
-            font-feature-settings: normal;
-            /* 5 */
-            font-variation-settings: normal;
-            /* 6 */
-        }
-
-        body {
-            margin: 0;
-            /* 1 */
-            line-height: inherit;
-            /* 2 */
-        }
-
-        hr {
-            height: 0;
-            /* 1 */
-            color: inherit;
-            /* 2 */
-            border-top-width: 1px;
-            /* 3 */
-        }
-
-        abbr:where([title]) {
-            -webkit-text-decoration: underline dotted;
-            text-decoration: underline dotted;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-size: inherit;
-            font-weight: inherit;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: inherit;
-        }
-
-        b,
-        strong {
-            font-weight: bolder;
-        }
-
-        code,
-        kbd,
-        samp,
-        pre {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-            /* 1 */
-            font-size: 1em;
-            /* 2 */
-        }
-
-        small {
-            font-size: 80%;
-        }
-
-        sub,
-        sup {
-            font-size: 75%;
-            line-height: 0;
-            position: relative;
-            vertical-align: baseline;
-        }
-
-        sub {
-            bottom: -0.25em;
-        }
-
-        sup {
-            top: -0.5em;
-        }
-
-        table {
-            text-indent: 0;
-            /* 1 */
-            border-color: inherit;
-            /* 2 */
-            border-collapse: collapse;
-            /* 3 */
-        }
-
-        button,
-        input,
-        optgroup,
-        select,
-        textarea {
-            font-family: inherit;
-            /* 1 */
-            font-feature-settings: inherit;
-            /* 1 */
-            font-variation-settings: inherit;
-            /* 1 */
-            font-size: 100%;
-            /* 1 */
-            font-weight: inherit;
-            /* 1 */
-            line-height: inherit;
-            /* 1 */
-            color: inherit;
-            /* 1 */
-            margin: 0;
-            /* 2 */
-            padding: 0;
-            /* 3 */
-        }
-
-        button,
-        select {
-            text-transform: none;
-        }
-
-        button,
-        [type='button'],
-        [type='reset'],
-        [type='submit'] {
-            -webkit-appearance: button;
-            /* 1 */
-            background-color: transparent;
-            /* 2 */
-            background-image: none;
-            /* 2 */
-        }
-
-        :-moz-focusring {
-            outline: auto;
-        }
-
-        :-moz-ui-invalid {
-            box-shadow: none;
-        }
-
-        progress {
-            vertical-align: baseline;
-        }
-
-        ::-webkit-inner-spin-button,
-        ::-webkit-outer-spin-button {
-            height: auto;
-        }
-
-
-        [type='search'] {
-            -webkit-appearance: textfield;
-            /* 1 */
-            outline-offset: -2px;
-            /* 2 */
-        }
-
-        ::-webkit-search-decoration {
-            -webkit-appearance: none;
-        }
-
-        ::-webkit-file-upload-button {
-            -webkit-appearance: button;
-            /* 1 */
-            font: inherit;
-            /* 2 */
-        }
-
-        summary {
-            display: list-item;
-        }
-
-        blockquote,
-        dl,
-        dd,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        hr,
-        figure,
-        p,
-        pre {
-            margin: 0;
-        }
-
-        fieldset {
-            margin: 0;
-            padding: 0;
-        }
-
-        legend {
-            padding: 0;
-        }
-
-        ol,
-        ul,
-        menu {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        dialog {
-            padding: 0;
-        }
-
-        textarea {
-            resize: vertical;
-        }
-
-        input::-moz-placeholder,
-        textarea::-moz-placeholder {
-            opacity: 1;
-            /* 1 */
-            color: #9ca3af;
-            /* 2 */
-        }
-
-        input::placeholder,
-        textarea::placeholder {
-            opacity: 1;
-            /* 1 */
-            color: #9ca3af;
-            /* 2 */
-        }
-
-        button,
-        [role="button"] {
-            cursor: pointer;
-        }
-
-        :disabled {
-            cursor: default;
-        }
-
-        img,
-        svg,
-        video,
-        canvas,
-        audio,
-        iframe,
-        embed,
-        object {
-            display: block;
-            /* 1 */
-            vertical-align: middle;
-            /* 2 */
-        }
-
-        img,
-        video {
-            max-width: 100%;
-            height: auto;
-        }
-
-        /* Make elements with the HTML hidden attribute stay hidden by default */
-
-        [hidden] {
-            display: none;
-        }
-
-        *,
-        ::before,
-        ::after {
-            --tw-border-spacing-x: 0;
-            --tw-border-spacing-y: 0;
-            --tw-translate-x: 0;
-            --tw-translate-y: 0;
-            --tw-rotate: 0;
-            --tw-skew-x: 0;
-            --tw-skew-y: 0;
-            --tw-scale-x: 1;
-            --tw-scale-y: 1;
-            --tw-pan-x: ;
-            --tw-pan-y: ;
-            --tw-pinch-zoom: ;
-            --tw-scroll-snap-strictness: proximity;
-            --tw-gradient-from-position: ;
-            --tw-gradient-via-position: ;
-            --tw-gradient-to-position: ;
-            --tw-ordinal: ;
-            --tw-slashed-zero: ;
-            --tw-numeric-figure: ;
-            --tw-numeric-spacing: ;
-            --tw-numeric-fraction: ;
-            --tw-ring-inset: ;
-            --tw-ring-offset-width: 0px;
-            --tw-ring-offset-color: #fff;
-            --tw-ring-color: rgb(59 130 246 / 0.5);
-            --tw-ring-offset-shadow: 0 0 #0000;
-            --tw-ring-shadow: 0 0 #0000;
-            --tw-shadow: 0 0 #0000;
-            --tw-shadow-colored: 0 0 #0000;
-            --tw-blur: ;
-            --tw-brightness: ;
-            --tw-contrast: ;
-            --tw-grayscale: ;
-            --tw-hue-rotate: ;
-            --tw-invert: ;
-            --tw-saturate: ;
-            --tw-sepia: ;
-            --tw-drop-shadow: ;
-            --tw-backdrop-blur: ;
-            --tw-backdrop-brightness: ;
-            --tw-backdrop-contrast: ;
-            --tw-backdrop-grayscale: ;
-            --tw-backdrop-hue-rotate: ;
-            --tw-backdrop-invert: ;
-            --tw-backdrop-opacity: ;
-            --tw-backdrop-saturate: ;
-            --tw-backdrop-sepia: ;
-        }
-
-        ::backdrop {
-            --tw-border-spacing-x: 0;
-            --tw-border-spacing-y: 0;
-            --tw-translate-x: 0;
-            --tw-translate-y: 0;
-            --tw-rotate: 0;
-            --tw-skew-x: 0;
-            --tw-skew-y: 0;
-            --tw-scale-x: 1;
-            --tw-scale-y: 1;
-            --tw-pan-x: ;
-            --tw-pan-y: ;
-            --tw-pinch-zoom: ;
-            --tw-scroll-snap-strictness: proximity;
-            --tw-gradient-from-position: ;
-            --tw-gradient-via-position: ;
-            --tw-gradient-to-position: ;
-            --tw-ordinal: ;
-            --tw-slashed-zero: ;
-            --tw-numeric-figure: ;
-            --tw-numeric-spacing: ;
-            --tw-numeric-fraction: ;
-            --tw-ring-inset: ;
-            --tw-ring-offset-width: 0px;
-            --tw-ring-offset-color: #fff;
-            --tw-ring-color: rgb(59 130 246 / 0.5);
-            --tw-ring-offset-shadow: 0 0 #0000;
-            --tw-ring-shadow: 0 0 #0000;
-            --tw-shadow: 0 0 #0000;
-            --tw-shadow-colored: 0 0 #0000;
-            --tw-blur: ;
-            --tw-brightness: ;
-            --tw-contrast: ;
-            --tw-grayscale: ;
-            --tw-hue-rotate: ;
-            --tw-invert: ;
-            --tw-saturate: ;
-            --tw-sepia: ;
-            --tw-drop-shadow: ;
-            --tw-backdrop-blur: ;
-            --tw-backdrop-brightness: ;
-            --tw-backdrop-contrast: ;
-            --tw-backdrop-grayscale: ;
-            --tw-backdrop-hue-rotate: ;
-            --tw-backdrop-invert: ;
-            --tw-backdrop-opacity: ;
-            --tw-backdrop-saturate: ;
-            --tw-backdrop-sepia: ;
-        }
-
-        .fixed {
-            position: fixed;
-        }
-
-        .absolute {
-            position: absolute;
-        }
-
-        .relative {
-            position: relative;
-        }
-
-        .sticky {
-            position: sticky;
-        }
-
-        .left-0 {
-            left: 0px;
-        }
-
-        .left-4 {
-            left: 1rem;
-        }
-
-        .top-0 {
-            top: 0px;
-        }
-
-        .top-1\/2 {
-            top: 50%;
-        }
-
-        .z-30 {
-            z-index: 30;
-        }
-
-        .z-40 {
-            z-index: 40;
-        }
-
-        .z-50 {
-            z-index: 50;
-        }
-
-        .my-2 {
-            margin-top: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .-ml-3 {
-            margin-left: -0.75rem;
-        }
-
-        .mb-0 {
-            margin-bottom: 0px;
-        }
-
-        .mb-0\.5 {
-            margin-bottom: 0.125rem;
-        }
-
-        .mb-1 {
-            margin-bottom: 0.25rem;
-        }
-
-        .mb-2 {
-            margin-bottom: 0.5rem;
-        }
-
-        .mb-4 {
-            margin-bottom: 1rem;
-        }
-
-        .mb-6 {
-            margin-bottom: 1.5rem;
-        }
-
-        .ml-1 {
-            margin-left: 0.25rem;
-        }
-
-        .ml-2 {
-            margin-left: 0.5rem;
-        }
-
-        .ml-3 {
-            margin-left: 0.75rem;
-        }
-
-        .ml-4 {
-            margin-left: 1rem;
-        }
-
-        .ml-auto {
-            margin-left: auto;
-        }
-
-        .mr-1 {
-            margin-right: 0.25rem;
-        }
-
-        .mr-2 {
-            margin-right: 0.5rem;
-        }
-
-        .mr-3 {
-            margin-right: 0.75rem;
-        }
-
-        .mr-4 {
-            margin-right: 1rem;
-        }
-
-        .mt-2 {
-            margin-top: 0.5rem;
-        }
-
-        .mt-3 {
-            margin-top: 0.75rem;
-        }
-
-        .mt-4 {
-            margin-top: 1rem;
-        }
-
-        .block {
-            display: block;
-        }
-
-        .inline-block {
-            display: inline-block;
-        }
-
-        .flex {
-            display: flex;
-        }
-
-        .table {
-            display: table;
-        }
-
-        .grid {
-            display: grid;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .h-2 {
-            height: 0.5rem;
-        }
-
-        .h-4 {
-            height: 1rem;
-        }
-
-        .h-6 {
-            height: 1.5rem;
-        }
-
-        .h-8 {
-            height: 2rem;
-        }
-
-        .h-full {
-            height: 100%;
-        }
-
-        .max-h-64 {
-            max-height: 16rem;
-        }
-
-        .min-h-screen {
-            min-height: 100vh;
-        }
-
-        .w-2 {
-            width: 0.5rem;
-        }
-
-        .w-6 {
-            width: 1.5rem;
-        }
-
-        .w-64 {
-            width: 16rem;
-        }
-
-        .w-8 {
-            width: 2rem;
-        }
-
-        .w-full {
-            width: 100%;
-        }
-
-        .min-w-\[460px\] {
-            min-width: 460px;
-        }
-
-        .min-w-\[540px\] {
-            min-width: 540px;
-        }
-
-        .max-w-\[140px\] {
-            max-width: 140px;
-        }
-
-        .max-w-xs {
-            max-width: 20rem;
-        }
-
-        .-translate-x-full {
-            --tw-translate-x: -100%;
-            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-        }
-
-        .-translate-y-1\/2 {
-            --tw-translate-y: -50%;
-            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-        }
-
-        .appearance-none {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
-
-        .grid-cols-1 {
-            grid-template-columns: repeat(1, minmax(0, 1fr));
-        }
-
-        .items-start {
-            align-items: flex-start;
-        }
-
-        .items-center {
-            align-items: center;
-        }
-
-        .justify-center {
-            justify-content: center;
-        }
-
-        .justify-between {
-            justify-content: space-between;
-        }
-
-        .gap-4 {
-            gap: 1rem;
-        }
-
-        .gap-6 {
-            gap: 1.5rem;
-        }
-
-        .overflow-x-auto {
-            overflow-x: auto;
-        }
-
-        .overflow-y-auto {
-            overflow-y: auto;
-        }
-
-        .truncate {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .rounded {
-            border-radius: 0.25rem;
-        }
-
-        .rounded-full {
-            border-radius: 9999px;
-        }
-
-        .rounded-md {
-            border-radius: 0.375rem;
-        }
-
-        .rounded-bl-md {
-            border-bottom-left-radius: 0.375rem;
-        }
-
-        .rounded-br-md {
-            border-bottom-right-radius: 0.375rem;
-        }
-
-        .rounded-tl-md {
-            border-top-left-radius: 0.375rem;
-        }
-
-        .rounded-tr-md {
-            border-top-right-radius: 0.375rem;
-        }
-
-        .border {
-            border-width: 1px;
-        }
-
-        .border-b {
-            border-bottom-width: 1px;
-        }
-
-        .border-b-2 {
-            border-bottom-width: 2px;
-        }
-
-        .border-dashed {
-            border-style: dashed;
-        }
-
-        .border-gray-100 {
-            --tw-border-opacity: 1;
-            border-color: rgb(243 244 246 / var(--tw-border-opacity));
-        }
-
-        .border-gray-200 {
-            --tw-border-opacity: 1;
-            border-color: rgb(229 231 235 / var(--tw-border-opacity));
-        }
-
-        .border-b-gray-100 {
-            --tw-border-opacity: 1;
-            border-bottom-color: rgb(243 244 246 / var(--tw-border-opacity));
-        }
-
-        .border-b-gray-50 {
-            --tw-border-opacity: 1;
-            border-bottom-color: rgb(249 250 251 / var(--tw-border-opacity));
-        }
-
-        .border-b-gray-800 {
-            --tw-border-opacity: 1;
-            border-bottom-color: rgb(31 41 55 / var(--tw-border-opacity));
-        }
-
-        .border-b-transparent {
-            border-bottom-color: transparent;
-        }
-
-        .bg-black\/50 {
-            background-color: rgb(0 0 0 / 0.5);
-        }
-
-        .bg-blue-500 {
-            --tw-bg-opacity: 1;
-            background-color: rgb(59 130 246 / var(--tw-bg-opacity));
-        }
-
-        .bg-blue-500\/10 {
-            background-color: rgb(59 130 246 / 0.1);
-        }
-
-        .bg-emerald-500\/10 {
-            background-color: rgb(16 185 129 / 0.1);
-        }
-
-        .bg-gray-100 {
-            --tw-bg-opacity: 1;
-            background-color: rgb(243 244 246 / var(--tw-bg-opacity));
-        }
-
-        .bg-gray-50 {
-            --tw-bg-opacity: 1;
-            background-color: rgb(249 250 251 / var(--tw-bg-opacity));
-        }
-
-        .bg-gray-900 {
-            --tw-bg-opacity: 1;
-            background-color: rgb(17 24 39 / var(--tw-bg-opacity));
-        }
-
-        .bg-rose-500\/10 {
-            background-color: rgb(244 63 94 / 0.1);
-        }
-
-        .bg-white {
-            --tw-bg-opacity: 1;
-            background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-        }
-
-        .bg-select-arrow {
-            background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTExLjk5OTcgMTMuMTcxNEwxNi45NDk1IDguMjIxNjhMMTguMzYzNyA5LjYzNTg5TDExLjk5OTcgMTUuOTk5OUw1LjYzNTc0IDkuNjM1ODlMNy4wNDk5NiA4LjIyMTY4TDExLjk5OTcgMTMuMTcxNFoiIGZpbGw9InJnYmEoMTU2LDE2MywxNzUsMSkiPjwvcGF0aD48L3N2Zz4=");
-        }
-
-        .bg-\[length\:16px_16px\] {
-            background-size: 16px 16px;
-        }
-
-        .bg-\[right_16px_center\] {
-            background-position: right 16px center;
-        }
-
-        .bg-no-repeat {
-            background-repeat: no-repeat;
-        }
-
-        .object-cover {
-            -o-object-fit: cover;
-            object-fit: cover;
-        }
-
-        .p-1 {
-            padding: 0.25rem;
-        }
-
-        .p-4 {
-            padding: 1rem;
-        }
-
-        .p-6 {
-            padding: 1.5rem;
-        }
-
-        .px-4 {
-            padding-left: 1rem;
-            padding-right: 1rem;
-        }
-
-        .px-6 {
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-        }
-
-        .py-1 {
-            padding-top: 0.25rem;
-            padding-bottom: 0.25rem;
-        }
-
-        .py-1\.5 {
-            padding-top: 0.375rem;
-            padding-bottom: 0.375rem;
-        }
-
-        .py-2 {
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-        }
-
-        .pb-1 {
-            padding-bottom: 0.25rem;
-        }
-
-        .pb-4 {
-            padding-bottom: 1rem;
-        }
-
-        .pl-10 {
-            padding-left: 2.5rem;
-        }
-
-        .pl-4 {
-            padding-left: 1rem;
-        }
-
-        .pl-7 {
-            padding-left: 1.75rem;
-        }
-
-        .pr-10 {
-            padding-right: 2.5rem;
-        }
-
-        .pr-4 {
-            padding-right: 1rem;
-        }
-
-        .pt-4 {
-            padding-top: 1rem;
-        }
-
-        .text-left {
-            text-align: left;
-        }
-
-        .align-top {
-            vertical-align: top;
-        }
-
-        .align-middle {
-            vertical-align: middle;
-        }
-
-        .font-inter {
-            font-family: 'Inter', sans-serif;
-        }
-
-        .text-2xl {
-            font-size: 1.5rem;
-            line-height: 2rem;
-        }
-
-        .text-\[11px\] {
-            font-size: 11px;
-        }
-
-        .text-\[12px\] {
-            font-size: 12px;
-        }
-
-        .text-\[13px\] {
-            font-size: 13px;
-        }
-
-        .text-base {
-            font-size: 1rem;
-            line-height: 1.5rem;
-        }
-
-        .text-lg {
-            font-size: 1.125rem;
-            line-height: 1.75rem;
-        }
-
-        .text-sm {
-            font-size: 0.875rem;
-            line-height: 1.25rem;
-        }
-
-        .text-xl {
-            font-size: 1.25rem;
-            line-height: 1.75rem;
-        }
-
-        .font-bold {
-            font-weight: 700;
-        }
-
-        .font-medium {
-            font-weight: 500;
-        }
-
-        .font-normal {
-            font-weight: 400;
-        }
-
-        .font-semibold {
-            font-weight: 600;
-        }
-
-        .uppercase {
-            text-transform: uppercase;
-        }
-
-        .leading-none {
-            line-height: 1;
-        }
-
-        .tracking-wide {
-            letter-spacing: 0.025em;
-        }
-
-        .text-blue-500 {
-            --tw-text-opacity: 1;
-            color: rgb(59 130 246 / var(--tw-text-opacity));
-        }
-
-        .text-emerald-500 {
-            --tw-text-opacity: 1;
-            color: rgb(16 185 129 / var(--tw-text-opacity));
-        }
-
-        .text-gray-300 {
-            --tw-text-opacity: 1;
-            color: rgb(209 213 219 / var(--tw-text-opacity));
-        }
-
-        .text-gray-400 {
-            --tw-text-opacity: 1;
-            color: rgb(156 163 175 / var(--tw-text-opacity));
-        }
-
-        .text-gray-600 {
-            --tw-text-opacity: 1;
-            color: rgb(75 85 99 / var(--tw-text-opacity));
-        }
-
-        .text-gray-800 {
-            --tw-text-opacity: 1;
-            color: rgb(31 41 55 / var(--tw-text-opacity));
-        }
-
-        .text-rose-500 {
-            --tw-text-opacity: 1;
-            color: rgb(244 63 94 / var(--tw-text-opacity));
-        }
-
-        .text-white {
-            --tw-text-opacity: 1;
-            color: rgb(255 255 255 / var(--tw-text-opacity));
-        }
-
-        .shadow-md {
-            --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-        }
-
-        .shadow-black\/10 {
-            --tw-shadow-color: rgb(0 0 0 / 0.1);
-            --tw-shadow: var(--tw-shadow-colored);
-        }
-
-        .shadow-black\/5 {
-            --tw-shadow-color: rgb(0 0 0 / 0.05);
-            --tw-shadow: var(--tw-shadow-colored);
-        }
-
-        .outline-none {
-            outline: 2px solid transparent;
-            outline-offset: 2px;
-        }
-
-        .transition-all {
-            transition-property: all;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-duration: 150ms;
-        }
-
-        .transition-transform {
-            transition-property: transform;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-duration: 150ms;
-        }
-
-        .notification-tab>.active {
-            --tw-border-opacity: 1;
-            border-bottom-color: rgb(59 130 246 / var(--tw-border-opacity));
-            --tw-text-opacity: 1;
-            color: rgb(59 130 246 / var(--tw-text-opacity));
-        }
-
-        .notification-tab>.active:hover {
-            --tw-text-opacity: 1;
-            color: rgb(59 130 246 / var(--tw-text-opacity));
-        }
-
-        .order-tab>.active {
-            --tw-bg-opacity: 1;
-            background-color: rgb(59 130 246 / var(--tw-bg-opacity));
-            --tw-text-opacity: 1;
-            color: rgb(255 255 255 / var(--tw-text-opacity));
-        }
-
-        .order-tab>.active:hover {
-            --tw-text-opacity: 1;
-            color: rgb(255 255 255 / var(--tw-text-opacity));
-        }
-
-        @media (min-width: 768px) {
-            .main.active {
-                margin-left: 0px;
-                width: 100%;
-            }
-        }
-
-        .before\:mr-3::before {
-            content: var(--tw-content);
-            margin-right: 0.75rem;
-        }
-
-        .before\:h-1::before {
-            content: var(--tw-content);
-            height: 0.25rem;
-        }
-
-        .before\:w-1::before {
-            content: var(--tw-content);
-            width: 0.25rem;
-        }
-
-        .before\:rounded-full::before {
-            content: var(--tw-content);
-            border-radius: 9999px;
-        }
-
-        .before\:bg-gray-300::before {
-            content: var(--tw-content);
-            --tw-bg-opacity: 1;
-            background-color: rgb(209 213 219 / var(--tw-bg-opacity));
-        }
-
-        .hover\:bg-gray-50:hover {
-            --tw-bg-opacity: 1;
-            background-color: rgb(249 250 251 / var(--tw-bg-opacity));
-        }
-
-        .hover\:bg-gray-950:hover {
-            --tw-bg-opacity: 1;
-            background-color: rgb(3 7 18 / var(--tw-bg-opacity));
-        }
-
-        .hover\:text-blue-500:hover {
-            --tw-text-opacity: 1;
-            color: rgb(59 130 246 / var(--tw-text-opacity));
-        }
-
-        .hover\:text-blue-600:hover {
-            --tw-text-opacity: 1;
-            color: rgb(37 99 235 / var(--tw-text-opacity));
-        }
-
-        .hover\:text-gray-100:hover {
-            --tw-text-opacity: 1;
-            color: rgb(243 244 246 / var(--tw-text-opacity));
-        }
-
-        .hover\:text-gray-600:hover {
-            --tw-text-opacity: 1;
-            color: rgb(75 85 99 / var(--tw-text-opacity));
-        }
-
-        .focus\:border-blue-500:focus {
-            --tw-border-opacity: 1;
-            border-color: rgb(59 130 246 / var(--tw-border-opacity));
-        }
-
-        .group:hover .group-hover\:text-blue-500 {
-            --tw-text-opacity: 1;
-            color: rgb(59 130 246 / var(--tw-text-opacity));
-        }
-
-        .group.selected .group-\[\.selected\]\:block {
-            display: block;
-        }
-
-        .group.selected .group-\[\.selected\]\:rotate-90 {
-            --tw-rotate: 90deg;
-            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-        }
-
-        .group.active .group-\[\.active\]\:bg-gray-800 {
-            --tw-bg-opacity: 1;
-            background-color: rgb(31 41 55 / var(--tw-bg-opacity));
-        }
-
-        .group.selected .group-\[\.selected\]\:bg-gray-950 {
-            --tw-bg-opacity: 1;
-            background-color: rgb(3 7 18 / var(--tw-bg-opacity));
-        }
-
-        .group.active .group-\[\.active\]\:text-white {
-            --tw-text-opacity: 1;
-            color: rgb(255 255 255 / var(--tw-text-opacity));
-        }
-
-        .group.selected .group-\[\.selected\]\:text-gray-100 {
-            --tw-text-opacity: 1;
-            color: rgb(243 244 246 / var(--tw-text-opacity));
-        }
-
-        @media (min-width: 768px) {
-            .md\:ml-64 {
-                margin-left: 16rem;
-            }
-
-            .md\:hidden {
-                display: none;
-            }
-
-            .md\:w-\[calc\(100\%-256px\)\] {
-                width: calc(100% - 256px);
-            }
-
-            .md\:grid-cols-2 {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .lg\:col-span-2 {
-                grid-column: span 2 / span 2;
-            }
-
-            .lg\:grid-cols-2 {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .lg\:grid-cols-3 {
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-            }
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="./assets/img/favicon.png" />
+    <title>@yield('title')</title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <!-- Nucleo Icons -->
+    <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Popper -->
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <!-- Main Styling -->
+    <link href="./assets/css/argon-dashboard-tailwind.css?v=1.0.1" rel="stylesheet" />
 </head>
 
-<body class="text-gray-800 font-inter">
-    <!--sidenav -->
-    <aside class="fixed left-0 top-0 w-64 h-full bg-[#f8f4f3] p-4 z-50 sidebar-menu transition-transform">
-        <a href="" class="flex items-center">
-            <img src="{{ asset('storage/images/akprada-header.png') }}" class="object-cover h-14 w-auto md:h-20 mr-1.5" alt="akpardalogo">
-            <span>
-                <span class=" text-sm font-semibold items-center text-gray-900 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">Akademi Pariwisata</span>
-                <br>
-                <span class=" text-sm font-semibold items-center text-gray-900  rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">Dharma Nusantara Sakti </span>
-                <span class=" text-sm font-semibold items-center text-gray-900  rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">Yogyakarta</span>
-            </span>
-        </a>
-        <ul class="mt-4">
-            <span class="text-gray-400 font-bold">ADMIN</span>
-            <li class="mb-1 group">
-                <a href="" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-                    <i class="ri-home-2-line mr-3 text-lg"></i>
-                    <span class="text-sm">Dashboard</span>
-                </a>
-            </li>
-            <li class="mb-1 group">
-                <a href="" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
-                    <i class='bx bx-user mr-3 text-lg'></i>
-                    <span class="text-sm">Users</span>
-                    <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
-                </a>
-                <ul class="pl-7 mt-2 hidden group-[.selected]:block">
-                    <li class="mb-4">
-                        <a href="" class="text-gray-900 text-sm flex items-center hover:text-[#f84525] before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">All</a>
-                    </li>
-                    <li class="mb-4">
-                        <a href="" class="text-gray-900 text-sm flex items-center hover:text-[#f84525] before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Roles</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="mb-1 group">
-                <a href="" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-                    <i class='bx bx-list-ul mr-3 text-lg'></i>
-                    <span class="text-sm">Activities</span>
-                </a>
-            </li>
-            <span class="text-gray-400 font-bold">BLOG</span>
-            <li class="mb-1 group">
-                <a href="" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
-                    <i class='bx bxl-blogger mr-3 text-lg'></i>
-                    <span class="text-sm">Post</span>
-                    <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
-                </a>
-                <ul class="pl-7 mt-2 hidden group-[.selected]:block">
-                    <li class="mb-4">
-                        <a href="" class="text-gray-900 text-sm flex items-center hover:text-[#f84525] before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">All</a>
-                    </li>
-                    <li class="mb-4">
-                        <a href="" class="text-gray-900 text-sm flex items-center hover:text-[#f84525] before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Categories</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="mb-1 group">
-                <a href="" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-                    <i class='bx bx-archive mr-3 text-lg'></i>
-                    <span class="text-sm">Archive</span>
-                </a>
-            </li>
-            <span class="text-gray-400 font-bold">PERSONAL</span>
-            <li class="mb-1 group">
-                <a href="" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-                    <i class='bx bx-bell mr-3 text-lg'></i>
-                    <span class="text-sm">Notifications</span>
-                    <span class=" md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-600 bg-red-200 rounded-full">5</span>
-                </a>
-            </li>
-            <li class="mb-1 group">
-                <a href="" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-                    <i class='bx bx-envelope mr-3 text-lg'></i>
-                    <span class="text-sm">Messages</span>
-                    <span class=" md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-green-600 bg-green-200 rounded-full">2 New</span>
-                </a>
-            </li>
-        </ul>
-    </aside>
-    <div class="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay"></div>
-    <!-- end sidenav -->
-
-    <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-200 min-h-screen transition-all main">
-        <!-- navbar -->
-        <header class="py-2 px-6 bg-[#f8f4f3] flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
-            <button type="button" class="text-lg text-gray-900 font-semibold sidebar-toggle">
-                <i class="ri-menu-line"></i>
-            </button>
-            <ul class="ml-auto flex items-center">
-                <li class="mr-1 dropdown">
-                    <button type="button" class="dropdown-toggle text-gray-400 mr-4 w-8 h-8 rounded flex items-center justify-center  hover:text-gray-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="hover:bg-gray-100 rounded-full" viewBox="0 0 24 24" style="fill: gray;transform: ;msFilter:;">
-                            <path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path>
-                        </svg>
-                    </button>
-                    <div class="dropdown-menu shadow-md shadow-black/5 z-30 hidden max-w-xs w-full bg-white rounded-md border border-gray-100">
-                        <form action="" class="p-4 border-b border-b-gray-100">
-                            <div class="relative w-full">
-                                <input type="text" class="py-2 pr-4 pl-10 bg-gray-50 w-full outline-none border border-gray-100 rounded-md text-sm focus:border-blue-500" placeholder="Search...">
-                                <i class="ri-search-line absolute top-1/2 left-4 -translate-y-1/2 text-gray-900"></i>
-                            </div>
-                        </form>
-                    </div>
+<body class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
+    <div class="absolute w-full bg-blue-500 dark:hidden min-h-75"></div>
+    <!-- sidenav  -->
+    <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4 overflow-y-auto antialiased transition-transform duration-200 -translate-x-full bg-white border-0 shadow-xl dark:shadow-none dark:bg-slate-850 max-w-64 ease-nav-brand z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0" aria-expanded="false">
+        <div class="flex items-center">
+            <i class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times dark:text-white text-slate-400 xl:hidden" sidenav-close></i>
+            <a class="flex items-center px-2 py-3 m-0 text-sm whitespace-nowrap dark:text-white text-slate-700" href="" target="_blank">
+                <img src="{{ asset('storage/images/akprada.png') }}" class="inline h-full max-w-full transition-all duration-200 dark:hidden ease-nav-brand max-h-7" alt="main_logo" />
+                <img src="{{ asset('storage/images/akprada.png') }}" class="hidden h-full max-w-full transition-all duration-200 dark:inline ease-nav-brand max-h-8" alt="main_logo" />
+                <div class="ml-1 font-semibold transition-all duration-200 ease-nav-brand text-ellipsis overflow-hidden whitespace-nowrap">
+                    <span class="block">Akademi Pariwisata</span>
+                    <span class="block">Dharma Nusantara Sakti</span>
+                </div>
+            </a>
+        </div>
+        <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent" />
+        <div class="items-center block w-auto max-h-screen overflow-auto grow basis-full">
+            <ul class="flex flex-col pl-0 mb-0">
+                <li class="mt-0.5 w-full">
+                    <a class="py-2.7 bg-blue-500/13 dark:text-white dark:opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 font-semibold text-slate-700 transition-colors" href="./pages/dashboard.html">
+                        <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                            <i class="relative top-0 text-sm leading-normal text-blue-500 ni ni-tv-2"></i>
+                        </div>
+                        <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Dashboard</span>
+                    </a>
                 </li>
-                <li class="dropdown">
-                    <button type="button" class="dropdown-toggle text-gray-400 mr-4 w-8 h-8 rounded flex items-center justify-center  hover:text-gray-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="hover:bg-gray-100 rounded-full" viewBox="0 0 24 24" style="fill: gray;transform: ;msFilter:;">
-                            <path d="M19 13.586V10c0-3.217-2.185-5.927-5.145-6.742C13.562 2.52 12.846 2 12 2s-1.562.52-1.855 1.258C7.185 4.074 5 6.783 5 10v3.586l-1.707 1.707A.996.996 0 0 0 3 16v2a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-2a.996.996 0 0 0-.293-.707L19 13.586zM19 17H5v-.586l1.707-1.707A.996.996 0 0 0 7 14v-4c0-2.757 2.243-5 5-5s5 2.243 5 5v4c0 .266.105.52.293.707L19 16.414V17zm-7 5a2.98 2.98 0 0 0 2.818-2H9.182A2.98 2.98 0 0 0 12 22z"></path>
-                        </svg>
-                    </button>
-                    <div class="dropdown-menu shadow-md shadow-black/5 z-30 hidden max-w-xs w-full bg-white rounded-md border border-gray-100">
-                        <div class="flex items-center px-4 pt-4 border-b border-b-gray-100 notification-tab">
-                            <button type="button" data-tab="notification" data-tab-page="notifications" class="text-gray-400 font-medium text-[13px] hover:text-gray-600 border-b-2 border-b-transparent mr-4 pb-1 active">Notifications</button>
-                            <button type="button" data-tab="notification" data-tab-page="messages" class="text-gray-400 font-medium text-[13px] hover:text-gray-600 border-b-2 border-b-transparent mr-4 pb-1">Messages</button>
+
+                <li class="mt-0.5 w-full">
+                    <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="./pages/tables.html">
+                        <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                            <i class="relative top-0 text-sm leading-normal text-orange-500 ni ni-calendar-grid-58"></i>
                         </div>
-                        <div class="my-2">
-                            <ul class="max-h-64 overflow-y-auto" data-tab-for="notification" data-page="notifications">
-                                <li>
-                                    <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                        <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle">
-                                        <div class="ml-2">
-                                            <div class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">New order</div>
-                                            <div class="text-[11px] text-gray-400">from a user</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                        <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle">
-                                        <div class="ml-2">
-                                            <div class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">New order</div>
-                                            <div class="text-[11px] text-gray-400">from a user</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                        <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle">
-                                        <div class="ml-2">
-                                            <div class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">New order</div>
-                                            <div class="text-[11px] text-gray-400">from a user</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                        <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle">
-                                        <div class="ml-2">
-                                            <div class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">New order</div>
-                                            <div class="text-[11px] text-gray-400">from a user</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                        <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle">
-                                        <div class="ml-2">
-                                            <div class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">New order</div>
-                                            <div class="text-[11px] text-gray-400">from a user</div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="max-h-64 overflow-y-auto hidden" data-tab-for="notification" data-page="messages">
-                                <li>
-                                    <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                        <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle">
-                                        <div class="ml-2">
-                                            <div class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">John Doe</div>
-                                            <div class="text-[11px] text-gray-400">Hello there!</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                        <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle">
-                                        <div class="ml-2">
-                                            <div class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">John Doe</div>
-                                            <div class="text-[11px] text-gray-400">Hello there!</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                        <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle">
-                                        <div class="ml-2">
-                                            <div class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">John Doe</div>
-                                            <div class="text-[11px] text-gray-400">Hello there!</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                        <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle">
-                                        <div class="ml-2">
-                                            <div class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">John Doe</div>
-                                            <div class="text-[11px] text-gray-400">Hello there!</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                        <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle">
-                                        <div class="ml-2">
-                                            <div class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">John Doe</div>
-                                            <div class="text-[11px] text-gray-400">Hello there!</div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                        <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Tables</span>
+                    </a>
                 </li>
-                <button id="fullscreen-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="hover:bg-gray-100 rounded-full" viewBox="0 0 24 24" style="fill: gray;transform: ;msFilter:;">
-                        <path d="M5 5h5V3H3v7h2zm5 14H5v-5H3v7h7zm11-5h-2v5h-5v2h7zm-2-4h2V3h-7v2h5z"></path>
-                    </svg>
-                </button>
-                <script>
-                    const fullscreenButton = document.getElementById('fullscreen-button');
 
-                    fullscreenButton.addEventListener('click', toggleFullscreen);
-
-                    function toggleFullscreen() {
-                        if (document.fullscreenElement) {
-                            // If already in fullscreen, exit fullscreen
-                            document.exitFullscreen();
-                        } else {
-                            // If not in fullscreen, request fullscreen
-                            document.documentElement.requestFullscreen();
-                        }
-                    }
-                </script>
-
-                <li class="dropdown ml-3">
-                    <button type="button" class="dropdown-toggle flex items-center">
-                        <div class="flex-shrink-0 w-10 h-10 relative">
-                            <div class="p-1 bg-white rounded-full focus:outline-none focus:ring">
-                                <img class="w-8 h-8 rounded-full" src="https://laravelui.spruko.com/tailwind/ynex/build/assets/images/faces/9.jpg" alt="" />
-                                <div class="top-0 left-7 absolute w-3 h-3 bg-lime-400 border-2 border-white rounded-full animate-ping"></div>
-                                <div class="top-0 left-7 absolute w-3 h-3 bg-lime-500 border-2 border-white rounded-full"></div>
-                            </div>
+                <li class="mt-0.5 w-full">
+                    <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="./pages/billing.html">
+                        <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
+                            <i class="relative top-0 text-sm leading-normal text-emerald-500 ni ni-credit-card"></i>
                         </div>
-                        <div class="p-2 md:block text-left">
-                            <h2 class="text-sm font-semibold text-gray-800"><span class="firstName"></span></h2>
-                            <p class="text-xs text-gray-500">Administrator</p>
+                        <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Billing</span>
+                    </a>
+                </li>
+
+                <li class="mt-0.5 w-full">
+                    <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="./pages/virtual-reality.html">
+                        <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                            <i class="relative top-0 text-sm leading-normal text-cyan-500 ni ni-app"></i>
                         </div>
-                    </button>
-                    <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
-                        <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">Profile</a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">Settings</a>
-                        </li>
-                        <li>
-                            <form method="POST" action="">
-                                <a role="menuitem" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50 cursor-pointer" onclick="event.preventDefault();
-                                    this.closest('form').submit();">
-                                    Log Out
-                                </a>
-                            </form>
-                        </li>
-                    </ul>
+                        <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Virtual Reality</span>
+                    </a>
+                </li>
+
+                <li class="mt-0.5 w-full">
+                    <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="./pages/rtl.html">
+                        <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                            <i class="relative top-0 text-sm leading-normal text-red-600 ni ni-world-2"></i>
+                        </div>
+                        <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">RTL</span>
+                    </a>
+                </li>
+
+                <li class="w-full mt-4">
+                    <h6 class="pl-6 ml-2 text-xs font-bold leading-tight uppercase dark:text-white opacity-60">Account pages</h6>
+                </li>
+
+                <li class="mt-0.5 w-full">
+                    <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="./pages/profile.html">
+                        <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                            <i class="relative top-0 text-sm leading-normal text-slate-700 ni ni-single-02"></i>
+                        </div>
+                        <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Profile</span>
+                    </a>
+                </li>
+
+                <li class="mt-0.5 w-full">
+                    <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="./pages/sign-in.html">
+                        <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                            <i class="relative top-0 text-sm leading-normal text-orange-500 ni ni-single-copy-04"></i>
+                        </div>
+                        <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Sign In</span>
+                    </a>
+                </li>
+
+                <li class="mt-0.5 w-full">
+                    <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="./pages/sign-up.html">
+                        <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                            <i class="relative top-0 text-sm leading-normal text-cyan-500 ni ni-collection"></i>
+                        </div>
+                        <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Sign Up</span>
+                    </a>
                 </li>
             </ul>
-        </header>
-        <!-- end navbar -->
-
-        <!-- Content -->
-        <div class="p-6">
-            @yield('content')
         </div>
-        <!-- End Content -->
-    </main>
+    </aside>
 
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- end sidenav -->
 
-    <script>
-        async function fetchData() {
-            try {
-                const response = await axios.get('http://202.91.8.170:9000/api/pmb/72cac49d-f48c-4927-9672-a12ea2be3788/');
-                const data = response.data.data;
-                // Update all elements with class .firstName
-                document.querySelectorAll('.firstName').forEach(element => {
-                    element.innerText = data.nama_lengkap;
-                });
-                document.querySelectorAll('.fotopp').forEach(element => {
-                    element.innerText = data.nomor_pendaftaran;
-                });
-            } catch (error) {
-                console.error(error);
-            }
-        }
+    <div class="relative h-full max-h-screen transition-all duration-200 ease-in-out xl:ml-68">
+        <nav class="absolute z-20 flex flex-wrap items-center justify-between w-full px-6 py-2 -mt-56 text-white transition-all ease-in shadow-none duration-250 lg:flex-nowrap lg:justify-start" navbar-profile navbar-scroll="true">
+            <div class="flex items-center justify-between w-full px-6 py-1 mx-auto flex-wrap-inherit">
+                <nav>
+                    <!-- breadcrumb -->
+                    <ol class="flex flex-wrap pt-1 pl-2 pr-4 mr-12 bg-transparent rounded-lg sm:mr-16">
+                        <li class="leading-normal text-sm">
+                            <a class="opacity-50" href="javascript:;">Pages</a>
+                        </li>
+                        <li class="text-sm pl-2 capitalize leading-normal before:float-left before:pr-2 before:content-['/']" aria-current="page">Profile</li>
+                    </ol>
+                    <h6 class="mb-2 ml-2 font-bold text-white capitalize dark:text-white">Profile</h6>
+                </nav>
 
-        fetchData();
-    </script>
-    <script>
-        // start: Sidebar
-        const sidebarToggle = document.querySelector('.sidebar-toggle')
-        const sidebarOverlay = document.querySelector('.sidebar-overlay')
-        const sidebarMenu = document.querySelector('.sidebar-menu')
-        const main = document.querySelector('.main')
-        sidebarToggle.addEventListener('click', function(e) {
-            e.preventDefault()
-            main.classList.toggle('active')
-            sidebarOverlay.classList.toggle('hidden')
-            sidebarMenu.classList.toggle('-translate-x-full')
-        })
-        sidebarOverlay.addEventListener('click', function(e) {
-            e.preventDefault()
-            main.classList.add('active')
-            sidebarOverlay.classList.add('hidden')
-            sidebarMenu.classList.add('-translate-x-full')
-        })
-        document.querySelectorAll('.sidebar-dropdown-toggle').forEach(function(item) {
-            item.addEventListener('click', function(e) {
-                e.preventDefault()
-                const parent = item.closest('.group')
-                if (parent.classList.contains('selected')) {
-                    parent.classList.remove('selected')
-                } else {
-                    document.querySelectorAll('.sidebar-dropdown-toggle').forEach(function(i) {
-                        i.closest('.group').classList.remove('selected')
-                    })
-                    parent.classList.add('selected')
-                }
-            })
-        })
-        // end: Sidebar
-        // start: Popper
-        const popperInstance = {}
-        document.querySelectorAll('.dropdown').forEach(function(item, index) {
-            const popperId = 'popper-' + index
-            const toggle = item.querySelector('.dropdown-toggle')
-            const menu = item.querySelector('.dropdown-menu')
-            menu.dataset.popperId = popperId
-            popperInstance[popperId] = Popper.createPopper(toggle, menu, {
-                modifiers: [{
-                        name: 'offset',
-                        options: {
-                            offset: [0, 8],
-                        },
-                    },
-                    {
-                        name: 'preventOverflow',
-                        options: {
-                            padding: 24,
-                        },
-                    },
-                ],
-                placement: 'bottom-end'
-            });
-        })
-        document.addEventListener('click', function(e) {
-            const toggle = e.target.closest('.dropdown-toggle')
-            const menu = e.target.closest('.dropdown-menu')
-            if (toggle) {
-                const menuEl = toggle.closest('.dropdown').querySelector('.dropdown-menu')
-                const popperId = menuEl.dataset.popperId
-                if (menuEl.classList.contains('hidden')) {
-                    hideDropdown()
-                    menuEl.classList.remove('hidden')
-                    showPopper(popperId)
-                } else {
-                    menuEl.classList.add('hidden')
-                    hidePopper(popperId)
-                }
-            } else if (!menu) {
-                hideDropdown()
-            }
-        })
+                <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
+                    <div class="flex items-center md:ml-auto md:pr-4">
+                        <div class="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease">
+                            <span class="text-sm ease leading-5.6 absolute z-50 -ml-px flex h-full items-center whitespace-nowrap rounded-lg rounded-tr-none rounded-br-none border border-r-0 border-transparent bg-transparent py-2 px-2.5 text-center font-normal text-slate-500 transition-all">
+                                <i class="fas fa-search" aria-hidden="true"></i>
+                            </span>
+                            <input type="text" class="pl-9 text-sm dark:bg-slate-850 dark:text-white focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none focus:transition-shadow" placeholder="Type here..." />
+                        </div>
+                    </div>
+                    <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
+                        <!-- online builder btn  -->
+                        <!-- <li class="flex items-center">
+                <a class="inline-block px-8 py-2 mb-0 mr-4 font-bold text-center text-white uppercase align-middle transition-all ease-in border border-solid rounded-lg shadow-none cursor-pointer leading-pro border-white/75 bg-white/10 text-xs hover:-translate-y-px active:shadow-xs tracking-tight-rem hover:border-white hover:bg-transparent hover:text-white hover:opacity-75 hover:shadow-none active:bg-white active:text-black active:hover:bg-transparent active:hover:text-white" target="_blank" href="https://www.creative-tim.com/builder/soft-ui?ref=navbar-dashboard&amp;_ga=2.76518741.1192788655.1647724933-1242940210.1644448053">Online Builder</a>
+              </li> -->
+                        <li class="flex items-center">
+                            <a href="../pages/sign-in.html" class="block px-0 py-2 font-semibold text-white transition-all ease-in-out text-sm">
+                                <i class="fa fa-user sm:mr-1" aria-hidden="true"></i>
+                                <span class="hidden sm:inline">Sign In</span>
+                            </a>
+                        </li>
+                        <li class="flex items-center pl-4 xl:hidden">
+                            <a href="javascript:;" class="block p-0 text-white transition-all ease-in-out text-sm" sidenav-trigger>
+                                <div class="w-4.5 overflow-hidden">
+                                    <i class="ease mb-0.75 relative block h-0.5 rounded-sm bg-white transition-all"></i>
+                                    <i class="ease mb-0.75 relative block h-0.5 rounded-sm bg-white transition-all"></i>
+                                    <i class="ease relative block h-0.5 rounded-sm bg-white transition-all"></i>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="flex items-center px-4">
+                            <a href="javascript:;" class="p-0 text-white transition-all ease-in-out text-sm">
+                                <i fixed-plugin-button-nav class="cursor-pointer fa fa-cog" aria-hidden="true"></i>
+                                <!-- fixed-plugin-button-nav  -->
+                            </a>
+                        </li>
 
-        function hideDropdown() {
-            document.querySelectorAll('.dropdown-menu').forEach(function(item) {
-                item.classList.add('hidden')
-            })
-        }
+                        <!-- notifications -->
 
-        function showPopper(popperId) {
-            popperInstance[popperId].setOptions(function(options) {
-                return {
-                    ...options,
-                    modifiers: [
-                        ...options.modifiers,
-                        {
-                            name: 'eventListeners',
-                            enabled: true
-                        },
-                    ],
-                }
-            });
-            popperInstance[popperId].update();
-        }
+                        <li class="relative flex items-center pr-2">
+                            <p class="hidden dark:text-white dark:opacity-60 transform-dropdown-show"></p>
+                            <a dropdown-trigger href="javascript:;" class="block p-0 text-white transition-all text-sm ease-nav-brand" aria-expanded="false">
+                                <i class="cursor-pointer fa fa-bell" aria-hidden="true"></i>
+                            </a>
 
-        function hidePopper(popperId) {
-            popperInstance[popperId].setOptions(function(options) {
-                return {
-                    ...options,
-                    modifiers: [
-                        ...options.modifiers,
-                        {
-                            name: 'eventListeners',
-                            enabled: false
-                        },
-                    ],
-                }
-            });
-        }
-        // end: Popper
+                            <ul dropdown-menu class="text-sm transform-dropdown before:font-awesome before:leading-default before:duration-350 before:ease lg:shadow-3xl duration-250 min-w-44 before:sm:right-8 before:text-5.5 pointer-events-none absolute right-0 top-0 z-50 origin-top list-none rounded-lg border-0 border-solid border-transparent bg-white bg-clip-padding px-2 py-4 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-2 before:left-auto before:top-0 before:z-50 before:inline-block before:font-normal before:text-white before:antialiased before:transition-all before:content-['\f0d8'] sm:-mr-6 lg:absolute lg:right-0 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
+                                <!-- add show class on dropdown open js -->
+                                <li class="relative mb-2">
+                                    <a class="ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg bg-transparent px-4 duration-300 lg:transition-colors" href="javascript:;">
+                                        <div class="flex py-1">
+                                            <div class="my-auto">
+                                                <img src="../assets/img/team-2.jpg" class="inline-flex items-center justify-center mr-4 text-white text-sm h-9 w-9 max-w-none rounded-xl" />
+                                            </div>
+                                            <div class="flex flex-col justify-center">
+                                                <h6 class="mb-1 font-normal leading-normal dark:text-white text-sm"><span class="font-semibold">New message</span> from Laur</h6>
+                                                <p class="mb-0 leading-tight dark:text-white dark:opacity-60 text-xs text-slate-400">
+                                                    <i class="mr-1 fa fa-clock" aria-hidden="true"></i>
+                                                    13 minutes ago
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
 
-        // start: Tab
-        document.querySelectorAll('[data-tab]').forEach(function(item) {
-            item.addEventListener('click', function(e) {
-                e.preventDefault()
-                const tab = item.dataset.tab
-                const page = item.dataset.tabPage
-                const target = document.querySelector('[data-tab-for="' + tab + '"][data-page="' + page + '"]')
-                document.querySelectorAll('[data-tab="' + tab + '"]').forEach(function(i) {
-                    i.classList.remove('active')
-                })
-                document.querySelectorAll('[data-tab-for="' + tab + '"]').forEach(function(i) {
-                    i.classList.add('hidden')
-                })
-                item.classList.add('active')
-                target.classList.remove('hidden')
-            })
-        })
-        // end: Tab
-        // start: Chart
-        new Chart(document.getElementById('order-chart'), {
-            type: 'line',
-            data: {
-                labels: generateNDays(7),
-                datasets: [{
-                        label: 'Active',
-                        data: generateRandomData(7),
-                        borderWidth: 1,
-                        fill: true,
-                        pointBackgroundColor: 'rgb(59, 130, 246)',
-                        borderColor: 'rgb(59, 130, 246)',
-                        backgroundColor: 'rgb(59 130 246 / .05)',
-                        tension: .2
-                    },
-                    {
-                        label: 'Completed',
-                        data: generateRandomData(7),
-                        borderWidth: 1,
-                        fill: true,
-                        pointBackgroundColor: 'rgb(16, 185, 129)',
-                        borderColor: 'rgb(16, 185, 129)',
-                        backgroundColor: 'rgb(16 185 129 / .05)',
-                        tension: .2
-                    },
-                    {
-                        label: 'Canceled',
-                        data: generateRandomData(7),
-                        borderWidth: 1,
-                        fill: true,
-                        pointBackgroundColor: 'rgb(244, 63, 94)',
-                        borderColor: 'rgb(244, 63, 94)',
-                        backgroundColor: 'rgb(244 63 94 / .05)',
-                        tension: .2
-                    },
-                ]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
+                                <li class="relative mb-2">
+                                    <a class="ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg px-4 duration-300 lg:transition-colors" href="javascript:;">
+                                        <div class="flex py-1">
+                                            <div class="my-auto">
+                                                <img src="../assets/img/small-logos/logo-spotify.svg" class="inline-flex items-center justify-center mr-4 text-white text-sm bg-gradient-to-tl from-zinc-800 to-zinc-700 dark:bg-gradient-to-tl dark:from-slate-750 dark:to-gray-850 h-9 w-9 max-w-none rounded-xl" />
+                                            </div>
+                                            <div class="flex flex-col justify-center">
+                                                <h6 class="mb-1 font-normal leading-normal dark:text-white text-sm"><span class="font-semibold">New album</span> by Travis Scott</h6>
+                                                <p class="mb-0 leading-tight dark:text-white dark:opacity-60 text-xs text-slate-400">
+                                                    <i class="mr-1 fa fa-clock" aria-hidden="true"></i>
+                                                    1 day
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
 
-        function generateNDays(n) {
-            const data = []
-            for (let i = 0; i < n; i++) {
-                const date = new Date()
-                date.setDate(date.getDate() - i)
-                data.push(date.toLocaleString('en-US', {
-                    month: 'short',
-                    day: 'numeric'
-                }))
-            }
-            return data
-        }
+                                <li class="relative">
+                                    <a class="ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg px-4 duration-300 lg:transition-colors" href="javascript:;">
+                                        <div class="flex py-1">
+                                            <div class="inline-flex items-center justify-center my-auto mr-4 text-white transition-all duration-200 ease-in-out text-sm bg-gradient-to-tl from-slate-600 to-slate-300 h-9 w-9 rounded-xl">
+                                                <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                    <title>credit-card</title>
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                                            <g transform="translate(1716.000000, 291.000000)">
+                                                                <g transform="translate(453.000000, 454.000000)">
+                                                                    <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
+                                                                    <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z">
+                                                                    </path>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <div class="flex flex-col justify-center">
+                                                <h6 class="mb-1 font-normal leading-normal dark:text-white text-sm">Payment successfully
+                                                    completed</h6>
+                                                <p class="mb-0 leading-tight dark:text-white dark:opacity-60 text-xs text-slate-400">
+                                                    <i class="mr-1 fa fa-clock" aria-hidden="true"></i>
+                                                    2 days
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <br>
+        @yield('content')
+        <div class="w-full p-6 mx-auto">
+            <div class="flex flex-wrap -mx-3">
+                <div class="w-full max-w-full px-3 shrink-0 md:w-8/12 md:flex-0">
+                    <div class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+                        <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
+                            <div class="flex items-center">
+                                <p class="mb-0 dark:text-white/80">Edit Profile</p>
+                                <button type="button" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Settings</button>
+                            </div>
+                        </div>
+                        <div class="flex-auto p-6">
+                            <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">User Information</p>
+                            <div class="flex flex-wrap -mx-3">
+                                <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
+                                    <div class="mb-4">
+                                        <label for="username" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Username</label>
+                                        <input type="text" name="username" value="lucky.jesse" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                    </div>
+                                </div>
+                                <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
+                                    <div class="mb-4">
+                                        <label for="email" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Email
+                                            address</label>
+                                        <input type="email" name="email" value="jesse@example.com" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                    </div>
+                                </div>
+                                <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
+                                    <div class="mb-4">
+                                        <label for="first name" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">First
+                                            name</label>
+                                        <input type="text" name="first name" value="Jesse" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                    </div>
+                                </div>
+                                <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
+                                    <div class="mb-4">
+                                        <label for="last name" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Last
+                                            name</label>
+                                        <input type="text" name="last name" value="Lucky" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="h-px mx-0 my-4 bg-transparent border-0 opacity-25 bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent " />
 
-        function generateRandomData(n) {
-            const data = []
-            for (let i = 0; i < n; i++) {
-                data.push(Math.round(Math.random() * 10))
-            }
-            return data
-        }
-        // end: Chart
-    </script>
+                            <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">Contact Information</p>
+                            <div class="flex flex-wrap -mx-3">
+                                <div class="w-full max-w-full px-3 shrink-0 md:w-full md:flex-0">
+                                    <div class="mb-4">
+                                        <label for="address" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Address</label>
+                                        <input type="text" name="address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                    </div>
+                                </div>
+                                <div class="w-full max-w-full px-3 shrink-0 md:w-4/12 md:flex-0">
+                                    <div class="mb-4">
+                                        <label for="city" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">City</label>
+                                        <input type="text" name="city" value="New York" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                    </div>
+                                </div>
+                                <div class="w-full max-w-full px-3 shrink-0 md:w-4/12 md:flex-0">
+                                    <div class="mb-4">
+                                        <label for="country" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Country</label>
+                                        <input type="text" name="country" value="United States" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                    </div>
+                                </div>
+                                <div class="w-full max-w-full px-3 shrink-0 md:w-4/12 md:flex-0">
+                                    <div class="mb-4">
+                                        <label for="postal code" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Postal
+                                            code</label>
+                                        <input type="text" name="postal code" value="437300" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="h-px mx-0 my-4 bg-transparent border-0 opacity-25 bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent " />
 
+                            <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">About me</p>
+                            <div class="flex flex-wrap -mx-3">
+                                <div class="w-full max-w-full px-3 shrink-0 md:w-full md:flex-0">
+                                    <div class="mb-4">
+                                        <label for="about me" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">About
+                                            me</label>
+                                        <input type="text" name="about me" value="A beautiful Dashboard for Bootstrap 5. It is Free and Open Source." class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full max-w-full px-3 mt-6 shrink-0 md:w-4/12 md:flex-0 md:mt-0">
+                    <div class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+                        <img class="w-full rounded-t-2xl" src="../assets/img/bg-profile.jpg" alt="profile cover image">
+                        <div class="flex flex-wrap justify-center -mx-3">
+                            <div class="w-4/12 max-w-full px-3 flex-0 ">
+                                <div class="mb-6 -mt-6 lg:mb-0 lg:-mt-16">
+                                    <a href="javascript:;">
+                                        <img class="h-auto max-w-full border-2 border-white border-solid rounded-circle" src="../assets/img/team-2.jpg" alt="profile image">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-black/12.5 rounded-t-2xl p-6 text-center pt-0 pb-6 lg:pt-2 lg:pb-4">
+                            <div class="flex justify-between">
+                                <button type="button" class="hidden px-8 py-2 font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs bg-cyan-500 lg:block tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Connect</button>
+                                <button type="button" class="block px-8 py-2 font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs bg-cyan-500 lg:hidden tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">
+                                    <i class="ni ni-collection text-2.8"></i>
+                                </button>
+                                <button type="button" class="hidden px-8 py-2 font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs bg-slate-700 lg:block tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Message</button>
+                                <button type="button" class="block px-8 py-2 font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs bg-slate-700 lg:hidden tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">
+                                    <i class="ni ni-email-83 text-2.8"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="flex-auto p-6 pt-0">
+                            <div class="flex flex-wrap -mx-3">
+                                <div class="w-full max-w-full px-3 flex-1-0">
+                                    <div class="flex justify-center">
+                                        <div class="grid text-center">
+                                            <span class="font-bold dark:text-white text-lg">22</span>
+                                            <span class="leading-normal dark:text-white text-sm opacity-80">Friends</span>
+                                        </div>
+                                        <div class="grid mx-6 text-center">
+                                            <span class="font-bold dark:text-white text-lg">10</span>
+                                            <span class="leading-normal dark:text-white text-sm opacity-80">Photos</span>
+                                        </div>
+                                        <div class="grid text-center">
+                                            <span class="font-bold dark:text-white text-lg">89</span>
+                                            <span class="leading-normal dark:text-white text-sm opacity-80">Comments</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-6 text-center">
+                                <h5 class="dark:text-white ">
+                                    Mark Davis
+                                    <span class="font-light">, 35</span>
+                                </h5>
+                                <div class="mb-2 font-semibold leading-relaxed text-base dark:text-white/80 text-slate-700">
+                                    <i class="mr-2 dark:text-white ni ni-pin-3"></i>
+                                    Bucharest, Romania
+                                </div>
+                                <div class="mt-6 mb-2 font-semibold leading-relaxed text-base dark:text-white/80 text-slate-700">
+                                    <i class="mr-2 dark:text-white ni ni-briefcase-24"></i>
+                                    Solution Manager - Creative Tim Officer
+                                </div>
+                                <div class="dark:text-white/80">
+                                    <i class="mr-2 dark:text-white ni ni-hat-3"></i>
+                                    University of Computer Science
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <footer class="pt-4">
+                <div class="w-full px-6 mx-auto">
+                    <div class="flex flex-wrap items-center -mx-3 lg:justify-between">
+                        <div class="w-full max-w-full px-3 mt-0 mb-6 shrink-0 lg:mb-0 lg:w-1/2 lg:flex-none">
+                            <div class="leading-normal text-center text-sm text-slate-500 lg:text-left">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear() + ",");
+                                </script>
+                                made with <i class="fa fa-heart"></i> by
+                                <a href="https://www.creative-tim.com" class="font-semibold dark:text-white text-slate-700" target="_blank">Creative Tim</a>
+                                for a better web.
+                            </div>
+                        </div>
+                        <div class="w-full max-w-full px-3 mt-0 shrink-0 lg:w-1/2 lg:flex-none">
+                            <ul class="flex flex-wrap justify-center pl-0 mb-0 list-none lg:justify-end">
+                                <li class="nav-item">
+                                    <a href="https://www.creative-tim.com" class="block px-4 pt-0 pb-1 font-normal transition-colors ease-in-out text-sm text-slate-500" target="_blank">Creative Tim</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="https://www.creative-tim.com/presentation" class="block px-4 pt-0 pb-1 font-normal transition-colors ease-in-out text-sm text-slate-500" target="_blank">About Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="https://creative-tim.com/blog" class="block px-4 pt-0 pb-1 font-normal transition-colors ease-in-out text-sm text-slate-500" target="_blank">Blog</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="https://www.creative-tim.com/license" class="block px-4 pt-0 pb-1 pr-0 font-normal transition-colors ease-in-out text-sm text-slate-500" target="_blank">License</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
 </body>
+<!-- plugin for charts  -->
+<script src="./assets/js/plugins/chartjs.min.js" async></script>
+<!-- plugin for scrollbar  -->
+<script src="./assets/js/plugins/perfect-scrollbar.min.js" async></script>
+<!-- main script file  -->
+<script src="./assets/js/argon-dashboard-tailwind.js?v=1.0.1" async></script>
 
 </html>
