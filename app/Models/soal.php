@@ -2,19 +2,25 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Krs extends Model
+class soal extends Model
 {
-    protected $table = 'krs';
+    use HasFactory;
+    protected $table = 'soals';
 
     protected $fillable = [
-        'gelombang',
-        'periode_mulai',
-        'periode_berakhir',
-        'semester',
-        'status',
+       'id ',
+       'soal',
+       'pilihan1',
+       'pilihan2',
+       'pilihan3',
+       'pilihan4',
+       'foto',
+       'kunci_jawaban',
     ];
 
     protected static function boot()
@@ -40,5 +46,18 @@ class Krs extends Model
     public function getKeyType()
     {
         return 'string';
+    }
+
+    protected function foto():Attribute
+    {
+        return Attribute::make(
+            get: function ($image) {
+                if ($image) {
+                    return asset('/storage/soalfoto/' . $image);
+                } else {
+                    return null;
+                }
+            }
+        );
     }
 }

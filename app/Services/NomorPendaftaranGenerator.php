@@ -10,14 +10,14 @@ class NomorPendaftaranGenerator
      *
      * @return string
      */
-    public static function generate()
+    public static function generate($kode_jurusan)
     {
-        $lastnumber = count(PmbModel::all()); 
-        $lastnumber = str_pad($lastnumber, 4, '0', STR_PAD_LEFT);
-        $tanggal = date('Y/m');
+        $lastnumber = count(PmbModel::all())+1; 
+        $lastnumber = str_pad($lastnumber, 2, '0', STR_PAD_LEFT);
+        $tanggal = date('ym');
         // Menggunakan uniqid() untuk menghasilkan ID unik berdasarkan waktu saat ini
         // Anda dapat menyesuaikan format sesuai kebutuhan, misalnya dengan menambahkan awalan atau akhiran tertentu
         // Mengembalikan nomor pendaftaran yang unik
-        return 'PMB/'. $tanggal . '/' . $lastnumber.'/';
+        return $tanggal.$kode_jurusan.$lastnumber;
     }
 }

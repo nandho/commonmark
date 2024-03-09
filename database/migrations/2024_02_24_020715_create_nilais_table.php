@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('pmb', function (Blueprint $table) {
-            $table->renameColumn('npsn', 'nam_sekolah');
+        Schema::create('nilais', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('id_calon_mahasiswa');
+            $table->integer('nilai')->default(0);
         });
     }
 
@@ -21,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('pmb', function (Blueprint $table) {
-            $table->renameColumn('nam_sekolah', 'npsn');
-        });
+        Schema::dropIfExists('nilais');
     }
 };

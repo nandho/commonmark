@@ -2,19 +2,20 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Krs extends Model
+
+class nilai extends Model
 {
-    protected $table = 'krs';
+    use HasFactory;
+    protected $table = 'nilais';
 
     protected $fillable = [
-        'gelombang',
-        'periode_mulai',
-        'periode_berakhir',
-        'semester',
-        'status',
+       'id',
+       'id_calon_mahasiswa',
+       'nilai',
     ];
 
     protected static function boot()
