@@ -30,21 +30,21 @@
                     <span class="border-b w-1/5 lg:w-1/4"></span>
                 </div>
 
-                    <form id="loginForm">
-                        <div class="mt-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2">Username</label>
-                            <input name="username" id="username" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="text" />
+                <form id="loginForm">
+                    <div class="mt-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+                        <input name="username" id="username" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="text" />
+                    </div>
+                    <div class="mt-4">
+                        <div class="flex justify-between">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
                         </div>
-                        <div class="mt-4">
-                            <div class="flex justify-between">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                            </div>
-                            <input id="password" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="password" />
-                        </div>
-                        <div class="mt-8">
-                            <button type="submit" class=" bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 w-full rounded  ">Login</button>
-                        </div>
-                    </form>
+                        <input id="password" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="password" />
+                    </div>
+                    <div class="mt-8">
+                        <button type="submit" class=" bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 w-full rounded  ">Login</button>
+                    </div>
+                </form>
 
                 <div class="mt-4 flex items-center justify-between">
                     <span class="border-b w-1/5 md:w-1/4"></span>
@@ -65,12 +65,30 @@
 
 
             // Kirim data menggunakan Axios
-            axios.post('/api/pmb', {
+            axios.post('http://127.0.0.1:9000/api/auth/login', {
                     username: username,
-                    pass:pass
+                    password: pass
                 })
                 .then(function(response) {
                     console.log(response); // Log respon dari server jika sukses
+
+                    // Data berhasil diterima
+                    var userData = response.data; // Mengambil data user dari respons JSON
+
+                    // Menyimpan data user dalam variabel atau melakukan operasi lainnya
+                    var email = userData.email;
+                    var token = userData.token;
+                    var role = userData.role;
+                    var username = userData.username;
+
+                    // Contoh menyimpan data dalam localStorage
+                    localStorage.setItem('email', email);
+                    localStorage.setItem('token', token);
+                    localStorage.setItem('role', role);
+                    localStorage.setItem('username', username);
+
+                    //redirect to page
+                    
                 })
                 .catch(function(error) {
                     console.error(error); // Log kesalahan jika terjadi

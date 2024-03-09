@@ -256,6 +256,7 @@
     <!-- JavaScript untuk melakukan permintaan data ke API -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
+        const base_url = "http://202.91.8.170:9000";
         // Fungsi untuk mengambil data dari API
         async function fetchData(schoolName) {
             const apiUrl = 'https://api-sekolah-indonesia.vercel.app/sekolah/s?sekolah=' + encodeURIComponent(schoolName);
@@ -335,47 +336,48 @@
         // Event listener untuk menangani pengiriman form
         document.getElementById('schoolForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Mencegah pengiriman form secara default
-            const inpunama = document.getElementById('NamaL').value;
-            const inputnik = document.getElementById('NIK').value;
-            const inputnisn = document.getElementById('NISN').value;
-            const inputjk = document.getElementById('jk').value;
-            const inputhp = document.getElementById('HP').value;
-            const inputemail = document.getElementById('email').value;
+            const nama_lengkap = document.getElementById('NamaL').value;
+            const nik = document.getElementById('NIK').value;
+            const nisn = document.getElementById('NISN').value;
+            const jenis_kelamin = document.getElementById('jk').value;
+            const nomor_hp = document.getElementById('HP').value;
+            const email = document.getElementById('email').value;
             const selectedOption = document.getElementById('selectedSchool').value.split(':');
-            const inputjensi = document.getElementById('selectedType').value; // Menggunakan nilai langsung dari variabel selectedType
-            const inputjurusan = document.getElementById('jurusan').value;
-            const inputlulusn = document.getElementById('lulus').value;
-            const inputnamaw = document.getElementById('NamaW').value;
-            const inputNikW = document.getElementById('NIKW').value;
-            const inputnohpw = document.getElementById('NOHPW').value;
+            const jenis_sekolah = document.getElementById('selectedType').value; // Menggunakan nilai langsung dari variabel selectedType
+            const jurusan = document.getElementById('jurusan').value;
+            const tahun_lulus = document.getElementById('lulus').value;
+            const nama_wali = document.getElementById('NamaW').value;
+            const nik_wali = document.getElementById('NIKW').value;
+            const nomor_hp_wali = document.getElementById('NOHPW').value;
             const npsn = selectedOption[0];
             const schoolName = selectedOption[1];
             const inputsekolah = document.getElementById('manualInput').value;
             // Mendapatkan nama provinsi dan nama kota yang dipilih
             const selectedProvinceId = document.getElementById('selectedProvince').value;
-            const selectedProvinceName = document.getElementById('selectedProvince').options[document.getElementById('selectedProvince').selectedIndex].text;
+            const provinsi = document.getElementById('selectedProvince').options[document.getElementById('selectedProvince').selectedIndex].text;
             const selectedCityId = document.getElementById('selectedCity').value;
-            const selectedCityName = document.getElementById('selectedCity').options[document.getElementById('selectedCity').selectedIndex].text;
+            const kabupaten = document.getElementById('selectedCity').options[document.getElementById('selectedCity').selectedIndex].text;
 
             // Kirim data menggunakan Axios
-            axios.post('/api/pmb', {
-                    inpunama: inpunama,
-                    npsn: npsn, // Mengirimkan NPSN sekolah
-                    inputjk: inputjk,
-                    inputhp: inputhp,
-                    inputemail: inputemail,
+            axios
+                .post(`${base_url}/api/pmb`, {
+                    nama_lengkap: nama_lengkap,
+                    nik: nik,
+                    nisn: nisn,
+                    jenis_kelamin: jenis_kelamin,
+                    nomor_hp: nomor_hp,
+                    email: email,
+                    npsn: npsn,
+                    jenis_sekolah: jenis_sekolah,
+                    jurusan: jurusan,
+                    tahun_lulus: tahun_lulus,
+                    nama_wali: nama_wali,
+                    nik_wali: nik_wali,
+                    nomor_hp_wali: nomor_hp_wali,
+                    schoolName: schoolName,
                     inputsekolah: inputsekolah,
-                    schoolName: schoolName, // Mengirimkan nama sekolah
-                    inputjensi: inputjensi,
-                    inputjurusan: inputjurusan,
-                    inputlulusn: inputlulusn,
-                    inputnik: inputnik,
-                    inputnisn: inputnisn,
-                    inputNikW: inputNikW,
-                    inputnamaw: inputnamaw,
-                    inputnohpw: inputnohpw,
-                    selectedProvince: selectedProvinceName, // Mengirimkan nama provinsi yang dipilih
-                    selectedCity: selectedCityName // Mengirimkan nama kota yang dipilih
+                    selectedProvince: selectedProvinceName,
+                    selectedCity: selectedCityName
                 })
                 .then(function(response) {
                     console.log(response); // Log respon dari server jika sukses
