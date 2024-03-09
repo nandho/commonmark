@@ -39,8 +39,10 @@ class LoginController extends Controller
         //if auth success
         return response()->json([
             'success' => true,
-            'user'    => auth()->guard('api')->user(),
-            'token'   => $token
+            'email' => auth()->guard('api')->user()->email,
+            'token' => $token,
+            'role' => auth()->guard('api')->user()->role,
+            'username' => auth()->guard('api')->user()->username
         ], 200);
     }
 }
