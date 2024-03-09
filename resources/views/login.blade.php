@@ -65,7 +65,7 @@
 
 
             // Kirim data menggunakan Axios
-            axios.post('http://202.91.8.170:9000/api/auth/login', {
+            axios.post('http://202.91.8.170:8000/api/auth/login', {
                     username: username,
                     password: pass
                 })
@@ -89,7 +89,7 @@
 
                     //redirect to page
                     //redirect to page
-                    // window.location.href = "/tes";
+                    window.location.href = "/tes";
                 })
                 .catch(function(error) {
                     console.error(error); // Log kesalahan jika terjadi
