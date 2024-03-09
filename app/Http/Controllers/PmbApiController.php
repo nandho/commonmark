@@ -10,6 +10,11 @@ use App\Models\JurusanModel;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
+use App\Mail\SendEmailPMB;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use App\Services\GeneratingPassword as gpw;
+
 
 class PmbApiController extends Controller
 {
@@ -100,6 +105,21 @@ class PmbApiController extends Controller
             $pmb->save();
             $pmb->jurusan = $jurusan['jurusan'];
 
+            //mambuat akun dan sending email
+            $name = $pmb->nama_lengkap;
+            $username = $pmb->nomor_pendaftaran;
+            $password = gpw::generate();
+            //generating user with passing data to user model
+            $user = User::create([
+                'username'      => $username,
+                'email'         => $requestData['email'],
+                'password'      => bcrypt($password),
+                'role'          => "calonmahasiswa",
+            ]);
+
+            Mail::to('stryn@gmail.com’')->send(new SendEmailPMB($name, $password, $username));
+
+
             // Jika penyimpanan berhasil, kirim respons sukses
             return new PmbResource(true, 'success', $pmb);
         } catch (\Exception $e) {
@@ -176,7 +196,7 @@ class PmbApiController extends Controller
                 'error' => $validator->errors(),
             ], 422);
         }
-        
+
         $requestData = $request->all();
 
         if ($request->hasFile('foto')) {
@@ -190,7 +210,7 @@ class PmbApiController extends Controller
             $pmb = PmbModel::findOrFail($id);
             //deleting foto from database and storage
             //delete old image
-            Storage::delete('public/pmbfoto/'.basename($pmb->foto));
+            Storage::delete('public/pmbfoto/' . basename($pmb->foto));
             // Isi objek dengan data dari request
             $pmb->fill($requestData);
 
@@ -224,7 +244,7 @@ class PmbApiController extends Controller
         // Menghapus data PMB berdasarkan ID dari service lain atau dari database lokal
         $pmb = PmbModel::findorfail($id);
         //delete image
-        Storage::delete('public/pmbfoto/'.basename($pmb->image));
+        Storage::delete('public/pmbfoto/' . basename($pmb->image));
 
         //delete post
         $pmb->delete();

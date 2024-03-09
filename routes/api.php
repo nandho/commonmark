@@ -11,6 +11,10 @@ use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\SoalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+//testing email
+use App\Mail\SendEmailPMB;
+use Illuminate\Support\Facades\Mail;
+use App\Services\GeneratingPassword as gpw;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,3 +55,11 @@ Route::post('auth/logout', LogoutController::class)->name('logout');
 
 Route::get('test', [test::class, 'index']);
 Route::post('test', [test::class, 'store']);
+
+Route::get('/testroute', function () {
+    $password = gpw::generate(8);
+    $name = "FunnyCoder";
+
+    // The email sending is done using the to method on the Mail facade
+    Mail::to('stryn@gmail.com’')->send(new SendEmailPMB($name, $password,"xxx"));
+});

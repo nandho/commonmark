@@ -1,0 +1,506 @@
+{
+    "info": {
+        "_postman_id": "d2c6a5f9-83f0-473b-a9e8-e5952c642f1f",
+        "name": "siakad",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": ""
+    },
+    "item": [
+        {
+            "name": "auth",
+            "item": [
+                {
+                    "name": "register",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "202.91.8.170:9000/api/auth/register",
+                            "path": [
+                                "api",
+                                "auth",
+                                "register"
+                            ],
+                            "host": [
+                                "202",
+                                "91",
+                                "8",
+                                "170"
+                            ],
+                            "port": "9000"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"username\":\"stryn1\",\n  \"role\":\"admin\",\n  \"email\":\"nameless@nameless.com\",\n  \"password\":\"12345678\",\n  \"password_confirmation\":\"12345678\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "login",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "202.91.8.170:9000/api/auth/login",
+                            "path": [
+                                "api",
+                                "auth",
+                                "login"
+                            ],
+                            "host": [
+                                "202",
+                                "91",
+                                "8",
+                                "170"
+                            ],
+                            "port": "9000"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"username\":\"stryn1\",\n  \"password\":\"12345678\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "logout",
+                    "request": {
+                        "method": "GET"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "pmb",
+            "item": [
+                {
+                    "name": "202.91.8.170:9000/api/pmb/",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "202.91.8.170:9000/api/pmb/",
+                            "path": [
+                                "api",
+                                "pmb"
+                            ],
+                            "host": [
+                                "202",
+                                "91",
+                                "8",
+                                "170"
+                            ],
+                            "port": "9000"
+                        },
+                        "header": [
+                            {
+                                "key": "User-Agent",
+                                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name": "get by id",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "202.91.8.170:9000/api/pmb/200859f5-927b-4f7e-a8a4-1797c888b454//",
+                            "path": [
+                                "api",
+                                "pmb",
+                                "200859f5-927b-4f7e-a8a4-1797c888b454"
+                            ],
+                            "host": [
+                                "202",
+                                "91",
+                                "8",
+                                "170"
+                            ],
+                            "port": "9000"
+                        }
+                    }
+                },
+                {
+                    "name": "post_pmb",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "202.91.8.170:9000/api/pmb",
+                            "path": [
+                                "api",
+                                "pmb"
+                            ],
+                            "host": [
+                                "202",
+                                "91",
+                                "8",
+                                "170"
+                            ],
+                            "port": "9000"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n    \"nama_lengkap\": \"Ahmad Budi\",\n    \"nik\": \"1234967090143456789\",\n    \"jurusan_asal\":\"IPS\",\n    \"nisn\": \"9876543210\",\n    \"jenis_kelamin\": \"Laki-laki\",\n    \"nomor_hp\": \"081234567890\",\n    \"email\": \"ahmad.budi@example.com\",\n    \"provinsi\": \"Jawa Barat\",\n    \"kabupaten\": \"Bandung\",\n    \"nama_sekolah\": \"12345678\",\n    \"tahun_lulus_sekolah\": \"2021\",\n    \"jurusan_id\": \"fe6c76d4-bc06-4e56-a0cf-4dcfd4886f8d\",\n    \"nama_wali\": \"Budi\",\n    \"no_hp_wali\": \"081234567891\",\n    \"no_telp_wali\": \"0221234567\",\n    \"nik_wali\": \"0987654321098765\",\n    \"tempat_lahir\": \"Bandung\",\n    \"tanggal_lahir\": \"2000-01-01\"\n}\n"
+                        }
+                    }
+                },
+                {
+                    "name": "patch_pmb",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "202.91.8.170:9000/api/pmb/200859f5-927b-4f7e-a8a4-1797c888b454/",
+                            "path": [
+                                "api",
+                                "pmb",
+                                "200859f5-927b-4f7e-a8a4-1797c888b454"
+                            ],
+                            "host": [
+                                "202",
+                                "91",
+                                "8",
+                                "170"
+                            ],
+                            "port": "9000"
+                        },
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "_method",
+                                    "value": "PATCH",
+                                    "type": "default"
+                                },
+                                {
+                                    "key": "foto",
+                                    "src": "/home/samsung/nameless/download.jpg",
+                                    "type": "file"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Jurusan",
+            "item": [
+                {
+                    "name": "get_jurusan",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "202.91.8.170:9000/api/jurusan",
+                            "path": [
+                                "api",
+                                "jurusan"
+                            ],
+                            "host": [
+                                "202",
+                                "91",
+                                "8",
+                                "170"
+                            ],
+                            "port": "9000"
+                        }
+                    }
+                },
+                {
+                    "name": "post_jurusan",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "202.91.8.170:9000/api/jurusan/",
+                            "query": [
+                                {
+                                    "key": "jurusan",
+                                    "value": "Pariwisata",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "ukt",
+                                    "value": "3000000",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "_method",
+                                    "value": "POST",
+                                    "disabled": true
+                                }
+                            ],
+                            "variable": [],
+                            "path": [
+                                "api",
+                                "jurusan"
+                            ],
+                            "host": [
+                                "202",
+                                "91",
+                                "8",
+                                "170"
+                            ],
+                            "port": "9000"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"kode_jurusan\":\"pwt\",\n  \"jurusan\":\"Pariwisata\",\n  \"ukt\":\"3000000\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "update_jurusan",
+                    "request": {
+                        "method": "PUT",
+                        "url": {
+                            "raw": "202.91.8.170:9000/api/jurusan/fe6c76d4-bc06-4e56-a0cf-4dcfd4886f8d",
+                            "path": [
+                                "api",
+                                "jurusan",
+                                "fe6c76d4-bc06-4e56-a0cf-4dcfd4886f8d"
+                            ],
+                            "host": [
+                                "202",
+                                "91",
+                                "8",
+                                "170"
+                            ],
+                            "port": "9000"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"jurusan\":\"D3 - Perhotelan\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "delete_jurusan",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "202.91.8.170:9000/api/jurusan/554d9eb1-a1ee-41e9-b2e7-a4f411eafc0a",
+                            "path": [
+                                "api",
+                                "jurusan",
+                                "554d9eb1-a1ee-41e9-b2e7-a4f411eafc0a"
+                            ],
+                            "host": [
+                                "202",
+                                "91",
+                                "8",
+                                "170"
+                            ],
+                            "port": "9000"
+                        }
+                    }
+                },
+                {
+                    "name": "get_jurusan_by_id",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "202.91.8.170:9000/api/jurusan/fe6c76d4-bc06-4e56-a0cf-4dcfd4886f8d",
+                            "path": [
+                                "api",
+                                "jurusan",
+                                "fe6c76d4-bc06-4e56-a0cf-4dcfd4886f8d"
+                            ],
+                            "host": [
+                                "202",
+                                "91",
+                                "8",
+                                "170"
+                            ],
+                            "port": "9000"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "ujian",
+            "item": [
+                {
+                    "name": "get_soal",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "202.91.8.170:9000/api/ujian",
+                            "path": [
+                                "api",
+                                "ujian"
+                            ],
+                            "host": [
+                                "202",
+                                "91",
+                                "8",
+                                "170"
+                            ],
+                            "port": "9000"
+                        }
+                    }
+                },
+                {
+                    "name": "post_soal",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "202.91.8.170:9000/api/ujian/8defb946-2066-47d9-ada0-e65081d89954",
+                            "path": [
+                                "api",
+                                "ujian",
+                                "8defb946-2066-47d9-ada0-e65081d89954"
+                            ],
+                            "host": [
+                                "202",
+                                "91",
+                                "8",
+                                "170"
+                            ],
+                            "port": "9000"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"soal\":\"2+2\",\n  \"pilihan1\":\"4\",\n  \"pilihan2\":\"3\",\n  \"pilihan3\":\"2\",\n  \"pilihan4\":\"1\",\n  \"foto\":\"\",\n  \"kunci_jawaban\":\"A\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "post_soal Copy",
+                    "request": {
+                        "method": "PATCH",
+                        "url": {
+                            "raw": "202.91.8.170:9000/api/ujian/8defb946-2066-47d9-ada0-e65081d89954",
+                            "path": [
+                                "api",
+                                "ujian",
+                                "8defb946-2066-47d9-ada0-e65081d89954"
+                            ],
+                            "host": [
+                                "202",
+                                "91",
+                                "8",
+                                "170"
+                            ],
+                            "port": "9000"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"pilihan4\":\"8\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "delete_soal",
+                    "request": {
+                        "method": "GET"
+                    }
+                },
+                {
+                    "name": "get_hasil_ujian",
+                    "request": {
+                        "method": "GET"
+                    }
+                },
+                {
+                    "name": "get_soal_by_id",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "202.91.8.170:9000/api/ujian/efd7d697-93cd-424b-954d-4370bf03a106",
+                            "path": [
+                                "api",
+                                "ujian",
+                                "efd7d697-93cd-424b-954d-4370bf03a106"
+                            ],
+                            "host": [
+                                "202",
+                                "91",
+                                "8",
+                                "170"
+                            ],
+                            "port": "9000"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "user",
+            "item": [
+                {
+                    "name": "get_user_by_id",
+                    "request": {
+                        "method": "GET"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "jawaban",
+            "item": [
+                {
+                    "name": "post_jawaban",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "202.91.8.170:9000/api/pmb/jawaban",
+                            "path": [
+                                "api",
+                                "pmb",
+                                "jawaban"
+                            ],
+                            "host": [
+                                "202",
+                                "91",
+                                "8",
+                                "170"
+                            ],
+                            "port": "9000"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"id_calon_mahasiswa\":\"ff7fcc6c-2030-43f5-98e7-ee718dcea8f8\",\n  \"id_soal\":\"efd7d697-93cd-424b-954d-4370bf03a106\",\n  \"jawaban\":\"a\"\n}"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

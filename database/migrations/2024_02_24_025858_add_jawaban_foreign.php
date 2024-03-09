@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('jawabans', function (Blueprint $table) {
+            $table->string('id_soal')->unique()->change();
             $table->foreign('id_calon_mahasiswa')->references('id')->on('pmb');
             $table->foreign('id_soal')->references('id')->on('soals');
         });
@@ -23,6 +24,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('jawabans', function (Blueprint $table) {
+            $table->string('id_soal')->change();
             $table->dropForeign(['id_calon_mahasiswa']);
             $table->dropForeign(['id_soal']);
             $table->dropColumn('id_calon_mahasiswa');
