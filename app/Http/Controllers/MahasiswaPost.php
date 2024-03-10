@@ -86,7 +86,7 @@ class MahasiswaPost extends Controller
     {
         //will return specified jurusan
 
-        $data = MahasiswaModel::find($id);
+        $data = Mahasiswa::find($id);
 
         if (!$data) {
             return new MahasiswaResource(false, 'not found', null);
@@ -149,7 +149,7 @@ class MahasiswaPost extends Controller
             $data->save();
 
             // Jika penyimpanan berhasil, kirim respons sukses
-            return new MahaiswaResource(true, 'success', $data);
+            return new MahasiswaResource(true, 'success', $data);
         } catch (\Exception $e) {
             // Jika terjadi kesalahan, kirim respons error
             return response()->json([

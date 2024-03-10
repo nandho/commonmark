@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\GelombangResource;
+use App\Models\GelombangModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class GelombangPost extends Controller
 {

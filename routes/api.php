@@ -42,15 +42,15 @@ Route::post('auth/register', RegisterController::class)->name('register');
  * @method "POST"
  */
 
-Route::resource('pmb', PmbApiController::class);
-Route::resource('jurusan', JurusanController::class);
-Route::resource('ujian', SoalController::class);
-Route::resource('pmb/jawaban', JawabanController::class);
-Route::resource('hasil_ujian/nilai', NilaiController::class);
-Route::resource('mhs',MahasiswaPost::class);
-Route::resource('dosen',PostDosen::class);
-Route::resource('pem_akademik',Pem_AkademikPost::class);
-Route::resource('pem_skripsi',Pem_SkripsiPost::class);
+Route::apiResource('pmb', PmbApiController::class);
+Route::apiResource('jurusan', JurusanController::class);
+Route::apiResource('ujian', SoalController::class);
+Route::apiResource('pmb/jawaban', JawabanController::class);
+Route::apiResource('hasil_ujian/nilai', NilaiController::class);
+Route::apiResource('mhs',MahasiswaPost::class);
+Route::apiResource('dosen',PostDosen::class)->middleware('auth:api');
+Route::apiResource('pem_akademik',Pem_AkademikPost::class);
+Route::apiResource('pem_skripsi',Pem_SkripsiPost::class);
 // Route::resource('ujian');
 
 //auth

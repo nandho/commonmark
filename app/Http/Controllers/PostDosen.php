@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\dosenResource;
+use App\Models\DosenModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PostDosen extends Controller
 {

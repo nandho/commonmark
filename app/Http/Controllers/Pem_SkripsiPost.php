@@ -2,21 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Pem_SkripsiResource;
+use App\Models\Pem_SkripsiModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class Pem_SkripsiPost extends Controller
 {
-    public function index() 
+    public function index()
     {
         $data = Pem_SkripsiModel::all();
         return new Pem_SkripsiResource(true, 'success', $data);
     }
-        public function store(Request $request)
+    public function store(Request $request)
     {
         //will input jurusan
-        $validator = Validator::make($request->all(),[
-            'id_dosen'=> 'required',
-            'id_mahaiswa'=> 'required',
+        $validator = Validator::make($request->all(), [
+            'id_dosen' => 'required',
+            'id_mahaiswa' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -65,9 +69,9 @@ class Pem_SkripsiPost extends Controller
     public function update(Request $request, $id)
     {
         // get data and update data
-        $validator = Validator::make($request->all(),[
-            'id_dosen'=> 'required',
-            'id_mahaiswa'=> 'required',
+        $validator = Validator::make($request->all(), [
+            'id_dosen' => 'required',
+            'id_mahaiswa' => 'required',
         ]);
 
         if ($validator->fails()) {
