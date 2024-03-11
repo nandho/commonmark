@@ -119,10 +119,9 @@
       </ul>
     </div>
   </aside>
-
   <div class="relative h-full max-h-screen transition-all duration-200 ease-in-out xl:ml-68">
-
-    <div class="relative w-full mx-auto mt-60 ">
+    <div class="relative w-full mx-auto mt-40 ">
+      <br>
       @yield('content')
     </div>
   </div>
