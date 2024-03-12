@@ -311,4 +311,28 @@
     </div>
   </footer>
 </div>
+<script>
+async function fetchUserData() {
+    try {
+        const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3MTAyNTI0MzAsImV4cCI6MTcxMDI1NjAzMCwibmJmIjoxNzEwMjUyNDMwLCJqdGkiOiJTelVEMTZQdFJva0wzWFdEIiwic3ViIjoiY2ZiNjgzNDAtOTMzMS00YTE0LWE0ZDgtOTFhNGI4ZDFiOGU4IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.shtrQe5I2eUg-1JsmsrGR4lfg7k2zU-VOPIImlUWSco'; // Ganti 'tokenanda' dengan token autentikasi yang sesuai
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        };
+
+        const response = await axios.get('http://localhost:9000/api/user', config);
+        console.log(response.data);
+        // Lakukan sesuatu dengan data yang diterima, misalnya menyimpannya ke dalam variabel atau menampilkan ke pengguna.
+    } catch (error) {
+        console.error(error);
+        // Tangani kesalahan jika terjadi, misalnya dengan menampilkan pesan kesalahan kepada pengguna.
+    }
+}
+
+// Panggil fungsi untuk mengambil data pengguna.
+fetchUserData();
+
+
+</script>
 @endsection
