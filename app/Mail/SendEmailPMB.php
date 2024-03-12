@@ -37,7 +37,7 @@ class SendEmailPMB extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.test',
+            view: 'mail.pmbmail',
             with: [
                 'name' => $this->name,
                 'username' => $this->username,

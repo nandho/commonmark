@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class MahasiswaPost extends Controller
 {
     //
-    public function index() 
+    public function index()
     {
         $data = Mahasiswa::all();
         return new MahasiswaResource(true, 'success', $data);
@@ -20,36 +20,36 @@ class MahasiswaPost extends Controller
     public function store(Request $request)
     {
         //will input jurusan
-        $validator = Validator::make($request->all(),[
-            'nik'=> 'required',
-            'nama_lengkap'=> 'required',
-            'nomor_hp'=> 'required',
-            'nomor_telp'=> 'nullable',
-            'tempat_lahir'=> 'required',
-            'tanggal_lahir'=> 'required',
-            'jenis_kelamin'=> 'required|in:Laki-laki,Perempuan',
-            'alamat'=> 'required',
-            'agama'=> 'required',
-            'kewarganegaraan'=> 'required',
-            'tinggi_badan'=> 'required',
-            'berat_badan'=> 'required',
-            'jalur_pendaftaran'=> 'required',
-            'tahun_masuk'=> 'required',
-            'provinsi'=> 'required',
-            'kabupaten'=> 'required',
-            'kecamatan'=> 'required',
-            'kelurahan'=> 'required',
-            'kode_pos'=> 'required',
-            'provinsi_sekolah'=> 'required',
-            'kabupaten_sekolah'=> 'required',
-            'tahun_lulus_sekolah'=> 'required',
-            'no_ijazah'=> 'required',
-            'nama_wali'=> 'required',
-            'no_hp_wali'=> 'required',
-            'no_telp_wali'=> 'nullable',
-            'pekerjaan_wali'=> 'required',
-            'sumber_b_kuliah'=> 'required',
-            'nama_sekolah'=> 'required',
+        $validator = Validator::make($request->all(), [
+            'nik' => 'required',
+            'nama_lengkap' => 'required',
+            'nomor_hp' => 'required',
+            'nomor_telp' => 'nullable',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
+            'alamat' => 'required',
+            'agama' => 'required',
+            'kewarganegaraan' => 'required',
+            'tinggi_badan' => 'required',
+            'berat_badan' => 'required',
+            'jalur_pendaftaran' => 'required',
+            'tahun_masuk' => 'required',
+            'provinsi' => 'required',
+            'kabupaten' => 'required',
+            'kecamatan' => 'required',
+            'kelurahan' => 'required',
+            'kode_pos' => 'required',
+            'provinsi_sekolah' => 'required',
+            'kabupaten_sekolah' => 'required',
+            'tahun_lulus_sekolah' => 'required',
+            'no_ijazah' => 'required',
+            'nama_wali' => 'required',
+            'no_hp_wali' => 'required',
+            'no_telp_wali' => 'nullable',
+            'pekerjaan_wali' => 'required',
+            'sumber_b_kuliah' => 'required',
+            'nama_sekolah' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -98,36 +98,36 @@ class MahasiswaPost extends Controller
     public function update(Request $request, $id)
     {
         // get data and update data
-        $validator = Validator::make($request->all(),[
-            'nik'=> 'required',
-            'nama_lengkap'=> 'required',
-            'nomor_hp'=> 'required',
-            'nomor_telp'=> 'nullable|required',
-            'tempat_lahir'=> 'required',
-            'tanggal_lahir'=> 'required',
-            'jenis_kelamin'=> 'required|in:Laki-laki,Perempuan',
-            'alamat'=> 'required',
-            'agama'=> 'required',
-            'kewarganegaraan'=> 'required',
-            'tinggi_badan'=> 'required',
-            'berat_badan'=> 'required',
-            'jalur_pendaftaran'=> 'required',
-            'tahun_masuk'=> 'required',
-            'provinsi'=> 'required',
-            'kabupaten'=> 'required',
-            'kecamatan'=> 'required',
-            'kelurahan'=> 'required',
-            'kode_pos'=> 'required',
-            'provinsi_sekolah'=> 'required',
-            'kabupaten_sekolah'=> 'required',
-            'tahun_lulus_sekolah'=> 'required',
-            'no_ijazah'=> 'required',
-            'nama_wali'=> 'required',
-            'no_hp_wali'=> 'required',
-            'no_telp_wali'=> 'nullable|required',
-            'pekerjaan_wali'=> 'required',
-            'sumber_b_kuliah'=> 'required',
-            'nama_sekolah'=> 'required',
+        $validator = Validator::make($request->all(), [
+            'nik' => 'required',
+            'nama_lengkap' => 'required',
+            'nomor_hp' => 'required',
+            'nomor_telp' => 'nullable|required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
+            'alamat' => 'required',
+            'agama' => 'required',
+            'kewarganegaraan' => 'required',
+            'tinggi_badan' => 'required',
+            'berat_badan' => 'required',
+            'jalur_pendaftaran' => 'required',
+            'tahun_masuk' => 'required',
+            'provinsi' => 'required',
+            'kabupaten' => 'required',
+            'kecamatan' => 'required',
+            'kelurahan' => 'required',
+            'kode_pos' => 'required',
+            'provinsi_sekolah' => 'required',
+            'kabupaten_sekolah' => 'required',
+            'tahun_lulus_sekolah' => 'required',
+            'no_ijazah' => 'required',
+            'nama_wali' => 'required',
+            'no_hp_wali' => 'required',
+            'no_telp_wali' => 'nullable|required',
+            'pekerjaan_wali' => 'required',
+            'sumber_b_kuliah' => 'required',
+            'nama_sekolah' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -147,6 +147,8 @@ class MahasiswaPost extends Controller
 
             // Simpan objek ke database
             $data->save();
+
+            //membuat akun mahasiswa
 
             // Jika penyimpanan berhasil, kirim respons sukses
             return new MahasiswaResource(true, 'success', $data);
