@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('khs', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->uuid('pembimbing_akademik');
-            $table->string('mata_kuliah');
-            $table->integer('jumlah_sks');
-        });
         Schema::table('khs', function (Blueprint $table) {
-            $table->foreign('pembimbing_akademik')->references('id')->on('pem__akademik_models');
+            $table->uuid('id')->nullable(false)->primary('true')->change();
         });
     }
 
@@ -28,9 +22,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('khs', function (Blueprint $table) {
-            $table->dropForeign('khs_to_pem_ak_relation')->references('id')->on('pem__akademik_models');
+            $table->dropPrimary();
         });
-
-        Schema::dropIfExists('createkhs');
+        Schema::table('khs', function (Blueprint $table) {
+            $table->uuid('id');
+        });
     }
 };

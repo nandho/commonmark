@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\loggeduser;
 use App\Http\Controllers\PmbApiController;
 use App\Http\Controllers\test;
 use App\Http\Controllers\Api\RegisterController;
@@ -47,18 +48,23 @@ Route::apiResource('jurusan', JurusanController::class);
 Route::apiResource('ujian', SoalController::class);
 Route::apiResource('pmb/jawaban', JawabanController::class);
 Route::apiResource('hasil_ujian/nilai', NilaiController::class);
-Route::apiResource('mhs',MahasiswaPost::class);
-Route::apiResource('dosen',PostDosen::class)->middleware('auth:api');
-Route::apiResource('pem_akademik',Pem_AkademikPost::class);
-Route::apiResource('pem_skripsi',Pem_SkripsiPost::class);
+Route::apiResource('mhs', MahasiswaPost::class);
+Route::apiResource('dosen', PostDosen::class)->middleware('auth:api');
+Route::apiResource('pem_akademik', Pem_AkademikPost::class);
+Route::apiResource('pem_skripsi', Pem_SkripsiPost::class);
 // Route::resource('ujian');
 
 //auth
-Route::post('auth/login', LoginController::class)->name('login');
+Route::post('auth/login', LoginController::class)->name('apilogin');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('api/loggeduser/',loggeduser::class)->middleware('auth:api');
+
+Route::apiResource('testing/pmb', PmbApiController::class, ['only' => 'index'])->middleware('auth:api');
+// Route::apiResource('testing/pmb', PmbApiController::class, ['except' => 'index']);
 
 Route::post('auth/logout', LogoutController::class)->name('logout');
 
@@ -70,5 +76,5 @@ Route::get('/testroute', function () {
     $name = "FunnyCoder";
 
     // The email sending is done using the to method on the Mail facade
-    Mail::to('stryn@gmail.com’')->send(new SendEmailPMB($name, $password,"xxx"));
+    Mail::to('stryn@gmail.com’')->send(new SendEmailPMB($name, $password, "xxx"));
 });
