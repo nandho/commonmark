@@ -24,8 +24,13 @@ class loggeduser extends Controller
 
         switch ($role_user) {
             case 'mahasiswa':
-                $mahasiswa = Mahasiswa::find('id_akun', $id_user);
-                $data['data'] = $mahasiswa;
+                $mahasiswa = Mahasiswa::where('id_akun', $id_user)->fisrt();
+                if($mahasiswa) {
+                    $data['data'] = $mahasiswa->toArray(); // Pastikan untuk mengonversi model ke array jika diperlukan
+                } else {
+                    // Jika tidak ada data ditemukan, Anda mungkin ingin menangani kasus ini
+                    $data['data'] = null;
+                }
                 break;
             case 'calonmahasiswa':
                 $pmb = PmbModel::where('id_akun', $id_user)->first(); // Ubah metode pencarian
@@ -37,12 +42,22 @@ class loggeduser extends Controller
                 }
                 break;
             case 'dosen':
-                $dosen = DosenModel::find('id_akun', $id_user);
-                $data['data'] = $dosen;
+                $dosen = DosenModel::where('id_akun', $id_user)->fisrt();
+                if($dosen) {
+                    $data['data'] = $dosen->toArray(); // Pastikan untuk mengonversi model ke array jika diperlukan
+                } else {
+                    // Jika tidak ada data ditemukan, Anda mungkin ingin menangani kasus ini
+                    $data['data'] = null;
+                }
                 break;
             case 'backoffice':
-                $backoffice = backoffice::find('id_akun', $id_user);
-                $data['data'] = $backoffice;
+                $backoffice = backoffice::where('id_akun', $id_user)->first();
+                if($backoffice) {
+                    $data['data'] = $backoffice->toArray(); // Pastikan untuk mengonversi model ke array jika diperlukan
+                } else {
+                    // Jika tidak ada data ditemukan, Anda mungkin ingin menangani kasus ini
+                    $data['data'] = null;
+                }
                 break;
             case 'admin':
                 // $backoffice = backoffice::find('id_akun',$id_user);  
