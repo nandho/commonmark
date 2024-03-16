@@ -61,7 +61,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('api/loggeduser/',loggeduser::class)->middleware('auth:api');
+Route::get('loggeduser/',loggeduser::class)->middleware('auth:api');
 
 Route::apiResource('testing/pmb', PmbApiController::class, ['only' => 'index'])->middleware('auth:api');
 // Route::apiResource('testing/pmb', PmbApiController::class, ['except' => 'index']);
