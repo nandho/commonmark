@@ -28,8 +28,13 @@ class loggeduser extends Controller
                 $data['data'] = $mahasiswa;
                 break;
             case 'calonmahasiswa':
-                $pmb = PmbModel::find('id_akun', $id_user);
-                $data['data'] = $pmb;
+                $pmb = PmbModel::where('id_akun', $id_user)->first(); // Ubah metode pencarian
+                if($pmb) {
+                    $data['data'] = $pmb->toArray(); // Pastikan untuk mengonversi model ke array jika diperlukan
+                } else {
+                    // Jika tidak ada data ditemukan, Anda mungkin ingin menangani kasus ini
+                    $data['data'] = null;
+                }
                 break;
             case 'dosen':
                 $dosen = DosenModel::find('id_akun', $id_user);
@@ -43,6 +48,7 @@ class loggeduser extends Controller
                 // $backoffice = backoffice::find('id_akun',$id_user);  
                 $data['data'] = 'u r admin';
                 break;
+
             default:
                 return response()->json(['message' => 'unauthorized'], 401);
                 break;
