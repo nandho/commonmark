@@ -99,15 +99,12 @@ class PmbApiController extends Controller
         try {
             // Buat objek PmbModel baru dengan data dari request
             $pmb = new PmbModel();
-            $pmb->fill($requestData);
-
             // Simpan objek ke database
-            $pmb->save();
-            $pmb->jurusan = $jurusan['jurusan'];
+            $pmb->jurusan_id = $jurusan->id;
 
             //mambuat akun dan sending email
             $name = $pmb->nama_lengkap;
-            $username = $pmb->nomor_pendaftaran;
+            $username = $requestData['nomor_pendaftaran'];
             $password = gpw::generate();
             //generating user with passing data to user model
             $user = User::create([
@@ -116,7 +113,9 @@ class PmbApiController extends Controller
                 'password'      => bcrypt($password),
                 'role'          => "calonmahasiswa",
             ]);
-
+            $requestData['id_akun'] = $user->id;
+            $pmb->fill($requestData);
+            $pmb->save();
             Mail::to('stryn@gmail.com’')->send(new SendEmailPMB($name, $password, $username));
 
 

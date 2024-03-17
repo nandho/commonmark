@@ -45,7 +45,7 @@ return new class extends Migration
             $table->string('provinsi_sekolah')->nullable(false)->change();
             $table->string('kabupaten_sekolah')->nullable(false)->change();
             $table->string('no_ijazah')->nullable(false)->change();
-            $table->string('perkerjaan_wali')->nullable(false)->change();
+            $table->string('pekerjaan_wali')->nullable(false)->change();
             $table->string('sumber_b_kuliah')->nullable(false)->change();
             $table->string('foto')->nullable(false)->change();
             $table->string('kecamatan')->nullable(false)->change();
