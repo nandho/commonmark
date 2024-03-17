@@ -82,7 +82,11 @@
 
                     // Contoh menyimpan data dalam localStorage
                     localStorage.setItem('email', email);
-                    localStorage.setItem('token', token);
+                    setcookie(
+                        "token",
+                        token,
+                        time() + (60 * 60)
+                    );
                     localStorage.setItem('role', role);
                     localStorage.setItem('username', username);
 
