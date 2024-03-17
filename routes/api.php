@@ -36,13 +36,13 @@ use App\Services\GeneratingPassword as gpw;
  * route "/register"
  * @method "POST"
  */
-Route::post('auth/register', RegisterController::class)->name('register');
 
 /**
  * route "/login"
  * @method "POST"
  */
 
+Route::post('auth/register', RegisterController::class)->name('register');
 Route::apiResource('pmb', PmbApiController::class);
 Route::apiResource('jurusan', JurusanController::class);
 Route::apiResource('ujian', SoalController::class);
@@ -52,7 +52,7 @@ Route::apiResource('mhs', MahasiswaPost::class);
 Route::apiResource('dosen', PostDosen::class)->middleware('auth:api');
 Route::apiResource('pem_akademik', Pem_AkademikPost::class);
 Route::apiResource('pem_skripsi', Pem_SkripsiPost::class);
-// Route::resource('ujian');
+// Route::resource('ujian')
 
 //auth
 Route::post('auth/login', LoginController::class)->name('apilogin');
@@ -63,18 +63,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('loggeduser/',loggeduser::class)->middleware('auth:api');
 
-Route::apiResource('testing/pmb', PmbApiController::class, ['only' => 'index'])->middleware('auth:api');
+Route::post('auth/logout', LogoutController::class)->name('logout');
 // Route::apiResource('testing/pmb', PmbApiController::class, ['except' => 'index']);
 
-Route::post('auth/logout', LogoutController::class)->name('logout');
+
+
 
 Route::get('test', [test::class, 'index']);
 Route::post('test', [test::class, 'store']);
-
+Route::apiResource('testing/pmb', PmbApiController::class, ['only' => 'index'])->middleware('auth:api');
 Route::get('/testroute', function () {
     $password = gpw::generate(8);
     $name = "FunnyCoder";
-
     // The email sending is done using the to method on the Mail facade
     Mail::to('stryn@gmail.com’')->send(new SendEmailPMB($name, $password, "xxx"));
 });
