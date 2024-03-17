@@ -55,6 +55,12 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
+        function setCookie(token, tvalue) {
+            let date = new Date();
+            date.setTime(date.getTime() + ( 60 * 60 * 1000));
+            const expires = "expires=" + date.toUTCString();
+            document.cookie = token + "=" + tvalue + "; " + expires + "; path=/";
+        }
         // Event listener untuk menangani pengiriman form
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Mencegah pengiriman form secara default
@@ -82,11 +88,7 @@
 
                     // Contoh menyimpan data dalam localStorage
                     localStorage.setItem('email', email);
-                    setcookie(
-                        "token",
-                        token,
-                        time() + (60 * 60)
-                    );
+                    setCookie('token',token);
                     localStorage.setItem('role', role);
                     localStorage.setItem('username', username);
 
