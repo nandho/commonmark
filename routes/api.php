@@ -57,11 +57,11 @@ Route::apiResource('pem_skripsi', Pem_SkripsiPost::class);
 //auth
 Route::post('auth/login', LoginController::class)->name('apilogin');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::get('loggeduser/',loggeduser::class)->middleware('auth:api');
+Route::get('user/',loggeduser::class)->middleware('auth:api');
 
 Route::apiResource('testing/pmb', PmbApiController::class, ['only' => 'index'])->middleware('auth:api');
 // Route::apiResource('testing/pmb', PmbApiController::class, ['except' => 'index']);

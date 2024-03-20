@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PMB Akprada</title>
-    @vite('resources/css/app.css')
+    <!-- @vite('resources/css/app.css') -->
+    <link rel="stylesheet" href="../css/tailwind.output.css">
     <!-- @vite('resources/js/app.js') -->
     <!-- Alpine.js (required for Select2 with Alpine) -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2"></script>
