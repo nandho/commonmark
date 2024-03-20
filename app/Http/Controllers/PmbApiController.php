@@ -47,7 +47,7 @@ class PmbApiController extends Controller
             'nama_lengkap' => 'required|string',
             'nik' => 'required|string',
             'nisn' => 'required|string',
-            'jenis_kelamin' => 'required|string|in:Laki-laki,Perempuan',
+            'jenis_kelamin' => 'required|string|in:L,P',
             'nomor_hp' => 'required|string',
             'email' => 'required|email',
             'provinsi' => 'required|string',

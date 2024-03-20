@@ -257,7 +257,7 @@
     <!-- JavaScript untuk melakukan permintaan data ke API -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        const base_url = "http://202.91.8.170:9000";
+        const base_url = "http://localhost:9000";
         // Fungsi untuk mengambil data dari API
         async function fetchData(schoolName) {
             const apiUrl = 'https://api-sekolah-indonesia.vercel.app/sekolah/s?sekolah=' + encodeURIComponent(schoolName);
@@ -341,6 +341,7 @@
             const nik = document.getElementById('NIK').value;
             const nisn = document.getElementById('NISN').value;
             const jenis_kelamin = document.getElementById('jk').value;
+            console.log(jenis_kelamin)
             const nomor_hp = document.getElementById('HP').value;
             const email = document.getElementById('email').value;
             const selectedOption = document.getElementById('selectedSchool').value.split(':');
@@ -356,7 +357,7 @@
             // Mendapatkan nama provinsi dan nama kota yang dipilih
             const selectedProvinceId = document.getElementById('selectedProvince').value;
             const provinsi = document.getElementById('selectedProvince').options[document.getElementById('selectedProvince').selectedIndex].text;
-            const selectedCityId = document.getElementById('selectedCity').value;
+            const selectedCityName = document.getElementById('selectedCity').value;
             const kabupaten = document.getElementById('selectedCity').options[document.getElementById('selectedCity').selectedIndex].text;
 
             // Kirim data menggunakan Axios
@@ -377,7 +378,7 @@
                     nomor_hp_wali: nomor_hp_wali,
                     schoolName: schoolName,
                     inputsekolah: inputsekolah,
-                    selectedProvince: selectedProvinceName,
+                    selectedProvince: selectedProvinceId,
                     selectedCity: selectedCityName
                 })
                 .then(function(response) {

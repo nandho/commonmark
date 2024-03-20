@@ -114,9 +114,7 @@
               </div>
             </div>
           </div>
-
           <hr class="h-px mx-0 my-4 bg-transparent border-0 opacity-25 bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent " />
-
           <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">Alamat</p>
           <div class="flex flex-wrap -mx-3">
             <div class="w-full max-w-full px-3 shrink-0 md:w-full md:flex-0">
