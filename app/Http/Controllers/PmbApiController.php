@@ -43,51 +43,51 @@ class PmbApiController extends Controller
 
         // Menyimpan PMB baru ke service lain atau ke database lokal
         // Mendapatkan semua data yang dikirim dengan permintaan
-        $validator = Validator::make($request->all(), [
-            'nama_lengkap' => 'required|string',
-            'nik' => 'required|string',
-            'nisn' => 'required|string',
-            'jenis_kelamin' => 'required|string|in:L,P',
-            'nomor_hp' => 'required|string',
-            'email' => 'required|email',
-            'provinsi' => 'required|string',
-            'kabupaten' => 'required|string',
-            'nama_sekolah' => 'required|string', //seharusnya nama sekolah
-            'tahun_lulus_sekolah' => 'nullable|string',
-            //ditambahkan jurusan asal
-            'jurusan_asal' => 'required|string',
-            'jurusan_id' => 'required|string|in:' . implode(',', $daftarJurusan),
-            'nama_wali' => 'required|string',
-            'no_hp_wali' => 'required|string',
-            'no_telp_wali' => 'required|string',
-            // tambahkan nik orang tua
-            'nik_wali' => 'required|string',
-            'tempat_lahir' => 'required|string',
-            'tanggal_lahir' => 'required|date',
-            // batas field pendaftaran
-            'alamat' => 'nullable|string|nullable',
-            'agama' => 'nullable|string|nullable',
-            'kewarganegaraan' => 'nullable|string|nullable',
-            'jalur_pendaftaran' => 'nullable|string|nullable',
-            'periode_pendaftaran' => 'nullable|string|nullable',
-            'kode_pos' => 'nullable|string|nullable',
-            'provinsi_sekolah' => 'nullable|string|nullable',
-            'kabupaten_sekolah' => 'nullable|string|nullable',
-            'no_ijazah' => 'nullable|string|nullable',
-            'perkerjaan_wali' => 'nullable|string|nullable',
-            'sumber_b_kuliah' => 'nullable|string|nullable',
-            'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif|dimensions:min_width=100,min_height=100|nullable',
-            'kecamatan' => 'nullable|string|nullable',
-            'kelurahan' => 'nullable|string|nullable',
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'nama_lengkap' => 'required|string',
+        //     'nik' => 'required|string',
+        //     'nisn' => 'required|string',
+        //     'jenis_kelamin' => 'required|string|in:L,P',
+        //     'nomor_hp' => 'required|string',
+        //     'email' => 'required|email',
+        //     'provinsi' => 'required|string',
+        //     'kabupaten' => 'required|string',
+        //     'nama_sekolah' => 'required|string', //seharusnya nama sekolah
+        //     'tahun_lulus_sekolah' => 'nullable|string',
+        //     //ditambahkan jurusan asal
+        //     'jurusan_asal' => 'required|string',
+        //     'jurusan_id' => 'required|string|in:' . implode(',', $daftarJurusan),
+        //     'nama_wali' => 'required|string',
+        //     'no_hp_wali' => 'required|string',
+        //     'no_telp_wali' => 'required|string',
+        //     // tambahkan nik orang tua
+        //     'nik_wali' => 'required|string',
+        //     'tempat_lahir' => 'required|string',
+        //     'tanggal_lahir' => 'required|date',
+        //     // batas field pendaftaran
+        //     'alamat' => 'nullable|string|nullable',
+        //     'agama' => 'nullable|string|nullable',
+        //     'kewarganegaraan' => 'nullable|string|nullable',
+        //     'jalur_pendaftaran' => 'nullable|string|nullable',
+        //     'periode_pendaftaran' => 'nullable|string|nullable',
+        //     'kode_pos' => 'nullable|string|nullable',
+        //     'provinsi_sekolah' => 'nullable|string|nullable',
+        //     'kabupaten_sekolah' => 'nullable|string|nullable',
+        //     'no_ijazah' => 'nullable|string|nullable',
+        //     'perkerjaan_wali' => 'nullable|string|nullable',
+        //     'sumber_b_kuliah' => 'nullable|string|nullable',
+        //     'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif|dimensions:min_width=100,min_height=100|nullable',
+        //     'kecamatan' => 'nullable|string|nullable',
+        //     'kelurahan' => 'nullable|string|nullable',
+        // ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Gagal menyimpan data',
-                'error' => $validator->errors(),
-            ], 400);
-        }
+        // if ($validator->fails()) {
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => 'Gagal menyimpan data',
+        //         'error' => $validator->errors(),
+        //     ], 400);
+        // }
 
         $requestData = $request->all();
 

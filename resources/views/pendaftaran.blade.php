@@ -96,7 +96,8 @@
                             </div>
                         </div>
                         <!-- Form inputan untuk nama sekolah -->
-                        <div class="container mx-auto px-4 md:px-6" x-data="{ schoolName: '', schools: [], NamaL : [], NIK:[], NISN:[],jk : [],HP : [], email : [],selectedSchool: '', selectedProvince: '', selectedCity: '', provinces: [], cities: [],selectedType: '',jurusan:[], lulus:[],NamaW:[], NIKW:[], NOHPW:[]  }">
+                        <div class="container mx-auto px-4 md:px-6" x-data="{ schoolName: '', schools: [], NamaL: [], NIK: [], NISN: [], jk: [], HP: [], email: [], selectedSchool: '', selectedProvince: '', selectedCity: '', provinces: [], cities: [], selectedType: '',programstudi:'', jurusanItems: [],jurusanasal:[], lulus: [], NamaW: [], NIKW: [], NOHPW: [] }">
+
                             <form class="mb-4" id="schoolForm">
                                 <div class="container mx-auto px-4 md:px-6">
                                     <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 light:bg-gray-800 light:text-blue-400" role="alert">
@@ -203,9 +204,9 @@
                                             <option value="Paket C">Paket C</option>
                                         </select>
                                     </div>
-                                    <div x-model="jurusan" class="container mx-auto px-4 md:px-6">
-                                        <label for="jurusan" class="block text-sm font-medium text-gray-700 mb-2">Jurusan Sekolah (Cth: IPA, IPS): <span class="text-red-500">*</span></label>
-                                        <input type="text" x-model="jurusan" id="jurusan" name="jurusan" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="Isi Jurusan Anda">
+                                    <div x-model="jurusanasal" class="container mx-auto px-4 md:px-6">
+                                        <label for="jurusanasal" class="block text-sm font-medium text-gray-700 mb-2">Jurusan Sekolah (Cth: IPA, IPS): <span class="text-red-500">*</span></label>
+                                        <input type="text" x-model="jurusanasal" id="jurusanasal" name="jurusanasal" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="Isi Jurusan Anda">
                                     </div>
                                     <div x-model="lulus" class="container mx-auto px-4 md:px-6">
                                         <label for="lulus" class="block text-sm font-medium text-gray-700 mb-2">Tahun Lulus (Cth: 2023): <span class="text-red-500">*</span></label>
@@ -220,10 +221,12 @@
                                 </div>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="container mx-auto px-4 md:px-6">
-                                        <label for="schoolType" class="block text-sm font-medium text-gray-700 mb-2">Progam Studi: <span class="text-red-500">*</span></label>
-                                        <select x-model="selectedType" id="selectedType" name="schoolType" class="border border-gray-300 rounded-md px-4 py-2 w-full">
+                                        <label for="jurusan" class="block text-sm font-medium text-gray-700 mb-2">Progam Studi: <span class="text-red-500">*</span></label>
+                                        <select x-model="programstudi" id="jurusan" name="jurusan" class="border border-gray-300 rounded-md px-4 py-2 w-full">
                                             <option value="" selected>Pilih Program Studi</option>
-                                            <option value="D3 perhotelan">D3 - Perhotelan</option>
+                                            <template x-for="jurusanItem in jurusanItems" :key="jurusanItem.kode_jurusan">
+                                                <option x-text="jurusanItem.jurusan" :value="jurusanItem.kode_jurusan"></option>
+                                            </template>
                                         </select>
                                     </div>
                                     <div x-model="NamaW" class="container mx-auto px-4 md:px-6">
@@ -333,6 +336,20 @@
             const provinceId = event.target.value;
             fetchCities(provinceId);
         });
+        // Panggil fungsi fetchJurusan saat halaman dimuat
+        fetchJurusan();
+
+        async function fetchJurusan() {
+            try {
+                // Ambil data jurusan dari API
+                const response = await axios.get("http://localhost:9000/api/jurusan");
+                console.log(response);
+                // Simpan respons API ke dalam properti jurusanItems dalam objek data Alpine.js
+                document.querySelector('[x-data]').__x.$data.jurusanItems = response.data.data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
 
         // Event listener untuk menangani pengiriman form
         document.getElementById('schoolForm').addEventListener('submit', function(event) {
@@ -341,12 +358,12 @@
             const nik = document.getElementById('NIK').value;
             const nisn = document.getElementById('NISN').value;
             const jenis_kelamin = document.getElementById('jk').value;
-            console.log(jenis_kelamin)
             const nomor_hp = document.getElementById('HP').value;
             const email = document.getElementById('email').value;
             const selectedOption = document.getElementById('selectedSchool').value.split(':');
-            const jenis_sekolah = document.getElementById('selectedType').value; // Menggunakan nilai langsung dari variabel selectedType
-            const jurusan = document.getElementById('jurusan').value;
+            const selectedType = document.querySelector('[x-data]').__x.$data.selectedType;
+            console.log('jenis sekolah: ' + selectedType);
+            const jurusanasal = document.getElementById('jurusanasal').value;
             const tahun_lulus = document.getElementById('lulus').value;
             const nama_wali = document.getElementById('NamaW').value;
             const nik_wali = document.getElementById('NIKW').value;
@@ -359,8 +376,12 @@
             const provinsi = document.getElementById('selectedProvince').options[document.getElementById('selectedProvince').selectedIndex].text;
             const selectedCityName = document.getElementById('selectedCity').value;
             const kabupaten = document.getElementById('selectedCity').options[document.getElementById('selectedCity').selectedIndex].text;
-
-            // Kirim data menggunakan Axios
+            // Dapatkan nilai yang dipilih dari elemen select
+            const selectedJurusan = document.getElementById('jurusan').value;
+            console.log('jurusanitem:' + selectedJurusan)
+            // const prodi = document.getElementById('jurusan').options[document.getElementById('jurusan').selectedIndex].text;
+            // console.log('prodi' + prodi)
+            //  Kirim data menggunakan Axios
             axios
                 .post(`${base_url}/api/pmb`, {
                     nama_lengkap: nama_lengkap,
@@ -370,16 +391,17 @@
                     nomor_hp: nomor_hp,
                     email: email,
                     npsn: npsn,
-                    jenis_sekolah: jenis_sekolah,
-                    jurusan: jurusan,
+                    jenis_sekolah: selectedType,
+                    jurusan_asal: jurusanasal,
+                    jurusan_id: selectedJurusan,
                     tahun_lulus: tahun_lulus,
                     nama_wali: nama_wali,
                     nik_wali: nik_wali,
                     nomor_hp_wali: nomor_hp_wali,
                     schoolName: schoolName,
                     inputsekolah: inputsekolah,
-                    selectedProvince: selectedProvinceId,
-                    selectedCity: selectedCityName
+                    selectedProvince: provinsi,
+                    selectedCity: kabupaten
                 })
                 .then(function(response) {
                     console.log(response); // Log respon dari server jika sukses
