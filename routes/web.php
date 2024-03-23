@@ -25,3 +25,7 @@ Route::get('daftar/', function () {
 Route::get('login/', function () {
     return view('login');
 })->name('login');
+
+Route::get('dashboard',function () {
+    return view('all.dashboard'); // TODO return index dengan authorization berisikan KRS, KHS, disini terdapat 5 user
+});

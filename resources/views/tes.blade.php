@@ -3,54 +3,6 @@
 @section('title', 'SIAKAD')
 
 @section('content')
-<div class="relative flex flex-col flex-auto min-w-0 p-4 mx-6 overflow-hidden break-words bg-white border-0 dark:bg-slate-850 dark:shadow-dark-xl shadow-3xl rounded-2xl bg-clip-border">
-  <div class="flex flex-wrap -mx-3">
-    <div class="flex-none w-auto max-w-full px-3">
-      <div class="relative inline-flex items-center justify-center text-white transition-all duration-200 ease-in-out text-base h-19 w-19 rounded-xl">
-        <img src="../assets/img/team-1.jpg" alt="profile_image" class="w-full shadow-2xl rounded-xl" />
-      </div>
-    </div>
-    <div class="flex-none w-auto max-w-full px-3 my-auto">
-      <div class="h-full">
-        <h5 name="username" class="mb-1 dark:text-white"></h5>
-        <p id="role" class="mb-0 font-semibold leading-normal dark:text-white dark:opacity-60 text-sm"></p>
-      </div>
-    </div>
-    <div class="w-full max-w-full px-3 mx-auto mt-4 sm:my-auto sm:mr-0 md:w-1/2 md:flex-none">
-      <div class=" max-w-full  mx-auto sm:my-auto sm:mr-0 md:w-1/2 md:flex-none>
-        <nav class=" z-20 flex flex-wrap items-center justify-between w-full px-6 py-2 text-black transition-all ease-in shadow-none duration-250 lg:flex-nowrap lg:justify-start" navbar-profile navbar-scroll="true">
-        <div class="flex items-center justify-between w-full px-6 py-1 mx-auto flex-wrap-inherit">
-          <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
-            <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
-              <li class="flex items-center">
-                <a href="../pages/sign-in.html" class="block px-0 py-2 font-semibold text-black transition-all ease-in-out text-sm">
-                  <i class="fa fa-user sm:mr-1" aria-hidden="true"></i>
-                  <span class="hidden sm:inline">Sign In</span>
-                </a>
-              </li>
-              <li class="flex items-center pl-4 xl:hidden">
-                <a href="javascript:;" class="block p-0 text-black transition-all ease-in-out text-sm" sidenav-trigger>
-                  <div class="w-4.5 overflow-hidden">
-                    <i class="ease mb-0.75 relative block h-0.5 rounded-sm bg-black transition-all"></i>
-                    <i class="ease mb-0.75 relative block h-0.5 rounded-sm bg-black transition-all"></i>
-                    <i class="ease relative block h-0.5 rounded-sm bg-black transition-all"></i>
-                  </div>
-                </a>
-              </li>
-              <li class="flex items-center px-4">
-                <a href="javascript:;" class="p-0 text-black transition-all ease-in-out text-sm">
-                  <i fixed-plugin-button-nav class="cursor-pointer fa fa-cog" aria-hidden="true"></i>
-                  <!-- fixed-plugin-button-nav  -->
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        </nav>
-      </div>
-    </div>
-  </div>
-</div>
 <div class="w-full p-6 mx-auto">
   <div class="flex flex-wrap -mx-3">
     <div class="w-full max-w-full px-3 shrink-0 md:w-8/12 md:flex-0">
