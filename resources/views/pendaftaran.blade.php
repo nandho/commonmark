@@ -20,7 +20,7 @@
                 <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <div class="flex items-center space-x-3 rtl:space-x-reverse">
                         <a href="https://flowbite.com/" class="flex items-center space-x-3">
-                            <img src="{{ asset('storage/images/akprada-header.png') }}"
+                            <img src="{{ asset('storage/images/akparda.png') }}"
                                 class="object-cover h-14 w-auto md:h-20" alt="Flowbite Logo">
                         </a>
                         <div id="hideOnSmallScreen">
