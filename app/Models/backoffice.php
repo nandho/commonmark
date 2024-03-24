@@ -9,6 +9,11 @@ class backoffice extends Model
 {
     use HasUuids;
 
+    protected $fillable = [
+        //provide table tobe fillable
+        
+    ] ;
+
     protected $table = 'backoffices';
     protected $primarykey = 'id';
     protected $keyType = 'string';
