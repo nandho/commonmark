@@ -47,13 +47,21 @@ class PmbApiController extends Controller
             'nama_lengkap' => 'required|string',
             'nik' => 'required|string',
             'nisn' => 'required|string',
+<<<<<<< HEAD
             'jenis_kelamin' => 'required|string|in:Laki-Laki,Perempuan',
+=======
+            'jenis_kelamin' => 'required|string|in:L,P',
+>>>>>>> 10d0212 (Update WSL FE datadiri)
             'nomor_hp' => 'required|string',
             'email' => 'required|email',
             'provinsi' => 'required|string',
             'kabupaten' => 'required|string',
             'nama_sekolah' => 'required|string', //seharusnya nama sekolah
+<<<<<<< HEAD
             'tahun_lulus_sekolah' => 'required|string',
+=======
+            'tahun_lulus_sekolah' => 'nullable|string',
+>>>>>>> 10d0212 (Update WSL FE datadiri)
             //ditambahkan jurusan asal
             'jurusan_asal' => 'required|string',
             'jurusan_id' => 'required|string|in:' . implode(',', $daftarJurusan),

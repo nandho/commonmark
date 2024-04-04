@@ -159,6 +159,7 @@
                                         </span>
                                         <div x-model="jk" id="jk" name="jk" class="mt-2">
                                             <label class="inline-flex items-center text-gray-900 light:text-white">
+<<<<<<< HEAD
                                                 <input type="radio"
                                                     class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple light:focus:shadow-outline-gray"
                                                     name="jenis_kelamin" value="Laki-Laki" />
@@ -169,6 +170,13 @@
                                                 <input type="radio"
                                                     class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple light:focus:shadow-outline-gray"
                                                     name="jenis_kelamin" value="Perempuan" />
+=======
+                                                <input type="radio" class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple light:focus:shadow-outline-gray" name="jenis_kelamin" value="L" />
+                                                <span class="ml-2">Laki-Laki</span>
+                                            </label>
+                                            <label class="inline-flex items-center ml-6 text-gray-900 light:text-white">
+                                                <input type="radio" class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple light:focus:shadow-outline-gray" name="jenis_kelamin" value="P" />
+>>>>>>> 10d0212 (Update WSL FE datadiri)
                                                 <span class="ml-2">Perempuan</span>
                                             </label>
                                         </div>
@@ -304,10 +312,15 @@
                                         <select x-model="programstudi" id="jurusan" name="jurusan"
                                             class="border border-gray-300 rounded-md px-4 py-2 w-full">
                                             <option value="" selected>Pilih Program Studi</option>
+<<<<<<< HEAD
                                             <template x-for="jurusanItem in jurusanItems"
                                                 :key="jurusanItem.kode_jurusan">
                                                 <option x-text="jurusanItem.jurusan" :value="jurusanItem.id">
                                                 </option>
+=======
+                                            <template x-for="jurusanItem in jurusanItems" :key="jurusanItem.jurusan_id">
+                                                <option x-text="jurusanItem.jurusan" :value="jurusanItem.id"></option>
+>>>>>>> 10d0212 (Update WSL FE datadiri)
                                             </template>
                                         </select>
                                     </div>
@@ -484,6 +497,7 @@
                 .post(`${base_url}/api/pmb`, {
                     nama_lengkap: nama_lengkap,
                     nik: nik,
+                    email:email,
                     nisn: nisn,
                     jenis_kelamin: jenis_kelamin,
                     nomor_hp: nomor_hp,
@@ -496,7 +510,11 @@
                     nama_wali: nama_wali,
                     nik_wali: nik_wali,
                     no_hp_wali: nomor_hp_wali,
+<<<<<<< HEAD
                     namasekolah: schoolName,
+=======
+                    nama_sekolah: schoolName,
+>>>>>>> 10d0212 (Update WSL FE datadiri)
                     inputsekolah: inputsekolah,
                     provinsi: provinsi,
                     kabupaten: kabupaten
