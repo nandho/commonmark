@@ -11,7 +11,6 @@ class backoffice extends Model
 
     protected $fillable = [
         //provide table tobe fillable
-        
     ] ;
 
     protected $table = 'backoffices';
