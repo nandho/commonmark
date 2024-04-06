@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nomor_hp');
             $table->string('nomor_telp')->nullable();
             $table->string('tempat_lahir');
-            $table->date('tanggal_lahir');
+            $table->date('tanggal_lahir'); //yyyy-mm-dd
             $table->string('jenis_kelamin');
             $table->string('alamat');
             $table->string('agama');
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('tinggi_badan');
             $table->string('berat_badan');
             $table->string('jalur_pendaftaran');
-            $table->date('tahun_masuk');
+            $table->date('tahun_masuk'); //yyyy-mm-dd -> converter to_char / to_date
             $table->string('provinsi');
             $table->string('kabupaten');
             $table->string('kecamatan');

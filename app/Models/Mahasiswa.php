@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Mahasiswa extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+    'id',
     'nik',
     'nama_lengkap',
     'nomor_hp',
@@ -38,7 +40,15 @@ class Mahasiswa extends Model
     'no_telp_wali',
     'pekerjaan_wali',
     'sumber_b_kuliah',
-    'nama_sekolah'
+    'nama_sekolah',
+    'jurusan',
+    'khs_id',
+    'krs_id',
+    'pembimbing_akademik',
+    'pembimbing_skripsi',
+    'tahun_lulus',
+    'status',
+    'semester',
     ];
 
     protected static function boot()
