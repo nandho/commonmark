@@ -6,20 +6,21 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
     @vite('resources/css/app.css')
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+    
 </head>
 
 <body>
     <!-- component -->
     <div class="py-6">
         <div class="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
-            <div class="lg:block lg:w-1/2 bg-cover" style="background-image:url('{{ asset('storage/images/Foto-Hero.png') }}')">
+            <div class="lg:block lg:w-1/2 bg-cover" style="background-image:url('{{ asset('assets/img/Foto-Hero.png') }}')">
             </div>
             <div class="w-full p-8 lg:w-1/2">
                 <h2 class="text-2xl font-semibold text-gray-700 text-center">Selamat Datang</h2>
                 <p class="text-xl text-gray-600 text-center">Calon Mahasiswa/i Akparda!</p>
                 <a href="/daftar" class="flex items-center justify-center mt-4 text-white rounded-lg shadow-md hover:bg-gray-100">
                     <div class="px-4 py-3">
-                        <img src="{{ asset('storage/images/akprada-header.png') }}" class="object-cover h-14 w-auto md:h-10" alt="Flowbite Logo">
+                        <img src="{{ asset('assets/img/akprada-header.png') }}" class="object-cover h-14 w-auto md:h-10" alt="Flowbite Logo">
                     </div>
                     <h1 class="px-4 py-3 w-5/6 text-center text-gray-600 font-bold">Silahkan Daftar Jika Belum Memiliki Akun</h1>
                 </a>
