@@ -35,3 +35,7 @@ Route::get('biodata/', function () {
     return view('biodata');
 });
 
+Route::get('biodataedit/', function () {
+    return view('biodataedit');
+});
+
