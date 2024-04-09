@@ -304,7 +304,7 @@
 
                 const role = data.role;
                 // Tampilkan data di console log
-                console.log(data);
+                // console.log(data);
                 console.log("Role : " + role);
                 // Tampilkan email di dalam elemen span
                 document.getElementById('role').innerText = role;

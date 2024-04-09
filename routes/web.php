@@ -26,12 +26,12 @@ Route::get('login/', function () {
     return view('login');
 })->name('login');
 
-<<<<<<< HEAD
+
 Route::get('dashboard',function () {
     return view('all.dashboard'); // TODO return index dengan authorization berisikan KRS, KHS, disini terdapat 5 user
 });
-=======
-Route::get('datadiri/', function () {
-    return view('datadiri');
+
+Route::get('biodata/', function () {
+    return view('biodata');
 });
->>>>>>> 10d0212 (Update WSL FE datadiri)
+
