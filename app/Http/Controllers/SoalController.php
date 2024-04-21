@@ -38,6 +38,8 @@ class SoalController extends Controller
             'kunci_jawaban' => 'required|string|size:1|in:A,B,C,D',
         ]);
 
+        //add soal picture
+
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
@@ -47,6 +49,13 @@ class SoalController extends Controller
         }
 
         $requestData = $request->all();
+        
+        if ($request->hasFile('foto')) {
+            $image = $request->file('foto');
+            $image->storePubliclyAs('public/soalfoto/', $image->hashName());
+            $requestData['foto'] = $image->hashName();
+        }
+
 
         try {
             // Buat objek PmbModel baru dengan data dari request

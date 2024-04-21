@@ -96,7 +96,7 @@
                             </div>
                         </div>
                         <!-- Form inputan untuk nama sekolah -->
-                        <div class="container mx-auto px-4 md:px-6" x-data="{ schoolName: '', schools: [], NamaL : [], NIK:[], NISN:[],jk : [],HP : [], email : [],selectedSchool: '', selectedProvince: '', selectedCity: '', provinces: [], cities: [],selectedType: '',jurusan:[], lulus:[],NamaW:[], NIKW:[], NOHPW:[],Namaibu:[], NIKibu:[], NOHPibu:[]  }">
+                        <div class="container mx-auto px-4 md:px-6" x-data="{ schoolName: '', schools: [], NamaL : [], NIK:[], NISN:[],jk : [],HP : [], email : [],selectedSchool: '', selectedProvince: '', selectedCity: '', provinces: [], cities: [],selectedType: '',jurusan_asal:[],jurusan:[], lulus:[],NamaW:[], NIKW:[], NOHPW:[],Namaibu:[], NIKibu:[], NOHPibu:[]  }">
                             <form class="mb-4" id="schoolForm">
                                 <div class="container mx-auto px-4 md:px-6">
                                     <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 light:bg-gray-800 light:text-blue-400" role="alert">
@@ -203,9 +203,9 @@
                                             <option value="Paket C">Paket C</option>
                                         </select>
                                     </div>
-                                    <div x-model="jurusan" class="container mx-auto px-4 md:px-6">
-                                        <label for="jurusan" class="block text-sm font-medium text-gray-700 mb-2">Jurusan Sekolah (Cth: IPA, IPS): <span class="text-red-500">*</span></label>
-                                        <input type="text" x-model="jurusan" id="jurusan" name="jurusan" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="Isi Jurusan Anda">
+                                    <div x-model="jurusan_asal" class="container mx-auto px-4 md:px-6">
+                                        <label for="jurusan_asal" class="block text-sm font-medium text-gray-700 mb-2">Jurusan Sekolah (Cth: IPA, IPS): <span class="text-red-500">*</span></label>
+                                        <input type="text" x-model="jurusan_asal" id="jurusan_asal" name="jurusan_asal" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="Isi Jurusan Anda">
                                     </div>
                                     <div x-model="lulus" class="container mx-auto px-4 md:px-6">
                                         <label for="lulus" class="block text-sm font-medium text-gray-700 mb-2">Tahun Lulus (Cth: 2023): <span class="text-red-500">*</span></label>
@@ -220,8 +220,8 @@
                                 </div>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="container mx-auto px-4 md:px-6">
-                                        <label for="schoolType" class="block text-sm font-medium text-gray-700 mb-2">Progam Studi: <span class="text-red-500">*</span></label>
-                                        <select x-model="selectedType" id="selectedType" name="schoolType" class="border border-gray-300 rounded-md px-4 py-2 w-full">
+                                        <label for="jurusan" class="block text-sm font-medium text-gray-700 mb-2">Progam Studi: <span class="text-red-500">*</span></label>
+                                        <select x-model="jurusan" id="jurusan" name="jurusan" class="border border-gray-300 rounded-md px-4 py-2 w-full">
                                             <option value="" selected>Pilih Program Studi</option>
                                             <option value="D3 perhotelan">D3 - Perhotelan</option>
                                         </select>
@@ -270,6 +270,26 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         const base_url = "http://localhost:9000";
+
+        async function fetchJurusan(){
+            try{
+                const response = await axios.get(base_url+'/jurusan');
+                const jurusanData = response.data.map(data=>({
+                    id: data.id,
+                    nama: data.jurusan
+                }));
+                document.querySelector('[x-data]').__x.$data.jurusan = jurusanData;
+
+                // Mengosongkan hasil jika ada
+                document.getElementById('result').innerHTML = '';
+            }catch(error){
+                document.getElementById('result').innerHTML = 'Data tidak ditemukan';
+
+                // Menyembunyikan dropdown jika data tidak ditemukan
+                document.querySelector('[x-data]').__x.$data.schools = [];
+            }
+        }
+        
         // Fungsi untuk mengambil data dari API
         async function fetchData(schoolName) {
             const apiUrl = 'https://api-sekolah-indonesia.vercel.app/sekolah/s?sekolah=' + encodeURIComponent(schoolName);
@@ -357,6 +377,7 @@
             const email = document.getElementById('email').value;
             const selectedOption = document.getElementById('selectedSchool').value.split(':');
             const jenis_sekolah = document.getElementById('selectedType').value; // Menggunakan nilai langsung dari variabel selectedType
+            const jurusan_asal = document.getElementById('jurusan_asal').value;
             const jurusan = document.getElementById('jurusan').value;
             const tahun_lulus = document.getElementById('lulus').value;
             const nama_wali = document.getElementById('NamaW').value;
@@ -383,20 +404,21 @@
                     jenis_kelamin: jenis_kelamin,
                     nomor_hp: nomor_hp,
                     email: email,
-                    npsn: npsn,
+                    nama_sekolah: nama_sekolah,
                     jenis_sekolah: jenis_sekolah,
+                    jurusan_asal: jurusan_asal,
                     jurusan: jurusan,
                     tahun_lulus: tahun_lulus,
                     nama_wali: nama_wali,
                     nik_wali: nik_wali,
-                    nomor_hp_wali: nomor_hp_wali,
+                    no_hp_wali: nomor_hp_wali,
                     nama_ortu: nama_ortu,
                     nik_ortu: nik_ortu,
-                    nomor_hp_ortu: nomor_hp_ortu,
+                    nomor_hp_wali: nomor_hp_ortu,
                     schoolName: schoolName,
                     inputsekolah: inputsekolah,
-                    selectedProvince: provinsi,
-                    selectedCity: kabupaten
+                    provinsi: provinsi,
+                    kabupaten: kabupaten
                 })
                 .then(function(response) {
                     console.log(response); // Log respon dari server jika sukses
