@@ -39,3 +39,6 @@ Route::get('biodataedit/', function () {
     return view('biodataedit');
 });
 
+Route::get('soal/', function () {
+    return view('soal');
+});
