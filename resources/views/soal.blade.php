@@ -1,5 +1,7 @@
 @extends('base')
+
 @section('title', 'SIAKAD')
+
 @section('content')
 <div class="w-full p-6 mx-auto">
   <div class="flex flex-wrap -mx-3">
@@ -60,15 +62,17 @@
 
   // Panggil fungsi untuk mengambil data pengguna saat halaman dimuat
   fetchUserData();
-  // Objek untuk menyimpan status jawaban pada setiap soal
-  const jawabanSoal = {};
-
   // Ambil data soal dari API
+  // Variabel global untuk menyimpan jawaban sementara
+  let jawabanSementara = {};
+
+  // Fungsi untuk mengambil data soal dari API
   async function fetchSoal() {
     try {
       const response = await axios.get('http://localhost:9000/api/ujian');
       const data = response.data.data;
       console.log(data);
+
       return data;
     } catch (error) {
       console.error('Gagal mengambil data:', error);
@@ -77,47 +81,70 @@
   }
 
   // Fungsi untuk menampilkan soal pada detail container
+  // Fungsi untuk menampilkan soal pada detail container
   function tampilkanSoal(container, soal, nomorSoal) {
     let html = `
-      <div>
-          <div class="bg-white border border-gray-200 p-4 rounded-md">
-              <h2 class="text-lg font-semibold mb-4">SOAL NO ${nomorSoal}</h2>
-              <hr class="h-px mx-0 my-4 bg-black border-0 opacity-25 dark:opacity-50" />
-              <h2 class="text-lg font-semibold mb-4">${soal.soal}</h2>
-              <form>
-                  <div class="flex items-center mb-2">
-                      <input type="radio" id="pilihan1" name="jawaban_${nomorSoal}" value="A" class="mr-2">
-                      <label for="pilihan1">${soal.pilihan1}</label>
-                  </div>
-                  <div class="flex items-center mb-2">
-                      <input type="radio" id="pilihan2" name="jawaban_${nomorSoal}" value="B" class="mr-2">
-                      <label for="pilihan2">${soal.pilihan2}</label>
-                  </div>
-                  <div class="flex items-center mb-2">
-                      <input type="radio" id="pilihan3" name="jawaban_${nomorSoal}" value="C" class="mr-2">
-                      <label for="pilihan3">${soal.pilihan3}</label>
-                  </div>
-                  <div class="flex items-center mb-2">
-                      <input type="radio" id="pilihan4" name="jawaban_${nomorSoal}" value="D" class="mr-2">
-                      <label for="pilihan4">${soal.pilihan4}</label>
-                  </div>
-              </form>
-          </div>
-      </div>
-  `;
+    <div class="bg-white border border-gray-200 p-4 rounded-md grid grid-cols-2">
+    <div class="col-span-1">
+        <div>
+            <h2 class="text-lg font-semibold mb-4">SOAL NO ${nomorSoal}</h2>
+            <hr class="h-px mx-0 my-4 bg-black border-0 opacity-25 dark:opacity-50" />
+        </div>
+        <div class="col-span-1 flex">
+            <div>
+                <h2 class="text-lg font-semibold mb-4">${soal.soal}</h2>
+                <form>
+                    <div class="flex items-center mb-2">
+                        <input type="radio" id="pilihan1" name="jawaban" value="A" class="mr-2">
+                        <label for="pilihan1">${soal.pilihan1}</label>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input type="radio" id="pilihan2" name="jawaban" value="B" class="mr-2">
+                        <label for="pilihan2">${soal.pilihan2}</label>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input type="radio" id="pilihan3" name="jawaban" value="C" class="mr-2">
+                        <label for="pilihan3">${soal.pilihan3}</label>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <input type="radio" id="pilihan4" name="jawaban" value="D" class="mr-2">
+                        <label for="pilihan4">${soal.pilihan4}</label>
+                    </div>
+                </form>
+            </div>
+            <div class="ml-auto">
+                <img class="w-auto h-28 rounded-md" src="${soal.foto}" alt="soal image" loading="lazy">
+            </div>
+        </div>
+    </div>
+</div>
+    `;
     container.innerHTML = html;
 
-    // Jika jawaban untuk soal ini sudah tersimpan, tandai jawaban yang dipilih
-    const selectedJawaban = jawabanSoal[nomorSoal];
-    if (selectedJawaban) {
-      const radioInput = container.querySelector(`input[value="${selectedJawaban}"]`);
-      if (radioInput) {
-        radioInput.checked = true;
+    // Memeriksa apakah jawaban untuk nomor soal ini sudah tersimpan
+    if (jawabanSementara[nomorSoal]) {
+      const selectedRadio = document.querySelector(`input[name="jawaban"][value="${jawabanSementara[nomorSoal].jawaban}"]`);
+      if (selectedRadio) {
+        selectedRadio.checked = true;
       }
     }
+
+    // Menambahkan event listener untuk setiap pilihan jawaban
+    const radioButtons = document.querySelectorAll('input[name="jawaban"]');
+    radioButtons.forEach(radio => {
+      radio.addEventListener('change', () => {
+        jawabanSementara[nomorSoal] = {
+          id_soal: soal.id, // Menyimpan ID soal
+          id_calon_mahasiswa: userData.data.id, // Menyimpan ID calon mahasiswa
+          jawaban: radio.value // Menyimpan jawaban yang dipilih
+        };
+        console.log(jawabanSementara);
+      });
+    });
   }
 
-  // Menampilkan tombol nomor soal dan detail soal
+
+  // Fungsi untuk merender tombol nomor soal dan detail soal
   async function renderSoal() {
     const soalContainer = document.getElementById('soal-container');
     const soalDetailContainer = document.getElementById('soal-detail');
@@ -130,28 +157,22 @@
     // Loop melalui setiap soal
     for (let i = 0; i < dataSoal.count; i++) {
       html += `
-        <button class="button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" value="${i}">
-            ${i + 1}
-        </button>
-    `;
+          <button class="button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" value="${i}">
+              ${i + 1}
+          </button>
+      `;
     }
     soalContainer.innerHTML = html;
+
     // Tandai tombol nomor soal pertama sebagai aktif
     const tombolSoal = document.querySelectorAll('.button');
     tombolSoal[0].setAttribute('data-active', 'true');
 
-    // Tambahkan event listener untuk setiap tombol
+    // Tambahkan event listener untuk setiap tombol nomor soal
     tombolSoal.forEach((tombol, index) => {
       tombol.addEventListener('click', () => {
-        // Simpan jawaban dari soal sebelumnya
-        const activeButton = document.querySelector('.button[data-active="true"]');
-        const nomorSoalSebelumnya = parseInt(activeButton.textContent);
-        const selectedInput = document.querySelector(`input[name="jawaban_${nomorSoalSebelumnya}"]:checked`);
-        if (selectedInput) {
-          jawabanSoal[nomorSoalSebelumnya] = selectedInput.value;
-        }
-
         // Hapus atribut data-active dari tombol sebelumnya
+        const activeButton = document.querySelector('.button[data-active="true"]');
         if (activeButton) {
           activeButton.removeAttribute('data-active');
         }
@@ -164,14 +185,7 @@
     // Tambahkan event listener untuk tombol "Selanjutnya"
     const nextButton = document.getElementById('next-button');
     nextButton.addEventListener('click', () => {
-      // Simpan jawaban dari soal saat ini
       const activeButton = document.querySelector('.button[data-active="true"]');
-      const nomorSoalSaatIni = parseInt(activeButton.textContent);
-      const selectedInput = document.querySelector(`input[name="jawaban_${nomorSoalSaatIni}"]:checked`);
-      if (selectedInput) {
-        jawabanSoal[nomorSoalSaatIni] = selectedInput.value;
-      }
-
       const nextButtonIndex = parseInt(activeButton.value) + 1;
       if (nextButtonIndex < tombolSoal.length) {
         // Klik tombol selanjutnya secara programatik
@@ -182,27 +196,27 @@
     // Tambahkan event listener untuk tombol "Sebelumnya"
     const previousButton = document.getElementById('previous-button');
     previousButton.addEventListener('click', () => {
-      // Simpan jawaban dari soal saat ini
       const activeButton = document.querySelector('.button[data-active="true"]');
-      const nomorSoalSaatIni = parseInt(activeButton.textContent);
-      const selectedInput = document.querySelector(`input[name="jawaban_${nomorSoalSaatIni}"]:checked`);
-      if (selectedInput) {
-        jawabanSoal[nomorSoalSaatIni] = selectedInput.value;
-      }
-
       const previousButtonIndex = parseInt(activeButton.value) - 1;
       if (previousButtonIndex >= 0) {
         // Klik tombol sebelumnya secara programatik
         tombolSoal[previousButtonIndex].click();
       }
     });
+
     // Tampilkan tombol "Submit Jawaban" hanya pada soal terakhir
     const submitButton = document.getElementById('submit-button');
-    submitButton.style.display = 'none';
-    tombolSoal[tombolSoal.length - 1].classList.add('last-soal');
-    tombolSoal[tombolSoal.length - 1].addEventListener('click', () => {
+    if (tombolSoal.length === 1) {
+      // Jika hanya ada satu soal, tampilkan tombol "Submit Jawaban"
       submitButton.style.display = 'inline-block';
-    });
+    } else {
+      // Jika lebih dari satu soal, tampilkan tombol "Submit Jawaban" pada soal terakhir
+      submitButton.style.display = 'none';
+      tombolSoal[tombolSoal.length - 1].classList.add('last-soal');
+      tombolSoal[tombolSoal.length - 1].addEventListener('click', () => {
+        submitButton.style.display = 'inline-block';
+      });
+    }
 
     // Mulai timer
     let startTime = new Date();
@@ -222,37 +236,19 @@
     }, 1000); // Cek setiap detik
   }
 
+
+
   // Fungsi untuk mengirim jawaban ke server
   async function submitJawaban() {
     try {
-      const dataSoal = document.getElementById('soal-container').querySelectorAll('div');
-      const jawaban = [];
+      const jawaban = Object.values(jawabanSementara); // Ambil nilai jawaban dari objek jawabanSementara
 
-      // Mengambil ID calon mahasiswa dari data pengguna
-      const iduser = userData.data.id;
-
-      // Loop melalui setiap div soal
-      dataSoal.forEach((divSoal) => {
-        const id = divSoal.id;
-        const selectedOption = divSoal.querySelector('input:checked');
-        if (selectedOption) {
-          const id_soal = id;
-          const id_calon_mahasiswa = iduser; // Menggunakan iduser sebagai id_calon_mahasiswa
-          const selectedJawaban = selectedOption.value;
-          console.log(id_soal);
-          console.log(id_calon_mahasiswa);
-          console.log(selectedJawaban);
-          // Tambahkan ke array jawaban
-          jawaban.push({
-            id_soal: id_soal,
-            id_calon_mahasiswa: id_calon_mahasiswa,
-            jawaban: selectedJawaban
-          });
+      // Kirim jawaban ke server dalam format JSON
+      const response = await axios.post('http://localhost:9000/api/pmb/jawaban/', JSON.stringify(jawaban), {
+        headers: {
+          'Content-Type': 'application/json'
         }
       });
-
-      // Kirim jawaban ke server
-      const response = await axios.post('http://localhost:9000/api/pmb/jawaban/', jawaban);
       console.log('Response:', response.data);
     } catch (error) {
       console.error('Gagal mengirim jawaban:', error);
@@ -261,6 +257,7 @@
 
   // Panggil fungsi renderSoal untuk menampilkan tombol nomor soal saat halaman dimuat
   renderSoal();
+
   // Panggil fungsi submitJawaban ketika tombol submit diklik
   document.getElementById('submit-button').addEventListener('click', submitJawaban);
 </script>

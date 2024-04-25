@@ -157,10 +157,10 @@
     // Loop melalui setiap soal
     for (let i = 0; i < dataSoal.count; i++) {
       html += `
-            <button class="button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" value="${i}">
-                ${i + 1}
-            </button>
-        `;
+          <button class="button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" value="${i}">
+              ${i + 1}
+          </button>
+      `;
     }
     soalContainer.innerHTML = html;
 
@@ -206,11 +206,18 @@
 
     // Tampilkan tombol "Submit Jawaban" hanya pada soal terakhir
     const submitButton = document.getElementById('submit-button');
-    submitButton.style.display = 'none';
-    tombolSoal[tombolSoal.length - 1].classList.add('last-soal');
-    tombolSoal[tombolSoal.length - 1].addEventListener('click', () => {
+    if (tombolSoal.length === 1) {
+      // Jika hanya ada satu soal, tampilkan tombol "Submit Jawaban"
       submitButton.style.display = 'inline-block';
-    });
+    } else {
+      // Jika lebih dari satu soal, tampilkan tombol "Submit Jawaban" pada soal terakhir
+      submitButton.style.display = 'none';
+      tombolSoal[tombolSoal.length - 1].classList.add('last-soal');
+      tombolSoal[tombolSoal.length - 1].addEventListener('click', () => {
+        submitButton.style.display = 'inline-block';
+      });
+    }
+
     // Mulai timer
     let startTime = new Date();
     let timer = setInterval(() => {
@@ -229,7 +236,8 @@
     }, 1000); // Cek setiap detik
   }
 
-  // Fungsi untuk mengirim jawaban ke server
+
+
   // Fungsi untuk mengirim jawaban ke server
   async function submitJawaban() {
     try {
