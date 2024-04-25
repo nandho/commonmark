@@ -21,7 +21,6 @@
             <button id="previous-button" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Sebelumnya</button>
             <button id="next-button" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Selanjutnya</button>
             <button id="submit-button" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Submit Jawaban</button>
-
           </div>
         </div>
       </div>
@@ -64,11 +63,16 @@
   // Panggil fungsi untuk mengambil data pengguna saat halaman dimuat
   fetchUserData();
   // Ambil data soal dari API
+  // Variabel global untuk menyimpan jawaban sementara
+  let jawabanSementara = {};
+
+  // Fungsi untuk mengambil data soal dari API
   async function fetchSoal() {
     try {
       const response = await axios.get('http://localhost:9000/api/ujian');
       const data = response.data.data;
       console.log(data);
+
       return data;
     } catch (error) {
       console.error('Gagal mengambil data:', error);
@@ -77,12 +81,17 @@
   }
 
   // Fungsi untuk menampilkan soal pada detail container
+  // Fungsi untuk menampilkan soal pada detail container
   function tampilkanSoal(container, soal, nomorSoal) {
     let html = `
+    <div class="bg-white border border-gray-200 p-4 rounded-md grid grid-cols-2">
+    <div class="col-span-1">
         <div>
-            <div class="bg-white border border-gray-200 p-4 rounded-md">
-                <h2 class="text-lg font-semibold mb-4">SOAL NO ${nomorSoal}</h2>
-                <hr class="h-px mx-0 my-4 bg-black border-0 opacity-25 dark:opacity-50" />
+            <h2 class="text-lg font-semibold mb-4">SOAL NO ${nomorSoal}</h2>
+            <hr class="h-px mx-0 my-4 bg-black border-0 opacity-25 dark:opacity-50" />
+        </div>
+        <div class="col-span-1 flex">
+            <div>
                 <h2 class="text-lg font-semibold mb-4">${soal.soal}</h2>
                 <form>
                     <div class="flex items-center mb-2">
@@ -103,17 +112,47 @@
                     </div>
                 </form>
             </div>
+            <div class="ml-auto">
+                <img class="w-auto h-28 rounded-md" src="${soal.foto}" alt="soal image" loading="lazy">
+            </div>
         </div>
+    </div>
+</div>
     `;
     container.innerHTML = html;
+
+    // Memeriksa apakah jawaban untuk nomor soal ini sudah tersimpan
+    if (jawabanSementara[nomorSoal]) {
+      const selectedRadio = document.querySelector(`input[name="jawaban"][value="${jawabanSementara[nomorSoal].jawaban}"]`);
+      if (selectedRadio) {
+        selectedRadio.checked = true;
+      }
+    }
+
+    // Menambahkan event listener untuk setiap pilihan jawaban
+    const radioButtons = document.querySelectorAll('input[name="jawaban"]');
+    radioButtons.forEach(radio => {
+      radio.addEventListener('change', () => {
+        jawabanSementara[nomorSoal] = {
+          id_soal: soal.id, // Menyimpan ID soal
+          id_calon_mahasiswa: userData.data.id, // Menyimpan ID calon mahasiswa
+          jawaban: radio.value // Menyimpan jawaban yang dipilih
+        };
+        console.log(jawabanSementara);
+      });
+    });
   }
 
-  // Menampilkan tombol nomor soal dan detail soal
+
+  // Fungsi untuk merender tombol nomor soal dan detail soal
   async function renderSoal() {
     const soalContainer = document.getElementById('soal-container');
     const soalDetailContainer = document.getElementById('soal-detail');
     const dataSoal = await fetchSoal(); // Tunggu hingga data soal tersedia
     let html = '';
+
+    // Tampilkan soal nomor satu secara default
+    tampilkanSoal(soalDetailContainer, dataSoal[0], 1);
 
     // Loop melalui setiap soal
     for (let i = 0; i < dataSoal.count; i++) {
@@ -125,13 +164,20 @@
     }
     soalContainer.innerHTML = html;
 
-    // Tampilkan soal nomor satu secara default
-    tampilkanSoal(soalDetailContainer, dataSoal[0], 1);
-
-    // Tambahkan event listener untuk setiap tombol
+    // Tandai tombol nomor soal pertama sebagai aktif
     const tombolSoal = document.querySelectorAll('.button');
+    tombolSoal[0].setAttribute('data-active', 'true');
+
+    // Tambahkan event listener untuk setiap tombol nomor soal
     tombolSoal.forEach((tombol, index) => {
       tombol.addEventListener('click', () => {
+        // Hapus atribut data-active dari tombol sebelumnya
+        const activeButton = document.querySelector('.button[data-active="true"]');
+        if (activeButton) {
+          activeButton.removeAttribute('data-active');
+        }
+        // Tandai tombol yang diklik sebagai aktif
+        tombol.setAttribute('data-active', 'true');
         tampilkanSoal(soalDetailContainer, dataSoal[index], index + 1);
       });
     });
@@ -139,9 +185,10 @@
     // Tambahkan event listener untuk tombol "Selanjutnya"
     const nextButton = document.getElementById('next-button');
     nextButton.addEventListener('click', () => {
-      const currentButton = document.querySelector('.button[value="active"]');
-      const nextButtonIndex = parseInt(currentButton.value) + 1;
+      const activeButton = document.querySelector('.button[data-active="true"]');
+      const nextButtonIndex = parseInt(activeButton.value) + 1;
       if (nextButtonIndex < tombolSoal.length) {
+        // Klik tombol selanjutnya secara programatik
         tombolSoal[nextButtonIndex].click();
       }
     });
@@ -149,9 +196,10 @@
     // Tambahkan event listener untuk tombol "Sebelumnya"
     const previousButton = document.getElementById('previous-button');
     previousButton.addEventListener('click', () => {
-      const currentButton = document.querySelector('.button[value="active"]');
-      const previousButtonIndex = parseInt(currentButton.value) - 1;
+      const activeButton = document.querySelector('.button[data-active="true"]');
+      const previousButtonIndex = parseInt(activeButton.value) - 1;
       if (previousButtonIndex >= 0) {
+        // Klik tombol sebelumnya secara programatik
         tombolSoal[previousButtonIndex].click();
       }
     });
@@ -163,7 +211,6 @@
     tombolSoal[tombolSoal.length - 1].addEventListener('click', () => {
       submitButton.style.display = 'inline-block';
     });
-
     // Mulai timer
     let startTime = new Date();
     let timer = setInterval(() => {
@@ -183,36 +230,17 @@
   }
 
   // Fungsi untuk mengirim jawaban ke server
+  // Fungsi untuk mengirim jawaban ke server
   async function submitJawaban() {
     try {
-      const dataSoal = document.getElementById('soal-container').querySelectorAll('div');
-      const jawaban = [];
+      const jawaban = Object.values(jawabanSementara); // Ambil nilai jawaban dari objek jawabanSementara
 
-      // Mengambil ID calon mahasiswa dari data pengguna
-      const iduser = userData.data.id;
-
-      // Loop melalui setiap div soal
-      dataSoal.forEach((divSoal) => {
-        const id = divSoal.id;
-        const selectedOption = divSoal.querySelector('input:checked');
-        if (selectedOption) {
-          const id_soal = id;
-          const id_calon_mahasiswa = iduser; // Menggunakan iduser sebagai id_calon_mahasiswa
-          const selectedJawaban = selectedOption.value;
-          console.log(id_soal)
-          console.log(id_calon_mahasiswa)
-          console.log(selectedJawaban)
-          // Tambahkan ke array jawaban
-          jawaban.push({
-            id_soal: id_soal,
-            id_calon_mahasiswa: id_calon_mahasiswa,
-            jawaban: selectedJawaban
-          });
+      // Kirim jawaban ke server dalam format JSON
+      const response = await axios.post('http://localhost:9000/api/pmb/jawaban/', JSON.stringify(jawaban), {
+        headers: {
+          'Content-Type': 'application/json'
         }
       });
-
-      // Kirim jawaban ke server
-      const response = await axios.post('http://localhost:9000/api/pmb/jawaban/', jawaban);
       console.log('Response:', response.data);
     } catch (error) {
       console.error('Gagal mengirim jawaban:', error);
@@ -221,6 +249,7 @@
 
   // Panggil fungsi renderSoal untuk menampilkan tombol nomor soal saat halaman dimuat
   renderSoal();
+
   // Panggil fungsi submitJawaban ketika tombol submit diklik
   document.getElementById('submit-button').addEventListener('click', submitJawaban);
 </script>
