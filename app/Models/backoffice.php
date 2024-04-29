@@ -10,7 +10,12 @@ class backoffice extends Model
     use HasUuids;
 
     protected $fillable = [
-        //provide table tobe fillable
+        'nama_lengkap',
+        'jabatan',
+        'nip',
+        'email',
+        'no_hp',
+        'id_akun'
     ] ;
 
     protected $table = 'backoffices';

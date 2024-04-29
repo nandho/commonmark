@@ -19,6 +19,7 @@ return new class extends Migration
             $table->uuid('pembimbing_akademik');
             $table->string('mata_kuliah');
             $table->integer('jumlah_sks');
+            $table->boolean('status_persetujuan');
         });
 
         //creating relation into table pembimbing akademik

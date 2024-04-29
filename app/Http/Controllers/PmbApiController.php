@@ -108,15 +108,16 @@ class PmbApiController extends Controller
             $password = gpw::generate();
             //generating user with passing data to user model
             $user = User::create([
-                'username'      => $username,
-                'email'         => $requestData['email'],
-                'password'      => bcrypt($password),
-                'role'          => "calonmahasiswa",
+                'username' => $username,
+                'email' => $requestData['email'],
+                'password' => bcrypt($password),
             ]);
+
+            $user->assignRole('calonmahasiswa');
             $requestData['id_akun'] = $user->id;
             $pmb->fill($requestData);
             $pmb->save();
-            Mail::to('stryn@gmail.com’')->send(new SendEmailPMB($name, $password, $username));
+            Mail::to('stryn@gmail.com')->send(new SendEmailPMB($name, $password, $username));
 
 
             // Jika penyimpanan berhasil, kirim respons sukses
