@@ -48,7 +48,6 @@
         data.forEach(item => {
           // Buat baris baru untuk setiap objek data
           const row = document.createElement('tr');
-
           // Isi kolom nama lengkap
           const namaLengkapCell = document.createElement('td');
           namaLengkapCell.textContent = item.nama_lengkap;
