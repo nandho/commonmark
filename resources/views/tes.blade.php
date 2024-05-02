@@ -17,6 +17,7 @@
                 <tr>
                   <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Nama Lengkap</th>
                   <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">NIK</th>
+                  <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Actions</th>
                 </tr>
               </thead>
               <tbody id="tableBody">
@@ -48,6 +49,7 @@
         data.forEach(item => {
           // Buat baris baru untuk setiap objek data
           const row = document.createElement('tr');
+
           // Isi kolom nama lengkap
           const namaLengkapCell = document.createElement('td');
           namaLengkapCell.textContent = item.nama_lengkap;
@@ -58,12 +60,33 @@
           nikCell.textContent = item.nik;
           row.appendChild(nikCell);
 
+          // Tambah tombol detail untuk menampilkan detail data
+          const detailButtonCell = document.createElement('td');
+          const detailButton = document.createElement('button');
+          detailButton.textContent = 'Detail';
+          detailButton.addEventListener('click', () => {
+            // Arahkan pengguna ke halaman biodata dengan mengirimkan ID data
+            window.location.href = `http://localhost:9000/biodata?id=${item.id}`;
+          });
+          detailButtonCell.appendChild(detailButton);
+          row.appendChild(detailButtonCell);
+
           // Tambahkan baris ke dalam tbody
           tableBody.appendChild(row);
         });
 
-        // Inisialisasi DataTables pada tabel
-        $('#pmbTable').DataTable();
+        // Inisialisasi DataTables pada tabel tanpa menggunakan gaya default
+        // Inisialisasi DataTables pada tabel tanpa menggunakan gaya default
+        $('#pmbTable').DataTable({
+          "paging": true, // Menonaktifkan pagination
+          "columnDefs": [
+            // Menyesuaikan tampilan tag <td> untuk setiap kolom
+            {
+              "targets": [0, 1, 2], // Kolom yang akan disesuaikan (indeks dimulai dari 0)
+              "className": "p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent" // Class yang akan ditambahkan pada tag <td>
+            }
+          ]
+        });
       } else {
         console.error('Data yang diterima bukanlah array.');
       }
@@ -74,5 +97,4 @@
 
   getData();
 </script>
-
 @endsection
