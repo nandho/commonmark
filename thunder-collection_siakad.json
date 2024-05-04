@@ -1,63 +1,71 @@
 {
-    "client": "Thunder Client",
+    "clientName": "Thunder Client",
     "collectionName": "siakad",
-    "dateExported": "2024-03-12T13:38:07.983Z",
-    "version": "1.1",
+    "collectionId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+    "dateExported": "2024-05-04T01:19:48.183Z",
+    "version": "1.2",
     "folders": [
         {
-            "_id": "c9676f7d-21f5-407e-9a20-d41f0ca4ac4f",
+            "_id": "b7bd3d96-437c-4a26-869e-7bbda35674c4",
             "name": "auth",
             "containerId": "",
-            "created": "2024-03-03T04:36:00.417Z",
+            "created": "2024-03-23T06:47:53.117Z",
             "sortNum": 10000
         },
         {
-            "_id": "ccaf3816-cc91-4649-bd3e-1e85184034b0",
+            "_id": "759bc983-db80-49d5-b064-539e247c76b0",
             "name": "pmb",
             "containerId": "",
-            "created": "2024-03-03T04:36:00.418Z",
+            "created": "2024-03-23T06:47:53.118Z",
             "sortNum": 20000
         },
         {
-            "_id": "fc099acd-7e05-4f9f-b933-1513ca9aa03b",
+            "_id": "cd0480c9-1f09-41ef-8594-d9173b5b5b95",
             "name": "Jurusan",
             "containerId": "",
-            "created": "2024-03-03T04:36:00.419Z",
+            "created": "2024-03-23T06:47:53.119Z",
             "sortNum": 30000
         },
         {
-            "_id": "8e007f10-df21-4bd4-b2d0-5095b4f2204b",
+            "_id": "f890169e-ce72-4641-8250-d5069dd7a211",
             "name": "ujian",
             "containerId": "",
-            "created": "2024-03-03T04:36:00.420Z",
+            "created": "2024-03-23T06:47:53.120Z",
             "sortNum": 40000
         },
         {
-            "_id": "5fd65632-e2a5-47af-94c8-0b627a388dec",
+            "_id": "9ab40f75-1282-4841-a78b-d70a5d3a9c14",
             "name": "user",
             "containerId": "",
-            "created": "2024-03-03T04:36:00.421Z",
+            "created": "2024-03-23T06:47:53.121Z",
             "sortNum": 50000
         },
         {
-            "_id": "a667d171-d807-49cf-8bfd-5be16c5659ed",
+            "_id": "92a5efe5-ba62-4bbc-8eb6-1c6857bb64b7",
             "name": "jawaban",
             "containerId": "",
-            "created": "2024-03-03T04:36:00.422Z",
+            "created": "2024-03-23T06:47:53.122Z",
             "sortNum": 60000
+        },
+        {
+            "_id": "e56a9bcb-5355-466b-9d9b-54cf891955e2",
+            "name": "Persyaratan",
+            "containerId": "",
+            "created": "2024-04-20T09:21:15.386Z",
+            "sortNum": 70000
         }
     ],
     "requests": [
         {
-            "_id": "b2123248-b7a2-48d4-b4c1-e72e80d13226",
-            "colId": "b4ef99e7-8e80-46f5-9c97-309b23de9e1e",
-            "containerId": "ccaf3816-cc91-4649-bd3e-1e85184034b0",
+            "_id": "6b5312c2-76d8-42b5-8803-fa74841cf673",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "759bc983-db80-49d5-b064-539e247c76b0",
             "name": "202.91.8.170:9000/api/pmb/",
             "url": "localhost:8000/api/pmb",
             "method": "GET",
             "sortNum": 10000,
-            "created": "2024-03-03T04:36:00.417Z",
-            "modified": "2024-03-09T09:27:09.614Z",
+            "created": "2024-03-23T06:47:53.118Z",
+            "modified": "2024-03-23T06:47:53.118Z",
             "headers": [
                 {
                     "name": "User-Agent",
@@ -65,33 +73,32 @@
                 }
             ],
             "params": [],
-            "reqType": "get",
             "tests": []
         },
         {
-            "_id": "ab1a6a13-0bd4-4289-8e1a-bbfcd7bede56",
-            "colId": "b4ef99e7-8e80-46f5-9c97-309b23de9e1e",
-            "containerId": "ccaf3816-cc91-4649-bd3e-1e85184034b0",
+            "_id": "1b33ec74-1834-4e08-b5ce-84f0f131b2e9",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "759bc983-db80-49d5-b064-539e247c76b0",
             "name": "get by id",
             "url": "202.91.8.170:9000/api/pmb/200859f5-927b-4f7e-a8a4-1797c888b454//",
             "method": "GET",
             "sortNum": 20000,
-            "created": "2024-03-03T04:36:00.418Z",
-            "modified": "2024-03-03T04:36:00.418Z",
+            "created": "2024-03-23T06:47:53.119Z",
+            "modified": "2024-03-23T06:47:53.119Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "a38a00eb-694b-41e4-ae6c-18f776a1512f",
-            "colId": "b4ef99e7-8e80-46f5-9c97-309b23de9e1e",
-            "containerId": "c9676f7d-21f5-407e-9a20-d41f0ca4ac4f",
+            "_id": "34d54e21-2de4-41a6-a29b-d97b4f674293",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "b7bd3d96-437c-4a26-869e-7bbda35674c4",
             "name": "register",
-            "url": "127.0.0.1:9000/api/auth/register",
+            "url": "127.0.0.1:8000/api/auth/register",
             "method": "POST",
             "sortNum": 50000,
-            "created": "2024-03-03T04:36:00.419Z",
-            "modified": "2024-03-08T14:24:50.707Z",
+            "created": "2024-03-23T06:47:53.120Z",
+            "modified": "2024-04-09T14:35:13.560Z",
             "headers": [],
             "params": [],
             "body": {
@@ -99,66 +106,63 @@
                 "raw": "{\n  \"username\":\"stryn1\",\n  \"role\":\"admin\",\n  \"email\":\"nameless@nameless.com\",\n  \"password\":\"12345678\",\n  \"password_confirmation\":\"12345678\"\n}",
                 "form": []
             },
-            "reqType": "post",
             "tests": []
         },
         {
-            "_id": "6826a882-2a7a-49a3-adbf-890ee8f4a5e8",
-            "colId": "b4ef99e7-8e80-46f5-9c97-309b23de9e1e",
-            "containerId": "c9676f7d-21f5-407e-9a20-d41f0ca4ac4f",
+            "_id": "9f507660-22ad-46f7-88a5-30e29585bdc4",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "b7bd3d96-437c-4a26-869e-7bbda35674c4",
             "name": "login",
             "url": "localhost:8000/api/auth/login",
             "method": "POST",
             "sortNum": 60000,
-            "created": "2024-03-03T04:36:00.420Z",
-            "modified": "2024-03-10T16:18:58.638Z",
+            "created": "2024-03-23T06:47:53.121Z",
+            "modified": "2024-03-23T07:31:40.556Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"username\":\"admin\",\n  \"password\":\"RN#Sb)oa\"\n}",
+                "raw": "{\n  \"username\":\"240304101\",\n  \"password\":\"4(Q@jPUP\"\n}",
                 "form": []
             },
-            "reqType": "post",
             "tests": []
         },
         {
-            "_id": "1499cbd7-e11c-44c6-8d29-f4e7addc754a",
-            "colId": "b4ef99e7-8e80-46f5-9c97-309b23de9e1e",
-            "containerId": "c9676f7d-21f5-407e-9a20-d41f0ca4ac4f",
+            "_id": "f75e32e9-8a83-4e61-98c8-09ee0b2d5562",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "b7bd3d96-437c-4a26-869e-7bbda35674c4",
             "name": "logout",
             "url": "",
             "method": "GET",
             "sortNum": 70000,
-            "created": "2024-03-03T04:36:00.421Z",
-            "modified": "2024-03-03T04:36:00.421Z",
+            "created": "2024-03-23T06:47:53.122Z",
+            "modified": "2024-03-23T06:47:53.122Z",
             "headers": []
         },
         {
-            "_id": "81dc4c97-0187-4a95-87fe-ebdf072f60d6",
-            "colId": "b4ef99e7-8e80-46f5-9c97-309b23de9e1e",
-            "containerId": "fc099acd-7e05-4f9f-b933-1513ca9aa03b",
+            "_id": "7ec5a295-5127-4709-a85f-47005fa825b8",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "cd0480c9-1f09-41ef-8594-d9173b5b5b95",
             "name": "get_jurusan",
             "url": "localhost:8000/api/jurusan",
             "method": "GET",
             "sortNum": 90000,
-            "created": "2024-03-03T04:36:00.422Z",
-            "modified": "2024-03-09T15:55:45.589Z",
+            "created": "2024-03-23T06:47:53.123Z",
+            "modified": "2024-03-23T06:47:53.123Z",
             "headers": [],
             "params": [],
-            "reqType": "get",
             "tests": []
         },
         {
-            "_id": "25413b54-f273-44e8-a5c3-a9e961a761a0",
-            "colId": "b4ef99e7-8e80-46f5-9c97-309b23de9e1e",
-            "containerId": "fc099acd-7e05-4f9f-b933-1513ca9aa03b",
+            "_id": "e1a4856e-615f-4066-95a4-4db12e087e33",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "cd0480c9-1f09-41ef-8594-d9173b5b5b95",
             "name": "post_jurusan",
             "url": "localhost:8000/api/jurusan/",
             "method": "POST",
             "sortNum": 100000,
-            "created": "2024-03-03T04:36:00.423Z",
-            "modified": "2024-03-09T15:55:57.079Z",
+            "created": "2024-03-23T06:47:53.124Z",
+            "modified": "2024-03-23T06:48:22.833Z",
             "headers": [],
             "params": [
                 {
@@ -182,22 +186,21 @@
             ],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"kode_jurusan\":\"pwt\",\n  \"jurusan\":\"Pariwisata\",\n  \"ukt\":\"3000000\"\n}",
+                "raw": "{\n  \"kode_jurusan\":\"041\",\n  \"jurusan\":\"Pariwisata\",\n  \"ukt\":\"3000000\"\n}",
                 "form": []
             },
-            "reqType": "post",
             "tests": []
         },
         {
-            "_id": "30fdefa8-f979-49d3-9fb0-a06ce429ce2d",
-            "colId": "b4ef99e7-8e80-46f5-9c97-309b23de9e1e",
-            "containerId": "fc099acd-7e05-4f9f-b933-1513ca9aa03b",
+            "_id": "46ccbd0a-81d7-454d-83db-707ab06a1cae",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "cd0480c9-1f09-41ef-8594-d9173b5b5b95",
             "name": "update_jurusan",
             "url": "202.91.8.170:9000/api/jurusan/fe6c76d4-bc06-4e56-a0cf-4dcfd4886f8d",
             "method": "PUT",
             "sortNum": 110000,
-            "created": "2024-03-03T04:36:00.424Z",
-            "modified": "2024-03-03T04:36:00.424Z",
+            "created": "2024-03-23T06:47:53.125Z",
+            "modified": "2024-03-23T06:47:53.125Z",
             "headers": [],
             "params": [],
             "body": {
@@ -208,63 +211,60 @@
             "tests": []
         },
         {
-            "_id": "3ab445ef-d4ce-4fdc-ae5d-fce52ac3a628",
-            "colId": "b4ef99e7-8e80-46f5-9c97-309b23de9e1e",
-            "containerId": "fc099acd-7e05-4f9f-b933-1513ca9aa03b",
+            "_id": "e34df355-75e0-4562-b4a9-3bb04f6bba84",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "cd0480c9-1f09-41ef-8594-d9173b5b5b95",
             "name": "delete_jurusan",
             "url": "202.91.8.170:9000/api/jurusan/554d9eb1-a1ee-41e9-b2e7-a4f411eafc0a",
             "method": "DELETE",
             "sortNum": 120000,
-            "created": "2024-03-03T04:36:00.425Z",
-            "modified": "2024-03-03T04:36:00.425Z",
+            "created": "2024-03-23T06:47:53.126Z",
+            "modified": "2024-03-23T06:47:53.126Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "2324260a-67c2-4d00-a275-5cb196f8cc31",
-            "colId": "b4ef99e7-8e80-46f5-9c97-309b23de9e1e",
-            "containerId": "fc099acd-7e05-4f9f-b933-1513ca9aa03b",
+            "_id": "ae72bff4-bbb5-47b8-8aac-54911afda09f",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "cd0480c9-1f09-41ef-8594-d9173b5b5b95",
             "name": "get_jurusan_by_id",
             "url": "202.91.8.170:9000/api/jurusan/fe6c76d4-bc06-4e56-a0cf-4dcfd4886f8d",
             "method": "GET",
             "sortNum": 130000,
-            "created": "2024-03-03T04:36:00.426Z",
-            "modified": "2024-03-03T04:36:00.426Z",
+            "created": "2024-03-23T06:47:53.127Z",
+            "modified": "2024-03-23T06:47:53.127Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "25216737-f280-40ac-81a5-cb70f48b2f92",
-            "colId": "b4ef99e7-8e80-46f5-9c97-309b23de9e1e",
-            "containerId": "ccaf3816-cc91-4649-bd3e-1e85184034b0",
+            "_id": "6a1a18d1-18cd-4cf4-a655-1fc68c31d4cb",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "759bc983-db80-49d5-b064-539e247c76b0",
             "name": "post_pmb",
             "url": "127.0.0.1:8000/api/pmb",
             "method": "POST",
             "sortNum": 140000,
-            "created": "2024-03-03T04:36:00.427Z",
-            "modified": "2024-03-09T15:57:08.393Z",
+            "created": "2024-03-23T06:47:53.128Z",
+            "modified": "2024-04-22T13:17:34.197Z",
             "headers": [],
-            "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n    \"nama_lengkap\": \"Ahmad Budi\",\n    \"nik\": \"1234967090143456789\",\n    \"jurusan_asal\":\"IPS\",\n    \"nisn\": \"9876543210\",\n    \"jenis_kelamin\": \"Laki-laki\",\n    \"nomor_hp\": \"081234567890\",\n    \"email\": \"ahmad.budi@example.com\",\n    \"provinsi\": \"Jawa Barat\",\n    \"kabupaten\": \"Bandung\",\n    \"nama_sekolah\": \"12345678\",\n    \"tahun_lulus_sekolah\": \"2021\",\n    \"jurusan_id\": \"68783a7f-30fc-427a-b06a-8e004c2a66bc\",\n    \"nama_wali\": \"Budi\",\n    \"no_hp_wali\": \"081234567891\",\n    \"no_telp_wali\": \"0221234567\",\n    \"nik_wali\": \"0987654321098765\",\n    \"tempat_lahir\": \"Bandung\",\n    \"tanggal_lahir\": \"2000-01-01\",\n    \"jenis_sekolah\": \"smk\"\n}\n",
+                "raw": "{\n    \"nama_lengkap\": \"Ahmad Budi\",\n    \"nik\": \"1234967090143456789\",\n    \"jurusan_asal\":\"IPS\",\n    \"nisn\": \"9876543210\",\n    \"jenis_kelamin\": \"Laki-laki\",\n    \"nomor_hp\": \"081234567890\",\n    \"email\": \"ahmad.budi@example.com\",\n    \"provinsi\": \"Jawa Barat\",\n    \"kabupaten\": \"Bandung\",\n    \"nama_sekolah\": \"12345678\",\n    \"tahun_lulus_sekolah\": \"2021\",\n    \"jurusan_id\": \"5054b83e-5a69-4b86-93b6-99387616015d\",\n    \"nama_wali\": \"Budi\",\n    \"no_hp_wali\": \"081234567891\",\n    \"no_telp_wali\": \"0221234567\",\n    \"nik_wali\": \"0987654321098765\",\n    \"tempat_lahir\": \"Bandung\",\n    \"tanggal_lahir\": \"2000-01-01\",\n    \"jenis_sekolah\": \"smk\"\n}\n",
                 "form": []
-            },
-            "reqType": "post",
-            "tests": []
+            }
         },
         {
-            "_id": "db435298-c53a-4c54-8b73-f42152bdc9da",
-            "colId": "b4ef99e7-8e80-46f5-9c97-309b23de9e1e",
-            "containerId": "ccaf3816-cc91-4649-bd3e-1e85184034b0",
+            "_id": "dbcbc27f-5acb-4e71-ba6d-fb0a7ab72699",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "759bc983-db80-49d5-b064-539e247c76b0",
             "name": "patch_pmb",
             "url": "202.91.8.170:9000/api/pmb/200859f5-927b-4f7e-a8a4-1797c888b454/",
             "method": "POST",
             "sortNum": 150000,
-            "created": "2024-03-03T04:36:00.428Z",
-            "modified": "2024-03-03T04:36:00.428Z",
+            "created": "2024-03-23T06:47:53.129Z",
+            "modified": "2024-03-23T06:47:53.129Z",
             "headers": [],
             "params": [],
             "body": {
@@ -286,117 +286,111 @@
             "tests": []
         },
         {
-            "_id": "79488f37-5715-4e54-9d27-ebea93ab687e",
-            "colId": "b4ef99e7-8e80-46f5-9c97-309b23de9e1e",
-            "containerId": "8e007f10-df21-4bd4-b2d0-5095b4f2204b",
+            "_id": "70dd984c-c7a2-463f-b578-8eb1ecba11d7",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "f890169e-ce72-4641-8250-d5069dd7a211",
             "name": "get_soal",
-            "url": "202.91.8.170:9000/api/ujian",
+            "url": "127.0.0.1:8000/api/ujian",
             "method": "GET",
             "sortNum": 160000,
-            "created": "2024-03-03T04:36:00.429Z",
-            "modified": "2024-03-03T04:36:00.429Z",
-            "headers": [],
-            "params": [],
-            "tests": []
+            "created": "2024-03-23T06:47:53.130Z",
+            "modified": "2024-04-30T15:54:35.718Z",
+            "headers": []
         },
         {
-            "_id": "f5726f9b-7141-4a17-8b43-725ac473fdc6",
-            "colId": "b4ef99e7-8e80-46f5-9c97-309b23de9e1e",
-            "containerId": "8e007f10-df21-4bd4-b2d0-5095b4f2204b",
+            "_id": "e8ebce7b-55a1-4b5f-b7c7-2612fe7e82de",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "f890169e-ce72-4641-8250-d5069dd7a211",
             "name": "post_soal",
-            "url": "202.91.8.170:9000/api/ujian/8defb946-2066-47d9-ada0-e65081d89954",
+            "url": "127.0.0.1:8000/api/ujian/",
             "method": "POST",
             "sortNum": 180000,
-            "created": "2024-03-03T04:36:00.430Z",
-            "modified": "2024-03-03T04:36:00.430Z",
+            "created": "2024-03-23T06:47:53.131Z",
+            "modified": "2024-04-30T15:52:24.537Z",
             "headers": [],
-            "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"soal\":\"2+2\",\n  \"pilihan1\":\"4\",\n  \"pilihan2\":\"3\",\n  \"pilihan3\":\"2\",\n  \"pilihan4\":\"1\",\n  \"foto\":\"\",\n  \"kunci_jawaban\":\"A\"\n}",
+                "raw": "{\n  \"soal\":\"2+2\",\n  \"pilihan1\":\"4\",\n  \"pilihan2\":\"3\",\n  \"pilihan3\":\"2\",\n  \"pilihan4\":\"1\",\n  \"foto\":\"\", \n  \"kunci_jawaban\":\"A\"\n}",
                 "form": []
-            },
-            "tests": []
+            }
         },
         {
-            "_id": "38e13d7c-f5b8-45e0-86b3-9f49ed8f728c",
-            "colId": "b4ef99e7-8e80-46f5-9c97-309b23de9e1e",
-            "containerId": "8e007f10-df21-4bd4-b2d0-5095b4f2204b",
+            "_id": "ba424f35-36ff-4972-a4df-d4f0f70c9c77",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "f890169e-ce72-4641-8250-d5069dd7a211",
             "name": "post_soal Copy",
-            "url": "202.91.8.170:9000/api/ujian/8defb946-2066-47d9-ada0-e65081d89954",
+            "url": "127.0.0.1:8000/api/ujian/942f43c8-c23a-4b3f-a272-7fe4ea22bacd",
             "method": "PATCH",
             "sortNum": 190000,
-            "created": "2024-03-03T04:36:00.431Z",
-            "modified": "2024-03-03T04:36:00.431Z",
+            "created": "2024-03-23T06:47:53.132Z",
+            "modified": "2024-04-30T16:11:50.486Z",
             "headers": [],
-            "params": [],
             "body": {
                 "type": "json",
                 "raw": "{\n  \"pilihan4\":\"8\"\n}",
                 "form": []
-            },
-            "tests": []
+            }
         },
         {
-            "_id": "37ed5bb7-f729-48db-a456-fa2ffe12b3ac",
-            "colId": "b4ef99e7-8e80-46f5-9c97-309b23de9e1e",
-            "containerId": "8e007f10-df21-4bd4-b2d0-5095b4f2204b",
+            "_id": "8af90a75-6ca3-4e61-81d2-8265d0a31834",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "f890169e-ce72-4641-8250-d5069dd7a211",
             "name": "delete_soal",
             "url": "",
             "method": "GET",
             "sortNum": 190000,
-            "created": "2024-03-03T04:36:00.432Z",
-            "modified": "2024-03-03T04:36:00.432Z",
+            "created": "2024-03-23T06:47:53.133Z",
+            "modified": "2024-03-23T06:47:53.133Z",
             "headers": []
         },
         {
-            "_id": "77c387ad-7be6-49a2-a4eb-f28a510661f4",
-            "colId": "b4ef99e7-8e80-46f5-9c97-309b23de9e1e",
-            "containerId": "8e007f10-df21-4bd4-b2d0-5095b4f2204b",
+            "_id": "98a99a7c-c230-461b-8358-b064912a3a3c",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "f890169e-ce72-4641-8250-d5069dd7a211",
             "name": "get_soal_by_id",
             "url": "202.91.8.170:9000/api/ujian/efd7d697-93cd-424b-954d-4370bf03a106",
             "method": "GET",
             "sortNum": 190000,
-            "created": "2024-03-03T04:36:00.436Z",
-            "modified": "2024-03-03T04:36:00.436Z",
+            "created": "2024-03-23T06:47:53.136Z",
+            "modified": "2024-03-23T06:47:53.136Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "15dfde81-59fc-40b4-a934-70a303b4204b",
-            "colId": "b4ef99e7-8e80-46f5-9c97-309b23de9e1e",
-            "containerId": "5fd65632-e2a5-47af-94c8-0b627a388dec",
+            "_id": "860b2fe3-cc1e-492e-8ad1-aed97d224d28",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "9ab40f75-1282-4841-a78b-d70a5d3a9c14",
             "name": "get_user_by_id",
             "url": "",
             "method": "GET",
             "sortNum": 200000,
-            "created": "2024-03-03T04:36:00.434Z",
-            "modified": "2024-03-03T04:36:00.434Z",
+            "created": "2024-03-23T06:47:53.134Z",
+            "modified": "2024-03-23T06:47:53.134Z",
             "headers": []
         },
         {
-            "_id": "daa502e2-dcec-4b3a-8648-94297cdf1d51",
-            "colId": "b4ef99e7-8e80-46f5-9c97-309b23de9e1e",
-            "containerId": "8e007f10-df21-4bd4-b2d0-5095b4f2204b",
+            "_id": "369792fd-5965-406c-bb14-11d9823204a0",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "f890169e-ce72-4641-8250-d5069dd7a211",
             "name": "get_hasil_ujian",
             "url": "",
             "method": "GET",
             "sortNum": 200000,
-            "created": "2024-03-03T04:36:00.435Z",
-            "modified": "2024-03-03T04:36:00.435Z",
+            "created": "2024-03-23T06:47:53.135Z",
+            "modified": "2024-03-23T06:47:53.135Z",
             "headers": []
         },
         {
-            "_id": "2a2846f5-055a-437b-81b5-c83222916a3a",
-            "colId": "b4ef99e7-8e80-46f5-9c97-309b23de9e1e",
-            "containerId": "a667d171-d807-49cf-8bfd-5be16c5659ed",
+            "_id": "5cfce08b-4d0c-401b-8795-2d845aa41de0",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "92a5efe5-ba62-4bbc-8eb6-1c6857bb64b7",
             "name": "post_jawaban",
             "url": "202.91.8.170:9000/api/pmb/jawaban",
             "method": "POST",
             "sortNum": 230000,
-            "created": "2024-03-03T04:36:00.437Z",
-            "modified": "2024-03-03T04:36:00.437Z",
+            "created": "2024-03-23T06:47:53.137Z",
+            "modified": "2024-03-23T06:47:53.137Z",
             "headers": [],
             "params": [],
             "body": {
@@ -405,6 +399,105 @@
                 "form": []
             },
             "tests": []
+        },
+        {
+            "_id": "d2937a61-d7b3-4911-93c2-c7606f080b45",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "e56a9bcb-5355-466b-9d9b-54cf891955e2",
+            "name": "get_persyaratan",
+            "url": "127.0.0.1:8000/api/persyaratan_pmb/",
+            "method": "POST",
+            "sortNum": 260000,
+            "created": "2024-04-20T09:21:47.821Z",
+            "modified": "2024-04-22T13:27:33.836Z",
+            "headers": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "id_mahasiswa",
+                        "value": "5cc62414-df27-4856-9d68-61c4f7d975bc"
+                    }
+                ],
+                "files": [
+                    {
+                        "name": "ijazah",
+                        "value": "/mnt/c/Users/247/Downloads/dummy.pdf"
+                    },
+                    {
+                        "name": "ktp",
+                        "value": "/mnt/c/Users/247/Downloads/dummy.pdf"
+                    },
+                    {
+                        "name": "transkrip",
+                        "value": "/mnt/c/Users/247/Downloads/dummy.pdf"
+                    },
+                    {
+                        "name": "akta",
+                        "value": "/mnt/c/Users/247/Downloads/dummy.pdf"
+                    },
+                    {
+                        "name": "surat_ket_narkoba",
+                        "value": "/mnt/c/Users/247/Downloads/dummy.pdf"
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "e1f2e4ab-9c3e-437d-a64d-4b21aac2eb9f",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "e56a9bcb-5355-466b-9d9b-54cf891955e2",
+            "name": "post_persyaratan",
+            "url": "",
+            "method": "POST",
+            "sortNum": 270000,
+            "created": "2024-04-20T09:22:17.896Z",
+            "modified": "2024-04-20T09:23:42.640Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "bc7fa5df-7c90-4db6-bb79-dcf282636fa4",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "e56a9bcb-5355-466b-9d9b-54cf891955e2",
+            "name": "patch_persyaratan",
+            "url": "",
+            "method": "PATCH",
+            "sortNum": 280000,
+            "created": "2024-04-20T09:22:51.697Z",
+            "modified": "2024-04-20T09:24:05.652Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "ab38d894-bef5-4846-bffc-b02579a7f9d4",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "e56a9bcb-5355-466b-9d9b-54cf891955e2",
+            "name": "show_persyaratan",
+            "url": "",
+            "method": "GET",
+            "sortNum": 290000,
+            "created": "2024-04-20T09:23:05.149Z",
+            "modified": "2024-04-20T09:23:05.149Z",
+            "headers": []
+        },
+        {
+            "_id": "8c2c2db2-55a2-4201-b0a7-a9ce768aec8a",
+            "colId": "6e6672fe-d5a9-4f94-80e1-ebc97252979f",
+            "containerId": "e56a9bcb-5355-466b-9d9b-54cf891955e2",
+            "name": "delete_persyaratan",
+            "url": "",
+            "method": "DELETE",
+            "sortNum": 300000,
+            "created": "2024-04-20T09:23:20.134Z",
+            "modified": "2024-04-20T09:24:15.592Z",
+            "headers": [],
+            "params": [],
+            "tests": []
         }
-    ]
+    ],
+    "ref": "z6xWkKbF52rOz7ySAl5yaWfOMCP6FbB1n0SZsmkpriwCNXHWuiJNZlUNAJQ7Ielf3Ci23JWXLHhYqSdVsPrFrQ"
 }
