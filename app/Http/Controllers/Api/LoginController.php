@@ -41,7 +41,7 @@ class LoginController extends Controller
             'success' => true,
             'email' => auth()->guard('api')->user()->email,
             'token' => $token,
-            'role' => auth()->guard('api')->user()->role,
+            // 'role' => auth()->guard('api')->user()->role,
             'username' => auth()->guard('api')->user()->username
         ], 200);
     }

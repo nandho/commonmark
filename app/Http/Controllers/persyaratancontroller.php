@@ -14,6 +14,7 @@ class persyaratancontroller extends Controller
     public function __construct()
     {
         //add authorization schema can update must pmb and admin
+        //if backoffice > parse di explode 'backoffice|pmb|staff'
     }
     public function index()
     {

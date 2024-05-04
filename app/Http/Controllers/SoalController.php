@@ -29,13 +29,13 @@ class SoalController extends Controller
     {
         //will input jurusan
         $validator = Validator::make($request->all(), [
-            'data.soal' => 'required|string',
-            'data.pilihan1' => 'required|string',
-            'data.pilihan2' => 'required|string',
-            'data.pilihan3' => 'required|string',
-            'data.pilihan4' => 'required|string',
-            'data.foto' => 'nullable|image|mimes:jpeg,jpg,png,gif',
-            'data.kunci_jawaban' => 'required|string|size:1|in:A,B,C,D',
+            'soal' => 'required|string',
+            'pilihan1' => 'required|string',
+            'pilihan2' => 'required|string',
+            'pilihan3' => 'required|string',
+            'pilihan4' => 'required|string',
+            'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif',
+            'kunci_jawaban' => 'required|string|size:1|in:A,B,C,D',
         ]);
 
         if ($validator->fails()) {
@@ -50,7 +50,7 @@ class SoalController extends Controller
 
         try {
             //getting all array
-            
+
             // Buat objek PmbModel baru dengan data dari request
             $data = new soal();
             $data->fill($requestData);
@@ -131,8 +131,11 @@ class SoalController extends Controller
         //will delete data
         $data = soal::findorfail($id);
 
+        //delete foto jika ada
+
         //delete post
         $data->delete();
+
 
         //return response
         return new soalResource(true, 'Data Post Berhasil Dihapus!', null);

@@ -13,14 +13,14 @@ class BackofficeController extends Controller
     public function __construct()
     {
         //add authorization schema
-        
+
     }
     public function index()
     {
         $data = backoffice::all();
         return new BackOfficeResource(true, 'success', $data);
     }
-        public function store(Request $request)
+    public function store(Request $request)
     {
         //will input jurusan
         $validator = Validator::make($request->all(),[

@@ -57,7 +57,8 @@ Route::apiResource('dosen', App\Http\Controllers\PostDosen::class)->middleware('
 Route::apiResource('pem_akademik', App\Http\Controllers\Pem_AkademikPost::class);
 Route::apiResource('pem_skripsi', App\Http\Controllers\Pem_SkripsiPost::class);
 Route::apiResource('persyaratan_pmb',App\Http\Controllers\persyaratancontroller::class);
-// Route::resource('ujian')
+// Route::apiresource('ujian')
+// Route::resource('testing2',App\Http\Controllers\testing2::class);
 
 //auth
 Route::post('auth/login', LoginController::class)->name('apilogin');
