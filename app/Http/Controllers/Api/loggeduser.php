@@ -68,7 +68,6 @@ class loggeduser extends Controller
                 return response()->json(['message' => 'unauthorized'], 401);
                 break;
         }
-        return new ResourcesLoggeduser('success', 'data berhasil di dapatkan', $data);
-        // return response()->json($data,200); // can use json resource
+        return new ResourcesLoggeduser(true, 'data berhasil di dapatkan', $data);
     }
 }

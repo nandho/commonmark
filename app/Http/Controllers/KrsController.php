@@ -1,30 +1,34 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\Models\krsModel;
 
-class UserController extends Controller
+// 'gelombang',
+// 'periode_mulai',
+// 'periode_berakhir',
+// 'semester',
+// 'status',
+
+class KrsController extends Controller
 {
-   //get all user
-   public function index()
-   {
-       //will return all data
-       $data = User::all();
-       return new UserResource(true,'success',$data);
-   }
-   //jika perlu
-   public function store(Request $request)
+    public function index()
+    {
+        //will return all data
+        $data = krs::all();
+        return new krsresource(true,'success',$data);
+    }
+
+    public function store(Request $request)
     {
         //will input jurusan
         $validator = Validator::make($request->all(),[
-            'kode_jurusan'=> 'required',
-            'jurusan'=> 'required',
-            'ukt'=> 'required',
+            'pembimbigelombangng_akademik'=> 'required', //foreign id merelasikan ke pembimbing akademik table
+            'periode_mulai'=> 'required',
+            'periode_berakhir'=> 'required',
+            'semester'=> 'required',
+            'status'=> 'required',
         ]);
 
         if ($validator->fails()) {
@@ -39,14 +43,14 @@ class UserController extends Controller
 
         try {
             // Buat objek PmbModel baru dengan data dari request
-            $data = new User();
+            $data = new krs();
             $data->fill($requestData);
 
             // Simpan objek ke database
             $data->save();
 
             // Jika penyimpanan berhasil, kirim respons sukses
-            return new UserResource(true, 'success', $data);
+            return new krsresource(true, 'success', $data);
         } catch (\Exception $e) {
             // Jika terjadi kesalahan, kirim respons error
             return response()->json([
@@ -56,27 +60,29 @@ class UserController extends Controller
             ], 500);
         }
     }
-   //update, get by id, and delete 
-   public function show($id)
+
+    public function show($id)
     {
         //will return specified jurusan
 
-        $data = User::find($id);
+        $data = krs::find($id);
 
         if (!$data) {
-            return new UserResource(false, 'not found', null);
+            return new krsresource(false, 'not found', null);
         }
 
-        return new UserResource(true, 'success', $data);
+        return new krsresource(true, 'success', $data);
     }
 
     public function update(Request $request, $id)
     {
         // get data and update data
         $validator = Validator::make($request->all(),[
-            'kode_jurusan'=> 'string',
-            'jurusan'=> 'string',
-            'ukt'=> 'integer',
+            'pembimbigelombangng_akademik'=> 'required', //foreign id merelasikan ke pembimbing akademik table
+            'periode_mulai'=> 'required',
+            'periode_berakhir'=> 'required',
+            'semester'=> 'required',
+            'status'=> 'required',
         ]);
 
         if ($validator->fails()) {
@@ -91,14 +97,14 @@ class UserController extends Controller
 
         try {
             // Buat objek PmbModel baru dengan data dari request
-            $data = User::findOrFail($id);
+            $data = krs::findOrFail($id);
             $data->fill($requestData);
 
             // Simpan objek ke database
             $data->save();
 
             // Jika penyimpanan berhasil, kirim respons sukses
-            return new UserResource(true, 'success', $data);
+            return new krsresource(true, 'success', $data);
         } catch (\Exception $e) {
             // Jika terjadi kesalahan, kirim respons error
             return response()->json([
@@ -112,12 +118,12 @@ class UserController extends Controller
     public function destroy($id)
     {
         //will delete data
-        $data = User::findorfail($id);
+        $data = krs::findorfail($id);
 
         //delete post
         $data->delete();
 
         //return response
-        return new UserResource(true, 'Data Post Berhasil Dihapus!', null);
+        return new krsresource(true, 'Data Post Berhasil Dihapus!', null);
     }
 }
