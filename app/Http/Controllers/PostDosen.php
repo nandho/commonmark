@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\dosenResource;
 use App\Models\DosenModel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class PostDosen extends Controller
 {
-    public function index() 
+    public function index()
     {
         $data = DosenModel::all();
         return new DosenResource(true, 'success', $data);
@@ -64,6 +65,7 @@ class PostDosen extends Controller
             'nomor_surat_ijin_mengajar'=> 'required',
             'status_aktifitas'=> 'required',
             'semester_keluar'=> 'required',
+            'id_akun'=>'required',
         ]);
 
         if ($validator->fails()) {
@@ -77,6 +79,18 @@ class PostDosen extends Controller
         $requestData = $request->all();
 
         try {
+            //daftarkan akun dengan role dosen
+            // 'username',
+            // 'email',
+            // 'password',
+            $user = User::create([
+                'username'=>$request->nidn,
+                'email'=>$request->email,
+                'password'=>bcrypt($request->password)
+            ]);
+
+            $requestData['id_akun'] = $user->id;
+
             // Buat objek PmbModel baru dengan data dari request
             $data = new DosenModel();
             $data->fill($requestData);
@@ -172,6 +186,7 @@ class PostDosen extends Controller
         $requestData = $request->all();
 
         try {
+
             // Buat objek PmbModel baru dengan data dari request
             $data = DosenModel::findOrFail($id);
             $data->fill($requestData);

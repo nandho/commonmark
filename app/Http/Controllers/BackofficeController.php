@@ -2,43 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\backoffice;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Resources\BackOfficeResource;
 use Illuminate\Support\Facades\Validator;
-use App\Models\soal;
-use App\Http\Resources\soalResource;
 
-class SoalController extends Controller
+class BackofficeController extends Controller
 {
+    public function __construct()
+    {
+        //add authorization schema
+
+    }
     public function index()
     {
-        //will return all data
-        $data = soal::select(
-            'id',
-            'soal',
-            'pilihan1',
-            'pilihan2',
-            'pilihan3',
-            'pilihan4',
-            'foto'
-        )->get();
-        $data['count'] = count($data);
-        return new soalResource(true, 'success', $data);
+        $data = backoffice::all();
+        return new BackOfficeResource(true, 'success', $data);
     }
-
     public function store(Request $request)
     {
         //will input jurusan
-        $validator = Validator::make($request->all(), [
-            'soal' => 'required|string',
-            'pilihan1' => 'required|string',
-            'pilihan2' => 'required|string',
-            'pilihan3' => 'required|string',
-            'pilihan4' => 'required|string',
-            'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif',
-            'kunci_jawaban' => 'required|string|size:1|in:A,B,C,D',
+        $validator = Validator::make($request->all(),[
+            'nama_lengkap'=>'required|string',
+            'jabatan'=>'required|string', //bisa menggunakan divisi, ini akan digunakan untuk teams on permission
+            'nip'=>'required|string',
+            'email'=>'required|email',
+            'no_hp'=>'required|string',
+            'password'=>'required|string|min:8' //getting password from user input
         ]);
-
-        //add soal picture
 
         if ($validator->fails()) {
             return response()->json([
@@ -49,26 +41,26 @@ class SoalController extends Controller
         }
 
         $requestData = $request->all();
-        
-        if ($request->hasFile('foto')) {
-            $image = $request->file('foto');
-            $image->storePubliclyAs('public/soalfoto/', $image->hashName());
-            $requestData['foto'] = $image->hashName();
-        }
-
 
         try {
-            //getting all array
+            //membuat user sebelum data di assign ke backoffice
+            $user = User::create([
+                'username'=>$request->nip,
+                'email'=>$request->email,
+                'password'=>bcrypt($request->password)
+            ]);
+            $user->assignRole('backoffice');
 
+            $requestData['id_akun']=$user->id;
             // Buat objek PmbModel baru dengan data dari request
-            $data = new soal();
+            $data = new backoffice();
             $data->fill($requestData);
 
             // Simpan objek ke database
             $data->save();
 
             // Jika penyimpanan berhasil, kirim respons sukses
-            return new soalResource(true, 'success', $data);
+            return new BackOfficeResource(true, 'success', $data);
         } catch (\Exception $e) {
             // Jika terjadi kesalahan, kirim respons error
             return response()->json([
@@ -83,26 +75,25 @@ class SoalController extends Controller
     {
         //will return specified jurusan
 
-        $data = soal::find($id);
+        $data = backoffice::find($id);
 
         if (!$data) {
-            return new soalResource(false, 'not found', null);
+            return new BackOfficeResource(false, 'not found', null);
         }
 
-        return new soalResource(true, 'success', $data);
+        return new BackOfficeResource(true, 'success', $data);
     }
 
     public function update(Request $request, $id)
     {
         // get data and update data
-        $validator = Validator::make($request->all(), [
-            'soal' => 'nullable|string',
-            'pilihan1' => 'nullable|string',
-            'pilihan2' => 'nullable|string',
-            'pilihan3' => 'nullable|string',
-            'pilihan4' => 'nullable|string',
-            'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif',
-            'kunci_jawaban' => 'nullable|string|size:1|in:A,B,C,D',
+        $validator = Validator::make($request->all(),[
+            'nama_lengkap'=>'required|string',
+            'jabatan'=>'required|string', //bisa menggunakan divisi, ini akan digunakan untuk teams on permission
+            'nip'=>'required|string',
+            'email'=>'required|email',
+            'no_hp'=>'required|string',
+            'password'=>'required|string|min:8' //getting password from user input
         ]);
 
         if ($validator->fails()) {
@@ -117,14 +108,14 @@ class SoalController extends Controller
 
         try {
             // Buat objek PmbModel baru dengan data dari request
-            $data = soal::findOrFail($id);
+            $data = backoffice::findOrFail($id);
             $data->fill($requestData);
 
             // Simpan objek ke database
             $data->save();
 
             // Jika penyimpanan berhasil, kirim respons sukses
-            return new soalResource(true, 'success', $data);
+            return new BackOfficeResource(true, 'success', $data);
         } catch (\Exception $e) {
             // Jika terjadi kesalahan, kirim respons error
             return response()->json([
@@ -138,15 +129,12 @@ class SoalController extends Controller
     public function destroy($id)
     {
         //will delete data
-        $data = soal::findorfail($id);
-
-        //delete foto jika ada
+        $data = backoffice::findorfail($id);
 
         //delete post
         $data->delete();
 
-
         //return response
-        return new soalResource(true, 'Data Post Berhasil Dihapus!', null);
+        return new BackOfficeResource(true, 'Data Post Berhasil Dihapus!', null);
     }
 }

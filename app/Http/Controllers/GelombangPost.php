@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class GelombangPost extends Controller
 {
-    public function index() 
+    public function index()
     {
         $data = GelombangModel::all();
         return new GelombangResource(true, 'success', $data);

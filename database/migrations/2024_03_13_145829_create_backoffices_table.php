@@ -17,7 +17,7 @@ return new class extends Migration
         // email varchar
         // no_hp varchar
         Schema::create('backoffices', function (Blueprint $table) {
-            $table->uuid('id')->nullable(false)->primary(true);
+            $table->uuid('id')->nullable(false)->primary();
             $table->string('nama_lengkap');
             $table->string('jabatan');
             $table->string('nip');
