@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('khs', function (Blueprint $table) {
-            $table->uuid('id')->nullable(false)->primary()->change();
+        Schema::table('backoffice',function (Blueprint $table){
+            $table->uuid('jabatan')->change();
+        });
+
+        Schema::table('backoffice',function (Blueprint $table){
+            $table->foreign('id_mahasiswa')->references('id')->on('mahasiswas')->onDelete('cascade');
         });
     }
 
@@ -21,11 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('khs', function (Blueprint $table) {
-            $table->dropPrimary();
-        });
-        Schema::table('khs', function (Blueprint $table) {
-            $table->uuid('id');
-        });
+        //
     }
 };
