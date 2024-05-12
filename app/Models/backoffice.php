@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class backoffice extends Model
 {
     use HasUuids;
+    use HasRoles;
 
     protected $fillable = [
         'nama_lengkap',
