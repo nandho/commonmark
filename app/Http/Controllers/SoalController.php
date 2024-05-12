@@ -62,7 +62,14 @@ class SoalController extends Controller
 
             // Buat objek PmbModel baru dengan data dari request
             $data = new soal();
+            //upload gambar jika ada
+            if($request->getFiles()){
+                
+            }
+
             $data->fill($requestData);
+
+
 
             // Simpan objek ke database
             $data->save();
@@ -116,7 +123,7 @@ class SoalController extends Controller
         $requestData = $request->all();
 
         try {
-            // Buat objek PmbModel baru dengan data dari request
+            // Buat objek soal baru dengan data dari request
             $data = soal::findOrFail($id);
             $data->fill($requestData);
 
@@ -141,6 +148,9 @@ class SoalController extends Controller
         $data = soal::findorfail($id);
 
         //delete foto jika ada
+        if($data->foto){
+
+        }
 
         //delete post
         $data->delete();

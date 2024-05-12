@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('khs', function (Blueprint $table) {
-            $table->uuid('id')->nullable(false)->primary()->change();
+        Schema::create('divisi',function (Blueprint $table){
+            $table->uuid('id')->primary();
+            $table->string('divisi');
         });
     }
 
@@ -21,11 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('khs', function (Blueprint $table) {
-            $table->dropPrimary();
-        });
-        Schema::table('khs', function (Blueprint $table) {
-            $table->uuid('id');
-        });
+        Schema::dropIfExists('divisi');
     }
 };
