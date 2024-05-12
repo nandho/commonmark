@@ -33,7 +33,7 @@ class divisi
 
         $jabatan = divisiModel::where('id',$backoffice->jabatan)->first();
 
-        if(! $jabatan == $divisi)
+        if(! $jabatan->divisi == $divisi)
         {
             throw UnauthorizedException::notLoggedIn();
         }

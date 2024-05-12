@@ -117,8 +117,7 @@ class PmbApiController extends Controller
             $requestData['id_akun'] = $user->id;
             $pmb->fill($requestData);
             $pmb->save();
-            Mail::to('stryn@gmail.com')->send(new SendEmailPMB($name, $password, $username));
-
+            Mail::to($requestData['email'])->send(new SendEmailPMB($name, $password, $username));
 
             // Jika penyimpanan berhasil, kirim respons sukses
             return new PmbResource(true, 'success', $pmb);

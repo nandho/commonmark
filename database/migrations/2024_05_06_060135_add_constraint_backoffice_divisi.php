@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('backoffice',function (Blueprint $table){
+        Schema::table('backoffices',function (Blueprint $table){
             $table->uuid('jabatan')->change();
         });
 
-        Schema::table('backoffice',function (Blueprint $table){
-            $table->foreign('id_mahasiswa')->references('id')->on('mahasiswas')->onDelete('cascade');
+        Schema::table('backoffices',function (Blueprint $table){
+            $table->foreign('jabatan')->references('id')->on('divisi')->onDelete('cascade');
         });
     }
 
@@ -25,6 +25,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('backoffices', function (Blueprint $table) {
+            // Drop foreign key constraint
+            $table->dropForeign(['jabatan']);
+
+            // Change column type back to its original type
+            $table->string('jabatan')->change();
+        });
     }
 };

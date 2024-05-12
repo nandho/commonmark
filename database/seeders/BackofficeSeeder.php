@@ -12,6 +12,6 @@ class BackofficeSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        
     }
 }

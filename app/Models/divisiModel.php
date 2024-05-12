@@ -15,7 +15,7 @@ class divisiModel extends Model
         'divisi'
     ] ;
 
-    public $timestamp = 'false';
+    public $timestamps = false;
 
     protected $table = 'divisi';
     protected $primarykey = 'id';

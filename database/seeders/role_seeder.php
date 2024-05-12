@@ -17,6 +17,8 @@ class role_seeder extends Seeder
         Role::create(['guard_name' => 'api','name'=>'calonmahasiswa']);
         Role::create(['guard_name' => 'api','name'=>'mahasiswa']);
         Role::create(['guard_name' => 'api','name'=>'dosen']);
-        Role::create(['guard_name' => 'api','name'=>'backoffice']);
+        Role::create(['guard_name' => 'api','name'=>'admisi']);
+        Role::create(['guard_name' => 'api','name'=>'keuangan']);
+        Role::create(['guard_name' => 'api','name'=>'akademik']);
     }
 }

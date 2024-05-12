@@ -25,7 +25,7 @@ class BackofficeController extends Controller
         //will input jurusan
         $validator = Validator::make($request->all(),[
             'nama_lengkap'=>'required|string',
-            'jabatan'=>'required|string', //bisa menggunakan divisi, ini akan digunakan untuk teams on permission
+            'jabatan'=>'required|string|in:pmb,keuangan,akademik', //bisa menggunakan divisi, ini akan digunakan untuk teams on permission
             'nip'=>'required|string',
             'email'=>'required|email',
             'no_hp'=>'required|string',
@@ -49,7 +49,16 @@ class BackofficeController extends Controller
                 'email'=>$request->email,
                 'password'=>bcrypt($request->password)
             ]);
-            $user->assignRole('backoffice');
+
+            if($request->jabatan == 'pmb'){
+                $user->assignRole('pmb');
+            }
+            if($request->jabatan == 'akademik'){
+                $user->assignRole('akademik');
+            }
+            if($request->jabatan == 'keuangan'){
+                $user->assignRole('keuangan');
+            }
 
             $requestData['id_akun']=$user->id;
             // Buat objek PmbModel baru dengan data dari request
@@ -89,7 +98,7 @@ class BackofficeController extends Controller
         // get data and update data
         $validator = Validator::make($request->all(),[
             'nama_lengkap'=>'required|string',
-            'jabatan'=>'required|string', //bisa menggunakan divisi, ini akan digunakan untuk teams on permission
+            'jabatan'=>'required|string', //bisa menggunakan divisi, ini akan digunakan untuk role on permission
             'nip'=>'required|string',
             'email'=>'required|email',
             'no_hp'=>'required|string',
