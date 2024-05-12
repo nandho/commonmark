@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Krs extends Model
+class KrsModel extends Model
 {
     protected $table = 'krs';
 

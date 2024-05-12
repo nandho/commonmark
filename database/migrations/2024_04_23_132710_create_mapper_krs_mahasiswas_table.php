@@ -18,7 +18,7 @@ return new class extends Migration
         });
 
         Schema::table('mapper_krs_mahasiswas',function (Blueprint $table){
-            $table->foreign('id_dosen')->references('id')->on('dosen_models');
+            $table->foreign('id_mahasiswa')->references('id')->on('dosen_models');
             $table->foreign('id_krs')->references('id')->on('krs');
         });
     }

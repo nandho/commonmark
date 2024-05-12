@@ -16,7 +16,7 @@ class KrsController extends Controller
     public function index()
     {
         //will return all data
-        $data = krs::all();
+        $data = KrsModel::all();
         return new krsresource(true,'success',$data);
     }
 
@@ -24,7 +24,7 @@ class KrsController extends Controller
     {
         //will input jurusan
         $validator = Validator::make($request->all(),[
-            'pembimbigelombangng_akademik'=> 'required', //foreign id merelasikan ke pembimbing akademik table
+            'gelombang'=> 'required', //foreign id merelasikan ke pembimbing akademik table
             'periode_mulai'=> 'required',
             'periode_berakhir'=> 'required',
             'semester'=> 'required',
@@ -43,7 +43,7 @@ class KrsController extends Controller
 
         try {
             // Buat objek PmbModel baru dengan data dari request
-            $data = new krs();
+            $data = new KrsModel();
             $data->fill($requestData);
 
             // Simpan objek ke database
@@ -65,7 +65,7 @@ class KrsController extends Controller
     {
         //will return specified jurusan
 
-        $data = krs::find($id);
+        $data = KrsModel::find($id);
 
         if (!$data) {
             return new krsresource(false, 'not found', null);
@@ -97,7 +97,7 @@ class KrsController extends Controller
 
         try {
             // Buat objek PmbModel baru dengan data dari request
-            $data = krs::findOrFail($id);
+            $data = KrsModel::findOrFail($id);
             $data->fill($requestData);
 
             // Simpan objek ke database
@@ -118,7 +118,7 @@ class KrsController extends Controller
     public function destroy($id)
     {
         //will delete data
-        $data = krs::findorfail($id);
+        $data = KrsModel::findorfail($id);
 
         //delete post
         $data->delete();
