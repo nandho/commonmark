@@ -6,6 +6,7 @@ use App\Http\Controllers\test;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\LogoutController;
+
 // use App\Http\Controllers\JawabanController;
 // use App\Http\Controllers\JurusanController;
 // use App\Http\Controllers\NilaiController;
@@ -53,7 +54,7 @@ Route::apiResource('ujian', App\Http\Controllers\SoalController::class);
 Route::apiResource('pmb/jawaban', App\Http\Controllers\JawabanController::class);
 Route::apiResource('hasil_ujian/nilai', App\Http\Controllers\NilaiController::class);
 Route::apiResource('mahasiswa', App\Http\Controllers\MahasiswaPost::class);
-Route::apiResource('dosen', App\Http\Controllers\PostDosen::class)->middleware('auth:api');
+Route::apiResource('dosen', App\Http\Controllers\PostDosen::class);//->middleware('auth:api');
 Route::apiResource('pem_akademik', App\Http\Controllers\Pem_AkademikPost::class);
 Route::apiResource('pem_skripsi', App\Http\Controllers\Pem_SkripsiPost::class);
 Route::apiResource('persyaratan_pmb',App\Http\Controllers\persyaratancontroller::class);
@@ -84,3 +85,4 @@ Route::post('test', [test::class, 'store']);
 //     // The email sending is done using the to method on the Mail facade
 //     Mail::to('stryn@gmail.com’')->send(new SendEmailPMB($name, $password, "xxx"));
 // });
+Route::apiResource('Semester', App\Http\Controllers\SemesterController::class);

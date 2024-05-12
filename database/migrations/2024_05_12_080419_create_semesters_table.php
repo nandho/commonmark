@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('krs', function (Blueprint $table) {
+        Schema::create('semesters', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('periode_mulai');
-            $table->string('periode_berakhir');
-            $table->string('semester');
+            $table->string('nama_semester');
+            $table->date('tanggal_mulai');
+            $table->date('tanggal_selesai');
             $table->string('status');
-            $table->timestamps();
         });
     }
 
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('krs_models');
+        Schema::dropIfExists('semesters');
     }
 };
