@@ -58,6 +58,7 @@ class DosenModel extends Model
         'nomor_surat_ijin_mengajar',
         'status_aktifitas',
         'semester_keluar',
+        'id_akun',
     ];
 
     protected static function boot()
