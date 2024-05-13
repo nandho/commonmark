@@ -47,23 +47,28 @@ class PmbApiController extends Controller
             'nama_lengkap' => 'required|string',
             'nik' => 'required|string',
             'nisn' => 'required|string',
-            'jenis_kelamin' => 'required|string|in:Laki-laki,Perempuan',
+
+            'jenis_kelamin' => 'required|string|in:"Laki-Laki","Perempuan"',
             'nomor_hp' => 'required|string',
             'email' => 'required|email',
             'provinsi' => 'required|string',
             'kabupaten' => 'required|string',
             'nama_sekolah' => 'required|string', //seharusnya nama sekolah
+
+            'tahun_lulus_sekolah' => 'required|string',
+
             'tahun_lulus_sekolah' => 'nullable|string',
+
             //ditambahkan jurusan asal
             'jurusan_asal' => 'required|string',
-            'jurusan_id' => 'required|string|in:' . implode(',', $daftarJurusan),
+            //'jurusan_id' => 'required|string|in:' . implode(',', $daftarJurusan),
             'nama_wali' => 'required|string',
             'no_hp_wali' => 'required|string',
-            'no_telp_wali' => 'required|string',
+            'no_telp_wali' => 'nullable|string',
             // tambahkan nik orang tua
             'nik_wali' => 'required|string',
-            'tempat_lahir' => 'required|string',
-            'tanggal_lahir' => 'required|date',
+            'tempat_lahir' => 'nullable|string',
+            'tanggal_lahir' => 'nullable|date',
             // batas field pendaftaran
             'alamat' => 'nullable|string|nullable',
             'agama' => 'nullable|string|nullable',
@@ -164,7 +169,7 @@ class PmbApiController extends Controller
             'nomor_hp' => 'nullable|string',
             'tempat_lahir' => 'nullable|string',
             'tanggal_lahir' => 'nullable|date',
-            'jenis_kelamin' => 'nullable|string|in:Laki-laki,Perempuan',
+            'jenis_kelamin' => 'nullable|string|in:Laki-Laki,Perempuan',
             'alamat' => 'nullable|string',
             'agama' => 'nullable|string',
             'kewarganegaraan' => 'nullable|string',
@@ -200,7 +205,7 @@ class PmbApiController extends Controller
 
         if ($request->hasFile('foto')) {
             $image = $request->file('foto');
-            $image->storeAs('public/pmbfoto', $image->hashName());
+            $image->storePubliclyAs('public/pmbfoto/', $image->hashName());
             $requestData['foto'] = $image->hashName();
         }
 

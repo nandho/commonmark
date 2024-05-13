@@ -10,11 +10,14 @@ class KrsModel extends Model
     protected $table = 'krs';
 
     protected $fillable = [
-        'gelombang',
         'periode_mulai',
         'periode_berakhir',
         'semester',
         'status',
+        'pembimbing_akademik',
+        'mata_kuliah',
+        'jumlah_sks'
+
     ];
 
     protected static function boot()

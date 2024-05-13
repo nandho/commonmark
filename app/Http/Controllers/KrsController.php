@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\KrsModel;
 use Illuminate\Http\Request;
-use App\Models\krsModel;
+use App\Http\Resources\krsresource;
+use Illuminate\Support\Facades\Validator;
+
 
 // 'gelombang',
 // 'periode_mulai',

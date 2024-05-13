@@ -18,6 +18,8 @@ class NomorPendaftaranGenerator
         // Menggunakan uniqid() untuk menghasilkan ID unik berdasarkan waktu saat ini
         // Anda dapat menyesuaikan format sesuai kebutuhan, misalnya dengan menambahkan awalan atau akhiran tertentu
         // Mengembalikan nomor pendaftaran yang unik
+        echo($tanggal.$kode_jurusan.$lastnumber);
         return $tanggal.$kode_jurusan.$lastnumber;
+
     }
 }
