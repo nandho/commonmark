@@ -27,6 +27,7 @@
 
     <!-- Kemudian impor DataTables JS -->
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    @yield('head')
 
 </head>
 
@@ -230,7 +231,6 @@
             @yield('content')
         </div>
     </div>
-
 </body>
 <!-- Plugin data tables -->
 

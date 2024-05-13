@@ -62,7 +62,6 @@ class SemesterController extends Controller
         // Kembalikan response dengan data semester
         return response()->json($semester);
     }
-
     /**
      * Update the specified resource in storage.
      */
@@ -78,10 +77,10 @@ class SemesterController extends Controller
 
         // Validasi request
         $validator = Validator::make($request->all(), [
-            'nama_semester' => 'required|string|max:255',
-            'tanggal_mulai' => 'required|date',
-            'tanggal_selesai' => 'required|date',
-            'status' => 'required|string|max:255',
+            'nama_semester' => 'string|max:255',
+            'tanggal_mulai' => 'date',
+            'tanggal_selesai' => 'date',
+            'status' => 'string|max:255',
         ]);
 
         // Jika validasi gagal, kembalikan error

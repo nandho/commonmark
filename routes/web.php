@@ -27,7 +27,7 @@ Route::get('login/', function () {
 })->name('login');
 
 
-Route::get('dashboard',function () {
+Route::get('dashboard', function () {
     return view('all.dashboard'); // TODO return index dengan authorization berisikan KRS, KHS, disini terdapat 5 user
 });
 
@@ -41,4 +41,14 @@ Route::get('biodataedit/', function () {
 
 Route::get('soal/', function () {
     return view('soal');
+});
+
+// Rute untuk menampilkan daftar semua semester
+Route::get('/semester', function () {
+    return view('daftar_semester');
+});
+
+// Rute untuk menampilkan detail semester berdasarkan ID
+Route::get('/semester/{id}', function ($id) {
+    return view('semester_detail', ['id' => $id]);
 });

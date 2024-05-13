@@ -14,29 +14,21 @@
     padding: 0.5rem;
   }
 
-
-
   /* Gaya tabel */
   #semesterTable {
-    border-collapse: collapse;
-    background: white;
-    border-radius: 6px;
-    overflow: hidden;
+    border-collapse: separate;
+    border-spacing: 0 0.5rem;
     width: 100%;
-    /* margin: 0 auto; */
-    position: relative;
-    margin-bottom: 5%;
+    
   }
 
   #semesterTable thead th {
-    background-color: #65b8e0;
+    background-color: #4f46e5;
     color: white;
-    font-weight: 700;
+    font-weight: 600;
     padding: 0.75rem;
     text-align: left;
-    height: 60px;
-    font-size: 16px;
-
+    
   }
 
   #semesterTable tbody td {
@@ -47,8 +39,7 @@
   }
 
   #semesterTable tbody tr {
-    height: 48px;
-    border-bottom: 1px solid #E3F1D5;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
 
   /* Gaya untuk kontrol paginasi */
@@ -57,7 +48,7 @@
     margin: 0 0.25rem;
     border-radius: 0.375rem;
     border: 1px solid transparent;
-    background-color: #65b8e0;
+    background-color: #4f46e5;
     color: white;
     cursor: pointer;
   }
@@ -68,7 +59,7 @@
 
   .dataTables_wrapper .dataTables_paginate .paginate_button.current,
   .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-    background-color: #65b8e0;
+    background-color: #6366f1;
     color: white;
     border-color: transparent;
   }
@@ -112,7 +103,7 @@
     .dataTables_wrapper .dataTables_paginate {
       float: none;
       text-align: center;
-
+      
     }
   }
 </style>
@@ -124,13 +115,8 @@
     <div class="w-full max-w-full px-3 shrink-0 md:w-12 md:flex-0">
       <div class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
         <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
-          <div class="flex justify-between items-center mb-4">
-            <h2 class="text-2xl font-bold dark:text-white">Data Semester</h2>
-            <a href="{{ url('biodata') }}" class="inline-block px-6 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700">Kembali</a>
-          </div>
+          <h2 class="text-2xl font-bold mb-4 dark:text-white">Data Semester</h2>
           <div class="overflow-x-auto">
-
-
             <table id="semesterTable" class="display min-w-full divide-y divide-gray-200">
               <thead class="bg-gray-50">
                 <tr>
@@ -139,7 +125,6 @@
                   <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Mulai</th>
                   <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Selesai</th>
                   <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                 </tr>
               </thead>
               <tbody>
@@ -147,6 +132,7 @@
               </tbody>
             </table>
           </div>
+          <a href="{{ url('biodata') }}" class="mt-4 inline-block px-6 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700">Kembali</a>
         </div>
       </div>
     </div>
@@ -157,6 +143,7 @@
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script>
   $(document).ready(function() {
+    // Inisialisasi DataTable dengan opsi dom kustom
     var table = $('#semesterTable').DataTable({
       "paging": true,
       "searching": true,
@@ -166,29 +153,25 @@
         "<'flex flex-row justify-between'<'flex flex-col'i><'flex flex-col'p>>"
     });
 
+    // Menggunakan Axios untuk mengambil data dari API
     axios.get('http://localhost:9000/api/Semester')
       .then(function(response) {
+        // Menangani sukses
         response.data.forEach(function(item) {
-          var rowNode = table.row.add([
+          // Menambahkan data ke tabel
+          table.row.add([
             item.id,
             item.nama_semester,
             item.tanggal_mulai,
             item.tanggal_selesai,
-            item.status,
-            '<button class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-700 details-btn" data-id="' + item.id + '">Details</button>'
-          ]).draw().node();
-
-          $(rowNode).find('.details-btn').on('click', function(e) {
-            e.preventDefault();
-            var semesterId = $(this).data('id');
-            window.location.href = '/semester/' + semesterId;
-          });
+            item.status
+          ]).draw();
         });
       })
       .catch(function(error) {
-        console.error(error);
+        // Menangani error
+        console.log(error);
       });
   });
 </script>
-
 @endsection
