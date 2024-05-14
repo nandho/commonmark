@@ -8,13 +8,6 @@ use Illuminate\Http\Request;
 use App\Http\Resources\krsresource;
 use Illuminate\Support\Facades\Validator;
 
-
-// 'gelombang',
-// 'periode_mulai',
-// 'periode_berakhir',
-// 'semester',
-// 'status',
-
 class KrsController extends Controller
 {
     public function index()
