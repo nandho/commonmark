@@ -169,19 +169,36 @@
     axios.get('http://localhost:9000/api/Semester')
       .then(function(response) {
         response.data.forEach(function(item) {
+          var statusButtonText = item.status === 'Aktif' ? 'Nonaktifkan' : 'Aktifkan';
           var rowNode = table.row.add([
             item.id,
             item.nama_semester,
             item.tanggal_mulai,
             item.tanggal_selesai,
             item.status,
-            '<button class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-700 details-btn" data-id="' + item.id + '">Details</button>'
+            '<button class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-700 details-btn" data-id="' + item.id + '">Details</button>' +
+            '<button class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-green-700 status-btn" data-id="' + item.id + '">' + statusButtonText + '</button>'
           ]).draw().node();
 
           $(rowNode).find('.details-btn').on('click', function(e) {
             e.preventDefault();
             var semesterId = $(this).data('id');
             window.location.href = '/semester/' + semesterId;
+          });
+
+          $(rowNode).find('.status-btn').on('click', function(e) {
+            e.preventDefault();
+            var semesterId = $(this).data('id');
+            axios.patch('http://localhost:9000/api/Semester/' + semesterId, {
+                status: item.status === 'Aktif' ? 'Nonaktif' : 'Aktif'
+              })
+              .then(function(response) {
+                console.log(response.data);
+                location.reload(); // Refresh halaman untuk menampilkan status terbaru
+              })
+              .catch(function(error) {
+                console.error(error);
+              });
           });
         });
       })
@@ -190,5 +207,6 @@
       });
   });
 </script>
+
 
 @endsection

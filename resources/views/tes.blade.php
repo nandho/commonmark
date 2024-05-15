@@ -168,8 +168,20 @@
 
     axios.get('http://localhost:9000/api/Semester')
       .then(function(response) {
+        var activeSemesterFound = false; // Menandakan apakah sudah ditemukan semester aktif
         response.data.forEach(function(item) {
-          var statusButtonText = item.status === 'aktif' ? 'Nonaktifkan' : 'Aktifkan';
+          if (item.status === 'Aktif') {
+            activeSemesterFound = true; // Setel ke true jika ditemukan semester aktif
+          }
+        });
+
+        response.data.forEach(function(item) {
+          var statusButtonText = item.status === 'Aktif' ? 'Nonaktifkan' : 'Aktifkan';
+          if (activeSemesterFound && item.status === 'Nonaktif') {
+            // Jika sudah ditemukan semester aktif dan semester ini non-aktif,
+            // ubah statusnya menjadi non-aktif
+            statusButtonText = 'Aktifkan';
+          }
           var rowNode = table.row.add([
             item.id,
             item.nama_semester,
@@ -177,7 +189,8 @@
             item.tanggal_selesai,
             item.status,
             '<button class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-700 details-btn" data-id="' + item.id + '">Details</button>' +
-            '<button class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-green-700 status-btn" data-id="' + item.id + '">' + statusButtonText + '</button>'
+            '<button class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-green-700 status-btn" data-id="' + item.id + '">' + statusButtonText + '</button>' +
+            '<button class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-700 delete-btn" data-id="' + item.id + '">Hapus</button>'
           ]).draw().node();
 
           $(rowNode).find('.details-btn').on('click', function(e) {
@@ -190,11 +203,24 @@
             e.preventDefault();
             var semesterId = $(this).data('id');
             axios.patch('http://localhost:9000/api/Semester/' + semesterId, {
-                status: item.status === 'Aktif' ? 'Non-Aktif' : 'Aktif'
+                status: item.status === 'Aktif' ? 'Nonaktif' : 'Aktif'
               })
               .then(function(response) {
                 console.log(response.data);
                 location.reload(); // Refresh halaman untuk menampilkan status terbaru
+              })
+              .catch(function(error) {
+                console.error(error);
+              });
+          });
+
+          $(rowNode).find('.delete-btn').on('click', function(e) {
+            e.preventDefault();
+            var semesterId = $(this).data('id');
+            axios.delete('http://localhost:9000/api/Semester/' + semesterId)
+              .then(function(response) {
+                console.log(response.data);
+                location.reload(); // Refresh halaman untuk menampilkan data terbaru setelah penghapusan
               })
               .catch(function(error) {
                 console.error(error);
