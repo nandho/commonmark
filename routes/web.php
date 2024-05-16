@@ -52,3 +52,6 @@ Route::get('/semester', function () {
 Route::get('/semester/{id}', function ($id) {
     return view('semester_detail', ['id' => $id]);
 });
+Route::get('/addsemster', function () {
+    return view('addsemester');
+});

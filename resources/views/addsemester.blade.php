@@ -39,9 +39,9 @@
                 </div>
               </div>
               <div>
-                <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                <select id="status" name="status" class="mt-1 p-2 block w-full border-gray-300 rounded-md" required>
-                  <option value="Aktif">Aktif</option>
+                <label for="status" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Status</label>
+                <select id="status" name="status" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" required>
+                  <option value="Aktif" >Aktif</option>
                   <option value="Nonaktif">Nonaktif</option>
                 </select>
               </div>
