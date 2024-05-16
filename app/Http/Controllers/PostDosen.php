@@ -65,7 +65,6 @@ class PostDosen extends Controller
             'nomor_surat_ijin_mengajar'=> 'required',
             'status_aktifitas'=> 'required',
             'semester_keluar'=> 'required',
-            'id_akun'=>'required',
         ]);
 
         if ($validator->fails()) {
