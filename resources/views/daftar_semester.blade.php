@@ -134,7 +134,6 @@
             <table id="semesterTable" class="display min-w-full divide-y divide-gray-200">
               <thead class="bg-gray-50">
                 <tr>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
                   <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Semester</th>
                   <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Mulai</th>
                   <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Selesai</th>
@@ -183,7 +182,6 @@
             statusButtonText = 'Aktifkan';
           }
           var rowNode = table.row.add([
-            item.id,
             item.nama_semester,
             item.tanggal_mulai,
             item.tanggal_selesai,
