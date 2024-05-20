@@ -190,7 +190,7 @@
             <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
               <div class="mb-4">
                 <label for="nomor_taspen" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Nomor TASPEN</label>
-                <div name="nomor_taspen" id="nomor_taspen" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block h-10 w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" ></div>
+                <div name="nomor_taspen" id="nomor_taspen" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block h-10 w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"></div>
               </div>
             </div>
             <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
@@ -208,7 +208,7 @@
             <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
               <div class="mb-4">
                 <label for="gelar_akademik_tertinggi" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Gelar Akademik Tertinggi</label>
-                <div name="gelar_akademik_tertinggi" id="gelar_akademik_tertinggi" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block h-10 w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" ></div>
+                <div name="gelar_akademik_tertinggi" id="gelar_akademik_tertinggi" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block h-10 w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"></div>
               </div>
             </div>
             <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
@@ -309,7 +309,7 @@
               <label for="nomor_ktp" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">NIK</label>
             </div>
             <div class="mb-4">
-              <div name="nomor_ktp" id="nomor_ktp" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block h-10 w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" ></div>
+              <div name="nomor_ktp" id="nomor_ktp" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block h-10 w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"></div>
             </div>
             <div class="w-full max-w-full px-0 shrink-0 md:w-4/12 md:flex-0">
               <label for="nidn" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">NIDN</label>
@@ -321,7 +321,7 @@
             <div class="flex flex-wrap -mx-2">
               <div class="w-full md:w-1/2 px-2 mb-4">
                 <label for="gelar_depan" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Gelar Depan</label>
-                <div  name="gelar_depan" id="gelar_depan" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block h-10 w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"></div>
+                <div name="gelar_depan" id="gelar_depan" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block h-10 w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"></div>
               </div>
               <div class="w-full md:w-1/2 px-2 mb-4">
                 <label for="gelar_belakang" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Gelar Belakang</label>
@@ -357,41 +357,39 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
-  document.getElementById('dosenForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const formProps = Object.fromEntries(formData);
-    const baseUrl = window.location.origin;
+  document.addEventListener('DOMContentLoaded', function() {
+    const dosenId = '1c719669-0574-4c02-8d2c-42bd57f38f85';
 
-    axios.post(`${baseUrl}/api/dosen`, formProps)
+    axios.get(`http://localhost:9000/api/dosen/${dosenId}`)
       .then(response => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Berhasil',
-          text: 'Dosen berhasil ditambahkan!',
-          timer: 2000,
-          showConfirmButton: false
-        }).then(() => {
-          location.reload();
-        });
+        const dosenData = response.data.data;
+        console.log(dosenData);
+        return axios.get(`http://localhost:9000/api/user/${dosenData.id_akun}`)
+          .then(userResponse => {
+            const userData = userResponse.data.data;
+            console.log(userData);
+            return { dosenData, userData };
+          });
+      })
+      .then(({ dosenData, userData }) => {
+        // Set email
+        document.getElementById('email').innerHTML = userData.email || 'Email not found';
+        console.log('Email:', userData.email || 'Email not found');
+        
+        // Set NIDN
+        const nidnElement = document.getElementById('nidn');
+        nidnElement.innerHTML = dosenData.nidn;
+        console.log('NIDN:', dosenData.nidn);
+        
+        // Set Nama Lengkap
+        const namaLengkapElement = document.getElementById('nama_lengkap');
+        namaLengkapElement.innerHTML = dosenData.nama_lengkap;
+        console.log('Nama Lengkap:', dosenData.nama_lengkap);
+        
+        // Tambahkan log untuk properti lainnya sesuai kebutuhan
       })
       .catch(error => {
-        if (error.response) {
-          console.error('Error Response:', error.response);
-          const errors = error.response.data.error;
-          let errorMessages = '';
-          for (const key in errors) {
-            errorMessages += `<p class="text-red-500">${errors[key]}</p>`;
-          }
-          document.getElementById('errorMessages').innerHTML = errorMessages;
-          Swal.fire({
-            icon: 'error',
-            title: 'Gagal',
-            html: errorMessages
-          });
-        } else {
-          console.error('Error:', error.message);
-        }
+        console.error('Error fetching data:', error);
       });
   });
 </script>
