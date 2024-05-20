@@ -47,9 +47,6 @@ class MahasiswaPost extends Controller
             // Initialize an array to hold the Mahasiswa data for batch insertion
             $mahasiswaData = [];
 
-            //TODO penyesuaian data yang masuk ke dalam db dari pmb model
-
-
             foreach ($pmbRecords as $pmbRecord) {
                 $mahasiswaData[] = [
                     'nik' => $pmbRecord->nik,
@@ -93,7 +90,7 @@ class MahasiswaPost extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Data saved successfully',
-                'data' => $mahasiswaData
+                'data' => array_column($mahasiswaData['data'], 'id')
             ], 201);
 
         } catch (\Exception $e) {

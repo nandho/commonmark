@@ -11,7 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('hari',function (Blueprint $table){
+            $table->uuid('id')->primary();
+            $table->date('tanggal');
+            $table->string('hari');
+        });
     }
 
     /**
@@ -19,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('hari');
     }
 };

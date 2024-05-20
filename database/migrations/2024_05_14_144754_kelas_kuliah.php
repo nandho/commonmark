@@ -11,7 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('kelas_kuliah',function (Blueprint $table){
+            $table->uuid('id')->primary();
+            $table->string('kelas');
+            $table->string('dosen');
+            $table->string('rombel')->default('A');
+            $table->uuid('semester');
+        });
     }
 
     /**
@@ -19,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('kelas_kuliah');
     }
 };

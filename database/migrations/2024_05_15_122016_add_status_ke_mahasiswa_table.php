@@ -11,7 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::table('mahasiswas',function (Blueprint $table){
+            $table->string('status_mahasiswa')->default('aktif');
+        });
     }
 
     /**
@@ -19,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('mahasiswas',function (Blueprint $table){
+            $table->dropColumn('status_mahasiswa');
+        });
     }
 };
