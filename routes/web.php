@@ -55,3 +55,8 @@ Route::get('/semester/{id}', function ($id) {
 Route::get('/addsemster', function () {
     return view('addsemester');
 });
+
+// dosen
+Route::get('/adddosen', function () {
+    return view('inputdosen');
+});

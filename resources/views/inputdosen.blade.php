@@ -10,7 +10,7 @@
       <div class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
         <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
           <div class="flex items-center">
-            <p class="mb-0 dark:text-white/80">Biodata</p>
+            <p class="mb-0 dark:text-white/80">Input Dosen</p>
             <a type="button" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85" href="{{ url('biodata') }}">Kembali</a>
           </div>
         </div>
@@ -19,12 +19,17 @@
             <button type="submit" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Perbaharui Data</button>
             <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">Data Diri</p>
             <div class="flex flex-wrap -mx-3">
-
               <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                 <div class="mb-4">
                   <label for="email" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Email
                     address</label>
                   <input type="email" name="email" id="email" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                </div>
+              </div>
+              <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
+                <div class="mb-4">
+                  <label for="password" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Masukan Password Baru</label>
+                  <input type="password" name="password" id="password" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
                 </div>
               </div>
               <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
@@ -54,7 +59,7 @@
               <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                 <div class="mb-4">
                   <label for="jenis_kelamin"" class=" inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Jenis Kelamin</label>
-                  <select id="jenis_kelamin" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
+                  <select name="jenis_kelamin" id="jenis_kelamin" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
                     <option value="Laki-laki">Laki-laki</option>
                     <option value="Perempuan">Perempuan</option>
                   </select>
@@ -84,6 +89,12 @@
                   <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
                 </div>
               </div>
+              <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
+                <div class="mb-4">
+                  <label for="catatan" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Catatan</label>
+                  <input type="text" name="catatan" id="" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                </div>
+              </div>
 
             </div>
             <!-- alamat_rumah -->
@@ -105,8 +116,8 @@
               </div>
               <div class="w-full max-w-full px-3 shrink-0 md:w-4/12 md:flex-0">
                 <div class="mb-4">
-                  <label for="negara" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Negara</label>
-                  <input type="text" name="negara" id="negara" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                  <label for="negara_tempat_lahir" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Negara</label>
+                  <input type="text" name="negara_tempat_lahir" id="negara_tempat_lahir" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
                 </div>
               </div>
               <div class="w-full max-w-full px-3 shrink-0 md:w-4/12 md:flex-0">
@@ -346,32 +357,42 @@
 
 
 </div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
   document.getElementById('dosenForm').addEventListener('submit', function(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const formProps = Object.fromEntries(formData);
-    // Menggunakan window.location untuk mendapatkan domain saat ini
     const baseUrl = window.location.origin;
 
     axios.post(`${baseUrl}/api/dosen`, formProps)
       .then(response => {
-        // Tangani respons sukses
+        Swal.fire({
+          icon: 'success',
+          title: 'Berhasil',
+          text: 'Dosen berhasil ditambahkan!',
+          timer: 2000,
+          showConfirmButton: false
+        }).then(() => {
+          location.reload();
+        });
       })
       .catch(error => {
         if (error.response) {
-          // Menampilkan error di konsol untuk debugging
           console.error('Error Response:', error.response);
-
-          // Menampilkan error di halaman web
           const errors = error.response.data.error;
           let errorMessages = '';
           for (const key in errors) {
             errorMessages += `<p class="text-red-500">${errors[key]}</p>`;
           }
           document.getElementById('errorMessages').innerHTML = errorMessages;
+          Swal.fire({
+            icon: 'error',
+            title: 'Gagal',
+            html: errorMessages
+          });
         } else {
-          // Jika error tidak berasal dari respons, tampilkan di konsol
           console.error('Error:', error.message);
         }
       });
