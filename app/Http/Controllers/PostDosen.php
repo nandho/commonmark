@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\dosenResource;
+use App\Http\Resources\DosenResource;
 use App\Models\DosenModel;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -10,11 +10,23 @@ use Illuminate\Support\Facades\Validator;
 
 class PostDosen extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $data = DosenModel::all();
+        // Buat query builder untuk model Dosen
+        $query = DosenModel::query();
+
+        // Periksa apakah ada filter untuk id_akun
+        if ($request->has('filter.id_akun')) {
+            $query->where('id_akun', $request->input('filter.id_akun'));
+        }
+
+        // Dapatkan hasil query
+        $data = $query->get();
+
+        // Kembalikan hasil dalam format JSON
         return new DosenResource(true, 'success', $data);
     }
+
     public function store(Request $request)
     {
         //will input jurusan

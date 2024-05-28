@@ -18,56 +18,39 @@ class loggeduser extends Controller
     public function __invoke(Request $request)
     {
         $user = $request->user();
-        $id_user = $user->id;
-        $role_user = $user->role;
+        // $id_user = $user->id;
         $data['user'] = $user;
-
-        switch ($role_user) {
-            case 'mahasiswa':
-                $mahasiswa = Mahasiswa::where('id_akun', $id_user)->fisrt();
-                if($mahasiswa) {
-                    $data['data'] = $mahasiswa->toArray(); // Pastikan untuk mengonversi model ke array jika diperlukan
-                } else {
-                    // Jika tidak ada data ditemukan, Anda mungkin ingin menangani kasus ini
-                    $data['data'] = null;
-                }
-                break;
-            case 'calonmahasiswa':
-                $pmb = PmbModel::where('id_akun', $id_user)->first(); // Ubah metode pencarian
-                if($pmb) {
-                    $data['data'] = $pmb->toArray(); // Pastikan untuk mengonversi model ke array jika diperlukan
-                } else {
-                    // Jika tidak ada data ditemukan, Anda mungkin ingin menangani kasus ini
-                    $data['data'] = null;
-                }
-                break;
-            case 'dosen':
-                $dosen = DosenModel::where('id_akun', $id_user)->fisrt();
-                if($dosen) {
-                    $data['data'] = $dosen->toArray(); // Pastikan untuk mengonversi model ke array jika diperlukan
-                } else {
-                    // Jika tidak ada data ditemukan, Anda mungkin ingin menangani kasus ini
-                    $data['data'] = null;
-                }
-                break;
-            case 'backoffice':
-                $backoffice = backoffice::where('id_akun', $id_user)->first();
-                if($backoffice) {
-                    $data['data'] = $backoffice->toArray(); // Pastikan untuk mengonversi model ke array jika diperlukan
-                } else {
-                    // Jika tidak ada data ditemukan, Anda mungkin ingin menangani kasus ini
-                    $data['data'] = null;
-                }
-                break;
-            case 'admin':
-                // $backoffice = backoffice::find('id_akun',$id_user);  
-                $data['data'] = 'u r admin';
-                break;
-
-            default:
-                return response()->json(['message' => 'unauthorized'], 401);
-                break;
+        // Retrieve roles associated with the user
+        // $userRoles = $user->hasRole(); // Returns a collection of role names
+        if ($user->hasRole('admin')) {
+            $userRoles = 'admin';
+        } else if ($user->hasRole('dosen')) {
+            $userRoles = 'dosen';
+        } else if ($user->hasRole('mahasiswa')) {
+            $userRoles = 'mahasiswa';
+        } else if ($user->hasRole('pmb')) {
+            $userRoles = 'pmb';
+        } else if ($user->hasRole('keuangan')) {
+            $userRoles = 'keuangan';
+        } else if ($user->hasRole('admisi')) {
+            $userRoles = 'admisi';
+        } else if ($user->hasRole('akademik')) {
+            $userRoles = 'akademik';
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unauthorized'
+            ], 401);
         }
+        $data['roles'] = $userRoles;
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User not found'
+            ], 404);
+        }
+
+        $data['data'] = $user;
         return new ResourcesLoggeduser(true, 'data berhasil di dapatkan', $data);
     }
 }

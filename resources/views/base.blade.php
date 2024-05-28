@@ -238,7 +238,7 @@
 <script src="../assets/js/plugins/perfect-scrollbar.min.js" async></script>
 <!-- main script file  -->
 <script src="../assets/js/argon-dashboard-tailwind.js?v=1.0.1" async></script>
-<script>
+<!-- <script>
     async function fetchUserData() {
         try {
             // Ambil token dari cookies
@@ -279,6 +279,6 @@
     }
 
     fetchUserData();
-</script>
+</script> -->
 
 </html>

@@ -358,39 +358,72 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const dosenId = '1c719669-0574-4c02-8d2c-42bd57f38f85';
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
 
-    axios.get(`http://localhost:9000/api/dosen/${dosenId}`)
-      .then(response => {
-        const dosenData = response.data.data;
-        console.log(dosenData);
-        return axios.get(`http://localhost:9000/api/user/${dosenData.id_akun}`)
-          .then(userResponse => {
-            const userData = userResponse.data.data;
-            console.log(userData);
-            return { dosenData, userData };
+    const token = getCookie('token');
+    if (!token) {
+      console.error('Token not found');
+      return;
+    }
+
+    const axiosInstance = axios.create({
+      baseURL: 'http://localhost:9000/api',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    axiosInstance.get('/user')
+      .then(userResponse => {
+        const userData = userResponse.data.data.user;
+        console.log('User Data:', userData);
+
+        const userId = userData.id;
+
+        // Mendapatkan data dosen berdasarkan id_akun
+        return axiosInstance.get(`/dosen?filter[id_akun]=${userId}`)
+          .then(dosenResponse => {
+            const dosenData = dosenResponse.data.data[0]; // Asumsikan hanya satu data dosen yang sesuai
+            console.log('Filtered Dosen Data:', dosenData);
+
+            if (!dosenData) {
+              console.error('Dosen not found');
+              return;
+            }
+
+            // Menampilkan data dosen
+            document.getElementById('email').innerHTML = userData.email || 'Email not found';
+            document.getElementById('nidn').innerHTML = dosenData.nidn;
+            document.getElementById('nama_lengkap').innerHTML = dosenData.nama_lengkap;
+            document.getElementById('telepon_selular').innerHTML=dosenData.telepon_selular;
+            document.getElementById('telepon_rumah').innerHTML=dosenData.telepon_rumah;
+            document.getElementById('telepon_kantor').innerHTML=dosenData.telepon_kantor;
+            document.getElementById('fax').innerHTML=dosenData.fax;
+            document.getElementById('jenis_kelamin').innerHTML=dosenData.jenis_kelamin;
+            document.getElementById('agama').innerHTML=dosenData.agama;
+            document.getElementById('golongan_darah').innerHTML=dosenData.golongan_darah;
+            document.getElementById('agama').innerHTML=dosenData.agama;
+            document.getElementById('kotatempat_lahir').innerHTML=dosenData.kotatempat_lahir;
+            document.getElementById('agama').innerHTML=dosenData.agama;
+            document.getElementById('agama').innerHTML=dosenData.agama;
+            document.getElementById('agama').innerHTML=dosenData.agama;
+            document.getElementById('agama').innerHTML=dosenData.agama;
+            document.getElementById('agama').innerHTML=dosenData.agama;
+            document.getElementById('agama').innerHTML=dosenData.agama;
+            document.getElementById('agama').innerHTML=dosenData.agama;
+            document.getElementById('agama').innerHTML=dosenData.agama;
           });
-      })
-      .then(({ dosenData, userData }) => {
-        // Set email
-        document.getElementById('email').innerHTML = userData.email || 'Email not found';
-        console.log('Email:', userData.email || 'Email not found');
-        
-        // Set NIDN
-        const nidnElement = document.getElementById('nidn');
-        nidnElement.innerHTML = dosenData.nidn;
-        console.log('NIDN:', dosenData.nidn);
-        
-        // Set Nama Lengkap
-        const namaLengkapElement = document.getElementById('nama_lengkap');
-        namaLengkapElement.innerHTML = dosenData.nama_lengkap;
-        console.log('Nama Lengkap:', dosenData.nama_lengkap);
-        
-        // Tambahkan log untuk properti lainnya sesuai kebutuhan
       })
       .catch(error => {
         console.error('Error fetching data:', error);
       });
   });
 </script>
+
+
+
 @endsection
