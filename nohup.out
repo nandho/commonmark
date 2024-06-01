@@ -1,0 +1,47 @@
+Re-optimizing dependencies because lockfile has changed
+
+  VITE v5.1.1  ready in 3217 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://202.91.8.170:5173/
+
+  LARAVEL v10.43.0  plugin v1.0.1
+
+  ➜  APP_URL: http://0.0.0.0
+Error:   Failed to scan for dependencies from entries:
+  /home/samsung/nameless/siakad2/siakad/resources/js/app.js
+
+  The service was stopped: write EPIPE
+    at /home/samsung/nameless/siakad2/siakad/node_modules/esbuild/lib/main.js:1111:28
+    at responseCallbacks.<computed> (/home/samsung/nameless/siakad2/siakad/node_modules/esbuild/lib/main.js:704:9)
+    at afterClose (/home/samsung/nameless/siakad2/siakad/node_modules/esbuild/lib/main.js:694:28)
+    at /home/samsung/nameless/siakad2/siakad/node_modules/esbuild/lib/main.js:2172:11
+    at onwriteError (node:internal/streams/writable:589:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:84:21)
+
+   INFO  Server running on [http://0.0.0.0:8000].  
+
+  Press Ctrl+C to stop the server
+
+  2024-02-25 02:33:06 ................................................... ~ 1s
+  2024-02-25 02:33:06 /build/assets/app-B1QLn1Xz.css .................... ~ 1s
+  2024-02-25 02:33:07 /storage/images/akprada-header.png ................ ~ 0s
+  2024-02-25 02:33:08 /favicon.ico ...................................... ~ 0s
+  2024-02-25 02:33:14 /favicon.ico ...................................... ~ 0s
+  2024-02-25 02:46:34 ................................................... ~ 0s
+  2024-02-25 02:46:34 /build/assets/app-B1QLn1Xz.css .................... ~ 0s
+  2024-02-25 02:46:34 /storage/images/akprada-header.png ................ ~ 0s
+  2024-02-25 02:46:34 /favicon.ico ...................................... ~ 0s
+  2024-02-25 02:46:38 .................................................. ~ 81s
+
+   WARN  212.70.149.146:64100 Invalid request (Malformed HTTP request).  
+
+  2024-02-25 03:18:41 ................................................... ~ 0s
+  2024-02-25 03:41:21 ................................................... ~ 3s
+  2024-02-25 03:41:21 /build/assets/app-B1QLn1Xz.css .................... ~ 3s
+  2024-02-25 03:41:24 /storage/images/akprada-header.png ................ ~ 0s
+  2024-02-25 03:41:24 /favicon.ico ...................................... ~ 0s
+  2024-02-25 03:41:26 ................................................... ~ 0s
+  2024-02-25 03:41:26 /build/assets/app-B1QLn1Xz.css .................... ~ 0s
+  2024-02-25 03:41:26 /storage/images/akprada-header.png ................ ~ 0s
+  2024-02-25 03:41:27 /favicon.ico ...................................... ~ 0s

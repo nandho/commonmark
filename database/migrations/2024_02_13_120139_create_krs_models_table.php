@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('krs', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('gelombang');
             $table->string('periode_mulai');
             $table->string('periode_berakhir');
             $table->string('semester');

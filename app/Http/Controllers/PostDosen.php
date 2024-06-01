@@ -65,7 +65,8 @@ class PostDosen extends Controller
             'nomor_surat_ijin_mengajar'=> 'required',
             'status_aktifitas'=> 'required',
             'semester_keluar'=> 'required',
-            'id_akun'=>'required',
+            'password'=>'required|min:8',
+            'email'=>'required|email',
         ]);
 
         if ($validator->fails()) {
@@ -84,10 +85,12 @@ class PostDosen extends Controller
             // 'email',
             // 'password',
             $user = User::create([
-                'username'=>$request->nidn,
-                'email'=>$request->email,
-                'password'=>bcrypt($request->password)
+                'username' => $request->nidn,
+                'email' => $request->email,
+                'password' => bcrypt($request->password)
             ]);
+
+            $user->assignRole('dosen');
 
             $requestData['id_akun'] = $user->id;
 

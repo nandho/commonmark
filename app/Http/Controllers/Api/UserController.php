@@ -56,11 +56,10 @@ class UserController extends Controller
             ], 500);
         }
     }
-   //update, get by id, and delete 
+   //update, get by id, and delete
    public function show($id)
     {
         //will return specified jurusan
-
         $data = User::find($id);
 
         if (!$data) {

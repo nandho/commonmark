@@ -12,7 +12,13 @@ class BackofficeController extends Controller
 {
     public function __construct()
     {
-        //add authorization schema
+        $this->middleware(['auth','Role:admin','Role:Backoffice' => [
+            'only' => [
+                'update',
+                'destroy'
+                //.... dilakukan untuk membatasi akses
+            ]
+        ]]);
 
     }
     public function index()
@@ -50,6 +56,10 @@ class BackofficeController extends Controller
                 'password'=>bcrypt($request->password)
             ]);
 
+            if($request->jabatan == 'admin'){
+                $user->assignRole('admin');
+            }
+
             if($request->jabatan == 'pmb'){
                 $user->assignRole('pmb');
             }
@@ -60,7 +70,7 @@ class BackofficeController extends Controller
                 $user->assignRole('keuangan');
             }
 
-            $requestData['id_akun']=$user->id;
+            $requestData['id_akun'] = $user->id;
             // Buat objek PmbModel baru dengan data dari request
             $data = new backoffice();
             $data->fill($requestData);

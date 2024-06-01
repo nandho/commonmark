@@ -19,3 +19,26 @@ Route::get('/', function () {
 Route::get('tes/', function () {
     return view('tes');
 });
+Route::get('daftar/', function () {
+    return view('pendaftaran');
+});
+Route::get('login/', function () {
+    return view('login');
+})->name('login');
+
+
+Route::get('dashboard',function () {
+    return view('all.dashboard'); // TODO return index dengan authorization berisikan KRS, KHS, disini terdapat 5 user
+});
+
+Route::get('biodata/', function () {
+    return view('biodata');
+});
+
+Route::get('biodataedit/', function () {
+    return view('biodataedit');
+});
+
+Route::get('soal/', function () {
+    return view('soal');
+});
