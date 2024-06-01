@@ -70,6 +70,11 @@ Route::post('auth/login', LoginController::class)->name('apilogin');
 
 Route::get('user/',loggeduser::class)->middleware('auth:api');
 
+Route::apiResource('user', \App\Http\Controllers\Api\UserController::class)->only(['show', 'update']);
+
+//user jika yang loggin admin akan di tambahkan di bawah ini
+
+
 Route::post('auth/logout', LogoutController::class)->name('logout');
 // Route::apiResource('testing/pmb', PmbApiController::class, ['except' => 'index']);
 

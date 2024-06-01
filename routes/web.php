@@ -60,3 +60,15 @@ Route::get('/addsemster', function () {
 Route::get('/adddosen', function () {
     return view('inputdosen');
 });
+
+// dosen
+Route::get('/dosen', function () {
+    return view('daftardosen');
+});
+Route::get('/dosen/{id}', function ($id) {
+    return view('detailsdosen', ['id' => $id]);
+});
+
+Route::get('/tes', function () {
+    return view('tes');
+});

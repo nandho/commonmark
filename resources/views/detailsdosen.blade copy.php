@@ -356,27 +356,12 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<!-- <script>
+<script>
   document.addEventListener('DOMContentLoaded', function() {
     function getCookie(name) {
       const value = `; ${document.cookie}`;
       const parts = value.split(`; ${name}=`);
       if (parts.length === 2) return parts.pop().split(';').shift();
-    }
-
-    function parseJWT(token) {
-      try {
-        const base64Url = token.split('.')[1];
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
-
-        return JSON.parse(jsonPayload);
-      } catch (e) {
-        console.error('Invalid token:', e);
-        return null;
-      }
     }
 
     const token = getCookie('token');
@@ -385,14 +370,6 @@
       return;
     }
 
-    const payload = parseJWT(token);
-    if (!payload) {
-      console.error('Invalid token payload');
-      return;
-    }
-
-    const userId = payload.sub; // Assuming 'sub' contains the user ID
-
     const axiosInstance = axios.create({
       baseURL: 'http://localhost:9000/api',
       headers: {
@@ -400,34 +377,52 @@
       }
     });
 
-    axiosInstance.get(`/dosen?filter[id_akun]=${userId}`)
-      .then(dosenResponse => {
-        const dosenData = dosenResponse.data.data[0]; // Asumsikan hanya satu data dosen yang sesuai
-        console.log('Filtered Dosen Data:', dosenData);
+    axiosInstance.get('/user')
+      .then(userResponse => {
+        const userData = userResponse.data.data.user;
+        console.log('User Data:', userData);
 
-        if (!dosenData) {
-          console.error('Dosen not found');
-          return;
-        }
+        const userId = userData.id;
 
-        // Menampilkan data dosen
-        document.getElementById('email').innerHTML = dosenData.email || 'Email not found';
-        document.getElementById('nidn').innerHTML = dosenData.nidn;
-        document.getElementById('nama_lengkap').innerHTML = dosenData.nama_lengkap;
-        document.getElementById('telepon_selular').innerHTML = dosenData.telepon_selular;
-        document.getElementById('telepon_rumah').innerHTML = dosenData.telepon_rumah;
-        document.getElementById('telepon_kantor').innerHTML = dosenData.telepon_kantor;
-        document.getElementById('fax').innerHTML = dosenData.fax;
-        document.getElementById('jenis_kelamin').innerHTML = dosenData.jenis_kelamin;
-        document.getElementById('agama').innerHTML = dosenData.agama;
-        document.getElementById('golongan_darah').innerHTML = dosenData.golongan_darah;
-        document.getElementById('kotatempat_lahir').innerHTML = dosenData.kotatempat_lahir;
+        // Mendapatkan data dosen berdasarkan id_akun
+        return axiosInstance.get(`/dosen?filter[id_akun]=${userId}`)
+          .then(dosenResponse => {
+            const dosenData = dosenResponse.data.data[0]; // Asumsikan hanya satu data dosen yang sesuai
+            console.log('Filtered Dosen Data:', dosenData);
+
+            if (!dosenData) {
+              console.error('Dosen not found');
+              return;
+            }
+
+            // Menampilkan data dosen
+            document.getElementById('email').innerHTML = userData.email || 'Email not found';
+            document.getElementById('nidn').innerHTML = dosenData.nidn;
+            document.getElementById('nama_lengkap').innerHTML = dosenData.nama_lengkap;
+            document.getElementById('telepon_selular').innerHTML=dosenData.telepon_selular;
+            document.getElementById('telepon_rumah').innerHTML=dosenData.telepon_rumah;
+            document.getElementById('telepon_kantor').innerHTML=dosenData.telepon_kantor;
+            document.getElementById('fax').innerHTML=dosenData.fax;
+            document.getElementById('jenis_kelamin').innerHTML=dosenData.jenis_kelamin;
+            document.getElementById('agama').innerHTML=dosenData.agama;
+            document.getElementById('golongan_darah').innerHTML=dosenData.golongan_darah;
+            document.getElementById('agama').innerHTML=dosenData.agama;
+            document.getElementById('kotatempat_lahir').innerHTML=dosenData.kotatempat_lahir;
+            document.getElementById('agama').innerHTML=dosenData.agama;
+            document.getElementById('agama').innerHTML=dosenData.agama;
+            document.getElementById('agama').innerHTML=dosenData.agama;
+            document.getElementById('agama').innerHTML=dosenData.agama;
+            document.getElementById('agama').innerHTML=dosenData.agama;
+            document.getElementById('agama').innerHTML=dosenData.agama;
+            document.getElementById('agama').innerHTML=dosenData.agama;
+            document.getElementById('agama').innerHTML=dosenData.agama;
+          });
       })
       .catch(error => {
         console.error('Error fetching data:', error);
       });
   });
-</script> -->
+</script>
 
 
 

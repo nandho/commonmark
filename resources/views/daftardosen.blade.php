@@ -180,12 +180,8 @@
       // Ambil ID dari atribut data-id tombol yang diklik
       var dosenId = $(this).data('id');
       // Redirect ke halaman detail dosen menggunakan ID yang sesuai
-      window.location.href = 'http://localhost:9000/api/dosen/' + dosenId;
+      window.location.href = '/dosen/' + dosenId;
     });
-
-
-
-
   });
 </script>
 @endsection

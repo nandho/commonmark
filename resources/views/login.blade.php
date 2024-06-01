@@ -68,20 +68,15 @@
                 })
                 .then(response => {
                     console.log('Login successful:', response.data);
-                    // Simpan token di cookies
-                    document.cookie = `token=${response.data.token}; path=/; max-age=3600`; // max-age=3600 berarti 1 jam
+                    // Set HttpOnly, Secure, and SameSite cookie via server-side response
+                    document.cookie = `token=${response.data.token}; path=/; max-age=3600; Secure; SameSite=Strict`;
+                    // Arahkan ke halaman daftar dosen setelah login sukses
+                    window.location.href = '/tes';
                 })
                 .catch(error => {
                     console.error('Error logging in:', error);
                 });
         });
-
-        // Fungsi untuk mendapatkan nilai cookie berdasarkan nama
-        function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
-        }
     </script>
 
 </html>
