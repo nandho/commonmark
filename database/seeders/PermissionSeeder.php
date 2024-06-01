@@ -29,7 +29,7 @@ class PermissionSeeder extends Seeder
 
 
         Permission::create(['guard_name' => 'api','name' => 'edit krs']);
-        Permission::create(['guard_name' => 'api','name' => 'delete krs']);
+        Permission::create(['guard_name' => 'api','name' => 'delete krs']); 
         Permission::create(['guard_name' => 'api','name' => 'add krs']);
         Permission::create(['guard_name' => 'api','name' => 'show krs']);
 
@@ -91,18 +91,5 @@ class PermissionSeeder extends Seeder
         Permission::create(['guard_name' => 'api','name' => 'add gelombang']);
         Permission::create(['guard_name' => 'api','name' => 'show gelombang']);
 
-
-        // create roles and assign created permissions
-
-        // this can be done as separate statements
-        // $role = Role::create(['name' => 'backoffice']);
-        // $role->givePermissionTo('edit articles');
-
-        // // or may be done by chaining
-        // $role = Role::create(['name' => 'moderator'])
-        //     ->givePermissionTo(['add articles', 'show articles']);
-
-        // $role = Role::create(['name' => 'super-admin']);
-        // $role->givePermissionTo(Permission::all());
     }
 }

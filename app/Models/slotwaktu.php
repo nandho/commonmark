@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class mapper_krs_mahasiswa extends Model
+class slotwaktu extends Model
 {
-    use HasFactory,HasUuids;
+    use HasFactory, HasUuids;
 }

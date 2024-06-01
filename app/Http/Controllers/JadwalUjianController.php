@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\JurusanResource;
-use App\Models\JurusanModel;
+use App\Http\Resources\JadwalUjian as JadwalUjianResource;
+use App\Models\JadwalUjian as JadwalUjianModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class JurusanController extends Controller
+class JadwalUjianController extends Controller
 {
 
     public function __construct(){
@@ -17,17 +17,18 @@ class JurusanController extends Controller
     public function index()
     {
         //will return all data
-        $data = JurusanModel::all();
-        return new JurusanResource(true,'success',$data);
+        $data = JadwalUjianModel::all();
+        return new JadwalUjianResource(true,'success',$data);
     }
 
     public function store(Request $request)
     {
-        //will input jurusan
+        //will input JadwalUjian
         $validator = Validator::make($request->all(),[
-            'kode_jurusan'=> 'required',
-            'jurusan'=> 'required',
-            'ukt'=> 'required',
+            'id_mahasiswa'=> 'required|exist:mahasiswas,id',
+            'hari'=> 'required|date',
+            'waktu'=> 'required|time',
+            'id_matakuliah'=> 'required|exists:kelas_kuliah,id',
         ]);
 
         if ($validator->fails()) {
@@ -42,14 +43,14 @@ class JurusanController extends Controller
 
         try {
             // Buat objek PmbModel baru dengan data dari request
-            $data = new JurusanModel();
+            $data = new JadwalUjianModel();
             $data->fill($requestData);
 
             // Simpan objek ke database
             $data->save();
 
             // Jika penyimpanan berhasil, kirim respons sukses
-            return new JurusanResource(true, 'success', $data);
+            return new JadwalUjianResource(true, 'success', $data);
         } catch (\Exception $e) {
             // Jika terjadi kesalahan, kirim respons error
             return response()->json([
@@ -62,24 +63,25 @@ class JurusanController extends Controller
 
     public function show($id)
     {
-        //will return specified jurusan
+        //will return specified JadwalUjian
 
-        $data = JurusanModel::find($id);
+        $data = JadwalUjianModel::find($id);
 
         if (!$data) {
-            return new JurusanResource(false, 'not found', null);
+            return new JadwalUjianResource(false, 'not found', null);
         }
 
-        return new JurusanResource(true, 'success', $data);
+        return new JadwalUjianResource(true, 'success', $data);
     }
 
     public function update(Request $request, $id)
     {
         // get data and update data
         $validator = Validator::make($request->all(),[
-            'kode_jurusan'=> 'string',
-            'jurusan'=> 'string',
-            'ukt'=> 'integer',
+            'id_mahasiswa'=> 'exists:mahasiswa,id',
+            'hari'=> 'date',
+            'waktu'=> 'time',
+            'id_matakuliah'=> 'exists:kelas_kuliah,id',
         ]);
 
         if ($validator->fails()) {
@@ -94,14 +96,14 @@ class JurusanController extends Controller
 
         try {
             // Buat objek PmbModel baru dengan data dari request
-            $data = JurusanModel::findOrFail($id);
+            $data = JadwalUjianModel::findOrFail($id);
             $data->fill($requestData);
 
             // Simpan objek ke database
             $data->save();
 
             // Jika penyimpanan berhasil, kirim respons sukses
-            return new JurusanResource(true, 'success', $data);
+            return new JadwalUjianResource(true, 'success', $data);
         } catch (\Exception $e) {
             // Jika terjadi kesalahan, kirim respons error
             return response()->json([
@@ -115,12 +117,12 @@ class JurusanController extends Controller
     public function destroy($id)
     {
         //will delete data
-        $data = JurusanModel::findorfail($id);
+        $data = JadwalUjianModel::findorfail($id);
 
         //delete post
         $data->delete();
 
         //return response
-        return new JurusanResource(true, 'Data Post Berhasil Dihapus!', null);
+        return new JadwalUjianResource(true, 'Data Post Berhasil Dihapus!', null);
     }
 }
