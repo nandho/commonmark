@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('pem__skrips_models', function (Blueprint $table) {
             $table->foreign('id_dosen')->references('id')->on('dosen_models')->onDelete('cascade');
-        }); 
+        });
         Schema::table('pem__skrips_models', function (Blueprint $table) {
             $table->foreign('id_mahasiswa')->references('id')->on('mahasiswas')->onDelete('cascade');
         });
@@ -25,10 +25,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('pem__skrips_models', function (Blueprint $table) {
-            $table->dropForeign('id_dosen');
+            $table->dropForeign(['id_dosen']);
         });
         Schema::table('pem__skrips_models', function (Blueprint $table) {
-            $table->dropForeign('id_mahasiswa');
+            $table->dropForeign(['id_mahasiswa']);
         });
     }
 };
