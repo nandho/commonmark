@@ -62,16 +62,6 @@ class KurikulumController extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
-    }
-
-    // Menampilkan form untuk mengedit kurikulum
-    public function show($id){
-        $data = kurikulum::find($id);
-        if(!$data){
-            return new PostKurikulum(false,'Data Tidak Ditemukan',null);
-        }
-        return new PostKurikulum(true,'Data Ditemukan',$data);
-    }
 
     // Memperbarui kurikulum di database
     public function update(Request $request, $id)
