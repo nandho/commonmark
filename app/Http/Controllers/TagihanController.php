@@ -2,32 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\JurusanResource;
-use App\Models\JurusanModel;
+use App\Http\Resources\TagihanResource;
+use App\Models\Tagihan as TagihanModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class JurusanController extends Controller
+class TagihanController extends Controller
 {
-
-    public function __construct(){
+    public function __construct()
+    {
 
     }
 
     public function index()
     {
         //will return all data
-        $data = JurusanModel::all();
-        return new JurusanResource(true,'success',$data);
+        $data = TagihanModel::all();
+        return new TagihanResource(true, 'success', $data);
     }
 
     public function store(Request $request)
     {
-        //will input jurusan
-        $validator = Validator::make($request->all(),[
-            'kode_jurusan'=> 'required',
-            'jurusan'=> 'required',
-            'ukt'=> 'required',
+        //will input ruang_kelas
+        $validator = Validator::make($request->all(), [
+            'tanggal' => 'required|date',
+            'ruang_kelas' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -42,14 +41,14 @@ class JurusanController extends Controller
 
         try {
             // Buat objek PmbModel baru dengan data dari request
-            $data = new JurusanModel();
+            $data = new TagihanModel();
             $data->fill($requestData);
 
             // Simpan objek ke database
             $data->save();
 
             // Jika penyimpanan berhasil, kirim respons sukses
-            return new JurusanResource(true, 'success', $data);
+            return new TagihanResource(true, 'success', $data);
         } catch (\Exception $e) {
             // Jika terjadi kesalahan, kirim respons error
             return response()->json([
@@ -62,24 +61,23 @@ class JurusanController extends Controller
 
     public function show($id)
     {
-        //will return specified jurusan
+        //will return specified ruang_kelas
 
-        $data = JurusanModel::find($id);
+        $data = TagihanModel::find($id);
 
         if (!$data) {
-            return new JurusanResource(false, 'not found', null);
+            return new TagihanResource(false, 'not found', null);
         }
 
-        return new JurusanResource(true, 'success', $data);
+        return new TagihanResource(true, 'success', $data);
     }
 
     public function update(Request $request, $id)
     {
         // get data and update data
-        $validator = Validator::make($request->all(),[
-            'kode_jurusan'=> 'string',
-            'jurusan'=> 'string',
-            'ukt'=> 'integer',
+        $validator = Validator::make($request->all(), [
+            'tanggal' => 'date',
+            'ruang_kelas' => 'string',
         ]);
 
         if ($validator->fails()) {
@@ -94,14 +92,14 @@ class JurusanController extends Controller
 
         try {
             // Buat objek PmbModel baru dengan data dari request
-            $data = JurusanModel::findOrFail($id);
+            $data = TagihanModel::findOrFail($id);
             $data->fill($requestData);
 
             // Simpan objek ke database
             $data->save();
 
             // Jika penyimpanan berhasil, kirim respons sukses
-            return new JurusanResource(true, 'success', $data);
+            return new TagihanResource(true, 'success', $data);
         } catch (\Exception $e) {
             // Jika terjadi kesalahan, kirim respons error
             return response()->json([
@@ -115,12 +113,12 @@ class JurusanController extends Controller
     public function destroy($id)
     {
         //will delete data
-        $data = JurusanModel::findorfail($id);
+        $data = TagihanModel::findorfail($id);
 
         //delete post
         $data->delete();
 
         //return response
-        return new JurusanResource(true, 'Data Post Berhasil Dihapus!', null);
+        return new TagihanResource(true, 'Data Post Berhasil Dihapus!', null);
     }
 }

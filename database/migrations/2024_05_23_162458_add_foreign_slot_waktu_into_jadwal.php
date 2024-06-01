@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ruang_kelas', function (Blueprint $table){
-            $table->uuid('id')->primary();
-            $table->string('ruang_kelas');
+        Schema::table('jadwal', function (Blueprint $table){
+            $table->uuid('id_waktu');
+
+            $table->foreign('id_waktu')->references('id')->on('slot_waktu')->onDelete('cascade');
         });
     }
 
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ruang_kelas');
+        //
     }
 };

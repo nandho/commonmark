@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('dosen');
             $table->string('rombel')->default('A');
             $table->uuid('semester');
+
+            $table->foreign('dosen')->references('id')->on('dosen_models')->onDelete('cascade');
         });
     }
 

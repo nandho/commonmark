@@ -18,19 +18,18 @@ class loggeduser extends Controller
     public function __invoke(Request $request)
     {
         $user = $request->user();
-        $id_user = $user->id;
         $data['user'] = $user;
         // Retrieve roles associated with the user
         $userRoles = $user->hasRole(); // Returns a collection of role names
         $data['roles'] = $userRoles;
-        if (!$userDetail) {
+        if (!$data) {
             return response()->json([
                 'success' => false,
                 'message' => 'User not found'
             ], 404);
         }
 
-        $data['data'] = $userDetail;
+        $data['data'] = $data;
         return new ResourcesLoggeduser(true, 'data berhasil di dapatkan', $data);
     }
 }

@@ -18,8 +18,5 @@ class rolepermissionassigner extends Seeder
         //asign permission into admin (super user)
         $role = Role::where('name','admin')->first();
         $role->givePermissionTo(Permission::all());
-
-
-        
     }
 }
