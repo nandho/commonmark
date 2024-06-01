@@ -19,7 +19,12 @@ return new class extends Migration
             $table->string('kelas');
             $table->string('sks');
             $table->string('semester');
+            $table->string('kurikulum');
             $table->timestamps();
+        });
+
+        Schema::table('matkuls', function (Blueprint $table) {
+            $table->foreign('kurikulum')->references('id')->on('kurikulums');
         });
     }
 

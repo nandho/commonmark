@@ -4,11 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\HasUuids;
 
 class Kurikulum extends Model
 {
     use HasFactory;
-    use Uuid;
+    use HasUuid;
+
+    protected $table = 'kurikulums';
 
     protected $fillable = [
         'kode_kurikulum',
@@ -17,6 +20,9 @@ class Kurikulum extends Model
         'semester',
         'kelas',
         'kurikulum',
-        'kurikulum_id',
     ];
+
+    protected $primaryKey = 'id';
+    protected $keyType = 'string';
+    public $incrementing = false;
 }

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('semester');
             $table->string('kelas');
             $table->string('kurikulum');
-            $table->string('kurikulum_id');
             $table->timestamps();
         });
     }

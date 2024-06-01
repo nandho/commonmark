@@ -20,13 +20,13 @@ class MatakuliahController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'kode' => 'required',
-            'nama' => 'required',
+            'kode_matkul' => 'required',
+            'nama_matkul' => 'required',
+            'nama_dosen' => 'required',
             'sks' => 'required',
             'semester' => 'required',
             'kelas' => 'required',
             'kurikulum' => 'required',
-            'kurikulum_id' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -38,24 +38,13 @@ class MatakuliahController extends Controller
         }
         $requestData = $request->all();
 
-        try{
-            $user = User::create([
-                'username'=>$request->nidn,
-                'email'=>$request->email,
-                'password'=>bcrypt($request->password)
-            ]);
-
-            $requestData['id_akun'] = $user->id;
-
-            // Buat objek PmbModel baru dengan data dari request
-            $data = new DosenModel();
-            $data->fill($requestData);
-
-            // Simpan objek ke database
-            $data->save();
-
-            // Jika penyimpanan berhasil, kirim respons sukses
-            return new DosenResource(true, 'success', $data);
+        try {
+            $data = Matkul::create($requestData);
+            return response()->json([
+                'success' => true,
+                'message' => 'Data berhasil disimpan',
+                'uuid' => $data->id
+            ], 200);
         } catch (\Exception $e) {
             // Jika terjadi kesalahan, kirim respons error
             return response()->json([
@@ -64,6 +53,33 @@ class MatakuliahController extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
+
+        // try{
+        //     $user = User::create([
+        //         'username'=>$request->nidn,
+        //         'email'=>$request->email,
+        //         'password'=>bcrypt($request->password)
+        //     ]);
+
+        //     $requestData['id_akun'] = $user->id;
+
+        //     // Buat objek PmbModel baru dengan data dari request
+        //     $data = new DosenModel();
+        //     $data->fill($requestData);
+
+        //     // Simpan objek ke database
+        //     $data->save();
+
+        //     // Jika penyimpanan berhasil, kirim respons sukses
+        //     return new DosenResource(true, 'success', $data);
+        // } catch (\Exception $e) {
+        //     // Jika terjadi kesalahan, kirim respons error
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => 'Gagal menyimpan data',
+        //         'error' => $e->getMessage(),
+        //     ], 500);
+        // }
     }
     public function show($id)
     {
@@ -82,7 +98,6 @@ class MatakuliahController extends Controller
         'semester' => 'required',
         'kelas' => 'required',
         'kurikulum' => 'required',
-        'kurikulum_id' => 'required',
        ]);
        if ($validator->fails()) {
         return response()->json([
