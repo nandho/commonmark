@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists('mapper_krs_mahasiswas');
         Schema::create('mapper_krs_mahasiswas', function (Blueprint $table) {
             $table->id();
             $table->uuid('id_krs');
             $table->uuid('id_mahasiswa');
+            $table->uuid('id_dosen'); // Tambahkan baris ini
         });
 
         Schema::table('mapper_krs_mahasiswas',function (Blueprint $table){

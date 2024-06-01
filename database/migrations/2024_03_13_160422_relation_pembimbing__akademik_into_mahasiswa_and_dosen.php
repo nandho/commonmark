@@ -25,10 +25,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('pem__akademik_models', function (Blueprint $table) {
-            $table->dropForeign('id_dosen');
+            $table->dropForeign(['id_dosen']);
         });
         Schema::table('pem__akademik_models', function (Blueprint $table) {
-            $table->dropForeign('id_mahasiswa');
+            $table->dropForeign(['id_mahasiswa']);
         });
     }
 };
