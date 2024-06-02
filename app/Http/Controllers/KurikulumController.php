@@ -13,7 +13,7 @@ class KurikulumController extends Controller
     public function index()
     {
         $data = Kurikulum::all();
-        return new PostKurikulum(true, 'Success', $data);
+        return new PostKurikulum(true,'Success',$data);
     }
 
     // Menyimpan kurikulum baru ke dalam database
@@ -21,11 +21,14 @@ class KurikulumController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_kurikulum' => 'required',
-            'kode_kurikulum' => 'required',
-            'sks' => 'required',
-            'semester' => 'required',
-            'kelas' => 'required',
-            'kurikulum' => 'required'
+            'tahun' => 'required',
+            'nomor' => 'required',
+            'tanggal' => 'required',
+            'pihak_acc' => 'required',
+            'tanggal_acc' => 'required',
+            'studi_ideal' => 'required',
+            'studi_maks' => 'required',
+            'keterangan' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -33,9 +36,9 @@ class KurikulumController extends Controller
                 'success' => false,
                 'message' => 'Gagal Menyimpan Data',
                 'data' => $validator->errors()
-            ], 400);
+            ],400);
         }
-        $requestData = request->all();
+        $requestData = request -> all();
 
         try {
             $data = Kurikulum::create($requestData);
@@ -55,13 +58,12 @@ class KurikulumController extends Controller
     }
 
     // Menampilkan form untuk mengedit kurikulum
-    public function show($id)
-    {
+    public function show($id){
         $data = kurikulum::find($id);
-        if (!$data) {
-            return new PostKurikulum(false, 'Data Tidak Ditemukan', null);
+        if(!$data){
+            return new PostKurikulum(false,'Data Tidak Ditemukan',null);
         }
-        return new PostKurikulum(true, 'Data Ditemukan', $data);
+        return new PostKurikulum(true,'Data Ditemukan',$data);
     }
 
     // Memperbarui kurikulum di database
@@ -69,12 +71,14 @@ class KurikulumController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_kurikulum' => 'required',
-            'kode_kurikulum' => 'required',
-            'sks' => 'required',
-            'semester' => 'required',
-            'kelas' => 'required',
-            'kurikulum' => 'required',
-            'kurikulum_id' => 'required',
+            'tahun' => 'required',
+            'nomor' => 'required',
+            'tanggal' => 'required',
+            'pihak_acc' => 'required',
+            'tanggal_acc' => 'required',
+            'studi_ideal' => 'required',
+            'studi_maks' => 'required',
+            'keterangan' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -82,14 +86,14 @@ class KurikulumController extends Controller
                 'success' => false,
                 'message' => 'Gagal Menyimpan Data',
                 'data' => $validator->errors()
-            ], 400);
+            ],400);
         }
         $requestData = request->all();
 
-        try {
+        try{
             $data = Kurikulum::find($id);
             $data->update($requestData);
-            return new PostKurikulum(true, 'Data Berhasil Diupdate', $data);
+            return new PostKurikulum(true,'Data Berhasil Diupdate',$data);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,

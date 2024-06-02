@@ -79,14 +79,20 @@ Route::get('/edit-dosen/{id}', function ($id) {
 
 // -----------------Kurikulum-----------------------------
 // kurikulum add
-
+Route::get('/kurikulumadd', function () {
+    return view('addkurikulum');
+});
 // kurikulum daftar
 Route::get('/kurikulum', function () {
     return view('kurikulum');
 });
-// matkul
+// matkul daftar
 Route::get('/matkul', function () {
     return view('matkul');
+});
+// matkul post
+Route::get('/matkuladd', function () {
+    return view('addmatkul');
 });
 
 Route::get('/tes', function () {

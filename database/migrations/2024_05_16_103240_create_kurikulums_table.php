@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('kurikulums', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('kode');
-            $table->string('nama');
-            $table->string('sks');
-            $table->string('semester');
-            $table->string('kelas');
-            $table->string('kurikulum');
-            $table->string('kurikulum_id');
+            $table->string('nama_kurikulum');
+            $table->string('tahun');
+            $table->string('nomor');
+            $table->date('tanggal');
+            $table->string('pihak_acc');
+            $table->string('tanggal_acc');
+            $table->string('studi_ideal');
+            $table->string('studi_maks');
+            $table->string('keterangan');
             $table->timestamps();
         });
     }

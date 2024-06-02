@@ -119,80 +119,116 @@
 
 @endsection
 @section('content')
-<!-- <div class="w-full p-6 mx-auto">
-  <div class="flex flex-wrap -mx-3">
-    <div class="w-full max-w-full px-3 shrink-0 md:w-12 md:flex-0">
-      <h1>Daftar Kurikulum</h1>
-      <form id="kurikulumForm">
-        <input type="checkbox" name="kurikulum" value="Kurikulum 1"> Kurikulum 1<br>
-        <input type="checkbox" name="kurikulum" value="Kurikulum 2"> Kurikulum 2<br>
-        <input type="checkbox" name="kurikulum" value="Kurikulum 3"> Kurikulum 3<br>
-        <button type="button" id="simpanKurikulumBtn">Simpan</button>
-      </form>
-    </div>
-  </div>
-</div> -->
 <div class="w-full p-6 mx-auto">
   <div class="flex flex-wrap -mx-3">
-    <div class="w-full max-w-full px-3 shrink-0  md:flex-0">
+    <div class="w-full max-w-full px-3 shrink-0 md:w-12 md:flex-0">
       <div class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
         <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
-          <div class="flex items-center">
-            <p class="mb-0 dark:text-white/80">Daftar Kurikulum</p>
-            <a type="button" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85" href="{{ url('semester') }}">Kembali</a>
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-bold dark:text-white">Data Semester</h2>
+            <a href="{{ url('kurikulumadd') }}" class="inline-block px-6 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700">Tambah Kurikulum Baru</a>
           </div>
-        </div>
-        <div class="flex-auto p-6">
-          <form id="kurikulumForm">
-            <button type="button" id="simpanKurikulumBtn" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Simpan</button>
-            <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">Tambah Semester</p>
-            <div class="flex flex-wrap -mx-3">
-              
-              <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
-                <div class="mb-4">
-                  <label for="nama_semester" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Nama Semester</label>
-                  <input type="text" id="nama_semester" name="nama_semester" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
-                </div>
-              </div>
-              <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
-                <div class="mb-4">
-                  <label for="tanggal_mulai" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Tanggal Mulai</label>
-                  <input type="date" id="tanggal_mulai" name="tanggal_mulai" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
-                </div>
-              </div>
-              <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
-                <div class="mb-4">
-                  <label for="tanggal_selesai" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Tanggal Selesai</label>
-                  <input type="date" id="tanggal_selesai" name="tanggal_selesai" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
-                </div>
-              </div>
-              <div>
-                <label for="status" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Status</label>
-                <select id="status" name="status" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" required>
-                  <option value="Aktif">Aktif</option>
-                  <option value="Nonaktif">Nonaktif</option>
-                </select>
-              </div>
-            </div>
-          </form>
+          <div class="overflow-x-auto">
+
+
+            <table id="semesterTable" class="display min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Semester</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Mulai</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Selesai</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Data dari API akan di-render di sini oleh Axios -->
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-
 <script>
-  document.getElementById('simpanKurikulumBtn').addEventListener('click', function() {
-    const form = document.getElementById('kurikulumForm');
-    const selectedKurikulum = Array.from(form.kurikulum)
-      .filter(checkbox => checkbox.checked)
-      .map(checkbox => checkbox.value)
-      .join(', ');
+  $(document).ready(function() {
+    var table = $('#semesterTable').DataTable({
+      "paging": true,
+      "searching": true,
+      "ordering": true,
+      "dom": "<'flex flex-row justify-between'<'flex flex-col'f><'flex flex-col'l>>" +
+        "<'dt-table'rt>" +
+        "<'flex flex-row justify-between'<'flex flex-col'i><'flex flex-col'p>>"
+    });
 
-    localStorage.setItem('selectedKurikulum', selectedKurikulum);
-    window.location.href = "{{ url('matkul') }}";
+    axios.get('http://localhost:9000/api/Semester')
+      .then(function(response) {
+        var activeSemesterFound = false; // Menandakan apakah sudah ditemukan semester aktif
+        response.data.forEach(function(item) {
+          if (item.status === 'Aktif') {
+            activeSemesterFound = true; // Setel ke true jika ditemukan semester aktif
+          }
+        });
+
+        response.data.forEach(function(item) {
+          var statusButtonText = item.status === 'Aktif' ? 'Nonaktifkan' : 'Aktifkan';
+          if (activeSemesterFound && item.status === 'Nonaktif') {
+            // Jika sudah ditemukan semester aktif dan semester ini non-aktif,
+            // ubah statusnya menjadi non-aktif
+            statusButtonText = 'Aktifkan';
+          }
+          var rowNode = table.row.add([
+            item.nama_semester,
+            item.tanggal_mulai,
+            item.tanggal_selesai,
+            item.status,
+            '<button class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-700 details-btn" data-id="' + item.id + '">Details</button>' +
+            '<button class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-green-700 status-btn" data-id="' + item.id + '">' + statusButtonText + '</button>' +
+            '<button class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-red-700 delete-btn" data-id="' + item.id + '">Hapus</button>'
+          ]).draw().node();
+
+          $(rowNode).find('.details-btn').on('click', function(e) {
+            e.preventDefault();
+            var semesterId = $(this).data('id');
+            window.location.href = '/semester/' + semesterId;
+          });
+
+          $(rowNode).find('.status-btn').on('click', function(e) {
+            e.preventDefault();
+            var semesterId = $(this).data('id');
+            axios.patch('http://localhost:9000/api/Semester/' + semesterId, {
+                status: item.status === 'Aktif' ? 'Nonaktif' : 'Aktif'
+              })
+              .then(function(response) {
+                console.log(response.data);
+                location.reload(); // Refresh halaman untuk menampilkan status terbaru
+              })
+              .catch(function(error) {
+                console.error(error);
+              });
+          });
+
+          $(rowNode).find('.delete-btn').on('click', function(e) {
+            e.preventDefault();
+            var semesterId = $(this).data('id');
+            axios.delete('http://localhost:9000/api/Semester/' + semesterId)
+              .then(function(response) {
+                console.log(response.data);
+                location.reload(); // Refresh halaman untuk menampilkan data terbaru setelah penghapusan
+              })
+              .catch(function(error) {
+                console.error(error);
+              });
+          });
+        });
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
   });
 </script>
 
