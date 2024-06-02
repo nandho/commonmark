@@ -53,33 +53,6 @@ class MatakuliahController extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
-
-        // try{
-        //     $user = User::create([
-        //         'username'=>$request->nidn,
-        //         'email'=>$request->email,
-        //         'password'=>bcrypt($request->password)
-        //     ]);
-
-        //     $requestData['id_akun'] = $user->id;
-
-        //     // Buat objek PmbModel baru dengan data dari request
-        //     $data = new DosenModel();
-        //     $data->fill($requestData);
-
-        //     // Simpan objek ke database
-        //     $data->save();
-
-        //     // Jika penyimpanan berhasil, kirim respons sukses
-        //     return new DosenResource(true, 'success', $data);
-        // } catch (\Exception $e) {
-        //     // Jika terjadi kesalahan, kirim respons error
-        //     return response()->json([
-        //         'success' => false,
-        //         'message' => 'Gagal menyimpan data',
-        //         'error' => $e->getMessage(),
-        //     ], 500);
-        // }
     }
     public function show($id)
     {
