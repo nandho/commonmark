@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\RoleResource;
 use App\Models\Role as RoleModel;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -142,13 +143,32 @@ class rolemanagement extends Controller
 
         $datas = $request->validated();
 
-        foreach($datas as $data){
-            $id_user = $data->id;
-            $user = User::findOrFail($id_user);
-            $user->assignRole($data->role);
+        try {
+            foreach($datas as $data){
+                $id_user = $data->id;
+                $user = User::findOrFail($id_user);
+                $user->assignRole($data->role);
+            }
+        } catch (Exception $e){
+            return new RoleResource(false, 'Role gagal untuk di tambahkan dengan error: '.$e, null);
         }
 
-        return new RoleResource(true, 'Data Post Berhasil Dihapus!', null);
 
+        return new RoleResource(true, 'Role berhasil ditambahkan', $data->all()->id);
+    }
+
+    public function role_deassigner(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'id'=>'required|exists:user,id',
+            'role'=>'required|exists:role,id',
+        ]);
+        $id = $request->validated()->id;
+        $role = $request->validated()->role;
+
+        $user = User::findOrFail($id);
+        $user->removeRole($role);
+        
+        return new RoleResource(true, 'Role berhasil ditambahkan', null);
     }
 }
