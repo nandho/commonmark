@@ -55,4 +55,4 @@ class LoginController extends Controller
             'username' => auth()->guard('api')->user()->username
         ], 200);
     }
-}
+}       

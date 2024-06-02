@@ -67,6 +67,8 @@ Route::apiResource('NilaiMatakuliah',App\Http\Controllers\NilaiMatKulController:
 //auth
 Route::post('auth/login', LoginController::class)->name('apilogin');
 
+Route::post('auth/refresh', App\Http\Controllers\Api\RefreshController::class);
+
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
@@ -89,3 +91,4 @@ Route::post('test', [test::class, 'store']);
 //     Mail::to('stryn@gmail.com’')->send(new SendEmailPMB($name, $password, "xxx"));
 // });
 Route::apiResource('Semester', App\Http\Controllers\SemesterController::class);
+Route::apiResource('rolemanagement', App\Http\Controllers\rolemanagement::class);
