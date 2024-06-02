@@ -10,13 +10,13 @@
       <div class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
         <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
           <div class="flex items-center">
-            <p class="mb-0 dark:text-white/80">Input Dosen</p>
-            <a type="button" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85" href="{{ url('biodata') }}">Kembali</a>
+            <p class="mb-0 dark:text-white/80">Details Dosen</p>
+            <a type="button" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85" href="{{ url('dosen') }}">Kembali</a>
           </div>
         </div>
 
         <div class="flex-auto p-6">
-          <button type="submit" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Perbaharui Data</button>
+          <a type="button" id="edit-link" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Edit Data Pribadi</a>
           <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">Data Diri</p>
           <div class="flex flex-wrap -mx-3">
             <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
@@ -92,10 +92,10 @@
                 </div>
               </div>
             </div>
-            <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
+            <div class="w-full max-w-full px-3 shrink-0 md:flex-0">
               <div class="mb-4">
                 <label for="catatan" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Catatan</label>
-                <div name="catatan" id="" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block h-10 w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
+                <div name="catatan" id="catatan" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block h-10 w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
                 </div>
               </div>
             </div>
@@ -358,40 +358,97 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    const token = getCookie('token'); // Ambil token dari cookie
+    if (!token) {
+      console.error('Token is not defined');
+      return; // Token tidak ditemukan, hentikan eksekusi script
+    }
     const axiosInstance = axios.create({
-      baseURL: 'http://localhost:9000/api'
+      baseURL: 'http://localhost:9000/api', // Gunakan HTTPS
+      headers: {
+        'Authorization': `Bearer ${token}` // Sertakan token yang aman
+      }
     });
     // Ambil ID dosen dari URL
     const dosenId = window.location.pathname.split('/').pop();
-
     axiosInstance.get(`/dosen/${dosenId}`)
       .then(response => {
         const dosenData = response.data.data;
-        console.log('Dosen Data:', dosenData);
-
         // Tampilkan informasi dosen
-        document.getElementById('email').textContent = dosenData.email || 'Email not found';
-        document.getElementById('nidn').textContent = dosenData.nidn || 'NIDN not found';
-        document.getElementById('nama_lengkap').textContent = dosenData.nama_lengkap || 'Nama not found';
-        document.getElementById('telepon_selular').textContent = dosenData.telepon_selular || 'Telepon selular not found';
-        document.getElementById('telepon_rumah').textContent = dosenData.telepon_rumah || 'Telepon rumah not found';
-        document.getElementById('telepon_kantor').textContent = dosenData.telepon_kantor || 'Telepon kantor not found';
-        document.getElementById('fax').textContent = dosenData.fax || 'Fax not found';
-        document.getElementById('jenis_kelamin').textContent = dosenData.jenis_kelamin || 'Jenis kelamin not found';
-        document.getElementById('agama').textContent = dosenData.agama || 'Agama not found';
-        document.getElementById('golongan_darah').textContent = dosenData.golongan_darah || 'Golongan darah not found';
-        document.getElementById('kotatempat_lahir').textContent = dosenData.kotatempat_lahir || 'Kota tempat lahir not found';
-        // Tambahkan lebih banyak info dosen sesuai kebutuhan
+        document.getElementById('nidn').textContent = dosenData.nidn || '-';
+        document.getElementById('nama_lengkap').textContent = dosenData.nama_lengkap || '-';
+        document.getElementById('telepon_selular').textContent = dosenData.telepon_selular || '-';
+        document.getElementById('telepon_rumah').textContent = dosenData.telepon_rumah || '-';
+        document.getElementById('telepon_kantor').textContent = dosenData.telepon_kantor || '-';
+        document.getElementById('fax').textContent = dosenData.fax || '-';
+        document.getElementById('jenis_kelamin').textContent = dosenData.jenis_kelamin || '-';
+        document.getElementById('agama').textContent = dosenData.agama || '-';
+        document.getElementById('golongan_darah').textContent = dosenData.golongan_darah || '-';
+        document.getElementById('kotatempat_lahir').textContent = dosenData.kotatempat_lahir || '-';
+        document.getElementById('tanggal_lahir').textContent = dosenData.tanggal_lahir || '-';
+        document.getElementById('catatan').textContent = dosenData.catatan || '-';
+        document.getElementById('alamat_rumah').textContent = dosenData.alamat_rumah || '-';
+        document.getElementById('kota').textContent = dosenData.kota || '-';
+        document.getElementById('negara_tempat_lahir').textContent = dosenData.negara_tempat_lahir || '-';
+        document.getElementById('kode_pos').textContent = dosenData.kode_pos || '-';
+        document.getElementById('status_nikah').textContent = dosenData.status_nikah || '-';
+        document.getElementById('kartu_pegawai').textContent = dosenData.kartu_pegawai || '-';
+        document.getElementById('stambuk').textContent = dosenData.stambuk || '-';
+        document.getElementById('nomor_sk_cpns').textContent = dosenData.nomor_sk_cpns || '-';
+        document.getElementById('tanggal_sk_cpns').textContent = dosenData.tanggal_sk_cpns || '-';
+        document.getElementById('tmt_pns').textContent = dosenData.tmt_pns || '-';
+        document.getElementById('golongan_pnd').textContent = dosenData.golongan_pnd || '-';
+        document.getElementById('sumpah_pns').textContent = dosenData.sumpah_pns || '-';
+        document.getElementById('tanggal_masuk_pt').textContent = dosenData.tanggal_masuk_pt || '-';
+        document.getElementById('nomor_taspen').textContent = dosenData.nomor_taspen || '-';
+        document.getElementById('instansi_asal').textContent = dosenData.instansi_asal || '-';
+        document.getElementById('nomor_dosen').textContent = dosenData.nomor_dosen || '-';
+        document.getElementById('gelar_akademik_tertinggi').textContent = dosenData.gelar_akademik_tertinggi || '-';
+        document.getElementById('pt_gelar_diperoleh').textContent = dosenData.pt_gelar_diperoleh || '-';
+        document.getElementById('jabatan').textContent = dosenData.jabatan || '-';
+        document.getElementById('bidang_ilmu').textContent = dosenData.bidang_ilmu || '-';
+        document.getElementById('kode_instansi_induk').textContent = dosenData.kode_instansi_induk || '-';
+        document.getElementById('status_sertifikat_mengajar').textContent = dosenData.status_sertifikat_mengajar || '-';
+        document.getElementById('nomor_sertifikat_mengajar').textContent = dosenData.nomor_sertifikat_mengajar || '-';
+        document.getElementById('status_surat_ijin_mengajar').textContent = dosenData.status_surat_ijin_mengajar || '-';
+        document.getElementById('nomor_surat_ijin_mengajar').textContent = dosenData.nomor_surat_ijin_mengajar || '-';
+        document.getElementById('status_aktifitas').textContent = dosenData.status_aktifitas || '-';
+        document.getElementById('semester_keluar').textContent = dosenData.semester_keluar || '-';
+        document.getElementById('nomor_ktp').textContent = dosenData.nomor_ktp || '-';
+        document.getElementById('gelar_depan').textContent = dosenData.gelar_depan || '-';
+        document.getElementById('gelar_belakang').textContent = dosenData.gelar_belakang || '-';
+        document.getElementById('jenis_pegawai').textContent = dosenData.jenis_pegawai || '-';
+        document.getElementById('status_ikatan_kerja').textContent = dosenData.status_ikatan_kerja || '-';
+        document.getElementById('program_studi').textContent = dosenData.program_studi || '-';
+        // Set link edit data dosen
+        document.getElementById('edit-link').href = `/edit-dosen/${dosenId}`;
+        // Dapatkan id_akun dari data dosen
+        const akunId = dosenData.id_akun;
+        // Panggil API untuk mendapatkan data pengguna berdasarkan id_akun
+        return axiosInstance.get(`/user/${akunId}`);
+      })
+      .then(userResponse => {
+        const userData = userResponse.data.data;
+        // Tampilkan email pengguna
+        document.getElementById('email').textContent = userData.email || '-';
       })
       .catch(error => {
         console.error('Error fetching data:', error);
       });
   });
+
+  // Fungsi untuk membaca cookie
+  function getCookie(name) {
+    let cookieArr = document.cookie.split(";");
+    for (let i = 0; i < cookieArr.length; i++) {
+      let cookiePair = cookieArr[i].split("=");
+      if (name == cookiePair[0].trim()) {
+        return decodeURIComponent(cookiePair[1]);
+      }
+    }
+    return null;
+  }
 </script>
-
-
-
-
 
 
 @endsection

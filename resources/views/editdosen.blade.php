@@ -28,12 +28,6 @@
               </div>
               <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                 <div class="mb-4">
-                  <label for="password" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Masukan Password Baru</label>
-                  <input type="password" name="password" id="password" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
-                </div>
-              </div>
-              <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
-                <div class="mb-4">
                   <label for="telepon_selular" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Nomor HP</label>
                   <input type="text" name="telepon_selular" id="telepon_selular" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
                 </div>
@@ -89,10 +83,10 @@
                   <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
                 </div>
               </div>
-              <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
+              <div class="w-full max-w-full px-3 shrink-0 md:flex-0">
                 <div class="mb-4">
                   <label for="catatan" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Catatan</label>
-                  <textarea  type="text" name="catatan" id="catatan" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" ></textarea>
+                  <textarea type="text" name="catatan" id="catatan" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"></textarea>
                 </div>
               </div>
 
@@ -360,42 +354,138 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
-  document.getElementById('dosenForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const formProps = Object.fromEntries(formData);
-    const baseUrl = window.location.origin;
+  document.addEventListener('DOMContentLoaded', function() {
+    const token = getCookie('token'); // Ambil token dari cookie
+    if (!token) {
+      console.error('Token is not defined');
+      return; // Token tidak ditemukan, hentikan eksekusi script
+    }
 
-    axios.post(`${baseUrl}/api/dosen`, formProps)
+    const axiosInstance = axios.create({
+      baseURL: 'http://localhost:9000/api',
+      headers: {
+        'Authorization': `Bearer ${token}` // Sertakan token yang aman
+      }
+    });
+
+    // Ambil ID dosen dari URL
+    const dosenId = window.location.pathname.split('/').pop();
+
+    axiosInstance.get(`/dosen/${dosenId}`)
       .then(response => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Berhasil',
-          text: 'Dosen berhasil ditambahkan!',
-          timer: 2000,
-          showConfirmButton: false
-        }).then(() => {
-          location.reload();
-        });
+        const dosenData = response.data.data;
+        // Tampilkan informasi dosen
+        document.getElementById('nidn').value = dosenData.nidn || '-';
+        document.getElementById('nama_lengkap').value = dosenData.nama_lengkap || '-';
+        document.getElementById('telepon_selular').value = dosenData.telepon_selular || '-';
+        document.getElementById('telepon_rumah').value = dosenData.telepon_rumah || '-';
+        document.getElementById('telepon_kantor').value = dosenData.telepon_kantor || '-';
+        document.getElementById('fax').value = dosenData.fax || '-';
+        document.getElementById('jenis_kelamin').value = dosenData.jenis_kelamin || '-';
+        document.getElementById('agama').value = dosenData.agama || '-';
+        document.getElementById('golongan_darah').value = dosenData.golongan_darah || '-';
+        document.getElementById('kotatempat_lahir').value = dosenData.kotatempat_lahir || '-';
+        document.getElementById('tanggal_lahir').value = dosenData.tanggal_lahir || '-';
+        document.getElementById('catatan').value = dosenData.catatan || '-';
+        document.getElementById('alamat_rumah').value = dosenData.alamat_rumah || '-';
+        document.getElementById('kota').value = dosenData.kota || '-';
+        document.getElementById('negara_tempat_lahir').value = dosenData.negara_tempat_lahir || '-';
+        document.getElementById('kode_pos').value = dosenData.kode_pos || '-';
+        document.getElementById('status_nikah').value = dosenData.status_nikah || '-';
+        document.getElementById('kartu_pegawai').value = dosenData.kartu_pegawai || '-';
+        document.getElementById('stambuk').value = dosenData.stambuk || '-';
+        document.getElementById('nomor_sk_cpns').value = dosenData.nomor_sk_cpns;
+        document.getElementById('tanggal_sk_cpns').value = dosenData.tanggal_sk_cpns;
+        document.getElementById('tmt_pns').value = dosenData.tmt_pns;
+        document.getElementById('golongan_pnd').value = dosenData.golongan_pnd || '-';
+        document.getElementById('sumpah_pns').value = dosenData.sumpah_pns || '-';
+        document.getElementById('tanggal_masuk_pt').value = dosenData.tanggal_masuk_pt;
+        document.getElementById('nomor_taspen').value = dosenData.nomor_taspen || '-';
+        document.getElementById('instansi_asal').value = dosenData.instansi_asal || '-';
+        document.getElementById('nomor_dosen').value = dosenData.nomor_dosen || '-';
+        document.getElementById('gelar_akademik_tertinggi').value = dosenData.gelar_akademik_tertinggi || '-';
+        document.getElementById('pt_gelar_diperoleh').value = dosenData.pt_gelar_diperoleh || '-';
+        document.getElementById('jabatan').value = dosenData.jabatan || '-';
+        document.getElementById('bidang_ilmu').value = dosenData.bidang_ilmu || '-';
+        document.getElementById('kode_instansi_induk').value = dosenData.kode_instansi_induk || '-';
+        document.getElementById('status_sertifikat_mengajar').value = dosenData.status_sertifikat_mengajar || '-';
+        document.getElementById('nomor_sertifikat_mengajar').value = dosenData.nomor_sertifikat_mengajar || '-';
+        document.getElementById('status_surat_ijin_mengajar').value = dosenData.status_surat_ijin_mengajar || '-';
+        document.getElementById('nomor_surat_ijin_mengajar').value = dosenData.nomor_surat_ijin_mengajar || '-';
+        document.getElementById('status_aktifitas').value = dosenData.status_aktifitas || '-';
+        document.getElementById('semester_keluar').value = dosenData.semester_keluar || '-';
+        document.getElementById('nomor_ktp').value = dosenData.nomor_ktp || '-';
+        document.getElementById('gelar_depan').value = dosenData.gelar_depan || '-';
+        document.getElementById('gelar_belakang').value = dosenData.gelar_belakang || '-';
+        document.getElementById('jenis_pegawai').value = dosenData.jenis_pegawai || '-';
+        document.getElementById('status_ikatan_kerja').value = dosenData.status_ikatan_kerja || '-';
+        document.getElementById('program_studi').value = dosenData.program_studi || '-';
+        // Tambahkan pengisian data untuk input lainnya
+        // Dapatkan id_akun dari data dosen
+        const akunId = dosenData.id_akun;
+        // Panggil API untuk mendapatkan data pengguna berdasarkan id_akun
+        return axiosInstance.get(`/user/${akunId}`);
+      })
+      .then(userResponse => {
+        const userData = userResponse.data.data;
+        // Tampilkan email pengguna
+        document.getElementById('email').value = userData.email || '-';
       })
       .catch(error => {
-        if (error.response) {
-          console.error('Error Response:', error.response);
-          const errors = error.response.data.error;
-          let errorMessages = '';
-          for (const key in errors) {
-            errorMessages += `<p class="text-red-500">${errors[key]}</p>`;
-          }
-          document.getElementById('errorMessages').innerHTML = errorMessages;
-          Swal.fire({
-            icon: 'error',
-            title: 'Gagal',
-            html: errorMessages
-          });
-        } else {
-          console.error('Error:', error.message);
-        }
+        console.error('Error fetching data:', error);
       });
+
+    // Panggil event listener kedua di sini
+    document.getElementById('dosenForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      const formProps = Object.fromEntries(formData);
+      const baseUrl = window.location.origin;
+      const dosenId = window.location.pathname.split('/').pop(); // Ambil ID dosen dari URL
+
+      axiosInstance.put(`${baseUrl}/api/dosen/${dosenId}`, formProps)
+        .then(response => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Berhasil',
+            text: 'Data dosen berhasil diperbarui!',
+            timer: 2000,
+            showConfirmButton: false
+          }).then(() => {
+            window.location.href = `/dosen/${dosenId}`; // Redirect ke halaman detail dosen
+          });
+        })
+        .catch(error => {
+          if (error.response) {
+            console.error('Error Response:', error.response);
+            const errors = error.response.data.error;
+            let errorMessages = '';
+            for (const key in errors) {
+              errorMessages += `<p class="text-red-500">${errors[key]}</p>`;
+            }
+            document.getElementById('errorMessages').innerHTML = errorMessages;
+            Swal.fire({
+              icon: 'error',
+              title: 'Gagal',
+              html: errorMessages
+            });
+          } else {
+            console.error('Error:', error.message);
+          }
+        });
+    });
   });
+
+  // Fungsi untuk membaca cookie
+  function getCookie(name) {
+    let cookieArr = document.cookie.split(";");
+    for (let i = 0; i < cookieArr.length; i++) {
+      let cookiePair = cookieArr[i].split("=");
+      if (name == cookiePair[0].trim()) {
+        return decodeURIComponent(cookiePair[1]);
+      }
+    }
+    return null;
+  }
 </script>
 @endsection

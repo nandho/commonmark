@@ -137,51 +137,91 @@
     </div>
   </div>
 </div>
-
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
-  $(document).ready(function() {
-    var table = $('#dosenTable').DataTable({
-      "paging": true,
-      "searching": true,
-      "ordering": true,
-      "dom": "<'flex flex-row justify-between'<'flex flex-col'f><'flex flex-col'l>>" +
-        "<'dt-table'rt>" +
-        "<'flex flex-row justify-between'<'flex flex-col'i><'flex flex-col'p>>"
+  document.addEventListener('DOMContentLoaded', function() {
+    const token = getCookie('token'); // Ambil token dari cookie
+    if (!token) {
+      console.error('Token is not defined');
+      return; // Token tidak ditemukan, hentikan eksekusi script
+    }
+    const axiosInstance = axios.create({
+      baseURL: 'http://localhost:9000/api', // Gunakan HTTPS
+      headers: {
+        'Authorization': `Bearer ${token}` // Sertakan token yang aman
+      }
     });
-
-    axios.get('http://localhost:9000/api/dosen')
-      .then(function(response) {
-        // Memeriksa apakah respons memiliki properti data yang berisi array dari objek-objek dosen
-        if (response.data && Array.isArray(response.data.data)) {
-          // Iterasi melalui setiap objek dosen dalam array
-          response.data.data.forEach(function(item) {
-            // Tambahkan baris baru ke DataTable
-            table.row.add([
-              item.nidn, // Kolom pertama: Nama
-              item.nama_lengkap, // Kolom kedua: Email
-              item.gelar_belakang, // Kolom ketiga: Telepon
-              // Tombol details
-              '<button class="details-btn" data-id="' + item.id + '">Details</button>'
-            ]).draw();
-          });
-        } else {
-          console.error('Struktur respons tidak sesuai dengan yang diharapkan');
-        }
-      })
-      .catch(function(error) {
-        console.error(error);
+    $(document).ready(function() {
+      var table = $('#dosenTable').DataTable({
+        "paging": true,
+        "searching": true,
+        "ordering": true,
+        "dom": "<'flex flex-row justify-between'<'flex flex-col'f><'flex flex-col'l>>" +
+          "<'dt-table'rt>" +
+          "<'flex flex-row justify-between'<'flex flex-col'i><'flex flex-col'p>>"
       });
 
-    // Event listener untuk tombol details
-    $('#dosenTable').on('click', '.details-btn', function() {
-      // Ambil ID dari atribut data-id tombol yang diklik
-      var dosenId = $(this).data('id');
-      // Redirect ke halaman detail dosen menggunakan ID yang sesuai
-      window.location.href = '/dosen/' + dosenId;
+      // Gunakan HTTPS untuk memanggil API
+      axios.get('http://localhost:9000/api/dosen')
+        .then(function(response) {
+          if (response.data && Array.isArray(response.data.data)) {
+            response.data.data.forEach(function(item) {
+              // Membersihkan input sebelum menambahkan ke tabel
+              var nidndosen = escapeHtml(item.nidn);
+              var namaLengkap = escapeHtml(item.nama_lengkap);
+              var gelarBelakang = escapeHtml(item.gelar_belakang);
+
+              table.row.add([
+                nidndosen,
+                namaLengkap,
+                gelarBelakang,
+                // Menambahkan tombol details secara dinamis
+                '<button class="details-btn" data-id="' + item.id + '">Details</button>'
+              ]).draw();
+            });
+          } else {
+            console.error('Struktur respons tidak sesuai dengan yang diharapkan');
+          }
+        })
+        .catch(function(error) {
+          console.error('Terjadi kesalahan saat mengambil data dosen:', error);
+        });
+
+      // Event listener untuk tombol details
+      $('#dosenTable').on('click', '.details-btn', function() {
+        var dosenId = $(this).data('id');
+        // Redirect hanya jika dosenId ada
+        if (dosenId) {
+          window.location.href = '/dosen/' + dosenId;
+        } else {
+          console.error('ID dosen tidak valid');
+        }
+      });
+
+      // Fungsi untuk membersihkan input dari karakter yang tidak aman
+      function escapeHtml(unsafe) {
+        // Cek apakah unsafe adalah string sebelum membersihkan
+        if (typeof unsafe !== 'string') {
+          return unsafe;
+        }
+        return unsafe.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      }
     });
-  });
+    // Fungsi untuk membaca cookie
+    function getCookie(name) {
+      let cookieArr = document.cookie.split(";");
+      for (let i = 0; i < cookieArr.length; i++) {
+        let cookiePair = cookieArr[i].split("=");
+        if (name == cookiePair[0].trim()) {
+          return decodeURIComponent(cookiePair[1]);
+        }
+      }
+      return null;
+    }
+  })
 </script>
+
+
 @endsection

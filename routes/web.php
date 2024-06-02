@@ -56,19 +56,24 @@ Route::get('/addsemster', function () {
     return view('addsemester');
 });
 
-// dosen
+//----------------URL DOSEN----------------------------
+// dosen add
 Route::get('/adddosen', function () {
     return view('inputdosen');
 });
 
-// dosen
+// dosen daftar
 Route::get('/dosen', function () {
     return view('daftardosen');
 });
+// dosen details
 Route::get('/dosen/{id}', function ($id) {
     return view('detailsdosen', ['id' => $id]);
 });
-
+// dosen edit
+Route::get('/edit-dosen/{id}', function ($id) {
+    return view('editdosen', ['id' => $id]);
+});
 Route::get('/tes', function () {
     return view('tes');
 });
