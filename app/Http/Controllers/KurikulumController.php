@@ -19,11 +19,14 @@ class KurikulumController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_kurikulum' => 'required',
-            'kode_kurikulum' => 'required',
-            'sks' => 'required',
-            'semester' => 'required',
-            'kelas' => 'required',
-            'kurikulum' => 'required'
+            'tahun' => 'required',
+            'nomor' => 'required',
+            'tanggal' => 'required',
+            'pihak_acc' => 'required',
+            'tanggal_acc' => 'required',
+            'studi_ideal' => 'required',
+            'studi_maks' => 'required',
+            'keterangan' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -66,12 +69,14 @@ class KurikulumController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_kurikulum' => 'required',
-            'kode_kurikulum' => 'required',
-            'sks' => 'required',
-            'semester' => 'required',
-            'kelas' => 'required',
-            'kurikulum' => 'required',
-            'kurikulum_id' => 'required',
+            'tahun' => 'required',
+            'nomor' => 'required',
+            'tanggal' => 'required',
+            'pihak_acc' => 'required',
+            'tanggal_acc' => 'required',
+            'studi_ideal' => 'required',
+            'studi_maks' => 'required',
+            'keterangan' => 'required'
         ]);
 
         if ($validator->fails()) {

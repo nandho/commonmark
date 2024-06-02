@@ -13,13 +13,17 @@ class Kurikulum extends Model
 
     protected $table = 'kurikulums';
 
-    protected $fillable = [
-        'kode_kurikulum',
+    protected $fillable =
+    [
         'nama_kurikulum',
-        'sks',
-        'semester',
-        'kelas',
-        'kurikulum',
+        'tahun',
+        'nomor',
+        'tanggal',
+        'pihak_acc',
+        'tanggal_acc',
+        'studi_ideal',
+        'studi_maks',
+        'keterangan',
     ];
 
     protected $primaryKey = 'id';
