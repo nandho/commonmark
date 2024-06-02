@@ -8,7 +8,7 @@ use App\Models\DosenModel;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Http\Resources\DosenResource;
-
+use App\Http\Resources\PostMatkul;
 class MatakuliahController extends Controller
 {
     //

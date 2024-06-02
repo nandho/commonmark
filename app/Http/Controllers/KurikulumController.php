@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kurikulum;
+use App\Http\Resources\PostKurikulum;
+use Illuminate\Support\Facades\Validator;
 
 class KurikulumController extends Controller
 {
@@ -11,7 +13,7 @@ class KurikulumController extends Controller
     public function index()
     {
         $data = Kurikulum::all();
-        return new PostKurikulum(true,'Success',$data);
+        return new PostKurikulum(true, 'Success', $data);
     }
 
     // Menyimpan kurikulum baru ke dalam database
@@ -23,8 +25,7 @@ class KurikulumController extends Controller
             'sks' => 'required',
             'semester' => 'required',
             'kelas' => 'required',
-            'kurikulum' => 'required',
-            'kurikulum_id' => 'required',
+            'kurikulum' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -32,28 +33,17 @@ class KurikulumController extends Controller
                 'success' => false,
                 'message' => 'Gagal Menyimpan Data',
                 'data' => $validator->errors()
-            ],400);
+            ], 400);
         }
         $requestData = request->all();
 
-        try{
-            $user = User::create([
-                'username'=>$request->nidn,
-                'email'=>$request->email,
-                'password'=>bcrypt($request->password)
-            ]);
-
-            $requestData['id_akun'] = $user->id;
-
-            // Buat objek PmbModel baru dengan data dari request
-            $data = new DosenModel();
-            $data->fill($requestData);
-
-            // Simpan objek ke database
-            $data->save();
-
-            // Jika penyimpanan berhasil, kirim respons sukses
-            return new DosenResource(true, 'success', $data);
+        try {
+            $data = Kurikulum::create($requestData);
+            return response()->json([
+                'success' => true,
+                'message' => 'Data berhasil disimpan',
+                'uuid' => $data->id
+            ], 200);
         } catch (\Exception $e) {
             // Jika terjadi kesalahan, kirim respons error
             return response()->json([
@@ -65,12 +55,13 @@ class KurikulumController extends Controller
     }
 
     // Menampilkan form untuk mengedit kurikulum
-    public function show($id){
+    public function show($id)
+    {
         $data = kurikulum::find($id);
-        if(!$data){
-            return new PostKurikulum(false,'Data Tidak Ditemukan',null);
+        if (!$data) {
+            return new PostKurikulum(false, 'Data Tidak Ditemukan', null);
         }
-        return new PostKurikulum(true,'Data Ditemukan',$data);
+        return new PostKurikulum(true, 'Data Ditemukan', $data);
     }
 
     // Memperbarui kurikulum di database
@@ -91,14 +82,14 @@ class KurikulumController extends Controller
                 'success' => false,
                 'message' => 'Gagal Menyimpan Data',
                 'data' => $validator->errors()
-            ],400);
+            ], 400);
         }
         $requestData = request->all();
 
-        try{
+        try {
             $data = Kurikulum::find($id);
             $data->update($requestData);
-            return new PostKurikulum(true,'Data Berhasil Diupdate',$data);
+            return new PostKurikulum(true, 'Data Berhasil Diupdate', $data);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -116,4 +107,3 @@ class KurikulumController extends Controller
         return redirect()->route('kurikulum.index')->with('success', 'Kurikulum berhasil dihapus.');
     }
 }
-

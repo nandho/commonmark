@@ -61,6 +61,7 @@ Route::apiResource('pem_skripsi', App\Http\Controllers\Pem_SkripsiPost::class);
 Route::apiResource('persyaratan_pmb',App\Http\Controllers\persyaratancontroller::class);
 Route::apiResource('Matakuliah',App\Http\Controllers\MatakuliahController::class);
 Route::apiResource('NilaiMatakuliah',App\Http\Controllers\NilaiMatKulController::class);
+Route::apiResource('kurikulum', App\Http\Controllers\KurikulumController::class);
 // Route::apiresource('ujian')
 // Route::resource('testing2',App\Http\Controllers\testing2::class);
 

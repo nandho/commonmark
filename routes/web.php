@@ -74,6 +74,21 @@ Route::get('/dosen/{id}', function ($id) {
 Route::get('/edit-dosen/{id}', function ($id) {
     return view('editdosen', ['id' => $id]);
 });
+
+// dosen delete
+
+// -----------------Kurikulum-----------------------------
+// kurikulum add
+
+// kurikulum daftar
+Route::get('/kurikulum', function () {
+    return view('kurikulum');
+});
+// matkul
+Route::get('/matkul', function () {
+    return view('matkul');
+});
+
 Route::get('/tes', function () {
     return view('tes');
 });
