@@ -18,7 +18,7 @@ return new class extends Migration
 
         Schema::table('pmb', function (Blueprint $table) {
             $table->foreign('id_akun')->references('id')->on('users')->onDelete('cascade');
-        }); 
+        });
     }
 
     /**
@@ -27,7 +27,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('pmb', function (Blueprint $table){
-            $table->dropForeign('id_akun');
+            $table->dropForeign(['id_akun']);
         });
         Schema::table('pmb', function (Blueprint $table){
             $table->dropColumn('id_akun');

@@ -49,7 +49,7 @@ class SoalController extends Controller
         }
 
         $requestData = $request->all();
-        
+
         if ($request->hasFile('foto')) {
             $image = $request->file('foto');
             $image->storePubliclyAs('public/soalfoto/', $image->hashName());
@@ -64,7 +64,7 @@ class SoalController extends Controller
             $data = new soal();
             //upload gambar jika ada
             if($request->getFiles()){
-                
+
             }
 
             $data->fill($requestData);

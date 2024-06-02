@@ -4,12 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-
-//table structure
-// 'pembimbing_akademik',
-// 'matakuliah',
-// 'jumlah_sks',
-
 class KhsController extends Controller
 {
     public function index()

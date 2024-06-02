@@ -8,13 +8,6 @@ use Illuminate\Http\Request;
 use App\Http\Resources\krsresource;
 use Illuminate\Support\Facades\Validator;
 
-
-// 'gelombang',
-// 'periode_mulai',
-// 'periode_berakhir',
-// 'semester',
-// 'status',
-
 class KrsController extends Controller
 {
     public function index()
@@ -28,7 +21,7 @@ class KrsController extends Controller
     {
         //will input jurusan
         $validator = Validator::make($request->all(),[
-            'pembimbigelombangng_akademik'=> 'required', //foreign id merelasikan ke pembimbing akademik table
+            'gelombang'=> 'required', //foreign id merelasikan ke pembimbing akademik table
             'periode_mulai'=> 'required',
             'periode_berakhir'=> 'required',
             'semester'=> 'required',

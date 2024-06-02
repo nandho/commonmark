@@ -13,7 +13,7 @@ class JurusanController extends Controller
     public function __construct(){
 
     }
-    
+
     public function index()
     {
         //will return all data
