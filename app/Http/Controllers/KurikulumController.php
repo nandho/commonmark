@@ -23,8 +23,7 @@ class KurikulumController extends Controller
             'sks' => 'required',
             'semester' => 'required',
             'kelas' => 'required',
-            'kurikulum' => 'required',
-            'kurikulum_id' => 'required',
+            'kurikulum' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -36,24 +35,13 @@ class KurikulumController extends Controller
         }
         $requestData = request->all();
 
-        try{
-            $user = User::create([
-                'username'=>$request->nidn,
-                'email'=>$request->email,
-                'password'=>bcrypt($request->password)
-            ]);
-
-            $requestData['id_akun'] = $user->id;
-
-            // Buat objek PmbModel baru dengan data dari request
-            $data = new DosenModel();
-            $data->fill($requestData);
-
-            // Simpan objek ke database
-            $data->save();
-
-            // Jika penyimpanan berhasil, kirim respons sukses
-            return new DosenResource(true, 'success', $data);
+        try {
+            $data = Kurikulum::create($requestData);
+            return response()->json([
+                'success' => true,
+                'message' => 'Data berhasil disimpan',
+                'uuid' => $data->id
+            ], 200);
         } catch (\Exception $e) {
             // Jika terjadi kesalahan, kirim respons error
             return response()->json([
