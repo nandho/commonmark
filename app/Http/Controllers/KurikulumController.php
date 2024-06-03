@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kurikulum;
-use App\Http\Resources\PostKurikulum;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\PostKurikulum;
 
 class KurikulumController extends Controller
 {
@@ -38,7 +38,7 @@ class KurikulumController extends Controller
                 'data' => $validator->errors()
             ],400);
         }
-        $requestData = request -> all();
+        $requestData = $request->all();
 
         try {
             $data = Kurikulum::create($requestData);
@@ -88,7 +88,7 @@ class KurikulumController extends Controller
                 'data' => $validator->errors()
             ],400);
         }
-        $requestData = request->all();
+        $requestData = $request->all();
 
         try{
             $data = Kurikulum::find($id);
@@ -108,6 +108,7 @@ class KurikulumController extends Controller
     {
         $kurikulum = Kurikulum::findOrFail($id);
         $kurikulum->delete();
-        return redirect()->route('kurikulum.index')->with('success', 'Kurikulum berhasil dihapus.');
+        // return redirect()->route('kurikulum.index')->with('success', 'Kurikulum berhasil dihapus.');
+        return new PostKurikulum(true,'Data Berhasil Dihapus',null);
     }
 }

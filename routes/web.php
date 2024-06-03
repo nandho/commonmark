@@ -86,6 +86,10 @@ Route::get('/kurikulumadd', function () {
 Route::get('/kurikulum', function () {
     return view('kurikulum');
 });
+// kurikulum details
+Route::get('/kurikulum/{id}', function ($id) {
+    return view('detailskurikulum', ['id' => $id]);
+});
 // matkul daftar
 Route::get('/matkul', function () {
     return view('matkul');

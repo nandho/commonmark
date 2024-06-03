@@ -4,233 +4,283 @@
 @section('head')
 <!-- Tempatkan impor CSS khusus untuk halaman ini di sini jika ada -->
 <style>
-  /* Atur ulang gaya default DataTables */
-  .dataTables_wrapper {
-    padding: 1rem;
-  }
-
-  .dataTables_wrapper .dataTables_length,
-  .dataTables_wrapper .dataTables_filter {
-    padding: 0.5rem;
-  }
-
-
-
-  /* Gaya tabel */
-  #semesterTable {
-    border-collapse: collapse;
-    background: white;
-    border-radius: 6px;
-    overflow: hidden;
-    width: 100%;
-    /* margin: 0 auto; */
-    position: relative;
-    margin-bottom: 5%;
-  }
-
-  #semesterTable thead th {
-    background-color: #65b8e0;
-    color: white;
-    font-weight: 700;
-    padding: 0.75rem;
-    text-align: left;
-    height: 60px;
-    font-size: 16px;
-
-  }
-
-  #semesterTable tbody td {
-    background-color: white;
-    padding: 0.75rem;
-    border-bottom: 2px solid #f3f4f6;
-    border-radius: 0.375rem;
-  }
-
-  #semesterTable tbody tr {
-    height: 48px;
-    border-bottom: 1px solid #E3F1D5;
-  }
-
-  /* Gaya untuk kontrol paginasi */
-  .dataTables_wrapper .dataTables_paginate .paginate_button {
-    padding: 0.5rem 1rem;
-    margin: 0 0.25rem;
-    border-radius: 0.375rem;
-    border: 1px solid transparent;
-    background-color: #65b8e0;
-    color: white;
-    cursor: pointer;
-  }
-
-  .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-    background-color: #3730a3;
-  }
-
-  .dataTables_wrapper .dataTables_paginate .paginate_button.current,
-  .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-    background-color: #65b8e0;
-    color: white;
-    border-color: transparent;
-  }
-
-  .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
-  .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover {
-    background-color: #e2e8f0;
-    color: #a1a1aa;
-    cursor: not-allowed;
-  }
-
-  /* Gaya untuk kotak pencarian */
-  .dataTables_wrapper .dataTables_filter input {
-    margin-left: 0.5rem;
-    padding: 0.5rem;
-    border-radius: 0.375rem;
-    border: 1px solid #e2e8f0;
-  }
-
-  /* Gaya untuk dropdown 'Show entries' */
-  .dataTables_wrapper .dataTables_length select {
-    padding: 0.5rem;
-    border-radius: 0.375rem;
-    border: 1px solid #e2e8f0;
-  }
-
-  /* Gaya responsif untuk kontrol DataTables */
-  @media screen and (max-width: 640px) {
+    .dataTables_wrapper {
+        padding: 1rem;
+    }
 
     .dataTables_wrapper .dataTables_length,
     .dataTables_wrapper .dataTables_filter {
-      float: none;
-      text-align: center;
+        padding: 0.5rem;
     }
 
-    .dataTables_wrapper .dataTables_length label,
-    .dataTables_wrapper .dataTables_filter label {
-      display: block;
+    #kurikulumTable {
+        border-collapse: collapse;
+        background: white;
+        border-radius: 6px;
+        overflow: hidden;
+        width: 100% !important;
+        position: relative;
+        margin-bottom: 5%;
     }
 
-    .dataTables_wrapper .dataTables_paginate {
-      float: none;
-      text-align: center;
-
+    #kurikulumTable thead th {
+        background-color: #65b8e0;
+        color: white;
+        font-weight: 700;
+        padding: 0.75rem;
+        text-align: left;
+        height: 60px;
+        font-size: 16px;
     }
-  }
+
+    #kurikulumTable tbody td {
+        background-color: white;
+        padding: 0.75rem;
+        border-bottom: 2px solid #f3f4f6;
+        border-radius: 0.375rem;
+    }
+
+    #kurikulumTable tbody tr {
+        height: 48px;
+        border-bottom: 1px solid #E3F1D5;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        padding: 0.5rem 1rem;
+        margin: 0 0.25rem;
+        border-radius: 0.375rem;
+        border: 1px solid transparent;
+        background-color: #65b8e0;
+        color: white;
+        cursor: pointer;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        background-color: #3730a3;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+        background-color: #65b8e0;
+        color: white;
+        border-color: transparent;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
+    .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover {
+        background-color: #e2e8f0;
+        color: #a1a1aa;
+        cursor: not-allowed;
+    }
+
+    .dataTables_wrapper .dataTables_filter input {
+        margin-left: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 0.375rem;
+        border: 1px solid #e2e8f0;
+    }
+
+    .dataTables_wrapper .dataTables_length select {
+        padding: 0.5rem;
+        border-radius: 0.375rem;
+        border: 1px solid #e2e8f0;
+    }
+
+    @media screen and (max-width: 640px) {
+
+        .dataTables_wrapper .dataTables_length,
+        .dataTables_wrapper .dataTables_filter {
+            float: none;
+            text-align: center;
+        }
+
+        .dataTables_wrapper .dataTables_length label,
+        .dataTables_wrapper .dataTables_filter label {
+            display: block;
+        }
+
+        .dataTables_wrapper .dataTables_paginate {
+            float: none;
+            text-align: center;
+        }
+    }
 </style>
-
 @endsection
+
 @section('content')
 <div class="w-full p-6 mx-auto">
-  <div class="flex flex-wrap -mx-3">
-    <div class="w-full max-w-full px-3 shrink-0 md:w-12 md:flex-0">
-      <div class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-        <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
-          <div class="flex justify-between items-center mb-4">
-            <h2 class="text-2xl font-bold dark:text-white">Data Semester</h2>
-            <a href="{{ url('kurikulumadd') }}" class="inline-block px-6 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700">Tambah Kurikulum Baru</a>
-          </div>
-          <div class="overflow-x-auto">
+    <div class="flex flex-wrap -mx-3">
+        <div class="w-full max-w-full px-3 shrink-0 md:w-12 md:flex-0">
+            <div class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+                <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-2xl font-bold dark:text-white">Data Kurikulum</h2>
+                        <a href="{{ url('kurikulumadd') }}" class="inline-block px-6 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700">Tambah Kurikulum Baru</a>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table id="kurikulumTable" class="display min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kurikulum</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tahun</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" colspan="2">Masa Studi (Semester)</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                                </tr>
+                                <tr>
+                                    <!-- Kolom kosong untuk Kurikulum dan Tahun -->
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
+                                    <!-- Judul untuk Ideal dan Maks. -->
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ideal</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Maks.</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Data dari API akan di-render di sini oleh Axios -->
+                            </tbody>
+                        </table>
 
-
-            <table id="semesterTable" class="display min-w-full divide-y divide-gray-200">
-              <thead class="bg-gray-50">
-                <tr>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Semester</th>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Mulai</th>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Selesai</th>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- Data dari API akan di-render di sini oleh Axios -->
-              </tbody>
-            </table>
-          </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
-
-
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
-  $(document).ready(function() {
-    var table = $('#semesterTable').DataTable({
-      "paging": true,
-      "searching": true,
-      "ordering": true,
-      "dom": "<'flex flex-row justify-between'<'flex flex-col'f><'flex flex-col'l>>" +
-        "<'dt-table'rt>" +
-        "<'flex flex-row justify-between'<'flex flex-col'i><'flex flex-col'p>>"
+    document.addEventListener('DOMContentLoaded', function() {
+        const token = getCookie('token'); // Ambil token dari cookie
+        if (!token) {
+            console.error('Token is not defined');
+            return; // Token tidak ditemukan, hentikan eksekusi script
+        }
+        const axiosInstance = axios.create({
+            baseURL: 'http://localhost:9000/api', // Gunakan HTTPS
+            headers: {
+                'Authorization': `Bearer ${token}` // Sertakan token yang aman
+            }
+        });
+        $(document).ready(function() {
+            var table = $('#kurikulumTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "dom": "<'flex flex-row justify-between'<'flex flex-col'f><'flex flex-col'l>>" +
+                    "<'dt-table'rt>" +
+                    "<'flex flex-row justify-between'<'flex flex-col'i><'flex flex-col'p>>"
+            });
+
+            // Gunakan HTTPS untuk memanggil API
+            axios.get('http://localhost:9000/api/kurikulum')
+                .then(function(response) {
+                    if (response.data && Array.isArray(response.data.data)) {
+                        response.data.data.forEach(function(item) {
+                            // Membersihkan input sebelum menambahkan ke tabel
+                            var namakurikulum = escapeHtml(item.nama_kurikulum);
+                            var tahun = escapeHtml(item.tahun);
+                            var idel = escapeHtml(item.studi_ideal);
+                            var max = escapeHtml(item.studi_maks);
+
+                            table.row.add([
+                                namakurikulum,
+                                tahun,
+                                idel,
+                                max,
+                                // Menambahkan tombol details dan delete secara dinamis
+                                '<button class="details-btn" data-id="' + item.id + '">Details</button>' +
+                                '<button class="delete-btn ml-2" data-id="' + item.id + '">Delete</button>'
+                            ]).draw();
+                        });
+                    } else {
+                        console.error('Struktur respons tidak sesuai dengan yang diharapkan');
+                    }
+                })
+                .catch(function(error) {
+                    console.error('Terjadi kesalahan saat mengambil data kurikulum:', error);
+                });
+
+            // Event listener untuk tombol details
+            $('#kurikulumTable').on('click', '.details-btn', function() {
+                var kurikulumId = $(this).data('id');
+                // Redirect hanya jika kurikulumId ada
+                if (kurikulumId) {
+                    window.location.href = '/kurikulum/' + kurikulumId;
+                } else {
+                    console.error('ID kurikulum tidak valid');
+                }
+            });
+
+            
+            // Event listener untuk tombol delete
+            $('#kurikulumTable').on('click', '.delete-btn', function() {
+                var deleteButton = $(this);
+                var kurikulumId = deleteButton.data('id');
+                // Confirm dialog untuk konfirmasi penghapusan
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Data akan dihapus secara permanen!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Panggil API delete
+                        axiosInstance.delete(`/kurikulum/${kurikulumId}`)
+                            .then(function(response) {
+                                // Hapus baris tabel yang sesuai dengan data yang dihapus
+                                var row = deleteButton.parents('tr');
+                                table.row(row).remove().draw();
+                                // Tampilkan pesan sukses
+                                Swal.fire(
+                                    'Terhapus!',
+                                    'Data telah dihapus.',
+                                    'success'
+                                );
+                            })
+                            .catch(function(error) {
+                                console.error('Terjadi kesalahan saat menghapus data:', error);
+                                // Tampilkan pesan error
+                                Swal.fire(
+                                    'Gagal!',
+                                    'Terjadi kesalahan saat menghapus data. Silakan coba lagi nanti.',
+                                    'error'
+                                );
+                            });
+                    }
+                });
+            });
+
+
+            // Fungsi untuk membersihkan input dari karakter yang tidak aman
+            function escapeHtml(unsafe) {
+                // Cek apakah unsafe adalah string sebelum membersihkan
+                if (typeof unsafe !== 'string') {
+                    return unsafe;
+                }
+                return unsafe.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            }
+        });
+        // Fungsi untuk membaca cookie
+        function getCookie(name) {
+            let cookieArr = document.cookie.split(";");
+            for (let i = 0; i < cookieArr.length; i++) {
+                let cookiePair = cookieArr[i].split("=");
+                if (name == cookiePair[0].trim()) {
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+            return null;
+        }
     });
-
-    axios.get('http://localhost:9000/api/Semester')
-      .then(function(response) {
-        var activeSemesterFound = false; // Menandakan apakah sudah ditemukan semester aktif
-        response.data.forEach(function(item) {
-          if (item.status === 'Aktif') {
-            activeSemesterFound = true; // Setel ke true jika ditemukan semester aktif
-          }
-        });
-
-        response.data.forEach(function(item) {
-          var statusButtonText = item.status === 'Aktif' ? 'Nonaktifkan' : 'Aktifkan';
-          if (activeSemesterFound && item.status === 'Nonaktif') {
-            // Jika sudah ditemukan semester aktif dan semester ini non-aktif,
-            // ubah statusnya menjadi non-aktif
-            statusButtonText = 'Aktifkan';
-          }
-          var rowNode = table.row.add([
-            item.nama_semester,
-            item.tanggal_mulai,
-            item.tanggal_selesai,
-            item.status,
-            '<button class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-700 details-btn" data-id="' + item.id + '">Details</button>' +
-            '<button class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-green-700 status-btn" data-id="' + item.id + '">' + statusButtonText + '</button>' +
-            '<button class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-red-700 delete-btn" data-id="' + item.id + '">Hapus</button>'
-          ]).draw().node();
-
-          $(rowNode).find('.details-btn').on('click', function(e) {
-            e.preventDefault();
-            var semesterId = $(this).data('id');
-            window.location.href = '/semester/' + semesterId;
-          });
-
-          $(rowNode).find('.status-btn').on('click', function(e) {
-            e.preventDefault();
-            var semesterId = $(this).data('id');
-            axios.patch('http://localhost:9000/api/Semester/' + semesterId, {
-                status: item.status === 'Aktif' ? 'Nonaktif' : 'Aktif'
-              })
-              .then(function(response) {
-                console.log(response.data);
-                location.reload(); // Refresh halaman untuk menampilkan status terbaru
-              })
-              .catch(function(error) {
-                console.error(error);
-              });
-          });
-
-          $(rowNode).find('.delete-btn').on('click', function(e) {
-            e.preventDefault();
-            var semesterId = $(this).data('id');
-            axios.delete('http://localhost:9000/api/Semester/' + semesterId)
-              .then(function(response) {
-                console.log(response.data);
-                location.reload(); // Refresh halaman untuk menampilkan data terbaru setelah penghapusan
-              })
-              .catch(function(error) {
-                console.error(error);
-              });
-          });
-        });
-      })
-      .catch(function(error) {
-        console.error(error);
-      });
-  });
 </script>
+
 
 
 @endsection
