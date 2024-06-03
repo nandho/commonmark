@@ -108,7 +108,8 @@ class KurikulumController extends Controller
     {
         $kurikulum = Kurikulum::findOrFail($id);
         $kurikulum->delete();
-        return redirect()->route('kurikulum.index')->with('success', 'Kurikulum berhasil dihapus.');
+        // return redirect()->route('kurikulum.index')->with('success', 'Kurikulum berhasil dihapus.');
+        return new PostKurikulum(true,'Data Berhasil Dihapus',null);
     }
 }
 

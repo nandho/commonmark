@@ -10,7 +10,7 @@ use App\Models\Matakuliah;
 class Kurikulum extends Model
 {
     use HasFactory;
-    use HasUuid;
+    use HasUuids;
 
     protected $table = 'kurikulums';
 
