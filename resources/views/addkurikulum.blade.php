@@ -100,16 +100,36 @@
   document.getElementById('addkurikulumForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
+    // Validasi data di sisi klien
+    var nama_kurikulum = document.getElementById('nama_kurikulum').value;
+    var tahun = document.getElementById('tahun').value;
+    var nomor = document.getElementById('nomor').value;
+    var tanggal = document.getElementById('tanggal').value;
+    var pihak_acc = document.getElementById('pihak_acc').value;
+    var tanggal_acc = document.getElementById('tanggal_acc').value;
+    var studi_ideal = document.getElementById('studi_ideal').value;
+    var studi_maks = document.getElementById('studi_maks').value;
+    var keterangan = document.getElementById('keterangan').value;
+
+    if (!nama_kurikulum || !tahun || !nomor || !tanggal || !pihak_acc || !tanggal_acc || !studi_ideal || !studi_maks || !keterangan) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Gagal',
+        text: 'Semua field harus diisi.'
+      });
+      return;
+    }
+
     var formData = {
-      nama_kurikulum: document.getElementById('nama_kurikulum').value,
-      tahun: document.getElementById('tahun').value,
-      nomor: document.getElementById('nomor').value,
-      tanggal: document.getElementById('tanggal').value,
-      pihak_acc: document.getElementById('pihak_acc').value,
-      tanggal_acc: document.getElementById('tanggal_acc').value,
-      studi_ideal: document.getElementById('studi_ideal').value,
-      studi_maks: document.getElementById('studi_maks').value,
-      keterangan: document.getElementById('keterangan').value,
+      nama_kurikulum: nama_kurikulum,
+      tahun: tahun,
+      nomor: nomor,
+      tanggal: tanggal,
+      pihak_acc: pihak_acc,
+      tanggal_acc: tanggal_acc,
+      studi_ideal: studi_ideal,
+      studi_maks: studi_maks,
+      keterangan: keterangan,
     };
 
     axios.post('http://localhost:9000/api/kurikulum', formData)
@@ -117,21 +137,22 @@
         Swal.fire({
           icon: 'success',
           title: 'Berhasil',
-          text: 'Semester berhasil ditambahkan!'
+          text: 'Kurikulum berhasil ditambahkan!'
         });
         // Reset form setelah berhasil menambahkan data
         document.getElementById('addkurikulumForm').reset();
       })
       .catch(function(error) {
-        console.error('Error menambahkan semester:', error);
+        console.error('Error menambahkan kurikulum:', error);
         Swal.fire({
           icon: 'error',
           title: 'Gagal',
-          text: 'Terjadi kesalahan saat menambahkan semester.'
+          text: 'Terjadi kesalahan saat menambahkan kurikulum.'
         });
       });
   });
 </script>
+
 
 
 @endsection

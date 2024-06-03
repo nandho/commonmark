@@ -11,16 +11,15 @@
       <div class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
         <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
           <div class="flex items-center">
-            <p class="mb-0 dark:text-white/80">Daftar Kurikulum</p>
+            <p class="mb-0 dark:text-white/80">Tambah Matakuliah Baru</p>
             <a type="button" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85" href="{{ url('semester') }}">Kembali</a>
           </div>
         </div>
         <div class="flex-auto p-6">
-          <form id="kurikulumForm">
-            <button type="button" id="simpanKurikulumBtn" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Simpan</button>
-            <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">Tambah Semester</p>
+          <form id="mkForm">
+            <button type="button" id="simpanMKBtn" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Simpan</button>
+            <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">Tambah Matakuliah</p>
             <div class="flex flex-wrap -mx-3">
-
               <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                 <div class="mb-4">
                   <label for="nama_semester" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Nama Semester</label>

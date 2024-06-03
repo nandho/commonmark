@@ -90,6 +90,10 @@ Route::get('/kurikulum', function () {
 Route::get('/kurikulum/{id}', function ($id) {
     return view('detailskurikulum', ['id' => $id]);
 });
+// kurikulum edit
+Route::get('/kurikulumedit/{id}', function ($id) {
+    return view('editkurikulum', ['id' => $id]);
+});
 // matkul daftar
 Route::get('/matkul', function () {
     return view('matkul');
@@ -99,6 +103,24 @@ Route::get('/matkuladd', function () {
     return view('addmatkul');
 });
 
+// ---------------------Prodi-------------------
+// prodi add
+Route::get('/prodiadd', function () {
+    return view('addprodi');
+});
+
+// prodi daftar
+Route::get('/prodi', function () {
+    return view('prodi');
+});
+// edit prodi
+Route::get('/editprodi/{id}', function ($id) {
+    return view('editprodi', ['id' => $id]);
+});
+// prodi details
+Route::get('/detailsprodi/{id}', function ($id) {
+    return view('detailsprodi', ['id' => $id]);
+});
 Route::get('/tes', function () {
     return view('tes');
 });
