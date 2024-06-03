@@ -22,7 +22,7 @@ return new class extends Migration
             $table->enum('status_pembayaran',['Lunas','Belum Dibayarkan']);
             $table->timestamps();
 
-            $table->foreign('id_mahasiswa')->references('id')->on('mahasiswa')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->foreign('id_mahasiswa')->references('id')->on('mahasiswas')->onDelete('CASCADE')->onUpdate('CASCADE');
         });
     }
 
