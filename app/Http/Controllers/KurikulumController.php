@@ -88,7 +88,7 @@ class KurikulumController extends Controller
                 'data' => $validator->errors()
             ],400);
         }
-        $requestData = request->all();
+        $requestData = $request->all();
 
         try{
             $data = Kurikulum::find($id);
