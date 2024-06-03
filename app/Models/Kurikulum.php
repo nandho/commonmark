@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Concerns\HasUuids; // Import trait HasUuids
+use App\Models\Matakuliah;
 
 class Kurikulum extends Model
 {
@@ -16,6 +17,14 @@ class Kurikulum extends Model
     protected $fillable =
     [
         'nama_kurikulum',
+        'tahun',
+        'nomor',
+        'tanggal',
+        'pihak_acc',
+        'tanggal_acc',
+        'studi_ideal',
+        'studi_maks',
+        'keterangan',
         'tahun',
         'nomor',
         'tanggal',

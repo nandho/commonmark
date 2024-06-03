@@ -58,9 +58,9 @@ Route::apiResource('dosen', App\Http\Controllers\PostDosen::class);//->middlewar
 Route::apiResource('dosen', App\Http\Controllers\PostDosen::class);//->middleware('auth:api');
 Route::apiResource('pem_akademik', App\Http\Controllers\Pem_AkademikPost::class);
 Route::apiResource('pem_skripsi', App\Http\Controllers\Pem_SkripsiPost::class);
-Route::apiResource('persyaratan_pmb',App\Http\Controllers\persyaratancontroller::class);
-Route::apiResource('Matakuliah',App\Http\Controllers\MatakuliahController::class);
-Route::apiResource('NilaiMatakuliah',App\Http\Controllers\NilaiMatKulController::class);
+Route::apiResource('persyaratan_pmb', App\Http\Controllers\persyaratancontroller::class);
+Route::apiResource('Matakuliah', App\Http\Controllers\MatakuliahController::class);
+Route::apiResource('NilaiMatakuliah', App\Http\Controllers\NilaiMatKulController::class);
 Route::apiResource('kurikulum', App\Http\Controllers\KurikulumController::class);
 // Route::apiresource('ujian')
 // Route::resource('testing2',App\Http\Controllers\testing2::class);
@@ -68,16 +68,13 @@ Route::apiResource('kurikulum', App\Http\Controllers\KurikulumController::class)
 //auth
 Route::post('auth/login', LoginController::class)->name('apilogin');
 
+Route::post('auth/refresh', App\Http\Controllers\Api\RefreshController::class);
+
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
 
 Route::get('user/',loggeduser::class)->middleware('auth:api');
-
-Route::apiResource('user', \App\Http\Controllers\Api\UserController::class)->only(['show', 'update']);
-
-//user jika yang loggin admin akan di tambahkan di bawah ini
-
 
 Route::post('auth/logout', LogoutController::class)->name('logout');
 // Route::apiResource('testing/pmb', PmbApiController::class, ['except' => 'index']);
@@ -95,3 +92,9 @@ Route::post('test', [test::class, 'store']);
 //     Mail::to('stryn@gmail.com’')->send(new SendEmailPMB($name, $password, "xxx"));
 // });
 Route::apiResource('Semester', App\Http\Controllers\SemesterController::class);
+Route::apiResource('rolemanagement', App\Http\Controllers\rolemanagement::class);
+Route::post('/addrole', [App\Http\Controllers\rolemanagement::class, 'role_assigner']);
+Route::post('/remove_role', [App\Http\Controllers\rolemanagement::class, 'role_deassigner']);
+Route::apiResource('permissionmanagement', App\Http\Controllers\permissionmanagement::class);
+Route::post('/addpermissionrole', [App\Http\Controllers\permissionmanagement::class, 'give_permission_into_role']);
+Route::post('/rmpermissionrole', [App\Http\Controllers\permissionmanagement::class, 'remove_permisssions']);

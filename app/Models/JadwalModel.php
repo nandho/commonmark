@@ -14,12 +14,14 @@ class JadwalModel extends Model
 {
     use HasFactory,HasUuids;
 
+    protected $table = 'Jadwals';
+
     protected $fillable = [
         'id_kelas',
         'id_ruang_kelas',
         'id_hari',
         'id_waktu'
-    ];  
+    ];
 
     public function id_kelas():HasMany
     {
