@@ -38,7 +38,7 @@ class KurikulumController extends Controller
                 'data' => $validator->errors()
             ],400);
         }
-        $requestData = request->all();
+        $requestData = $request->all();
 
         try {
             $data = Kurikulum::create($requestData);
@@ -108,7 +108,8 @@ class KurikulumController extends Controller
     {
         $kurikulum = Kurikulum::findOrFail($id);
         $kurikulum->delete();
-        return redirect()->route('kurikulum.index')->with('success', 'Kurikulum berhasil dihapus.');
+        // return redirect()->route('kurikulum.index')->with('success', 'Kurikulum berhasil dihapus.');
+        return new PostKurikulum(true,'Data Berhasil Dihapus',null);
     }
 }
 
