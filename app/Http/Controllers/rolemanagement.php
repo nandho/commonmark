@@ -163,12 +163,21 @@ class rolemanagement extends Controller
             'id'=>'required|exists:user,id',
             'role'=>'required|exists:role,id',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menyimpan data',
+                'error' => $validator->errors(),
+            ], 400);
+        }
+
         $id = $request->validated()->id;
         $role = $request->validated()->role;
 
         $user = User::findOrFail($id);
         $user->removeRole($role);
-        
-        return new RoleResource(true, 'Role berhasil ditambahkan', null);
+
+        return new RoleResource(true, 'Role berhasil dihapus', null);
     }
 }
