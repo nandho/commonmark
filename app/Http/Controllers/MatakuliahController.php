@@ -166,14 +166,16 @@ class MatakuliahController extends Controller
     public function matakuliahquery(Request $request)
     {
         if ($request->has('kurikulum')) $kurikulum_id = $request->query('kurikulum');
-        if ($request->has('tipe_matkul')) $tipe_matkul = $request->query('kurikulum');
-        if ($request->has('tipe_matkul')) $sifat_matkul = $request->query('kurikulum');
+        if ($request->has('tipe_matkul')) $tipe_matkul = $request->query('tipe_matkul');
+        // if ($request->has('tipe_matkul')) $sifat_matkul = $request->query('kurikulum');
 
-        DB::table('matkuls')
+        $data = DB::table('matkuls')
             ->join('kurikulum', 'matkuls.kurikulum', '=', 'kurikulum.id')
             ->where('matkuls.kurikulum',$kurikulum_id)
-            ->where('matkuls.tipe_matkul',$tipe_matkul)
-            ->where('matkuls.sifat_matkul',$sifat_matkul);
+            ->where('matkuls.tipe_matkul',$tipe_matkul)->get();
+            // ->where('matkuls.sifat_matkul',$sifat_matkul);
+
+        return new PostMatkul(true,'Data berhasil di dapatkan', $data);
     }
 }
 
