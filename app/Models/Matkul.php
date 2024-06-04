@@ -20,6 +20,7 @@ protected $fillable = [
     'nama_matkul_indonesia',
     'nama_matkul_singkat',
     'nama_matkul_english',
+    'nama_matkul_singkat_english',
     'sifat_matkul',
     'tipe_matkul',
     'kategori_matkul',

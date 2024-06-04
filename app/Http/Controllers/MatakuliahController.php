@@ -29,6 +29,7 @@ class MatakuliahController extends Controller
         'nama_matkul_indonesia' => 'required',
         'nama_matkul_singkat' => 'required',
         'nama_matkul_english' => 'required',
+        'nama_matkul_singkat_english' => 'required',
         'sifat_matkul' => 'required',
         'tipe_matkul' => 'required',
         'kategori_matkul' => 'required',
@@ -55,7 +56,7 @@ class MatakuliahController extends Controller
         'total_sks_matkul' => 'required',
         'ipk_minimal' => 'required',
         'abstraksi' => 'required',
-        'file_silabus' => 'mimes:pdf|max:10000',
+        'file_silabus' => 'mimes:pdf|max:50000',
         ]);
 
         if ($validator->fails()) {
