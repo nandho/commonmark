@@ -11,6 +11,8 @@ use App\Http\Resources\DosenResource;
 use App\Http\Resources\PostMatkul;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
+
 
 class MatakuliahController extends Controller
 {
@@ -160,6 +162,21 @@ class MatakuliahController extends Controller
         }
         $data->delete();
         return new PostMatkul(true,'Success',$data);
+    }
+
+    public function matakuliahquery(Request $request)
+    {
+        if ($request->has('kurikulum')) $kurikulum_id = $request->query('kurikulum');
+        if ($request->has('tipe_matkul')) $tipe_matkul = $request->query('tipe_matkul');
+        // if ($request->has('tipe_matkul')) $sifat_matkul = $request->query('kurikulum');
+
+        $data = DB::table('matkuls')
+            ->join('kurikulum', 'matkuls.kurikulum', '=', 'kurikulum.id')
+            ->where('matkuls.kurikulum',$kurikulum_id)
+            ->where('matkuls.tipe_matkul',$tipe_matkul)->get();
+            // ->where('matkuls.sifat_matkul',$sifat_matkul);
+
+        return new PostMatkul(true,'Data berhasil di dapatkan', $data);
     }
 }
 

@@ -55,7 +55,7 @@ return new class extends Migration
 
         Schema::table('matkuls', function (Blueprint $table) {
             $table->foreign('kurikulum')->references('id')->on('kurikulums');
-        });
+        }); 
     }
 
     /**

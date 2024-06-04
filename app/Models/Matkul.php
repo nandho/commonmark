@@ -12,6 +12,7 @@ class Matkul extends Model
 {
     use HasFactory;
     use HasUuids;
+    protected $table = 'matkuls';
 
 protected $fillable = [
     'prodi',
