@@ -96,7 +96,7 @@ Route::get('/kurikulumedit/{id}', function ($id) {
 });
 // matkul daftar
 Route::get('/matkul', function () {
-    return view('matkul');
+    return view('daftarmatkul');
 });
 // matkul post
 Route::get('/matkuladd', function () {

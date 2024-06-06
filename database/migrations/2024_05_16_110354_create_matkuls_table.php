@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('nama_matkul_indonesia');
             $table->string('nama_matkul_singkat');
             $table->string('nama_matkul_english');
+            $table->string('nama_matkul_singkat_english');
             $table->string('sifat_matkul');
             $table->string('tipe_matkul');
             $table->string('kategori_matkul');

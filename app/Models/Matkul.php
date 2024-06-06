@@ -12,7 +12,6 @@ class Matkul extends Model
 {
     use HasFactory;
     use HasUuids;
-    use HasUuids;
     protected $table = 'matkuls';
 
     protected $fillable = [
@@ -22,6 +21,7 @@ class Matkul extends Model
         'nama_matkul_indonesia',
         'nama_matkul_singkat',
         'nama_matkul_english',
+        'nama_matkul_singkat_english',
         'sifat_matkul',
         'tipe_matkul',
         'kategori_matkul',
