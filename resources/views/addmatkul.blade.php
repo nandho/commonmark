@@ -125,11 +125,12 @@
                 </div>
                 <div class="flex-auto p-6">
 
+
                     <!-- Modal untuk memilih dosen -->
-                    <div id="dosen_modal" class="w-8/12 fixed inset-0 items-center justify-center p-4 bg-opacity-50  hidden">
-                        <div class=" w-4/5 bg-white dark:bg-slate-850 shadow-xl rounded-lg p-6 mx-auto ">
+                    <div id="dosen_modal" class="w-8/12 fixed inset-0 items-center justify-center p-4 bg-opacity-50 hidden">
+                        <div class="w-4/5 bg-white dark:bg-slate-850 shadow-xl rounded-lg p-6 mx-auto">
                             <h2 class="text-xl font-bold mb-4">Pilih Dosen</h2>
-                            <table id="dosen_table" class=" dosenTable w-full table-auto border-collapse">
+                            <table id="dosen_table" class="dosenTable w-full table-auto border-collapse">
                                 <thead>
                                     <tr>
                                         <th class="border px-4 py-2">NIDN</th>
@@ -277,8 +278,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                             <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                                 <div class="mb-4">
                                     <label for="tanggal_mulai_efektif" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Tanggal Mulai Efektif</label>
@@ -406,8 +405,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                 </div>
                                 <div class="w-full max-w-full px-3 shrink-0">
                                     <h6 class="leading-normal capitalize">Jumlah Minimal sks Matakuliah Telah Lulus</h6>
@@ -543,7 +540,7 @@
                     "<'flex flex-row justify-between'<'flex flex-col'i><'flex flex-col'p>>"
             });
 
-            // Event listener untuk tombol details menggunakan data-id sebagai selector
+            // Event listener untuk tombol pilih dosen menggunakan data-id sebagai selector
             $('#dosen_table').on('click', 'button[data-id]', function() {
                 var dosenId = $(this).data('id'); // Ambil ID dosen dari data atribut tombol
                 var dosenNama = $(this).closest('tr').find('td:nth-child(2)').text(); // Ambil nama dosen dari baris tabel
@@ -568,7 +565,7 @@
                             var nidndosen = escapeHtml(item.nidn);
                             var namaLengkap = escapeHtml(item.nama_lengkap);
 
-                            // Menambahkan tombol details secara dinamis
+                            // Menambahkan tombol pilih dosen secara dinamis
                             table.row.add([
                                 nidndosen,
                                 namaLengkap,
@@ -604,10 +601,10 @@
             document.getElementById('dosen_modal').classList.add('hidden');
         });
 
+
         // Event listener untuk submit form
         document.getElementById('mkForm').addEventListener('submit', function(event) {
             event.preventDefault();
-
             // Buat objek FormData
             const formData = new FormData();
 

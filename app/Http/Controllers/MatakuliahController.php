@@ -46,10 +46,6 @@ class MatakuliahController extends Controller
         return new PostMatkul(true, 'Success', $data);
     }
 
-
-
-
-
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -117,12 +113,25 @@ class MatakuliahController extends Controller
     }
     public function show($id)
     {
-        $data = Matkul::find($id);
+        $cacheKey = 'matkul_' . $id;
+
+        $data = Cache::remember($cacheKey, 60, function () use ($id) {
+            return Matkul::query()
+                ->join('jurusan', 'matkuls.prodi', '=', 'jurusan.id')
+                ->join('kurikulums', 'matkuls.kurikulum', '=', 'kurikulums.id')
+                ->join('dosen_models', 'matkuls.dosen_pengampu', '=', 'dosen_models.id')
+                ->select('matkuls.*', 'jurusan.jurusan as nama_jurusan', 'kurikulums.nama_kurikulum', 'dosen_models.nama_lengkap as nama_dosen')
+                ->where('matkuls.id', $id)
+                ->first();
+        });
+
         if (!$data) {
             return new PostMatkul(false, 'Data Tidak Ditemukan', null);
         }
         return new PostMatkul(true, 'Success', $data);
     }
+
+
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
