@@ -30,16 +30,24 @@ class SemesterController extends Controller
             'nama_semester' => 'required|string|max:255',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date',
-            'status' => 'required|string|max:255',
+            // 'status' => 'required|string|max:255',
         ]);
 
         // Jika validasi gagal, kembalikan error
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
+        $data = $request->validated();
+
+        $data['status'] = 'Aktif';
+
+        $semesteraktif = Semester::where('status', 'Aktif')->first();
+
+        //update semester
+        $semesteraktif->update(['status' => 'Tidak Aktif']);
 
         // Jika validasi berhasil, buat semester baru
-        $semester = Semester::create($validator->validated());
+        $semester = Semester::create($data);
 
         // Kembalikan response berhasil dengan data semester
         return response()->json(['message' => 'Semester berhasil dibuat', 'data' => $semester], 201);
