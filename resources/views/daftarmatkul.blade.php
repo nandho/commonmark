@@ -123,6 +123,7 @@
                 <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
                     <div class="flex items-center">
                         <h4 class="mb-0 dark:text-white/80">Pencarian Matakuliah</h4>
+                        <a type="button" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85" href="{{ url('matkuladd') }}">Tambah Matkul</a>
                     </div>
                 </div>
                 <div class="flex-auto p-6">
@@ -394,6 +395,11 @@
 
                         if (response.data.data.length === 0) {
                             console.log('Tidak ada data yang sesuai dengan filter yang diberikan');
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Data Tidak Ditemukan',
+                                text: 'Mohon Maaf Data Tidak Ditemukan, Silahkan Periksa Kembali Data Yang Diinputkan'
+                            });
                         } else {
                             response.data.data.forEach(function(item) {
                                 // Membersihkan input sebelum menambahkan ke tabel
@@ -429,10 +435,62 @@
                 })
                 .catch(function(error) {
                     console.error('Terjadi kesalahan saat mengambil data matakuliah:', error);
+                    // Tampilkan sweet alert untuk kesalahan
                 });
         });
-
-
+        // Event listener untuk tombol details
+        $('#MKTable').on('click', '.details-btn', function() {
+            var matkulId = $(this).data('id');
+            // Redirect hanya jika kurikulumId ada
+            if (matkulId) {
+                window.location.href = '/matkul/' + matkulId;
+            } else {
+                console.error('ID kurikulum tidak valid');
+            }
+        });
+        // Inisialisasi DataTables pada tabel
+        var table = $('#MKTable').DataTable();
+        // Event listener untuk tombol delete
+        $('#MKTable').on('click', '.delete-btn', function() {
+            var deleteButton = $(this);
+            var matkulId = deleteButton.data('id');
+            // Confirm dialog untuk konfirmasi penghapusan
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Data akan dihapus secara permanen!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Panggil API delete
+                    axios.delete(`http://localhost:9000/api/Matakuliah/${matkulId}`)
+                        .then(function(response) {
+                            // Hapus baris tabel yang sesuai dengan data yang dihapus
+                            var row = deleteButton.parents('tr');
+                            table.row(row).remove().draw();
+                            // Tampilkan pesan sukses
+                            Swal.fire(
+                                'Terhapus!',
+                                'Data telah dihapus.',
+                                'success'
+                            );
+                        })
+                        .catch(function(error) {
+                            console.error('Terjadi kesalahan saat menghapus data:', error);
+                            // Tampilkan pesan error
+                            Swal.fire(
+                                'Gagal!',
+                                'Terjadi kesalahan saat menghapus data. Silakan coba lagi nanti.',
+                                'error'
+                            );
+                        });
+                }
+            });
+        });
 
         // Fungsi untuk membersihkan input dari karakter yang tidak aman
         function escapeHtml(unsafe) {

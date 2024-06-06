@@ -102,7 +102,10 @@ Route::get('/matkul', function () {
 Route::get('/matkuladd', function () {
     return view('addmatkul');
 });
-
+// matkul details
+Route::get('/matkul/{id}', function ($id) {
+    return view('detailsmatkul', ['id' => $id]);
+});
 // ---------------------Prodi-------------------
 // prodi add
 Route::get('/prodiadd', function () {

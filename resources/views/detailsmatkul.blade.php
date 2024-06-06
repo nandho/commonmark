@@ -120,11 +120,10 @@
                 <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
                     <div class="flex items-center">
                         <h4 class="mb-0 dark:text-white/80">Tambah Matakuliah Baru</h4>
-                        <a type="button" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85" href="{{ url('matkul') }}">Kembali</a>
+                        <a type="button" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85" href="{{ url('semester') }}">Kembali</a>
                     </div>
                 </div>
                 <div class="flex-auto p-6">
-
                     <!-- Modal untuk memilih dosen -->
                     <div id="dosen_modal" class="w-8/12 fixed inset-0 items-center justify-center p-4 bg-opacity-50  hidden">
                         <div class=" w-4/5 bg-white dark:bg-slate-850 shadow-xl rounded-lg p-6 mx-auto ">
