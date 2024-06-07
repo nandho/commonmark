@@ -175,10 +175,10 @@
                                     <label for="sifat_matkul" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Sifat Matakuliah</label>
                                     <select id="sifat_matkul" name="sifat_matkul" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
                                         <option value="">Pilih Sifat Matakuliah</option>
-                                        <option value="W">[W] Wajib Program Studi</option>
-                                        <option value="P">[P] Pilihan</option>
-                                        <option value="W">[W] Peminatan</option>
-                                        <option value="W">[W] Tugas Akhir/Skripsi/Tesis/Disertasi</option>
+                                        <option value="A">[W] Wajib Program Studi</option>
+                                        <option value="B">[P] Pilihan</option>
+                                        <option value="C">[W] Peminatan</option>
+                                        <option value="S">[W] Tugas Akhir/Skripsi/Tesis/Disertasi</option>
                                         <option value="W">[W] Wajib Nasional</option>
                                     </select>
                                 </div>
@@ -200,7 +200,7 @@
                                     <label for="kategori_matkul" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Kategori Matakuliah</label>
                                     <select id="kategori_matkul" name="kategori_matkul" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
                                         <option value="">Pilih Kategori Matakuliah</option>
-                                        <option value="Umum">UMUM</option>
+                                        <option value="1">UMUM</option>
                                     </select>
                                 </div>
                             </div>
@@ -209,8 +209,8 @@
                                     <label for="jenis_kurikulum" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Jenis Kurikulum</label>
                                     <select id="jenis_kurikulum" name="jenis_kurikulum" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
                                         <option value="">Pilih Jenis Kurikulum</option>
-                                        <option value="Inti">A - Inti</option>
-                                        <option value="Institusi">B - Institusi</option>
+                                        <option value="A">A - Inti</option>
+                                        <option value="B">B - Institusi</option>
                                     </select>
                                 </div>
                             </div>
@@ -605,7 +605,6 @@
             event.preventDefault();
             // Buat objek FormData
             const formData = new FormData();
-
             // Tambahkan nilai input yang dipilih ke objek FormData
             formData.append('prodi', document.getElementById('jurusan').value);
             formData.append('kurikulum', document.getElementById('nama_kurikulum').value);

@@ -337,10 +337,52 @@
                 document.getElementById('nama_matkul_singkat').textContent = matkulData.nama_matkul_singkat || '-';
                 document.getElementById('nama_matkul_english').textContent = matkulData.nama_matkul_english || '-';
                 document.getElementById('nama_matkul_singkat_english').textContent = matkulData.nama_matkul_singkat_english || '-';
-                document.getElementById('sifat_matkul').textContent = matkulData.sifat_matkul || '-';
+                // document.getElementById('sifat_matkul').textContent = matkulData.sifat_matkul || '-';
+                // Memodifikasi penampilan sifat_matkul berdasarkan nilai yang diterima
+                const sifatMatkulElement = document.getElementById('sifat_matkul');
+                switch (matkulData.sifat_matkul) {
+                    case 'A':
+                        sifatMatkulElement.textContent = '[W] Wajib Program Studi';
+                        break;
+                    case 'B':
+                        sifatMatkulElement.textContent = '[P] Pilihan';
+                        break;
+                    case 'C':
+                        sifatMatkulElement.textContent = '[W] Peminatan';
+                        break;
+                    case 'S':
+                        sifatMatkulElement.textContent = '[W] Tugas Akhir/Skripsi/Tesis/Disertasi';
+                        break;
+                    case 'W':
+                        sifatMatkulElement.textContent = '[W] Wajib Nasional';
+                        break;
+                    default:
+                        sifatMatkulElement.textContent = '-';
+                }
                 document.getElementById('tipe_matkul').textContent = matkulData.tipe_matkul || '-';
-                document.getElementById('kategori_matkul').textContent = matkulData.kategori_matkul || '-';
+                // document.getElementById('kategori_matkul').textContent = matkulData.kategori_matkul || '-';
+                const kategori_matkulElement = document.getElementById('kategori_matkul');
+                switch (matkulData.kategori_matkul) {
+                    case '1':
+                        kategori_matkulElement.textContent = 'Umum';
+                        break;
+                    default:
+                        kategori_matkulElement.textContent = '-';
+                }
                 document.getElementById('jenis_kurikulum').textContent = matkulData.jenis_kurikulum || '-';
+                document.getElementById('tipe_matkul').textContent = matkulData.tipe_matkul || '-';
+                // document.getElementById('kategori_matkul').textContent = matkulData.kategori_matkul || '-';
+                const jenis_kurikulumElement = document.getElementById('jenis_kurikulum');
+                switch (matkulData.jenis_kurikulum) {
+                    case 'A':
+                        jenis_kurikulumElement.textContent = 'Inti';
+                        break;
+                    case 'B':
+                        jenis_kurikulumElement.textContent = 'Institusi';
+                        break;
+                    default:
+                        jenis_kurikulumElement.textContent = '-';
+                }
                 document.getElementById('sks_kurikulum').textContent = matkulData.sks_kurikulum || '-';
                 document.getElementById('teori_sks').textContent = matkulData.teori_sks || '-';
                 document.getElementById('praktikum_sks').textContent = matkulData.praktikum_sks || '-';
@@ -371,12 +413,15 @@
                     var downloadButton = document.createElement('a');
                     downloadButton.textContent = 'Download File Silabus';
                     downloadButton.className = 'px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-700';
-                    downloadButton.href = matkulData.file_silabus;
+                    downloadButton.href = '{{ asset("") }}' + matkulData.file_silabus;
                     downloadButton.download = 'silabus.pdf'; // Nama file yang diunduh
-                    fileSilabusContainer.appendChild(downloadButton);
+                    file_silabus_container.appendChild(downloadButton);
                 } else {
-                    fileSilabusContainer.textContent = '-';
+                    file_silabus_container.textContent = '-';
                 }
+
+
+
                 document.getElementById('edit-link').href = `/edit-matkul/${matkulId}`;
             })
             .catch(error => {

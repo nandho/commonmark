@@ -480,91 +480,52 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Ambil ID dosen dari URL
-        const dosenId = window.location.pathname.split('/').pop();
+        // Ambil ID mata kuliah dari URL
+        const matkulId = window.location.pathname.split('/').pop();
 
-        // Definisikan fungsi untuk mengambil data dosen dari server
-        function fetchMatkulData(dosenId) {
-            axios.get(`http://localhost:9000/api/Matakuliah/${dosenId}`)
+        // Fungsi untuk mengisi dropdown jurusan
+        function fillJurusanDropdown(selectedJurusan) {
+            axios.get('http://localhost:9000/api/jurusan')
                 .then(response => {
-                    const matkulData = response.data.data;
-                    console.log(matkulData);
+                    const prodi = response.data.data;
+                    const jurusanSelect = document.getElementById('jurusan');
 
-                    // Isi form dengan data yang diterima
-                    document.getElementById('jurusan').value = matkulData.prodi || '-';
-                    document.getElementById('nama_kurikulum').value = matkulData.kurikulum || '-';
-                    document.getElementById('kode_matkul').value = matkulData.kode_matkul || '-';
-                    document.getElementById('nama_matkul_indonesia').value = matkulData.nama_matkul_indonesia || '-';
-                    document.getElementById('nama_matkul_english').value = matkulData.nama_matkul_english || '-';
-                    document.getElementById('sifat_matkul').value = matkulData.sifat_matkul || '-';
-                    document.getElementById('tipe_matkul').value = matkulData.tipe_matkul || '-';
-                    document.getElementById('kategori_matkul').value = matkulData.kategori_matkul || '-';
-                    document.getElementById('jenis_kurikulum').value = matkulData.jenis_kurikulum || '-';
-                    document.getElementById('sks_kurikulum').value = matkulData.sks_kurikulum || '-';
-                    document.getElementById('teori_sks').value = matkulData.teori_sks || '-';
-                    document.getElementById('praktikum_sks').value = matkulData.praktikum_sks || '-';
-                    document.getElementById('praklap_sks').value = matkulData.praklap_sks || '-';
-                    document.getElementById('paket_semester').value = matkulData.paket_semester || '-';
-                    document.getElementById('batas_ambil_ulang').value = matkulData.batas_ambil_ulang || '-';
-                    document.getElementById('status_matkul').value = matkulData.status_matkul || '-';
-                    document.getElementById('satuan_acara_perkulihan').value = matkulData.satuan_acara_perkulihan || '-';
-                    document.getElementById('bahan_ajar').value = matkulData.bahan_ajar || '-';
-                    document.getElementById('diktat').value = matkulData.diktat || '-';
-                    document.getElementById('dosen_id').value = matkulData.dosen_pengampu || '-';
-                    document.getElementById('tanggal_mulai_efektif').value = matkulData.tanggal_mulai_efektif || '-';
-                    document.getElementById('tanggal_selesai_efektif').value = matkulData.tanggal_selesai_efektif || '-';
-                    document.getElementById('bobot_nilai_minimal').value = matkulData.bobot_nilai_minimal || '-';
-                    document.getElementById('matkul_wajib').value = matkulData.matkul_wajib || '-';
-                    document.getElementById('matkul_pilihan').value = matkulData.matkul_pilihan || '-';
-                    document.getElementById('total_matkul').value = matkulData.total_matkul || '-';
-                    document.getElementById('sks_matkul_wajib').value = matkulData.sks_matkul_wajib || '-';
-                    document.getElementById('sks_matkul_pilihan').value = matkulData.sks_matkul_pilihan || '-';
-                    document.getElementById('total_sks_matkul').value = matkulData.total_sks_matkul || '-';
-                    document.getElementById('ipk_minimal').value = matkulData.ipk_minimal || '-';
-                    document.getElementById('abstraksi').value = matkulData.abstraksi || '-';
+                    prodi.forEach(prodi => {
+                        const option = document.createElement('option');
+                        option.value = prodi.id;
+                        option.textContent = prodi.jurusan;
+                        if (prodi.id === selectedJurusan) {
+                            option.selected = true;
+                        }
+                        jurusanSelect.appendChild(option);
+                    });
                 })
                 .catch(error => {
-                    console.error('Error fetching matkul data:', error);
+                    console.error('Error fetching prodi:', error);
                 });
         }
 
-        // Panggil fungsi untuk mengambil data mata kuliah dengan ID yang diambil dari URL
-        fetchMatkulData(dosenId);
+        // Fungsi untuk mengisi dropdown kurikulum
+        function fillKurikulumDropdown(selectedKurikulum) {
+            axios.get('http://localhost:9000/api/kurikulum')
+                .then(response => {
+                    const kurikulums = response.data.data;
+                    const kurikulumSelect = document.getElementById('nama_kurikulum');
 
-        // Mengambil data prodi dari API dan mengisi dropdown
-        axios.get('http://localhost:9000/api/jurusan')
-            .then(function(response) {
-                var prodi = response.data.data;
-                var prodiSelect = document.getElementById('jurusan');
-
-                prodi.forEach(function(prodi) {
-                    var option = document.createElement('option');
-                    option.value = prodi.id;
-                    option.textContent = prodi.jurusan;
-                    prodiSelect.appendChild(option);
+                    kurikulums.forEach(kurikulum => {
+                        const option = document.createElement('option');
+                        option.value = kurikulum.id;
+                        option.textContent = kurikulum.nama_kurikulum;
+                        if (kurikulum.id === selectedKurikulum) {
+                            option.selected = true;
+                        }
+                        kurikulumSelect.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching kurikulums:', error);
                 });
-            })
-            .catch(function(error) {
-                console.error('Error fetching prodi:', error);
-            });
-
-        // Mengambil data kurikulum dari API dan mengisi dropdown
-        axios.get('http://localhost:9000/api/kurikulum')
-            .then(function(response) {
-                var kurikulums = response.data.data;
-                var kurikulumSelect = document.getElementById('nama_kurikulum');
-
-                kurikulums.forEach(function(kurikulum) {
-                    var option = document.createElement('option');
-                    option.value = kurikulum.id;
-                    option.textContent = kurikulum.nama_kurikulum;
-                    kurikulumSelect.appendChild(option);
-                });
-            })
-            .catch(function(error) {
-                console.error('Error fetching kurikulums:', error);
-            });
-
+        }
         // Definisikan fungsi fetchDosen
         function fetchDosen() {
             const token = getCookie('token');
@@ -600,6 +561,17 @@
 
                 document.getElementById('dosen_modal').classList.add('hidden');
             });
+
+            function getCookie(name) {
+                let cookieArr = document.cookie.split(";");
+                for (let i = 0; i < cookieArr.length; i++) {
+                    let cookiePair = cookieArr[i].split("=");
+                    if (name == cookiePair[0].trim()) {
+                        return decodeURIComponent(cookiePair[1]);
+                    }
+                }
+                return null;
+            }
 
             axiosInstance.get('/dosen')
                 .then(function(response) {
@@ -641,48 +613,108 @@
             document.getElementById('dosen_modal').classList.add('hidden');
         });
 
+        // Fungsi untuk mengambil data mata kuliah dan mengisi form
+        function fetchMatkulData(matkulId) {
+            axios.get(`http://localhost:9000/api/Matakuliah/${matkulId}`)
+                .then(response => {
+                    const matkulData = response.data.data;
+                    // Isi form dengan data yang diterima
+                    document.getElementById('jurusan').value = matkulData.prodi || '';
+                    document.getElementById('nama_kurikulum').value = matkulData.kurikulum || '';
+                    document.getElementById('kode_matkul').value = matkulData.kode_matkul || '';
+                    document.getElementById('nama_matkul_indonesia').value = matkulData.nama_matkul_indonesia || '';
+                    document.getElementById('nama_matkul_english').value = matkulData.nama_matkul_english || '';
+                    document.getElementById('nama_matkul_singkat').value = matkulData.nama_matkul_singkat || '';
+                    document.getElementById('nama_matkul_singkat_english').value = matkulData.nama_matkul_singkat_english || '';
+                    document.getElementById('sifat_matkul').value = matkulData.sifat_matkul || '';
+                    document.getElementById('tipe_matkul').value = matkulData.tipe_matkul || '';
+                    document.getElementById('kategori_matkul').value = matkulData.kategori_matkul || '';
+                    document.getElementById('jenis_kurikulum').value = matkulData.jenis_kurikulum || '';
+                    document.getElementById('sks_kurikulum').value = matkulData.sks_kurikulum || '';
+                    document.getElementById('teori_sks').value = matkulData.teori_sks || '';
+                    document.getElementById('praktikum_sks').value = matkulData.praktikum_sks || '';
+                    document.getElementById('praklap_sks').value = matkulData.praklap_sks || '';
+                    document.getElementById('paket_semester').value = matkulData.paket_semester || '';
+                    document.getElementById('batas_ambil_ulang').value = matkulData.batas_ambil_ulang || '';
+                    document.getElementById('status_matkul').value = matkulData.status_matkul || '';
+                    document.getElementById('satuan_acara_perkulihan').value = matkulData.satuan_acara_perkulihan || '';
+                    document.getElementById('bahan_ajar').value = matkulData.bahan_ajar || '';
+                    document.getElementById('diktat').value = matkulData.diktat || '';
+                    // Isi nilai input teks dan input tersembunyi dengan data dosen pengampu yang telah dipilih
+                    document.getElementById('dosen_nama').value = matkulData.nama_dosen || '-';
+                    document.getElementById('dosen_id').value = matkulData.dosen_pengampu || '-';
+                    document.getElementById('tanggal_mulai_efektif').value = matkulData.tanggal_mulai_efektif || '';
+                    document.getElementById('tanggal_selesai_efektif').value = matkulData.tanggal_selesai_efektif || '';
+                    document.getElementById('bobot_nilai_minimal').value = matkulData.bobot_nilai_minimal || '';
+                    document.getElementById('matkul_wajib').value = matkulData.matkul_wajib || '';
+                    document.getElementById('matkul_pilihan').value = matkulData.matkul_pilihan || '';
+                    document.getElementById('total_matkul').value = matkulData.total_matkul || '';
+                    document.getElementById('sks_matkul_wajib').value = matkulData.sks_matkul_wajib || '';
+                    document.getElementById('sks_matkul_pilihan').value = matkulData.sks_matkul_pilihan || '';
+                    document.getElementById('total_sks_matkul').value = matkulData.total_sks_matkul || '';
+                    document.getElementById('ipk_minimal').value = matkulData.ipk_minimal || '';
+                    document.getElementById('abstraksi').value = matkulData.abstraksi || '';
+
+                    // Isi dropdown jurusan dan kurikulum
+                    fillJurusanDropdown(matkulData.prodi);
+                    fillKurikulumDropdown(matkulData.kurikulum);
+                })
+                .catch(error => {
+                    console.error('Error fetching matkul data:', error);
+                });
+        }
+
+        // Panggil fungsi untuk mengambil data mata kuliah dengan ID yang diambil dari URL
+        fetchMatkulData(matkulId);
+
+        // Event listener untuk form submit
         document.getElementById('mkForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            const formData = new FormData();
-            formData.append('prodi', document.getElementById('jurusan').value);
-            formData.append('kurikulum', document.getElementById('nama_kurikulum').value);
-            formData.append('kode_matkul', document.getElementById('kode_matkul').value);
-            formData.append('nama_matkul_indonesia', document.getElementById('nama_matkul_indonesia').value);
-            formData.append('nama_matkul_singkat', document.getElementById('nama_matkul_singkat').value);
-            formData.append('nama_matkul_english', document.getElementById('nama_matkul_english').value);
-            formData.append('nama_matkul_singkat_english', document.getElementById('nama_matkul_singkat_english').value);
-            formData.append('sifat_matkul', document.getElementById('sifat_matkul').value);
-            formData.append('tipe_matkul', document.getElementById('tipe_matkul').value);
-            formData.append('kategori_matkul', document.getElementById('kategori_matkul').value);
-            formData.append('jenis_kurikulum', document.getElementById('jenis_kurikulum').value);
-            formData.append('sks_kurikulum', document.getElementById('sks_kurikulum').value);
-            formData.append('teori_sks', document.getElementById('teori_sks').value);
-            formData.append('praktikum_sks', document.getElementById('praktikum_sks').value);
-            formData.append('praklap_sks', document.getElementById('praklap_sks').value);
-            formData.append('paket_semester', document.getElementById('paket_semester').value);
-            formData.append('batas_ambil_ulang', document.getElementById('batas_ambil_ulang').value);
-            formData.append('status_matkul', document.getElementById('status_matkul').value);
-            formData.append('satuan_acara_perkulihan', document.getElementById('satuan_acara_perkulihan').value);
-            formData.append('bahan_ajar', document.getElementById('bahan_ajar').value);
-            formData.append('diktat', document.getElementById('diktat').value);
-            formData.append('dosen_pengampu', document.getElementById('dosen_id').value);
-            formData.append('tanggal_mulai_efektif', document.getElementById('tanggal_mulai_efektif').value);
-            formData.append('tanggal_selesai_efektif', document.getElementById('tanggal_selesai_efektif').value);
-            formData.append('bobot_nilai_minimal', document.getElementById('bobot_nilai_minimal').value);
-            formData.append('matkul_wajib', document.getElementById('matkul_wajib').value);
-            formData.append('matkul_pilihan', document.getElementById('matkul_pilihan').value);
-            formData.append('total_matkul', document.getElementById('total_matkul').value);
-            formData.append('sks_matkul_wajib', document.getElementById('sks_matkul_wajib').value);
-            formData.append('sks_matkul_pilihan', document.getElementById('sks_matkul_pilihan').value);
-            formData.append('total_sks_matkul', document.getElementById('total_sks_matkul').value);
-            formData.append('ipk_minimal', document.getElementById('ipk_minimal').value);
-            formData.append('abstraksi', document.getElementById('abstraksi').value);
-            formData.append('file_silabus', document.getElementById('file_silabus').files[0]);
+
+            // Buat objek JSON dari nilai input
+            const data = {
+                prodi: document.getElementById('jurusan').value,
+                kurikulum: document.getElementById('nama_kurikulum').value,
+                kode_matkul: document.getElementById('kode_matkul').value,
+                nama_matkul_indonesia: document.getElementById('nama_matkul_indonesia').value,
+                nama_matkul_english: document.getElementById('nama_matkul_english').value,
+                nama_matkul_singkat: document.getElementById('nama_matkul_singkat').value,
+                nama_matkul_singkat_english: document.getElementById('nama_matkul_singkat_english').value,
+                sifat_matkul: document.getElementById('sifat_matkul').value,
+                tipe_matkul: document.getElementById('tipe_matkul').value,
+                kategori_matkul: document.getElementById('kategori_matkul').value,
+                jenis_kurikulum: document.getElementById('jenis_kurikulum').value,
+                sks_kurikulum: document.getElementById('sks_kurikulum').value,
+                teori_sks: document.getElementById('teori_sks').value,
+                praktikum_sks: document.getElementById('praktikum_sks').value,
+                praklap_sks: document.getElementById('praklap_sks').value,
+                paket_semester: document.getElementById('paket_semester').value,
+                batas_ambil_ulang: document.getElementById('batas_ambil_ulang').value,
+                status_matkul: document.getElementById('status_matkul').value,
+                satuan_acara_perkulihan: document.getElementById('satuan_acara_perkulihan').value,
+                bahan_ajar: document.getElementById('bahan_ajar').value,
+                diktat: document.getElementById('diktat').value,
+                dosen_pengampu: document.getElementById('dosen_id').value,
+                tanggal_mulai_efektif: document.getElementById('tanggal_mulai_efektif').value,
+                tanggal_selesai_efektif: document.getElementById('tanggal_selesai_efektif').value,
+                bobot_nilai_minimal: document.getElementById('bobot_nilai_minimal').value,
+                matkul_wajib: document.getElementById('matkul_wajib').value,
+                matkul_pilihan: document.getElementById('matkul_pilihan').value,
+                total_matkul: document.getElementById('total_matkul').value,
+                sks_matkul_wajib: document.getElementById('sks_matkul_wajib').value,
+                sks_matkul_pilihan: document.getElementById('sks_matkul_pilihan').value,
+                total_sks_matkul: document.getElementById('total_sks_matkul').value,
+                ipk_minimal: document.getElementById('ipk_minimal').value,
+                abstraksi: document.getElementById('abstraksi').value
+
+                // tambahkan input lainnya sesuai kebutuhan
+            };
 
             const baseUrl = window.location.origin;
 
-            axios.put(`${baseUrl}/api/Matakuliah/${dosenId}`, formData)
+            axios.put(`${baseUrl}/api/Matakuliah/${matkulId}`, data)
                 .then(response => {
+                    console.log('Data update berhasil dikirim:', response.data); // Tambahkan respon console log di sini
                     Swal.fire({
                         icon: 'success',
                         title: 'Berhasil',
@@ -690,7 +722,9 @@
                         timer: 2000,
                         showConfirmButton: false
                     }).then(() => {
-                        location.reload();
+
+                            location.reload(); // Reload halaman setelah 24 detik
+                        
                     });
                 })
                 .catch(error => {
@@ -715,23 +749,14 @@
                         });
                     }
                 });
+
         });
 
+        // Mengambil nama file saat file dipilih
         document.getElementById('file_silabus').addEventListener('change', function(e) {
-            var fileName = e.target.files[0].name;
+            const fileName = e.target.files[0].name;
             console.log('File dipilih:', fileName);
         });
-
-        function getCookie(name) {
-            let cookieArr = document.cookie.split(";");
-            for (let i = 0; i < cookieArr.length; i++) {
-                let cookiePair = cookieArr[i].split("=");
-                if (name == cookiePair[0].trim()) {
-                    return decodeURIComponent(cookiePair[1]);
-                }
-            }
-            return null;
-        }
     });
 </script>
 

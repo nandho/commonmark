@@ -407,7 +407,28 @@
                                 var kurikulum = escapeHtml(item.nama_kurikulum);
                                 var kode_matkul = escapeHtml(item.kode_matkul);
                                 var namaMK = escapeHtml(item.nama_matkul_indonesia);
-                                var sifatMK = escapeHtml(item.sifat_matkul);
+                                // var sifatMK = escapeHtml(item.sifat_matkul);
+                                // Memodifikasi penampilan sifat_matkul berdasarkan nilai yang diterima
+                                var sifatMK;
+                                switch (item.sifat_matkul) {
+                                    case 'A':
+                                        sifatMK = '[W] Wajib Program Studi';
+                                        break;
+                                    case 'B':
+                                        sifatMK = '[P] Pilihan';
+                                        break;
+                                    case 'C':
+                                        sifatMK = '[W] Peminatan';
+                                        break;
+                                    case 'S':
+                                        sifatMK = '[W] Tugas Akhir/Skripsi/Tesis/Disertasi';
+                                        break;
+                                    case 'W':
+                                        sifatMK = '[W] Wajib Nasional';
+                                        break;
+                                    default:
+                                        sifatMK = '-';
+                                }
                                 var paketsem = escapeHtml(item.paket_semester);
                                 var sksT = escapeHtml(item.teori_sks);
                                 var sksP = escapeHtml(item.praktikum_sks);
