@@ -79,7 +79,7 @@ Route::get('user/', loggeduser::class)->middleware('auth:api');
 Route::post('auth/logout', LogoutController::class)->name('logout');
 // Route::apiResource('testing/pmb', PmbApiController::class, ['except' => 'index']);
 
-
+Route::apiResource('semester',App\Http\Controllers\SemesterController::class);  
 
 
 Route::get('test', [test::class, 'index']);

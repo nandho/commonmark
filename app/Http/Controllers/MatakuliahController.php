@@ -20,45 +20,45 @@ class MatakuliahController extends Controller
     public function index()
     {
         $data = Matkul::all();
-        return new PostMatkul(true,'Success',$data);
+        return new PostMatkul(true, 'Success', $data);
     }
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-        'prodi' => 'required',
-        'kurikulum' => 'required',
-        'kode_matkul' => 'required',
-        'nama_matkul_indonesia' => 'required',
-        'nama_matkul_singkat' => 'required',
-        'nama_matkul_english' => 'required',
-        'nama_matkul_singkat_english' => 'required',
-        'sifat_matkul' => 'required',
-        'tipe_matkul' => 'required',
-        'kategori_matkul' => 'required',
-        'jenis_kurikulum' => 'required',
-        'sks_kurikulum' => 'required',
-        'teori_sks' => 'required',
-        'praktikum_sks' => 'required',
-        'praklap_sks' => 'required',
-        'paket_semester' => 'required',
-        'batas_ambil_ulang' => 'required',
-        'status_matkul' => 'required',
-        'satuan_acara_perkulihan' => 'required',
-        'bahan_ajar' => 'required',
-        'diktat' => 'required',
-        'dosen_pengampu' => 'required',
-        'tanggal_mulai_efektif' => 'required',
-        'tanggal_selesai_efektif' => 'required',
-        'bobot_nilai_minimal' => 'required',
-        'matkul_wajib' => 'required',
-        'matkul_pilihan' => 'required',
-        'total_matkul' => 'required',
-        'sks_matkul_wajib' => 'required',
-        'sks_matkul_pilihan' => 'required',
-        'total_sks_matkul' => 'required',
-        'ipk_minimal' => 'required',
-        'abstraksi' => 'required',
-        'file_silabus' => 'mimes:pdf|max:50000',
+        $validator = Validator::make($request->all(), [
+            'prodi' => 'required',
+            'kurikulum' => 'required',
+            'kode_matkul' => 'required',
+            'nama_matkul_indonesia' => 'required',
+            'nama_matkul_singkat' => 'required',
+            'nama_matkul_english' => 'required',
+            'nama_matkul_singkat_english' => 'required',
+            'sifat_matkul' => 'required',
+            'tipe_matkul' => 'required',
+            'kategori_matkul' => 'required',
+            'jenis_kurikulum' => 'required',
+            'sks_kurikulum' => 'required',
+            'teori_sks' => 'required',
+            'praktikum_sks' => 'required',
+            'praklap_sks' => 'required',
+            'paket_semester' => 'required',
+            'batas_ambil_ulang' => 'required',
+            'status_matkul' => 'required',
+            'satuan_acara_perkulihan' => 'required',
+            'bahan_ajar' => 'required',
+            'diktat' => 'required',
+            'dosen_pengampu' => 'required',
+            'tanggal_mulai_efektif' => 'required',
+            'tanggal_selesai_efektif' => 'required',
+            'bobot_nilai_minimal' => 'required',
+            'matkul_wajib' => 'required',
+            'matkul_pilihan' => 'required',
+            'total_matkul' => 'required',
+            'sks_matkul_wajib' => 'required',
+            'sks_matkul_pilihan' => 'required',
+            'total_sks_matkul' => 'required',
+            'ipk_minimal' => 'required',
+            'abstraksi' => 'required',
+            'file_silabus' => 'mimes:pdf|max:50000',
         ]);
 
         if ($validator->fails()) {
@@ -66,10 +66,10 @@ class MatakuliahController extends Controller
                 'success' => false,
                 'message' => 'Gagal Menyimpan Data',
                 'data' => $validator->errors()
-            ],400);
+            ], 400);
         }
         $requestData = $request->all();
-        $requestData['file_silabus'] = $request->file('file_silabus')->storePublicly('public/matkuls/file_silabus');
+        $requestData['file_silabus'] = $request->file('file_silabus')->storePublicly('public/matkuls/file_silabus/');
 
         try {
             $data = Matkul::create($requestData);
@@ -91,92 +91,101 @@ class MatakuliahController extends Controller
     {
         $data = Matkul::find($id);
         if (!$data) {
-            return new PostMatkul(false,'Data Tidak Ditemukan',null);
+            return new PostMatkul(false, 'Data Tidak Ditemukan', null);
         }
-        return new PostMatkul(true,'Success',$data);
+        return new PostMatkul(true, 'Success', $data);
     }
     public function update(Request $request, $id)
     {
-       $validator = Validator::make($request->all(),[
-        'prodi' => 'required',
-        'kurikulum' => 'required',
-        'kode_matkul' => 'required',
-        'nama_matkul_indonesia' => 'required',
-        'nama_matkul_singkat' => 'required',
-        'nama_matkul_english' => 'required',
-        'sifat_matkul' => 'required',
-        'tipe_matkul' => 'required',
-        'kategori_matkul' => 'required',
-        'jenis_kurikulum' => 'required',
-        'sks_kurikulum' => 'required',
-        'teori_sks' => 'required',
-        'praktikum_sks' => 'required',
-        'praklap_sks' => 'required',
-        'paket_semester' => 'required',
-        'batas_ambil_ulang' => 'required',
-        'status_matkul' => 'required',
-        'satuan_acara_perkulihan' => 'required',
-        'bahan_ajar' => 'required',
-        'diktat' => 'required',
-        'dosen_pengampu' => 'required',
-        'tanggal_mulai_efektif' => 'required',
-        'tanggal_selesai_efektif' => 'required',
-        'bobot_nilai_minimal' => 'required',
-        'matkul_wajib' => 'required',
-        'matkul_pilihan' => 'required',
-        'total_matkul' => 'required',
-        'sks_matkul_wajib' => 'required',
-        'sks_matkul_pilihan' => 'required',
-        'total_sks_matkul' => 'required',
-        'ipk_minimal' => 'required',
-        'abstraksi' => 'required',
-        'file_silabus' => 'mimes:pdf|max:10000',
+        $validator = Validator::make($request->validated(), [
+            'prodi' => 'required',
+            'kurikulum' => 'required',
+            'kode_matkul' => 'required',
+            'nama_matkul_indonesia' => 'required',
+            'nama_matkul_singkat' => 'required',
+            'nama_matkul_english' => 'required',
+            'sifat_matkul' => 'required',
+            'tipe_matkul' => 'required',
+            'kategori_matkul' => 'required',
+            'jenis_kurikulum' => 'required',
+            'sks_kurikulum' => 'required',
+            'teori_sks' => 'required',
+            'praktikum_sks' => 'required',
+            'praklap_sks' => 'required',
+            'paket_semester' => 'required',
+            'batas_ambil_ulang' => 'required',
+            'status_matkul' => 'required',
+            'satuan_acara_perkulihan' => 'required',
+            'bahan_ajar' => 'required',
+            'diktat' => 'required',
+            'dosen_pengampu' => 'required',
+            'tanggal_mulai_efektif' => 'required',
+            'tanggal_selesai_efektif' => 'required',
+            'bobot_nilai_minimal' => 'required',
+            'matkul_wajib' => 'required',
+            'matkul_pilihan' => 'required',
+            'total_matkul' => 'required',
+            'sks_matkul_wajib' => 'required',
+            'sks_matkul_pilihan' => 'required',
+            'total_sks_matkul' => 'required',
+            'ipk_minimal' => 'required',
+            'abstraksi' => 'required',
+            'file_silabus' => 'mimes:pdf|max:10000',
         ]);
-       if ($validator->fails()) {
-        return response()->json([
-            'success' => false,
-            'message' => 'Gagal Menyimpan Data',
-            'data' => $validator->errors()
-        ],400);
-       }
-       try{
-        $data = Matkul::find($id);
-        if (!$data) {
-            return new PostMatkul(false,'Data Tidak Ditemukan',null);
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal Menyimpan Data',
+                'data' => $validator->errors()
+            ], 400);
         }
-        $data->update($request->all());
-        return new PostMatkul(true,'Success',$data);
-       } catch (\Exception $e) {
-        return response()->json([
-            'success' => false,
-            'message' => 'Gagal Menyimpan Data',
-            'data' => $e->getMessage()
-        ],500);
-       }
+        try {
+            $data = Matkul::find($id);
+
+            $filename_lama = $data->file_silabus;
+
+            if (Storage::exists($filename_lama)) {
+                Storage::delete($filename_lama);
+            }
+
+            if (!$data) {
+                return new PostMatkul(false, 'Data Tidak Ditemukan', null);
+            }
+            $data->update($request->all());
+            return new PostMatkul(true, 'Success', $data);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal Menyimpan Data',
+                'data' => $e->getMessage()
+            ], 500);
+        }
     }
     public function destroy($id)
     {
         $data = Matkul::find($id);
         if (!$data) {
-            return new PostMatkul(false,'Data Tidak Ditemukan',null);
+            return new PostMatkul(false, 'Data Tidak Ditemukan', null);
         }
         $data->delete();
-        return new PostMatkul(true,'Success',$data);
+        return new PostMatkul(true, 'Success', $data);
     }
 
     public function matakuliahquery(Request $request)
     {
-        if ($request->has('kurikulum')) $kurikulum_id = $request->query('kurikulum');
-        if ($request->has('tipe_matkul')) $tipe_matkul = $request->query('tipe_matkul');
+        if ($request->has('kurikulum'))
+            $kurikulum_id = $request->query('kurikulum');
+        if ($request->has('tipe_matkul'))
+            $tipe_matkul = $request->query('tipe_matkul');
         // if ($request->has('tipe_matkul')) $sifat_matkul = $request->query('kurikulum');
 
         $data = DB::table('matkuls')
             ->join('kurikulum', 'matkuls.kurikulum', '=', 'kurikulum.id')
-            ->where('matkuls.kurikulum',$kurikulum_id)
-            ->where('matkuls.tipe_matkul',$tipe_matkul)->get();
-            // ->where('matkuls.sifat_matkul',$sifat_matkul);
+            ->where('matkuls.kurikulum', $kurikulum_id)
+            ->where('matkuls.tipe_matkul', $tipe_matkul)->get();
+        // ->where('matkuls.sifat_matkul',$sifat_matkul);
 
-        return new PostMatkul(true,'Data berhasil di dapatkan', $data);
+        return new PostMatkul(true, 'Data berhasil di dapatkan', $data);
     }
 }
 
