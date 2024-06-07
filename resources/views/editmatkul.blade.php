@@ -557,30 +557,27 @@
 
                                     </div>
 
-                                </div>
-                                <div class="w-full max-w-full px-3 shrink-0">
-                                    <h6 class="leading-normal uppercase">Data Silabus Matakuliah</h6>
-                                    <div class="flex flex-wrap -mx-3">
-                                        <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
-                                            <div class="mb-4">
-                                                <label for="abstraksi"
-                                                    class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Abstraksi</label>
-                                                <textarea type="text" name="abstraksi" id="abstraksi"
-                                                    class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"></textarea>
-                                            </div>
-                                        </div>
-                                        <!-- Input file untuk Silabus -->
-                                        <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
-                                            <div class="mb-4">
-                                                <label for="file_silabus"
-                                                    class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">File
-                                                    Silabus</label>
-                                                <input type="file" id="file_silabus" name="file_silabus"
-                                                    class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
-                                                <small class="text-gray-500">[Maksimum ukuran file : 5 MB]</small>
-                                            </div>
+                            </div>
+                            <div class="w-full max-w-full px-3 shrink-0">
+                                <h6 class="leading-normal uppercase">Data Silabus Matakuliah</h6>
+                                <div class="flex flex-wrap -mx-3">
+                                    <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
+                                        <div class="mb-4">
+                                            <label for="abstraksi" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Abstraksi</label>
+                                            <textarea type="text" name="abstraksi" id="abstraksi" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"></textarea>
                                         </div>
                                     </div>
+                                    <!-- Input file untuk Silabus -->
+                                    <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
+                                        <div class="mb-4">
+                                            <label for="file_silabus" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">File Silabus</label>
+                                            <input type="file" id="file_silabus" name="file_silabus" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
+                                            <div id="file_silabus_container"></div>
+                                            <small class="text-gray-500">[Maksimum ukuran file : 5 MB]</small>
+
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </form>
@@ -732,66 +729,65 @@
                 document.getElementById('dosen_modal').classList.add('hidden');
             });
 
-            // Fungsi untuk mengambil data mata kuliah dan mengisi form
-            function fetchMatkulData(matkulId) {
-                axios.get(`http://localhost:9000/api/Matakuliah/${matkulId}`)
-                    .then(response => {
-                        const matkulData = response.data.data;
-                        // Isi form dengan data yang diterima
-                        document.getElementById('jurusan').value = matkulData.prodi || '';
-                        document.getElementById('nama_kurikulum').value = matkulData.kurikulum || '';
-                        document.getElementById('kode_matkul').value = matkulData.kode_matkul || '';
-                        document.getElementById('nama_matkul_indonesia').value = matkulData
-                            .nama_matkul_indonesia || '';
-                        document.getElementById('nama_matkul_english').value = matkulData.nama_matkul_english ||
-                            '';
-                        document.getElementById('nama_matkul_singkat').value = matkulData.nama_matkul_singkat ||
-                            '';
-                        document.getElementById('nama_matkul_singkat_english').value = matkulData
-                            .nama_matkul_singkat_english || '';
-                        document.getElementById('sifat_matkul').value = matkulData.sifat_matkul || '';
-                        document.getElementById('tipe_matkul').value = matkulData.tipe_matkul || '';
-                        document.getElementById('kategori_matkul').value = matkulData.kategori_matkul || '';
-                        document.getElementById('jenis_kurikulum').value = matkulData.jenis_kurikulum || '';
-                        document.getElementById('sks_kurikulum').value = matkulData.sks_kurikulum || '';
-                        document.getElementById('teori_sks').value = matkulData.teori_sks || '';
-                        document.getElementById('praktikum_sks').value = matkulData.praktikum_sks || '';
-                        document.getElementById('praklap_sks').value = matkulData.praklap_sks || '';
-                        document.getElementById('paket_semester').value = matkulData.paket_semester || '';
-                        document.getElementById('batas_ambil_ulang').value = matkulData.batas_ambil_ulang || '';
-                        document.getElementById('status_matkul').value = matkulData.status_matkul || '';
-                        document.getElementById('satuan_acara_perkulihan').value = matkulData
-                            .satuan_acara_perkulihan || '';
-                        document.getElementById('bahan_ajar').value = matkulData.bahan_ajar || '';
-                        document.getElementById('diktat').value = matkulData.diktat || '';
-                        // Isi nilai input teks dan input tersembunyi dengan data dosen pengampu yang telah dipilih
-                        document.getElementById('dosen_nama').value = matkulData.nama_dosen || '-';
-                        document.getElementById('dosen_id').value = matkulData.dosen_pengampu || '-';
-                        document.getElementById('tanggal_mulai_efektif').value = matkulData
-                            .tanggal_mulai_efektif || '';
-                        document.getElementById('tanggal_selesai_efektif').value = matkulData
-                            .tanggal_selesai_efektif || '';
-                        document.getElementById('bobot_nilai_minimal').value = matkulData.bobot_nilai_minimal ||
-                            '';
-                        document.getElementById('matkul_wajib').value = matkulData.matkul_wajib || '';
-                        document.getElementById('matkul_pilihan').value = matkulData.matkul_pilihan || '';
-                        document.getElementById('total_matkul').value = matkulData.total_matkul || '';
-                        document.getElementById('sks_matkul_wajib').value = matkulData.sks_matkul_wajib || '';
-                        document.getElementById('sks_matkul_pilihan').value = matkulData.sks_matkul_pilihan ||
-                            '';
-                        document.getElementById('total_sks_matkul').value = matkulData.total_sks_matkul || '';
-                        document.getElementById('ipk_minimal').value = matkulData.ipk_minimal || '';
-                        document.getElementById('abstraksi').value = matkulData.abstraksi || '';
-
-
-                        // Isi dropdown jurusan dan kurikulum
-                        fillJurusanDropdown(matkulData.prodi);
-                        fillKurikulumDropdown(matkulData.kurikulum);
-                    })
-                    .catch(error => {
-                        console.error('Error fetching matkul data:', error);
-                    });
-            }
+        // Fungsi untuk mengambil data mata kuliah dan mengisi form
+        function fetchMatkulData(matkulId) {
+            axios.get(`http://localhost:9000/api/Matakuliah/${matkulId}`)
+                .then(response => {
+                    const matkulData = response.data.data;
+                    // Isi form dengan data yang diterima
+                    document.getElementById('jurusan').value = matkulData.prodi || '';
+                    document.getElementById('nama_kurikulum').value = matkulData.kurikulum || '';
+                    document.getElementById('kode_matkul').value = matkulData.kode_matkul || '';
+                    document.getElementById('nama_matkul_indonesia').value = matkulData.nama_matkul_indonesia || '';
+                    document.getElementById('nama_matkul_english').value = matkulData.nama_matkul_english || '';
+                    document.getElementById('nama_matkul_singkat').value = matkulData.nama_matkul_singkat || '';
+                    document.getElementById('nama_matkul_singkat_english').value = matkulData.nama_matkul_singkat_english || '';
+                    document.getElementById('sifat_matkul').value = matkulData.sifat_matkul || '';
+                    document.getElementById('tipe_matkul').value = matkulData.tipe_matkul || '';
+                    document.getElementById('kategori_matkul').value = matkulData.kategori_matkul || '';
+                    document.getElementById('jenis_kurikulum').value = matkulData.jenis_kurikulum || '';
+                    document.getElementById('sks_kurikulum').value = matkulData.sks_kurikulum || '';
+                    document.getElementById('teori_sks').value = matkulData.teori_sks || '';
+                    document.getElementById('praktikum_sks').value = matkulData.praktikum_sks || '';
+                    document.getElementById('praklap_sks').value = matkulData.praklap_sks || '';
+                    document.getElementById('paket_semester').value = matkulData.paket_semester || '';
+                    document.getElementById('batas_ambil_ulang').value = matkulData.batas_ambil_ulang || '';
+                    document.getElementById('status_matkul').value = matkulData.status_matkul || '';
+                    document.getElementById('satuan_acara_perkulihan').value = matkulData.satuan_acara_perkulihan || '';
+                    document.getElementById('bahan_ajar').value = matkulData.bahan_ajar || '';
+                    document.getElementById('diktat').value = matkulData.diktat || '';
+                    // Isi nilai input teks dan input tersembunyi dengan data dosen pengampu yang telah dipilih
+                    document.getElementById('dosen_nama').value = matkulData.nama_dosen || '-';
+                    document.getElementById('dosen_id').value = matkulData.dosen_pengampu || '-';
+                    document.getElementById('tanggal_mulai_efektif').value = matkulData.tanggal_mulai_efektif || '';
+                    document.getElementById('tanggal_selesai_efektif').value = matkulData.tanggal_selesai_efektif || '';
+                    document.getElementById('bobot_nilai_minimal').value = matkulData.bobot_nilai_minimal || '';
+                    document.getElementById('matkul_wajib').value = matkulData.matkul_wajib || '';
+                    document.getElementById('matkul_pilihan').value = matkulData.matkul_pilihan || '';
+                    document.getElementById('total_matkul').value = matkulData.total_matkul || '';
+                    document.getElementById('sks_matkul_wajib').value = matkulData.sks_matkul_wajib || '';
+                    document.getElementById('sks_matkul_pilihan').value = matkulData.sks_matkul_pilihan || '';
+                    document.getElementById('total_sks_matkul').value = matkulData.total_sks_matkul || '';
+                    document.getElementById('ipk_minimal').value = matkulData.ipk_minimal || '';
+                    document.getElementById('abstraksi').value = matkulData.abstraksi || '';
+                    // Tampilkan nama file silabus jika ada
+                    const fileSilabusContainer = document.getElementById('file_silabus_container');
+                    if (matkulData.file_silabus) {
+                        const fileNameSpan = document.createElement('span');
+                        fileNameSpan.textContent = matkulData.file_silabus.split('/').pop(); // Menampilkan nama file saja
+                        fileNameSpan.className = 'text-gray-700';
+                        fileSilabusContainer.appendChild(fileNameSpan);
+                    } else {
+                        fileSilabusContainer.textContent = '-';
+                    }
+                    // Isi dropdown jurusan dan kurikulum
+                    fillJurusanDropdown(matkulData.prodi);
+                    fillKurikulumDropdown(matkulData.kurikulum);
+                })
+                .catch(error => {
+                    console.error('Error fetching matkul data:', error);
+                });
+        }
 
             // Panggil fungsi untuk mengambil data mata kuliah dengan ID yang diambil dari URL
             fetchMatkulData(matkulId);
@@ -847,50 +843,45 @@
 
                 const baseUrl = window.location.origin;
 
-                axios.post(`${baseUrl}/api/Matakuliah/${matkulId}`, data, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    })
-                    .then(response => {
-                        console.log('Data update berhasil dikirim:', response
-                        .data); // Tambahkan respon console log di sini
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil',
-                            text: 'Data mata kuliah berhasil diperbarui!',
-                            timer: 2000,
-                            showConfirmButton: false
-                        }).then(() => {
+            axios.put(`${baseUrl}/api/Matakuliah/${matkulId}`, data)
+                .then(response => {
+                    console.log('Data update berhasil dikirim:', response.data); // Tambahkan respon console log di sini
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil',
+                        text: 'Data mata kuliah berhasil diperbarui!',
+                        timer: 2000,
+                        showConfirmButton: false
+                    }).then(() => {
 
                             location.reload(); // Reload halaman setelah 24 detik
 
-                        });
-                    })
-                    .catch(error => {
-                        if (error.response) {
-                            console.error('Error Response:', error.response);
-                            const errors = error.response.data.error;
-                            let errorMessages = '';
-                            for (const key in errors) {
-                                errorMessages += `<p class="text-red-500">${errors[key]}</p>`;
-                            }
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Gagal',
-                                html: errorMessages
-                            });
-                        } else {
-                            console.error('Error:', error.message);
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Gagal',
-                                text: 'Terjadi kesalahan saat memperbarui data mata kuliah.'
-                            });
-                        }
                     });
+                })
+                .catch(error => {
+                    if (error.response) {
+                        console.error('Error Response:', error.response);
+                        const errors = error.response.data.error;
+                        let errorMessages = '';
+                        for (const key in errors) {
+                            errorMessages += `<p class="text-red-500">${errors[key]}</p>`;
+                        }
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal',
+                            html: errorMessages
+                        });
+                    } else {
+                        console.error('Error:', error.message);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal',
+                            text: 'Terjadi kesalahan saat memperbarui data mata kuliah.'
+                        });
+                    }
+                });
 
-            });
+        });
 
             // Mengambil nama file saat file dipilih
             document.getElementById('file_silabus').addEventListener('change', function(e) {

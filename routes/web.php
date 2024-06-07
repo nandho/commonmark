@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\MatakuliahController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -111,6 +111,8 @@ Route::get('/edit-matkul/{id}', function ($id) {
     return view('editmatkul', ['id' => $id]);
 });
 
+// update data
+Route::put('/Matakuliah/{id}', [MatakuliahController::class, 'update']);
 // ---------------------Prodi-------------------
 // prodi add
 Route::get('/prodiadd', function () {
