@@ -39,14 +39,14 @@
     <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4 overflow-y-auto antialiased transition-transform duration-200 -translate-x-full bg-white border-0 shadow-xl dark:shadow-none dark:bg-slate-850 max-w-64 ease-nav-brand z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0" aria-expanded="false">
         <div class="flex items-center">
             <i class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times dark:text-white text-slate-400 xl:hidden" sidenav-close></i>
-            <a class="flex items-center px-2 py-3 m-0 text-sm whitespace-nowrap dark:text-white text-slate-700" href="" target="_blank">
+            <!-- <a class="flex items-center px-2 py-3 m-0 text-sm whitespace-nowrap dark:text-white text-slate-700" href="" target="_blank">
                 <img src="{{ asset('assets/img/akprada-header.png') }}" loading="lazy" class="inline h-10 max-w-full transition-all duration-200 dark:hidden ease-nav-brand max-h-10" alt="main_logo" />
                 <img src="{{ asset('assets/img/akprada-header.png') }}" loading="lazy" class="hidden h-8 max-w-full transition-all duration-200 dark:inline ease-nav-brand max-h-8" alt="main_logo" />
                 <div class="ml-1 font-semibold transition-all duration-200 ease-nav-brand text-ellipsis overflow-hidden whitespace-nowrap">
                     <span class="block">Akademi Pariwisata</span>
                     <span class="block">Dharma Nusantara Sakti</span>
                 </div>
-            </a>
+            </a> -->
         </div>
         <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent" />
 
@@ -373,7 +373,7 @@
                     </div>
                 </div>
             </div>
-            
+
             @yield('content')
         </div>
     </div>

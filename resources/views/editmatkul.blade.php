@@ -124,6 +124,8 @@
                     </div>
                 </div>
                 <div class="flex-auto p-6">
+
+
                     <!-- Modal untuk memilih dosen -->
                     <div id="dosen_modal" class="w-8/12 fixed inset-0 items-center justify-center p-4 bg-opacity-50 hidden">
                         <div class="w-4/5 bg-white dark:bg-slate-850 shadow-xl rounded-lg p-6 mx-auto">
@@ -144,6 +146,7 @@
                         </div>
                     </div>
                     <form id="mkForm" enctype="multipart/form-data">
+                        <button type="submit" id="simpanMKBtn" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Simpan</button>
 
                         <h6 class="leading-normal uppercase">Tambah Matakuliah</h6>
                         <div class="flex flex-wrap -mx-3">
@@ -175,10 +178,10 @@
                                     <label for="sifat_matkul" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Sifat Matakuliah</label>
                                     <select id="sifat_matkul" name="sifat_matkul" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
                                         <option value="">Pilih Sifat Matakuliah</option>
-                                        <option value="W">[W] Wajib Program Studi</option>
-                                        <option value="P">[P] Pilihan</option>
-                                        <option value="W">[W] Peminatan</option>
-                                        <option value="W">[W] Tugas Akhir/Skripsi/Tesis/Disertasi</option>
+                                        <option value="A">[W] Wajib Program Studi</option>
+                                        <option value="B">[P] Pilihan</option>
+                                        <option value="C">[W] Peminatan</option>
+                                        <option value="S">[W] Tugas Akhir/Skripsi/Tesis/Disertasi</option>
                                         <option value="W">[W] Wajib Nasional</option>
                                     </select>
                                 </div>
@@ -200,7 +203,7 @@
                                     <label for="kategori_matkul" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Kategori Matakuliah</label>
                                     <select id="kategori_matkul" name="kategori_matkul" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
                                         <option value="">Pilih Kategori Matakuliah</option>
-                                        <option value="Umum">UMUM</option>
+                                        <option value="1">UMUM</option>
                                     </select>
                                 </div>
                             </div>
@@ -209,8 +212,8 @@
                                     <label for="jenis_kurikulum" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Jenis Kurikulum</label>
                                     <select id="jenis_kurikulum" name="jenis_kurikulum" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
                                         <option value="">Pilih Jenis Kurikulum</option>
-                                        <option value="Inti">A - Inti</option>
-                                        <option value="Institusi">B - Institusi</option>
+                                        <option value="A">A - Inti</option>
+                                        <option value="B">B - Institusi</option>
                                     </select>
                                 </div>
                             </div>
@@ -462,7 +465,6 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" id="simpanMKBtn" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Simpan</button>
                     </form>
                 </div>
             </div>
@@ -478,17 +480,67 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Ambil ID dosen dari URL
+        const dosenId = window.location.pathname.split('/').pop();
+
+        // Definisikan fungsi untuk mengambil data dosen dari server
+        function fetchMatkulData(dosenId) {
+            axios.get(`http://localhost:9000/api/Matakuliah/${dosenId}`)
+                .then(response => {
+                    const matkulData = response.data.data;
+                    console.log(matkulData);
+
+                    // Isi form dengan data yang diterima
+                    document.getElementById('jurusan').value = matkulData.prodi || '-';
+                    document.getElementById('nama_kurikulum').value = matkulData.kurikulum || '-';
+                    document.getElementById('kode_matkul').value = matkulData.kode_matkul || '-';
+                    document.getElementById('nama_matkul_indonesia').value = matkulData.nama_matkul_indonesia || '-';
+                    document.getElementById('nama_matkul_english').value = matkulData.nama_matkul_english || '-';
+                    document.getElementById('sifat_matkul').value = matkulData.sifat_matkul || '-';
+                    document.getElementById('tipe_matkul').value = matkulData.tipe_matkul || '-';
+                    document.getElementById('kategori_matkul').value = matkulData.kategori_matkul || '-';
+                    document.getElementById('jenis_kurikulum').value = matkulData.jenis_kurikulum || '-';
+                    document.getElementById('sks_kurikulum').value = matkulData.sks_kurikulum || '-';
+                    document.getElementById('teori_sks').value = matkulData.teori_sks || '-';
+                    document.getElementById('praktikum_sks').value = matkulData.praktikum_sks || '-';
+                    document.getElementById('praklap_sks').value = matkulData.praklap_sks || '-';
+                    document.getElementById('paket_semester').value = matkulData.paket_semester || '-';
+                    document.getElementById('batas_ambil_ulang').value = matkulData.batas_ambil_ulang || '-';
+                    document.getElementById('status_matkul').value = matkulData.status_matkul || '-';
+                    document.getElementById('satuan_acara_perkulihan').value = matkulData.satuan_acara_perkulihan || '-';
+                    document.getElementById('bahan_ajar').value = matkulData.bahan_ajar || '-';
+                    document.getElementById('diktat').value = matkulData.diktat || '-';
+                    document.getElementById('dosen_id').value = matkulData.dosen_pengampu || '-';
+                    document.getElementById('tanggal_mulai_efektif').value = matkulData.tanggal_mulai_efektif || '-';
+                    document.getElementById('tanggal_selesai_efektif').value = matkulData.tanggal_selesai_efektif || '-';
+                    document.getElementById('bobot_nilai_minimal').value = matkulData.bobot_nilai_minimal || '-';
+                    document.getElementById('matkul_wajib').value = matkulData.matkul_wajib || '-';
+                    document.getElementById('matkul_pilihan').value = matkulData.matkul_pilihan || '-';
+                    document.getElementById('total_matkul').value = matkulData.total_matkul || '-';
+                    document.getElementById('sks_matkul_wajib').value = matkulData.sks_matkul_wajib || '-';
+                    document.getElementById('sks_matkul_pilihan').value = matkulData.sks_matkul_pilihan || '-';
+                    document.getElementById('total_sks_matkul').value = matkulData.total_sks_matkul || '-';
+                    document.getElementById('ipk_minimal').value = matkulData.ipk_minimal || '-';
+                    document.getElementById('abstraksi').value = matkulData.abstraksi || '-';
+                })
+                .catch(error => {
+                    console.error('Error fetching matkul data:', error);
+                });
+        }
+
+        // Panggil fungsi untuk mengambil data mata kuliah dengan ID yang diambil dari URL
+        fetchMatkulData(dosenId);
+
         // Mengambil data prodi dari API dan mengisi dropdown
         axios.get('http://localhost:9000/api/jurusan')
             .then(function(response) {
-                var prodi = response.data.data; // Mengambil array jurusan dari properti 'data'
-                console.log(prodi);
+                var prodi = response.data.data;
                 var prodiSelect = document.getElementById('jurusan');
 
                 prodi.forEach(function(prodi) {
                     var option = document.createElement('option');
-                    option.value = prodi.id; // Asumsikan 'id' adalah identifikasi unik semester
-                    option.textContent = prodi.jurusan; // Asumsikan 'nama_semester' adalah nama semester
+                    option.value = prodi.id;
+                    option.textContent = prodi.jurusan;
                     prodiSelect.appendChild(option);
                 });
             })
@@ -504,8 +556,8 @@
 
                 kurikulums.forEach(function(kurikulum) {
                     var option = document.createElement('option');
-                    option.value = kurikulum.id; // Asumsikan 'id' adalah identifikasi unik kurikulum
-                    option.textContent = kurikulum.nama_kurikulum; // Asumsikan 'nama_kurikulum' adalah nama kurikulum
+                    option.value = kurikulum.id;
+                    option.textContent = kurikulum.nama_kurikulum;
                     kurikulumSelect.appendChild(option);
                 });
             })
@@ -515,16 +567,16 @@
 
         // Definisikan fungsi fetchDosen
         function fetchDosen() {
-            const token = getCookie('token'); // Ambil token dari cookie
+            const token = getCookie('token');
             if (!token) {
                 console.error('Token is not defined');
-                return; // Token tidak ditemukan, hentikan eksekusi script
+                return;
             }
 
             const axiosInstance = axios.create({
-                baseURL: 'http://localhost:9000/api', // Gunakan HTTPS
+                baseURL: 'http://localhost:9000/api',
                 headers: {
-                    'Authorization': `Bearer ${token}` // Sertakan token yang aman
+                    'Authorization': `Bearer ${token}`
                 }
             });
 
@@ -532,7 +584,7 @@
                 "paging": true,
                 "searching": true,
                 "ordering": true,
-                "destroy": true, // Tambahkan opsi destroy agar DataTable bisa diinisialisasi ulang
+                "destroy": true,
                 "dom": "<'flex flex-row justify-between'<'flex flex-col'f><'flex flex-col'l>>" +
                     "<'dt-table'rt>" +
                     "<'flex flex-row justify-between'<'flex flex-col'i><'flex flex-col'p>>"
@@ -540,30 +592,24 @@
 
             // Event listener untuk tombol pilih dosen menggunakan data-id sebagai selector
             $('#dosen_table').on('click', 'button[data-id]', function() {
-                var dosenId = $(this).data('id'); // Ambil ID dosen dari data atribut tombol
-                var dosenNama = $(this).closest('tr').find('td:nth-child(2)').text(); // Ambil nama dosen dari baris tabel
+                var dosenId = $(this).data('id');
+                var dosenNama = $(this).closest('tr').find('td:nth-child(2)').text();
 
-                // Set nilai dosen_id dengan ID dosen yang dipilih
                 document.getElementById('dosen_id').value = dosenId;
-                // Set nilai dosen_nama dengan nama dosen yang dipilih
                 document.getElementById('dosen_nama').value = dosenNama;
 
-                // Tutup modal
                 document.getElementById('dosen_modal').classList.add('hidden');
             });
 
-            // Gunakan HTTPS untuk memanggil API
             axiosInstance.get('/dosen')
                 .then(function(response) {
                     if (response.data && Array.isArray(response.data.data)) {
-                        table.clear(); // Bersihkan tabel sebelum mengisi dengan data baru
+                        table.clear();
                         response.data.data.forEach(function(item) {
-                            // Membersihkan input sebelum menambahkan ke tabel
-                            var iddosen = escapeHtml(item.id); // Gunakan id sebagai value
+                            var iddosen = escapeHtml(item.id);
                             var nidndosen = escapeHtml(item.nidn);
                             var namaLengkap = escapeHtml(item.nama_lengkap);
 
-                            // Menambahkan tombol pilih dosen secara dinamis
                             table.row.add([
                                 nidndosen,
                                 namaLengkap,
@@ -578,9 +624,7 @@
                     console.error('Terjadi kesalahan saat mengambil data dosen:', error);
                 });
 
-            // Fungsi untuk membersihkan input dari karakter yang tidak aman
             function escapeHtml(unsafe) {
-                // Cek apakah unsafe adalah string sebelum membersihkan
                 if (typeof unsafe !== 'string') {
                     return unsafe;
                 }
@@ -588,25 +632,18 @@
             }
         }
 
-        // Event listener untuk membuka modal dosen
         document.getElementById('pilih_dosen_btn').addEventListener('click', function() {
             document.getElementById('dosen_modal').classList.remove('hidden');
             fetchDosen();
         });
 
-        // Event listener untuk menutup modal dosen
         document.getElementById('close_modal_btn').addEventListener('click', function() {
             document.getElementById('dosen_modal').classList.add('hidden');
         });
 
-
-        // Event listener untuk submit form
         document.getElementById('mkForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            // Buat objek FormData
             const formData = new FormData();
-
-            // Tambahkan nilai input yang dipilih ke objek FormData
             formData.append('prodi', document.getElementById('jurusan').value);
             formData.append('kurikulum', document.getElementById('nama_kurikulum').value);
             formData.append('kode_matkul', document.getElementById('kode_matkul').value);
@@ -644,12 +681,12 @@
 
             const baseUrl = window.location.origin;
 
-            axios.post(`${baseUrl}/api/Matakuliah`, formData)
+            axios.put(`${baseUrl}/api/Matakuliah/${dosenId}`, formData)
                 .then(response => {
                     Swal.fire({
                         icon: 'success',
                         title: 'Berhasil',
-                        text: 'Jurusan berhasil ditambahkan!',
+                        text: 'Data mata kuliah berhasil diperbarui!',
                         timer: 2000,
                         showConfirmButton: false
                     }).then(() => {
@@ -674,19 +711,17 @@
                         Swal.fire({
                             icon: 'error',
                             title: 'Gagal',
-                            text: 'Terjadi kesalahan saat menambahkan jurusan.'
+                            text: 'Terjadi kesalahan saat memperbarui data mata kuliah.'
                         });
                     }
                 });
         });
 
-        // Event listener untuk input file
         document.getElementById('file_silabus').addEventListener('change', function(e) {
             var fileName = e.target.files[0].name;
-            console.log('File dipilih:', fileName); // Periksa apakah event listener ini dijalankan saat file dipilih
+            console.log('File dipilih:', fileName);
         });
 
-        // Fungsi untuk membaca cookie
         function getCookie(name) {
             let cookieArr = document.cookie.split(";");
             for (let i = 0; i < cookieArr.length; i++) {
@@ -699,6 +734,7 @@
         }
     });
 </script>
+
 
 
 @endsection

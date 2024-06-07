@@ -106,6 +106,11 @@ Route::get('/matkuladd', function () {
 Route::get('/matkul/{id}', function ($id) {
     return view('detailsmatkul', ['id' => $id]);
 });
+// dosen edit
+Route::get('/edit-matkul/{id}', function ($id) {
+    return view('editmatkul', ['id' => $id]);
+});
+
 // ---------------------Prodi-------------------
 // prodi add
 Route::get('/prodiadd', function () {
