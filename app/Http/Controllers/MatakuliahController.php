@@ -175,10 +175,26 @@ class MatakuliahController extends Controller
         }
         try {
             $data = Matkul::find($id);
+
             if (!$data) {
                 return new PostMatkul(false, 'Data Tidak Ditemukan', null);
             }
-            $data->update($request->all());
+
+            $requestData = $request->validated();
+
+            if (basename($data->file_silabus) != $requestData['file_silabus']) {
+                $filename_lama = $data->file_silabus;
+                if (Storage::exists($filename_lama)) {
+                    Storage::delete($filename_lama);
+                }
+                //saving file into db
+
+                $requestData['file_silabus'] = $request->file('file_silabus')->storePublicly('public/matkuls/file_silabus/');
+                $requestData['file_silabus'] = str_replace('public/', 'storage/', $requestData['file_silabus']);
+            }
+
+            $data->update($requestData);
+
             return new PostMatkul(true, 'Success', $data);
         } catch (\Exception $e) {
             return response()->json([

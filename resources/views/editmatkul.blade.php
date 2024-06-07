@@ -459,9 +459,12 @@
                                         <div class="mb-4">
                                             <label for="file_silabus" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">File Silabus</label>
                                             <input type="file" id="file_silabus" name="file_silabus" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
+                                            <div id="file_silabus_container"></div>
                                             <small class="text-gray-500">[Maksimum ukuran file : 5 MB]</small>
+
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -654,7 +657,16 @@
                     document.getElementById('total_sks_matkul').value = matkulData.total_sks_matkul || '';
                     document.getElementById('ipk_minimal').value = matkulData.ipk_minimal || '';
                     document.getElementById('abstraksi').value = matkulData.abstraksi || '';
-
+                    // Tampilkan nama file silabus jika ada
+                    const fileSilabusContainer = document.getElementById('file_silabus_container');
+                    if (matkulData.file_silabus) {
+                        const fileNameSpan = document.createElement('span');
+                        fileNameSpan.textContent = matkulData.file_silabus.split('/').pop(); // Menampilkan nama file saja
+                        fileNameSpan.className = 'text-gray-700';
+                        fileSilabusContainer.appendChild(fileNameSpan);
+                    } else {
+                        fileSilabusContainer.textContent = '-';
+                    }
                     // Isi dropdown jurusan dan kurikulum
                     fillJurusanDropdown(matkulData.prodi);
                     fillKurikulumDropdown(matkulData.kurikulum);
@@ -671,48 +683,68 @@
         document.getElementById('mkForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
-            // Buat objek JSON dari nilai input
-            const data = {
-                prodi: document.getElementById('jurusan').value,
-                kurikulum: document.getElementById('nama_kurikulum').value,
-                kode_matkul: document.getElementById('kode_matkul').value,
-                nama_matkul_indonesia: document.getElementById('nama_matkul_indonesia').value,
-                nama_matkul_english: document.getElementById('nama_matkul_english').value,
-                nama_matkul_singkat: document.getElementById('nama_matkul_singkat').value,
-                nama_matkul_singkat_english: document.getElementById('nama_matkul_singkat_english').value,
-                sifat_matkul: document.getElementById('sifat_matkul').value,
-                tipe_matkul: document.getElementById('tipe_matkul').value,
-                kategori_matkul: document.getElementById('kategori_matkul').value,
-                jenis_kurikulum: document.getElementById('jenis_kurikulum').value,
-                sks_kurikulum: document.getElementById('sks_kurikulum').value,
-                teori_sks: document.getElementById('teori_sks').value,
-                praktikum_sks: document.getElementById('praktikum_sks').value,
-                praklap_sks: document.getElementById('praklap_sks').value,
-                paket_semester: document.getElementById('paket_semester').value,
-                batas_ambil_ulang: document.getElementById('batas_ambil_ulang').value,
-                status_matkul: document.getElementById('status_matkul').value,
-                satuan_acara_perkulihan: document.getElementById('satuan_acara_perkulihan').value,
-                bahan_ajar: document.getElementById('bahan_ajar').value,
-                diktat: document.getElementById('diktat').value,
-                dosen_pengampu: document.getElementById('dosen_id').value,
-                tanggal_mulai_efektif: document.getElementById('tanggal_mulai_efektif').value,
-                tanggal_selesai_efektif: document.getElementById('tanggal_selesai_efektif').value,
-                bobot_nilai_minimal: document.getElementById('bobot_nilai_minimal').value,
-                matkul_wajib: document.getElementById('matkul_wajib').value,
-                matkul_pilihan: document.getElementById('matkul_pilihan').value,
-                total_matkul: document.getElementById('total_matkul').value,
-                sks_matkul_wajib: document.getElementById('sks_matkul_wajib').value,
-                sks_matkul_pilihan: document.getElementById('sks_matkul_pilihan').value,
-                total_sks_matkul: document.getElementById('total_sks_matkul').value,
-                ipk_minimal: document.getElementById('ipk_minimal').value,
-                abstraksi: document.getElementById('abstraksi').value
+            // Buat objek FormData untuk mengirimkan file
+            const formData = new FormData();
+            const fileInput = document.getElementById('file_silabus');
 
-                // tambahkan input lainnya sesuai kebutuhan
-            };
+            // Periksa apakah file telah dipilih
+            if (fileInput.files.length > 0) {
+                // Tambahkan file ke FormData
+                formData.append('file_silabus', fileInput.files[0]);
 
+                // Tampilkan informasi file dalam konsol log
+                console.log('Nama File:', fileInput.files[0].name);
+                console.log('Tipe File:', fileInput.files[0].type);
+                console.log('Ukuran File:', fileInput.files[0].size, 'bytes');
+            } else {
+                console.log('File tidak dipilih.');
+            }
+
+            // Tambahkan nilai input teks ke FormData
+            formData.append('prodi', document.getElementById('jurusan').value);
+            formData.append('kurikulum', document.getElementById('nama_kurikulum').value);
+            formData.append('kode_matkul', document.getElementById('kode_matkul').value);
+            formData.append('nama_matkul_indonesia', document.getElementById('nama_matkul_indonesia').value);
+            formData.append('nama_matkul_english', document.getElementById('nama_matkul_english').value);
+            formData.append('nama_matkul_singkat', document.getElementById('nama_matkul_singkat').value);
+            formData.append('nama_matkul_singkat_english', document.getElementById('nama_matkul_singkat_english').value);
+            formData.append('sifat_matkul', document.getElementById('sifat_matkul').value);
+            formData.append('tipe_matkul', document.getElementById('tipe_matkul').value);
+            formData.append('kategori_matkul', document.getElementById('kategori_matkul').value);
+            formData.append('jenis_kurikulum', document.getElementById('jenis_kurikulum').value);
+            formData.append('sks_kurikulum', document.getElementById('sks_kurikulum').value);
+            formData.append('teori_sks', document.getElementById('teori_sks').value);
+            formData.append('praktikum_sks', document.getElementById('praktikum_sks').value);
+            formData.append('praklap_sks', document.getElementById('praklap_sks').value);
+            formData.append('paket_semester', document.getElementById('paket_semester').value);
+            formData.append('batas_ambil_ulang', document.getElementById('batas_ambil_ulang').value);
+            formData.append('status_matkul', document.getElementById('status_matkul').value);
+            formData.append('satuan_acara_perkulihan', document.getElementById('satuan_acara_perkulihan').value);
+            formData.append('bahan_ajar', document.getElementById('bahan_ajar').value);
+            formData.append('diktat', document.getElementById('diktat').value);
+            formData.append('dosen_pengampu', document.getElementById('dosen_id').value);
+            formData.append('tanggal_mulai_efektif', document.getElementById('tanggal_mulai_efektif').value);
+            formData.append('tanggal_selesai_efektif', document.getElementById('tanggal_selesai_efektif').value);
+            formData.append('bobot_nilai_minimal', document.getElementById('bobot_nilai_minimal').value);
+            formData.append('matkul_wajib', document.getElementById('matkul_wajib').value);
+            formData.append('matkul_pilihan', document.getElementById('matkul_pilihan').value);
+            formData.append('total_matkul', document.getElementById('total_matkul').value);
+            formData.append('sks_matkul_wajib', document.getElementById('sks_matkul_wajib').value);
+            formData.append('sks_matkul_pilihan', document.getElementById('sks_matkul_pilihan').value);
+            formData.append('total_sks_matkul', document.getElementById('total_sks_matkul').value);
+            formData.append('ipk_minimal', document.getElementById('ipk_minimal').value);
+            formData.append('abstraksi', document.getElementById('abstraksi').value);
+            // Tampilkan isi FormData di konsol log
+            for (const pair of formData.entries()) {
+                console.log(pair[0] + ': ' + pair[1]);
+            }
             const baseUrl = window.location.origin;
 
-            axios.put(`${baseUrl}/api/Matakuliah/${matkulId}`, data)
+            axios.put(`${baseUrl}/api/Matakuliah/${matkulId}`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
                 .then(response => {
                     console.log('Data update berhasil dikirim:', response.data); // Tambahkan respon console log di sini
                     Swal.fire({
@@ -722,9 +754,7 @@
                         timer: 2000,
                         showConfirmButton: false
                     }).then(() => {
-
-                            location.reload(); // Reload halaman setelah 24 detik
-                        
+                        location.reload(); // Reload halaman setelah 24 detik
                     });
                 })
                 .catch(error => {
@@ -749,8 +779,9 @@
                         });
                     }
                 });
-
         });
+
+
 
         // Mengambil nama file saat file dipilih
         document.getElementById('file_silabus').addEventListener('change', function(e) {
