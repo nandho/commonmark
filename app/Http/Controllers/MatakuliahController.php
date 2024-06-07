@@ -150,6 +150,7 @@ class MatakuliahController extends Controller
 
             if (basename($data->file_silabus) != $requestData['file_silabus']) {
                 $filename_lama = $data->file_silabus;
+                $filename_lama = str_replace('public/', 'storage/', $filename_lama);
                 if (Storage::exists($filename_lama)) {
                     Storage::delete($filename_lama);
                 }
@@ -173,9 +174,20 @@ class MatakuliahController extends Controller
     public function destroy($id)
     {
         $data = Matkul::find($id);
+
         if (!$data) {
             return new PostMatkul(false, 'Data Tidak Ditemukan', null);
         }
+
+        $filepath = $data->file_silabus;
+        $filepath = str_replace('public/', 'storage/', $filepath);
+
+        if (Storage::exists($filepath)) {
+            Storage::delete($filepath);
+        }
+
+
+
         $data->delete();
         return new PostMatkul(true, 'Success', $data);
     }
