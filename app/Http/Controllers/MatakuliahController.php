@@ -129,43 +129,121 @@ class MatakuliahController extends Controller
     }
 
 
+    // public function update(Request $request, $id)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'prodi' => 'nullable',
+    //         'kurikulum' => 'nullable',
+    //         'kode_matkul' => 'nullable',
+    //         'nama_matkul_indonesia' => 'nullable',
+    //         'nama_matkul_singkat' => 'nullable',
+    //         'nama_matkul_english' => 'nullable',
+    //         'sifat_matkul' => 'nullable',
+    //         'tipe_matkul' => 'nullable',
+    //         'kategori_matkul' => 'nullable',
+    //         'jenis_kurikulum' => 'nullable',
+    //         'sks_kurikulum' => 'nullable',
+    //         'teori_sks' => 'nullable',
+    //         'praktikum_sks' => 'nullable',
+    //         'praklap_sks' => 'nullable',
+    //         'paket_semester' => 'nullable',
+    //         'batas_ambil_ulang' => 'nullable',
+    //         'status_matkul' => 'nullable',
+    //         'satuan_acara_perkulihan' => 'nullable',
+    //         'bahan_ajar' => 'nullable',
+    //         'diktat' => 'nullable',
+    //         'dosen_pengampu' => 'nullable',
+    //         'tanggal_mulai_efektif' => 'nullable',
+    //         'tanggal_selesai_efektif' => 'nullable',
+    //         'bobot_nilai_minimal' => 'nullable',
+    //         'matkul_wajib' => 'nullable',
+    //         'matkul_pilihan' => 'nullable',
+    //         'total_matkul' => 'nullable',
+    //         'sks_matkul_wajib' => 'nullable',
+    //         'sks_matkul_pilihan' => 'nullable',
+    //         'total_sks_matkul' => 'nullable',
+    //         'ipk_minimal' => 'nullable',
+    //         'abstraksi' => 'nullable',
+    //         'file_silabus' => 'mimes:pdf|max:10000',
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return response()->json([
+    //             'success' => false,
+    //             'message' => 'Gagal Menyimpan Data',
+    //             'data' => $validator->errors()
+    //         ], 400);
+    //     }
+
+    //     try {
+    //         $data = Matkul::find($id);
+
+    //         if (!$data) {
+    //             return new PostMatkul(false, 'Data Tidak Ditemukan', null);
+    //         }
+
+    //         $requestData = $request->all();
+
+    //         if (basename($data->file_silabus) != $requestData['file_silabus']) {
+    //             $filename_lama = $data->file_silabus;
+    //             if (Storage::exists($filename_lama)) {
+    //                 Storage::delete($filename_lama);
+    //             }
+    //             //saving file into db
+    //             $requestData['file_silabus'] = $request->file('file_silabus')->storePublicly('public/matkuls/file_silabus/');
+    //             $requestData['file_silabus'] = str_replace('public/', 'storage/', $requestData['file_silabus']);
+    //         }
+
+    //         $data->update($requestData);
+
+    //         return new PostMatkul(true, 'Success', $data);
+    //     } catch (\Exception $e) {
+    //         return response()->json([
+    //             'success' => false,
+    //             'message' => 'Gagal Menyimpan Data',
+    //             'data' => $e->getMessage()
+    //         ], 500);
+    //     }
+    // }
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'prodi' => 'required',
-            'kurikulum' => 'required',
-            'kode_matkul' => 'required',
-            'nama_matkul_indonesia' => 'required',
-            'nama_matkul_singkat' => 'required',
-            'nama_matkul_english' => 'required',
-            'sifat_matkul' => 'required',
-            'tipe_matkul' => 'required',
-            'kategori_matkul' => 'required',
-            'jenis_kurikulum' => 'required',
-            'sks_kurikulum' => 'required',
-            'teori_sks' => 'required',
-            'praktikum_sks' => 'required',
-            'praklap_sks' => 'required',
-            'paket_semester' => 'required',
-            'batas_ambil_ulang' => 'required',
-            'status_matkul' => 'required',
-            'satuan_acara_perkulihan' => 'required',
-            'bahan_ajar' => 'required',
-            'diktat' => 'required',
-            'dosen_pengampu' => 'required',
-            'tanggal_mulai_efektif' => 'required',
-            'tanggal_selesai_efektif' => 'required',
-            'bobot_nilai_minimal' => 'required',
-            'matkul_wajib' => 'required',
-            'matkul_pilihan' => 'required',
-            'total_matkul' => 'required',
-            'sks_matkul_wajib' => 'required',
-            'sks_matkul_pilihan' => 'required',
-            'total_sks_matkul' => 'required',
-            'ipk_minimal' => 'required',
+            'prodi' => 'nullable',
+            'kurikulum' => 'nullable',
+            'kode_matkul' => 'nullable',
+            'nama_matkul_indonesia' => 'nullable',
+            'nama_matkul_singkat' => 'nullable',
+            'nama_matkul_english' => 'nullable',
+            'sifat_matkul' => 'nullable',
+            'tipe_matkul' => 'nullable',
+            'kategori_matkul' => 'nullable',
+            'jenis_kurikulum' => 'nullable',
+            'sks_kurikulum' => 'nullable',
+            'teori_sks' => 'nullable',
+            'praktikum_sks' => 'nullable',
+            'praklap_sks' => 'nullable',
+            'paket_semester' => 'nullable',
+            'batas_ambil_ulang' => 'nullable',
+            'status_matkul' => 'nullable',
+            'satuan_acara_perkulihan' => 'nullable',
+            'bahan_ajar' => 'nullable',
+            'diktat' => 'nullable',
+            'dosen_pengampu' => 'nullable',
+            'tanggal_mulai_efektif' => 'nullable',
+            'tanggal_selesai_efektif' => 'nullable',
+            'bobot_nilai_minimal' => 'nullable',
+            'matkul_wajib' => 'nullable',
+            'matkul_pilihan' => 'nullable',
+            'total_matkul' => 'nullable',
+            'sks_matkul_wajib' => 'nullable',
+            'sks_matkul_pilihan' => 'nullable',
+            'total_sks_matkul' => 'nullable',
+            'ipk_minimal' => 'nullable',
             'abstraksi' => 'required',
-            'file_silabus' => 'mimes:pdf|max:10000',
+            // Tambahkan aturan validasi lainnya di sini
+            'file_silabus' => 'mimes:pdf|max:10000', // Aturan validasi untuk file
         ]);
+
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
@@ -173,6 +251,7 @@ class MatakuliahController extends Controller
                 'data' => $validator->errors()
             ], 400);
         }
+
         try {
             $data = Matkul::find($id);
 
@@ -180,17 +259,15 @@ class MatakuliahController extends Controller
                 return new PostMatkul(false, 'Data Tidak Ditemukan', null);
             }
 
-            $requestData = $request->validated();
+            $requestData = $request->all(); // Menggunakan $request->all() untuk mendapatkan semua data
 
-            if (basename($data->file_silabus) != $requestData['file_silabus']) {
-                $filename_lama = $data->file_silabus;
-                if (Storage::exists($filename_lama)) {
-                    Storage::delete($filename_lama);
-                }
-                //saving file into db
-
-                $requestData['file_silabus'] = $request->file('file_silabus')->storePublicly('public/matkuls/file_silabus/');
-                $requestData['file_silabus'] = str_replace('public/', 'storage/', $requestData['file_silabus']);
+            // Periksa apakah file_silabus ada dalam permintaan
+            if ($request->hasFile('file_silabus')) {
+                // Lakukan operasi untuk menyimpan file
+                $file = $request->file('file_silabus');
+                $fileName = $file->getClientOriginalName(); // Atau sesuaikan dengan nama file yang Anda butuhkan
+                $file->storeAs('public/matkuls/file_silabus', $fileName);
+                $requestData['file_silabus'] = 'storage/matkuls/file_silabus/' . $fileName;
             }
 
             $data->update($requestData);
@@ -204,6 +281,8 @@ class MatakuliahController extends Controller
             ], 500);
         }
     }
+
+
     public function destroy($id)
     {
         $data = Matkul::find($id);
