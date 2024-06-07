@@ -843,7 +843,11 @@
 
                 const baseUrl = window.location.origin;
 
-            axios.put(`${baseUrl}/api/Matakuliah/${matkulId}`, data)
+            axios.post(`${baseUrl}/api/Matakuliah/${matkulId}`, data,{
+                headers: {
+        'Content-Type': 'multipart/form-data'
+    }
+            })
                 .then(response => {
                     console.log('Data update berhasil dikirim:', response.data); // Tambahkan respon console log di sini
                     Swal.fire({
