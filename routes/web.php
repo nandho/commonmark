@@ -15,7 +15,7 @@ use App\Http\Controllers\MatakuliahController;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('login');
+});
 Route::get('tes/', function () {
     return view('tes');
 });

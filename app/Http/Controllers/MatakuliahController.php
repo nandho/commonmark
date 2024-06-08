@@ -115,12 +115,12 @@ class MatakuliahController extends Controller
     {
         $data =
             Matkul::query()
-            ->join('jurusan', 'matkuls.prodi', '=', 'jurusan.id')
-            ->join('kurikulums', 'matkuls.kurikulum', '=', 'kurikulums.id')
-            ->join('dosen_models', 'matkuls.dosen_pengampu', '=', 'dosen_models.id')
-            ->select('matkuls.*', 'jurusan.jurusan as nama_jurusan', 'kurikulums.nama_kurikulum', 'dosen_models.nama_lengkap as nama_dosen')
-            ->where('matkuls.id', $id)
-            ->first();
+                ->join('jurusan', 'matkuls.prodi', '=', 'jurusan.id')
+                ->join('kurikulums', 'matkuls.kurikulum', '=', 'kurikulums.id')
+                ->join('dosen_models', 'matkuls.dosen_pengampu', '=', 'dosen_models.id')
+                ->select('matkuls.*', 'jurusan.jurusan as nama_jurusan', 'kurikulums.nama_kurikulum', 'dosen_models.nama_lengkap as nama_dosen')
+                ->where('matkuls.id', $id)
+                ->first();
 
         if (!$data) {
             return new PostMatkul(false, 'Data Tidak Ditemukan', null);
@@ -255,19 +255,23 @@ class MatakuliahController extends Controller
         try {
             $data = Matkul::find($id);
 
+
             if (!$data) {
                 return new PostMatkul(false, 'Data Tidak Ditemukan', null);
             }
 
-            $requestData = $request->all(); // Menggunakan $request->all() untuk mendapatkan semua data
+            $requestData =  $validator->valid();
 
-            // Periksa apakah file_silabus ada dalam permintaan
-            if ($request->hasFile('file_silabus')) {
-                // Lakukan operasi untuk menyimpan file
-                $file = $request->file('file_silabus');
-                $fileName = $file->getClientOriginalName(); // Atau sesuaikan dengan nama file yang Anda butuhkan
-                $file->storeAs('public/matkuls/file_silabus', $fileName);
-                $requestData['file_silabus'] = 'storage/matkuls/file_silabus/' . $fileName;
+            if (basename($data->file_silabus) != $requestData['file_silabus']) {
+                $filename_lama = $data->file_silabus;
+                $filename_lama = str_replace('storage/', 'public/', $filename_lama);
+                if (Storage::exists($filename_lama)) {
+                    Storage::delete($filename_lama);
+                }
+                //saving file into db
+
+                $requestData['file_silabus'] = $request->file('file_silabus')->storePublicly('public/matkuls/file_silabus/');
+                $requestData['file_silabus'] = str_replace('public/', 'storage/', $requestData['file_silabus']);
             }
 
             $data->update($requestData);
@@ -295,8 +299,10 @@ class MatakuliahController extends Controller
 
     public function matakuliahquery(Request $request)
     {
-        if ($request->has('kurikulum')) $kurikulum_id = $request->query('kurikulum');
-        if ($request->has('tipe_matkul')) $tipe_matkul = $request->query('tipe_matkul');
+        if ($request->has('kurikulum'))
+            $kurikulum_id = $request->query('kurikulum');
+        if ($request->has('tipe_matkul'))
+            $tipe_matkul = $request->query('tipe_matkul');
         // if ($request->has('tipe_matkul')) $sifat_matkul = $request->query('kurikulum');
 
         $data = DB::table('matkuls')
