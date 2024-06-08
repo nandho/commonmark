@@ -19,11 +19,11 @@ class testuserandpermission extends Seeder
         //add some user to testing role and authorization in app
         //make super admin
         $user = User::create([
-            'email'         => 'akademik@admin.com',
-            'username'      => 'akademik',
+            'email'         => 'pmb@admin.com',
+            'username'      => 'pmb',
             'password'      => bcrypt('12345678'),
         ]);
 
-        $user->assignRole('akademik');
+        $user->assignRole('admisi');
     }
 }
