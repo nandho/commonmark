@@ -38,6 +38,8 @@ class SemesterController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
+        Semester::where('status', 'Aktif')->update(['status' => 'Tidak Aktif']);
+
         // Jika validasi berhasil, buat semester baru
         $semester = Semester::create($validator->validated());
 
