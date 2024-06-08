@@ -227,7 +227,7 @@ class MatakuliahController extends Controller
             'status_matkul' => 'nullable',
             'satuan_acara_perkulihan' => 'nullable',
             'bahan_ajar' => 'nullable',
-            'diktat' => 'nullable',
+            'diktat' => 'required',
             'dosen_pengampu' => 'nullable',
             'tanggal_mulai_efektif' => 'nullable',
             'tanggal_selesai_efektif' => 'nullable',
@@ -239,7 +239,7 @@ class MatakuliahController extends Controller
             'sks_matkul_pilihan' => 'nullable',
             'total_sks_matkul' => 'nullable',
             'ipk_minimal' => 'nullable',
-            'abstraksi' => 'required',
+            'abstraksi' => 'nullable',
             // Tambahkan aturan validasi lainnya di sini
             'file_silabus' => 'mimes:pdf|max:10000', // Aturan validasi untuk file
         ]);
