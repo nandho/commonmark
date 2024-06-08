@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('semester');
             $table->string('tahun_akademik');
             $table->string('status_krs');
+            $table->string('status_validasi');
             $table->string('keterangan');
         });
 
