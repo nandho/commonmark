@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PMB Akprada</title>
-    @vite('resources/css/app.css')
+    <!-- @vite('resources/css/app.css') -->
+    <link rel="stylesheet" href="../css/tailwind.output.css">
     <!-- @vite('resources/js/app.js') -->
     <!-- Alpine.js (required for Select2 with Alpine) -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2"></script>
@@ -19,7 +20,7 @@
                 <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <div class="flex items-center space-x-3 rtl:space-x-reverse">
                         <a href="https://flowbite.com/" class="flex items-center space-x-3">
-                            <img src="{{ asset('storage/images/akprada-header.png') }}" class="object-cover h-14 w-auto md:h-20" alt="Flowbite Logo">
+                            <img src="../assets/img/akprada-header.png" class="object-cover h-14 w-auto md:h-20" alt="Flowbite Logo">
                         </a>
                         <div id="hideOnSmallScreen">
                             <span class="text-lg md:text-2xl font-semibold whitespace-nowrap light:text-white">Akademi
@@ -95,7 +96,7 @@
                             </div>
                         </div>
                         <!-- Form inputan untuk nama sekolah -->
-                        <div class="container mx-auto px-4 md:px-6" x-data="{ schoolName: '', schools: [], NamaL : [], NIK:[], NISN:[],jk : [],HP : [], email : [],selectedSchool: '', selectedProvince: '', selectedCity: '', provinces: [], cities: [],selectedType: '',jurusan:[], lulus:[],NamaW:[], NIKW:[], NOHPW:[]  }">
+                        <div class="container mx-auto px-4 md:px-6" x-data="{ schoolName: '', schools: [], NamaL : [], NIK:[], NISN:[],jk : [],HP : [], email : [],selectedSchool: '', selectedProvince: '', selectedCity: '', provinces: [], cities: [],selectedType: '',jurusan_asal:[],jurusan:[], lulus:[],NamaW:[], NIKW:[], NOHPW:[],Namaibu:[], NIKibu:[], NOHPibu:[]  }">
                             <form class="mb-4" id="schoolForm">
                                 <div class="container mx-auto px-4 md:px-6">
                                     <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 light:bg-gray-800 light:text-blue-400" role="alert">
@@ -202,9 +203,9 @@
                                             <option value="Paket C">Paket C</option>
                                         </select>
                                     </div>
-                                    <div x-model="jurusan" class="container mx-auto px-4 md:px-6">
-                                        <label for="jurusan" class="block text-sm font-medium text-gray-700 mb-2">Jurusan Sekolah (Cth: IPA, IPS): <span class="text-red-500">*</span></label>
-                                        <input type="text" x-model="jurusan" id="jurusan" name="jurusan" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="Isi Jurusan Anda">
+                                    <div x-model="jurusan_asal" class="container mx-auto px-4 md:px-6">
+                                        <label for="jurusan_asal" class="block text-sm font-medium text-gray-700 mb-2">Jurusan Sekolah (Cth: IPA, IPS): <span class="text-red-500">*</span></label>
+                                        <input type="text" x-model="jurusan_asal" id="jurusan_asal" name="jurusan_asal" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="Isi Jurusan Anda">
                                     </div>
                                     <div x-model="lulus" class="container mx-auto px-4 md:px-6">
                                         <label for="lulus" class="block text-sm font-medium text-gray-700 mb-2">Tahun Lulus (Cth: 2023): <span class="text-red-500">*</span></label>
@@ -219,25 +220,37 @@
                                 </div>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="container mx-auto px-4 md:px-6">
-                                        <label for="schoolType" class="block text-sm font-medium text-gray-700 mb-2">Progam Studi: <span class="text-red-500">*</span></label>
-                                        <select x-model="selectedType" id="selectedType" name="schoolType" class="border border-gray-300 rounded-md px-4 py-2 w-full">
+                                        <label for="jurusan" class="block text-sm font-medium text-gray-700 mb-2">Progam Studi: <span class="text-red-500">*</span></label>
+                                        <select x-model="jurusan" id="jurusan" name="jurusan" class="border border-gray-300 rounded-md px-4 py-2 w-full">
                                             <option value="" selected>Pilih Program Studi</option>
                                             <option value="D3 perhotelan">D3 - Perhotelan</option>
                                         </select>
                                     </div>
+                                    <div x-model="Namaibu" class="container mx-auto px-4 md:px-6">
+                                        <label for="Namaibu" class="block text-sm font-medium text-gray-700 mb-2">Nama Orang Tua Ibu: <span class="text-red-500">*</span></label>
+                                        <input type="text" x-model="Namaibu" id="Namaibu" name="Namaibu" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="Isi Nama Ibu">
+                                    </div>
+                                    <div x-model="NOHPibu" class="container mx-auto px-4 md:px-6">
+                                        <label for="NOHPibu" class="block text-sm font-medium text-gray-700 mb-2">No. HP Orang Tua Ibu: <span class="text-red-500">*</span></label>
+                                        <input type="nomor" x-model="NOHPibu" id="NOHPibu" name="NOHPibu" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="082xxxxxxxxx">
+
+                                    </div>
+                                    <div x-model="NIKibu" class="container mx-auto px-4 md:px-6">
+                                        <label for="NIKibu" class="block text-sm font-medium text-gray-700 mb-2">NIK Orang Tua Ibu: <span class="text-red-500">*</span></label>
+                                        <input type="nomor" x-model="NIKibu" id="NIKibu" name="NIKibu" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="Isi NIK Orang Tua">
+                                    </div>
                                     <div x-model="NamaW" class="container mx-auto px-4 md:px-6">
-                                        <label for="NamaW" class="block text-sm font-medium text-gray-700 mb-2">Nama Orang Tua/ Wali: <span class="text-red-500">*</span></label>
-                                        <input type="text" x-model="NamaW" id="NamaW" name="NamaW" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="Isi Jurusan Anda">
+                                        <label for="NamaW" class="block text-sm font-medium text-gray-700 mb-2">Nama Wali: <span class="text-red-500">*</span></label>
+                                        <input type="text" x-model="NamaW" id="NamaW" name="NamaW" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="Isi Nama Wali">
                                     </div>
                                     <div x-model="NOHPW" class="container mx-auto px-4 md:px-6">
-                                        <label for="NOHPW" class="block text-sm font-medium text-gray-700 mb-2">No. HP Orang Tua / Wali: <span class="text-red-500">*</span></label>
+                                        <label for="NOHPW" class="block text-sm font-medium text-gray-700 mb-2">No. HP Wali: <span class="text-red-500">*</span></label>
                                         <input type="nomor" x-model="NOHPW" id="NOHPW" name="NOHPW" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="082xxxxxxxxx">
 
                                     </div>
                                     <div x-model="NIKW" class="container mx-auto px-4 md:px-6">
-                                        <label for="NIKW" class="block text-sm font-medium text-gray-700 mb-2">NIK Orang Tua / Wali: <span class="text-red-500">*</span></label>
-                                        <input type="nomor" x-model="NIKW" id="NIKW" name="NIKW" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="Isi NIK Orang Tua/Wali">
-
+                                        <label for="NIKW" class="block text-sm font-medium text-gray-700 mb-2">NIK Wali: <span class="text-red-500">*</span></label>
+                                        <input type="nomor" x-model="NIKW" id="NIKW" name="NIKW" class="border border-gray-300 rounded-md px-4 py-2 w-full" placeholder="Isi NIK Orang Wali">
                                     </div>
                                 </div>
                                 <br>
@@ -256,6 +269,27 @@
     <!-- JavaScript untuk melakukan permintaan data ke API -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
+        const base_url = "http://localhost:9000";
+
+        async function fetchJurusan(){
+            try{
+                const response = await axios.get(base_url+'/jurusan');
+                const jurusanData = response.data.map(data=>({
+                    id: data.id,
+                    nama: data.jurusan
+                }));
+                document.querySelector('[x-data]').__x.$data.jurusan = jurusanData;
+
+                // Mengosongkan hasil jika ada
+                document.getElementById('result').innerHTML = '';
+            }catch(error){
+                document.getElementById('result').innerHTML = 'Data tidak ditemukan';
+
+                // Menyembunyikan dropdown jika data tidak ditemukan
+                document.querySelector('[x-data]').__x.$data.schools = [];
+            }
+        }
+        
         // Fungsi untuk mengambil data dari API
         async function fetchData(schoolName) {
             const apiUrl = 'https://api-sekolah-indonesia.vercel.app/sekolah/s?sekolah=' + encodeURIComponent(schoolName);
@@ -335,47 +369,56 @@
         // Event listener untuk menangani pengiriman form
         document.getElementById('schoolForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Mencegah pengiriman form secara default
-            const inpunama = document.getElementById('NamaL').value;
-            const inputnik = document.getElementById('NIK').value;
-            const inputnisn = document.getElementById('NISN').value;
-            const inputjk = document.getElementById('jk').value;
-            const inputhp = document.getElementById('HP').value;
-            const inputemail = document.getElementById('email').value;
+            const nama_lengkap = document.getElementById('NamaL').value;
+            const nik = document.getElementById('NIK').value;
+            const nisn = document.getElementById('NISN').value;
+            const jenis_kelamin = document.getElementById('jk').value;
+            const nomor_hp = document.getElementById('HP').value;
+            const email = document.getElementById('email').value;
             const selectedOption = document.getElementById('selectedSchool').value.split(':');
-            const inputjensi = document.getElementById('selectedType').value; // Menggunakan nilai langsung dari variabel selectedType
-            const inputjurusan = document.getElementById('jurusan').value;
-            const inputlulusn = document.getElementById('lulus').value;
-            const inputnamaw = document.getElementById('NamaW').value;
-            const inputNikW = document.getElementById('NIKW').value;
-            const inputnohpw = document.getElementById('NOHPW').value;
+            const jenis_sekolah = document.getElementById('selectedType').value; // Menggunakan nilai langsung dari variabel selectedType
+            const jurusan_asal = document.getElementById('jurusan_asal').value;
+            const jurusan = document.getElementById('jurusan').value;
+            const tahun_lulus = document.getElementById('lulus').value;
+            const nama_wali = document.getElementById('NamaW').value;
+            const nik_wali = document.getElementById('NIKW').value;
+            const nomor_hp_wali = document.getElementById('NOHPW').value;
+            const nama_ortu = document.getElementById('Namaibu').value;
+            const nik_ortu = document.getElementById('NIKibu').value;
+            const nomor_hp_ortu = document.getElementById('NOHPibu').value;
             const npsn = selectedOption[0];
             const schoolName = selectedOption[1];
             const inputsekolah = document.getElementById('manualInput').value;
             // Mendapatkan nama provinsi dan nama kota yang dipilih
             const selectedProvinceId = document.getElementById('selectedProvince').value;
-            const selectedProvinceName = document.getElementById('selectedProvince').options[document.getElementById('selectedProvince').selectedIndex].text;
+            const provinsi = document.getElementById('selectedProvince').options[document.getElementById('selectedProvince').selectedIndex].text;
             const selectedCityId = document.getElementById('selectedCity').value;
-            const selectedCityName = document.getElementById('selectedCity').options[document.getElementById('selectedCity').selectedIndex].text;
+            const kabupaten = document.getElementById('selectedCity').options[document.getElementById('selectedCity').selectedIndex].text;
 
             // Kirim data menggunakan Axios
-            axios.post('/api/pmb', {
-                    inpunama: inpunama,
-                    npsn: npsn, // Mengirimkan NPSN sekolah
-                    inputjk: inputjk,
-                    inputhp: inputhp,
-                    inputemail: inputemail,
+            axios
+                .post(`${base_url}/api/pmb`, {
+                    nama_lengkap: nama_lengkap,
+                    nik: nik,
+                    nisn: nisn,
+                    jenis_kelamin: jenis_kelamin,
+                    nomor_hp: nomor_hp,
+                    email: email,
+                    nama_sekolah: nama_sekolah,
+                    jenis_sekolah: jenis_sekolah,
+                    jurusan_asal: jurusan_asal,
+                    jurusan: jurusan,
+                    tahun_lulus: tahun_lulus,
+                    nama_wali: nama_wali,
+                    nik_wali: nik_wali,
+                    no_hp_wali: nomor_hp_wali,
+                    nama_ortu: nama_ortu,
+                    nik_ortu: nik_ortu,
+                    nomor_hp_wali: nomor_hp_ortu,
+                    schoolName: schoolName,
                     inputsekolah: inputsekolah,
-                    schoolName: schoolName, // Mengirimkan nama sekolah
-                    inputjensi: inputjensi,
-                    inputjurusan: inputjurusan,
-                    inputlulusn: inputlulusn,
-                    inputnik: inputnik,
-                    inputnisn: inputnisn,
-                    inputNikW: inputNikW,
-                    inputnamaw: inputnamaw,
-                    inputnohpw: inputnohpw,
-                    selectedProvince: selectedProvinceName, // Mengirimkan nama provinsi yang dipilih
-                    selectedCity: selectedCityName // Mengirimkan nama kota yang dipilih
+                    provinsi: provinsi,
+                    kabupaten: kabupaten
                 })
                 .then(function(response) {
                     console.log(response); // Log respon dari server jika sukses

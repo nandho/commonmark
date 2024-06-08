@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('jurusan', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('jurusan');
-            $table->string('ukt');
+            // $table->string('ukt');
         });
     }
 
