@@ -21,11 +21,14 @@ class KrsController extends Controller
     {
         //will input jurusan
         $validator = Validator::make($request->all(),[
-            'gelombang'=> 'required', //foreign id merelasikan ke pembimbing akademik table
-            'periode_mulai'=> 'required',
-            'periode_berakhir'=> 'required',
+            'kelas'=> 'required',
+            'kode_mk'=> 'required',
+            'nama_mk'=> 'required',
+            'sks'=> 'required',
             'semester'=> 'required',
-            'status'=> 'required',
+            'tahun_akademik'=> 'required',
+            'status_krs'=> 'required',
+            'keterangan'=> 'required',
         ]);
 
         if ($validator->fails()) {
@@ -75,11 +78,14 @@ class KrsController extends Controller
     {
         // get data and update data
         $validator = Validator::make($request->all(),[
-            'pembimbigelombangng_akademik'=> 'required', //foreign id merelasikan ke pembimbing akademik table
-            'periode_mulai'=> 'required',
-            'periode_berakhir'=> 'required',
+            'kelas'=> 'required',
+            'kode_mk'=> 'required',
+            'nama_mk'=> 'required',
+            'sks'=> 'required',
             'semester'=> 'required',
-            'status'=> 'required',
+            'tahun_akademik'=> 'required',
+            'status_krs'=> 'required',
+            'keterangan'=> 'required',
         ]);
 
         if ($validator->fails()) {

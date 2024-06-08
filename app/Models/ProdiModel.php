@@ -47,8 +47,8 @@ class ProdiModel extends Model
     ];
 
     protected $keyType = 'string';
-    protected $incrementing = 'false';
-    protected $timestamps = false;
+    public $incrementing = 'false';
+    public $timestamps = false;
 
 
     public function kepala_prodi(): HasOne
