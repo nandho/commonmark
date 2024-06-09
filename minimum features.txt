@@ -1,0 +1,49 @@
+silahkan di filter juga yang mana apai yang manayang bukan, ini list kebutuhan aplikasi
+1. PMB untuk daftar -aman
+2. PMB untuk details data diri -aman
+3. PMB untuk Update data diri (admin dan mahaiswa)  -aman
+4. PMB hapus data diri -aman
+4. PMB upload persyratan -aman
+5. PMB hapus persyratan -aman
+6. PMB update persyaratan -aman
+5. PMB validasi (merubah calon mhs ke mahasiswa) -menambahkan field nanti akan di update menggunakan update pmb 
+6. PMB pembuatan soal -(masih kurang input foto) -
+7. PMB upload jawaban soal -aman (di update untuk rolenya agar sesuai dengan mekanisme baru)
+8. PMB hapus soal -aman
+9. SIAKAD KRS -std
+10. SIAKAD UPDATE KRS -std
+11. SIAKAD validasi KRS (admin, dosen pembimbing) -di update menggunakan di status
+12. SIAKAD Hapus KRS - aman
+13. SIAKAD setting semester - belum 
+14. SIAKAD input semester - belum
+15. SIAKAD hapus semester -belum
+16. SIAKAD update semester -belum
+14. SIAKAD KHS -std
+15. SIAKAD HAPUS KHS -aman
+16. SIAKAD input matakuliah -belum
+17. SIAKAD hapus matakuliah -belum 
+18. SIAKAD Update matakuliah -belum
+19. SIAKAD input nilai mtakuliah -belum (dipisahkan dari khs)
+20. SIAKAD hapus nilai matakuliah -belum (dipisahkan dari khs)
+21. SIAKAD update nilai matakuliah -belum (dipisahkan dari khs)
+22. SIAKAD Kurikulum yang digunakan -belum 
+23. SIAKAD Hapus kurikulum -belum 
+24. SIAKAD update kurikulum -belum
+25. SIAKAD Transkip nilai -akan di print dari BE (pengecekan nilai, bisa di update dari admin (akademik))
+26. SIAKAD Hapus Transkrip -belum
+27. SIAKAD updat transkrip -belum
+28. SIAKAD status mahaiswa (LULUS, Dikeluarkan, CUTI, DO) CRUD -aman (di update dari menu mahasiswa)
+29. SIAKAD Cetak kartu ujian - belum (pengecekan dari jumlah absensi/lunas spp) 
+30. SIAKAD input data kartu ujian -belum (data bisa dari krs)
+31. SIAKAD Hapus data kartu ujian -belum
+32. SIAKAD update data kartu ujian -belum
+30. SIAKAD Cetak Jadwal -belum(dari krs)
+31. SIAKAD input jadwal kuliah -belum(dari krs)
+32. SIAKAD hapus jadwala kuliah -belum(dari krs)
+33. SIAKAD update jadawal kuliah -belum(dari krs)
+34. SIAKAD ruangan kelas CRUD -belum(dari krs)
+35. KEUANGAN input tagihan SEMSTER -belum
+36. KEUANGAN updat tagihan semester -belum
+37. KEUANGAN hapus tagihan semester -belum
+38. KEUANGAn validasi pembayaran -(terkait admisi dan akademik (spp))
+39. KEUANAGN validasi tagihan -(terkait admisi dan akademik (spp))

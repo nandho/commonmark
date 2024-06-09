@@ -44,9 +44,10 @@ class PmbModel extends Model
         'perkerjaan_wali',
         'sumber_b_kuliah',
         'npsn',
-        'jurusan',
+        'jurusan_id',
         'foto',
         'jurusan_asal',
+        'id_akun',
         'nik_wali'
     ];
 

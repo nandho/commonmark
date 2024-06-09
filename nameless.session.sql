@@ -1,1 +1,1 @@
-select * from soals;
+select * from pmb;

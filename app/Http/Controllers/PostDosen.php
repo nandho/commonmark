@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\dosenResource;
+use App\Models\DosenModel;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PostDosen extends Controller
 {
-    public function index() 
+    public function index()
     {
         $data = DosenModel::all();
         return new DosenResource(true, 'success', $data);
@@ -17,13 +21,13 @@ class PostDosen extends Controller
         $validator = Validator::make($request->all(),[
             'nidn'=> 'required',
             'nama_lengkap'=> 'required',
-            'gelar_depan'=> 'required',
+            'gelar_depan'=> 'nullable',
             'gelar_belakang'=> 'required',
             'program_studi'=> 'required',
             'nomor_ktp'=> 'required',
             'tanggal_lahir'=> 'required',
             'kotatempat_lahir'=> 'required',
-            'negara_tempat_lahir'=> 'required',
+            'negara_tempat_lahir'=> 'nullable',
             'kartu_pegawai'=> 'required',
             'stambuk'=> 'required',
             'jenis_kelamin'=> 'required',
@@ -39,15 +43,15 @@ class PostDosen extends Controller
             'telepon_selular'=> 'required',
             'telepon_kantor'=> 'required',
             'jenis_pegawai'=> 'required',
-            'nomor_sk_cpns'=> 'required',
-            'tanggal_sk_cpns'=> 'required',
-            'tmt_pns'=> 'required',
+            'nomor_sk_cpns'=> 'nullable',
+            'tanggal_sk_cpns'=> 'nullable',
+            'tmt_pns'=> 'nullable',
             'golongan_pnd'=> 'required',
-            'tanggal_masuk_pt'=> 'required',
+            'tanggal_masuk_pt'=> 'nullable',
             'sumpah_pns'=> 'required',
             'nomor_taspen'=> 'required',
             'instansi_asal'=> 'required',
-            'catatan'=> 'required',
+            'catatan'=> 'nullable',
             'nomor_dosen'=> 'required',
             'gelar_akademik_tertinggi'=> 'required',
             'pt_gelar_diperoleh'=> 'required',
@@ -61,6 +65,8 @@ class PostDosen extends Controller
             'nomor_surat_ijin_mengajar'=> 'required',
             'status_aktifitas'=> 'required',
             'semester_keluar'=> 'required',
+            'password'=>'required|min:8',
+            'email'=>'required|email',
         ]);
 
         if ($validator->fails()) {
@@ -74,6 +80,20 @@ class PostDosen extends Controller
         $requestData = $request->all();
 
         try {
+            //daftarkan akun dengan role dosen
+            // 'username',
+            // 'email',
+            // 'password',
+            $user = User::create([
+                'username' => $request->nidn,
+                'email' => $request->email,
+                'password' => bcrypt($request->password)
+            ]);
+
+            $user->assignRole('dosen');
+
+            $requestData['id_akun'] = $user->id;
+
             // Buat objek PmbModel baru dengan data dari request
             $data = new DosenModel();
             $data->fill($requestData);
@@ -112,13 +132,13 @@ class PostDosen extends Controller
         $validator = Validator::make($request->all(),[
             'nidn'=> 'required',
             'nama_lengkap'=> 'required',
-            'gelar_depan'=> 'required',
+            'gelar_depan'=> 'nullable',
             'gelar_belakang'=> 'required',
             'program_studi'=> 'required',
             'nomor_ktp'=> 'required',
             'tanggal_lahir'=> 'required',
             'kotatempat_lahir'=> 'required',
-            'negara_tempat_lahir'=> 'required',
+            'negara_tempat_lahir'=> 'nullable',
             'kartu_pegawai'=> 'required',
             'stambuk'=> 'required',
             'jenis_kelamin'=> 'required',
@@ -134,15 +154,15 @@ class PostDosen extends Controller
             'telepon_selular'=> 'required',
             'telepon_kantor'=> 'required',
             'jenis_pegawai'=> 'required',
-            'nomor_sk_cpns'=> 'required',
-            'tanggal_sk_cpns'=> 'required',
-            'tmt_pns'=> 'required',
+            'nomor_sk_cpns'=> 'nullable',
+            'tanggal_sk_cpns'=> 'nullable',
+            'tmt_pns'=> 'nullable',
             'golongan_pnd'=> 'required',
-            'tanggal_masuk_pt'=> 'required',
+            'tanggal_masuk_pt'=> 'nullable',
             'sumpah_pns'=> 'required',
             'nomor_taspen'=> 'required',
             'instansi_asal'=> 'required',
-            'catatan'=> 'required',
+            'catatan'=> 'nullable',
             'nomor_dosen'=> 'required',
             'gelar_akademik_tertinggi'=> 'required',
             'pt_gelar_diperoleh'=> 'required',
@@ -169,6 +189,7 @@ class PostDosen extends Controller
         $requestData = $request->all();
 
         try {
+
             // Buat objek PmbModel baru dengan data dari request
             $data = DosenModel::findOrFail($id);
             $data->fill($requestData);

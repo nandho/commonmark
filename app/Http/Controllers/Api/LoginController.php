@@ -36,13 +36,23 @@ class LoginController extends Controller
             ], 401);
         }
 
+        $user = auth()->guard('api')->user();
+
+        $getroles = $user->getRoleNames()->toArray();
+
+        $customize_token = [
+            'role' => $getroles,
+            'user' => $user,
+        ];
+
+        $token = auth()->guard('api')->claims($customize_token)->attempt($credentials);
+
         //if auth success
         return response()->json([
             'success' => true,
             'email' => auth()->guard('api')->user()->email,
             'token' => $token,
-            'role' => auth()->guard('api')->user()->role,
             'username' => auth()->guard('api')->user()->username
         ], 200);
     }
-}
+}       

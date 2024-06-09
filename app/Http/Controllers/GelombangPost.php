@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\GelombangResource;
+use App\Models\GelombangModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class GelombangPost extends Controller
 {
-    public function index() 
+    public function __construst(){
+        //add schema middleware to add some to edit db data
+    }
+    public function index()
     {
         $data = GelombangModel::all();
         return new GelombangResource(true, 'success', $data);
     }
-        public function store(Request $request)
+    public function store(Request $request)
     {
         //will input jurusan
         $validator = Validator::make($request->all(),[

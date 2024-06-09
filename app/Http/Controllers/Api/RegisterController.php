@@ -29,22 +29,48 @@ class RegisterController extends Controller
         //if calon mahasiswa baru create password random dan kirim ke email
 
         //create user
-        $user = User::create([
-            'username'      => $request->username,
-            'email'         => $request->email,
-            'password'      => bcrypt($request->password),
-            'role'          => $request->role,
-        ]);
+        try {
+            $user = User::create([
+                'username'      => $request->username,
+                'email'         => $request->email,
+                'password'      => bcrypt($request->password),
+                // 'role'          => $request->role,
+            ]);
+
+            //assign role
+            switch ($request->role) {
+                case 'admin':
+                    # code...
+                    break;
+                case 'backoffice':
+                    # code...
+                    break;
+                case 'mahasiswa':
+                    # code...
+                    break;
+                case 'calonmahasiswa':
+                    # code...
+                    break;
+                case 'dosen':
+                    # code...
+                    break;
+                default:
+                    echo("unable to add role");
+                    break;
+            }
+        } catch (\Throwable $th) {
+            return response()->json('bad request',400);
+        }
 
         //return response JSON user is created
         if($user) {
             return response()->json([
                 'success' => true,
-                'user'    => $user,  
+                'user'    => $user,
             ], 201);
         }
 
-        //return JSON process insert failed 
+        //return JSON process insert failed
         return response()->json([
             'success' => false,
         ], 409);

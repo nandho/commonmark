@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+
 
 class DosenModel extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'nidn',
         'nama_lengkap',
@@ -56,30 +58,31 @@ class DosenModel extends Model
         'nomor_surat_ijin_mengajar',
         'status_aktifitas',
         'semester_keluar',
-        ];
-    
-        protected static function boot()
-        {
-            parent::boot();
-            static::creating(function ($model) {
-                if (empty($model->{$model->getKeyName()})) {
-                    $model->{$model->getKeyName()} = Str::uuid()->toString();
-                }
-            });
-        }
-    
-        public function getIncrementing()
-        {
-            return false;
-        }
-    
-        /**
-         * Kita override getKeyType method
-         *
-         * Memberi tahu laravel bahwa model ini menggunakan primary key bertipe string
-         */
-        public function getKeyType()
-        {
-            return 'string';
-        }
+        'id_akun',
+    ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = Str::uuid()->toString();
+            }
+        });
     }
+
+    public function getIncrementing()
+    {
+        return false;
+    }
+
+    /**
+     * Kita override getKeyType method
+     *
+     * Memberi tahu laravel bahwa model ini menggunakan primary key bertipe string
+     */
+    public function getKeyType()
+    {
+        return 'string';
+    }
+}

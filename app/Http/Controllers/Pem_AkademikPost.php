@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Pem_AkademikResource;
+use App\Models\Pem_AkademikModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class Pem_AkademikPost extends Controller
 {

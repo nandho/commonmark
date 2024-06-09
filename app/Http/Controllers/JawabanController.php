@@ -23,9 +23,10 @@ class JawabanController extends Controller
     {
         //will input jawaban
         $validator = Validator::make($request->all(),[
-            'id_soal' => 'required',
-            'id_calon_mahasiswa' => 'required',
-            'jawaban' => 'required',
+            'data'=>'required|array',
+            'data.*.id_soal' => 'required',
+            'data.*.id_calon_mahasiswa' => 'required',
+            'data.*.jawaban' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -61,7 +62,7 @@ class JawabanController extends Controller
             //input nilai
             $data_nilai['nilai'] = $nilai;
             $data_nilai['id_calon_mahasiswa'] = $requestData['id_calon_mahasiswa'];
-           
+
             try {
                 $nilai_model = new nilai;
                 $nilai_model->fill($data_nilai);
@@ -74,8 +75,8 @@ class JawabanController extends Controller
                     'message' => 'Gagal menyimpan data',
                     'error' => $e->getMessage(),
                 ], 500);
-            }      
-            
+            }
+
             // Jika penyimpanan berhasil, kirim respons sukses
             return new jawabanResource(true, 'success', $data);
         } catch (\Exception $e) {
@@ -149,6 +150,6 @@ class JawabanController extends Controller
         $data->delete();
 
         //return response
-        return new jawabanResource(true, 'Data Post Berhasil Dihapus!', null);
+        return new jawabanResource(true, 'Data Jawaban Berhasil Dihapus!', null);
     }
 }

@@ -47,23 +47,28 @@ class PmbApiController extends Controller
             'nama_lengkap' => 'required|string',
             'nik' => 'required|string',
             'nisn' => 'required|string',
-            'jenis_kelamin' => 'required|string|in:Laki-laki,Perempuan',
+
+            'jenis_kelamin' => 'required|string|in:"Laki-Laki","Perempuan"',
             'nomor_hp' => 'required|string',
             'email' => 'required|email',
             'provinsi' => 'required|string',
             'kabupaten' => 'required|string',
             'nama_sekolah' => 'required|string', //seharusnya nama sekolah
+
+            'tahun_lulus_sekolah' => 'required|string',
+
             'tahun_lulus_sekolah' => 'nullable|string',
+
             //ditambahkan jurusan asal
             'jurusan_asal' => 'required|string',
-            'jurusan_id' => 'required|string|in:' . implode(',', $daftarJurusan),
+            //'jurusan_id' => 'required|string|in:' . implode(',', $daftarJurusan),
             'nama_wali' => 'required|string',
             'no_hp_wali' => 'required|string',
-            'no_telp_wali' => 'required|string',
+            'no_telp_wali' => 'nullable|string',
             // tambahkan nik orang tua
             'nik_wali' => 'required|string',
-            'tempat_lahir' => 'required|string',
-            'tanggal_lahir' => 'required|date',
+            'tempat_lahir' => 'nullable|string',
+            'tanggal_lahir' => 'nullable|date',
             // batas field pendaftaran
             'alamat' => 'nullable|string|nullable',
             'agama' => 'nullable|string|nullable',
@@ -99,26 +104,25 @@ class PmbApiController extends Controller
         try {
             // Buat objek PmbModel baru dengan data dari request
             $pmb = new PmbModel();
-            $pmb->fill($requestData);
-
             // Simpan objek ke database
-            $pmb->save();
-            $pmb->jurusan = $jurusan['jurusan'];
+            $pmb->jurusan_id = $jurusan->id;
 
             //mambuat akun dan sending email
             $name = $pmb->nama_lengkap;
-            $username = $pmb->nomor_pendaftaran;
+            $username = $requestData['nomor_pendaftaran'];
             $password = gpw::generate();
             //generating user with passing data to user model
             $user = User::create([
-                'username'      => $username,
-                'email'         => $requestData['email'],
-                'password'      => bcrypt($password),
-                'role'          => "calonmahasiswa",
+                'username' => $username,
+                'email' => $requestData['email'],
+                'password' => bcrypt($password),
             ]);
 
-            Mail::to('stryn@gmail.com’')->send(new SendEmailPMB($name, $password, $username));
-
+            $user->assignRole('calonmahasiswa');
+            $requestData['id_akun'] = $user->id;
+            $pmb->fill($requestData);
+            $pmb->save();
+            Mail::to($requestData['email'])->send(new SendEmailPMB($name, $password, $username));
 
             // Jika penyimpanan berhasil, kirim respons sukses
             return new PmbResource(true, 'success', $pmb);
@@ -165,7 +169,7 @@ class PmbApiController extends Controller
             'nomor_hp' => 'nullable|string',
             'tempat_lahir' => 'nullable|string',
             'tanggal_lahir' => 'nullable|date',
-            'jenis_kelamin' => 'nullable|string|in:Laki-laki,Perempuan',
+            'jenis_kelamin' => 'nullable|string|in:Laki-Laki,Perempuan',
             'alamat' => 'nullable|string',
             'agama' => 'nullable|string',
             'kewarganegaraan' => 'nullable|string',
@@ -201,7 +205,7 @@ class PmbApiController extends Controller
 
         if ($request->hasFile('foto')) {
             $image = $request->file('foto');
-            $image->storeAs('public/pmbfoto', $image->hashName());
+            $image->storePubliclyAs('public/pmbfoto/', $image->hashName());
             $requestData['foto'] = $image->hashName();
         }
 

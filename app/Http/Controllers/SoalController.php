@@ -38,6 +38,8 @@ class SoalController extends Controller
             'kunci_jawaban' => 'required|string|size:1|in:A,B,C,D',
         ]);
 
+        //add soal picture
+
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
@@ -48,10 +50,26 @@ class SoalController extends Controller
 
         $requestData = $request->all();
 
+        if ($request->hasFile('foto')) {
+            $image = $request->file('foto');
+            $image->storePubliclyAs('public/soalfoto/', $image->hashName());
+            $requestData['foto'] = $image->hashName();
+        }
+
+
         try {
+            //getting all array
+
             // Buat objek PmbModel baru dengan data dari request
             $data = new soal();
+            //upload gambar jika ada
+            if($request->getFiles()){
+
+            }
+
             $data->fill($requestData);
+
+
 
             // Simpan objek ke database
             $data->save();
@@ -105,7 +123,7 @@ class SoalController extends Controller
         $requestData = $request->all();
 
         try {
-            // Buat objek PmbModel baru dengan data dari request
+            // Buat objek soal baru dengan data dari request
             $data = soal::findOrFail($id);
             $data->fill($requestData);
 
@@ -129,8 +147,14 @@ class SoalController extends Controller
         //will delete data
         $data = soal::findorfail($id);
 
+        //delete foto jika ada
+        if($data->foto){
+
+        }
+
         //delete post
         $data->delete();
+
 
         //return response
         return new soalResource(true, 'Data Post Berhasil Dihapus!', null);
