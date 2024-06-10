@@ -241,7 +241,7 @@ class MatakuliahController extends Controller
             'ipk_minimal' => 'nullable',
             'abstraksi' => 'nullable',
             // Tambahkan aturan validasi lainnya di sini
-            'file_silabus' => 'mimes:pdf|max:10240', // Aturan validasi untuk file
+            'file_silabus' => 'mimes:pdf|max:50000', // Aturan validasi untuk file
         ]);
 
         if ($validator->fails()) {
@@ -260,7 +260,7 @@ class MatakuliahController extends Controller
                 return new PostMatkul(false, 'Data Tidak Ditemukan', null);
             }
 
-            $requestData =  $validator->valid();
+            $requestData = $validator->valid();
 
             if (basename($data->file_silabus) != $requestData['file_silabus']) {
                 $filename_lama = $data->file_silabus;
