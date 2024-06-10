@@ -15,7 +15,7 @@ return new class extends Migration
         // pembimbing_akademik_id uuid
         // mata_kuliah varchar
         // jumlah_sks int
-        Schema::table('krs', function (Blueprint $table) {
+        Schema::create('krs', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('kelas');
             $table->string('kode_mk');
@@ -28,12 +28,12 @@ return new class extends Migration
             $table->string('keterangan');
         });
 
-        //creating relation into table pembimbing akademik
-        Schema::table('krs', function (Blueprint $table) {
-            // $table->foreign('pembimbing_akademik')->references('id')->on('pem__akademik_models');
-            $table->foreign('kelas')->references('id')->on('kelas');
-            $table->foreign('kode_mk')->references('kode_mk')->on('mata_kuliah');
-        });
+        // //creating relation into table pembimbing akademik
+        // Schema::table('krs', function (Blueprint $table) {
+        //     // $table->foreign('pembimbing_akademik')->references('id')->on('pem__akademik_models');
+        //     $table->foreign('kelas')->references('id')->on('kelas_kuliah');
+        //     $table->foreign('kode_mk')->references('id')->on('matkuls');
+        // });
     }
 
     /**

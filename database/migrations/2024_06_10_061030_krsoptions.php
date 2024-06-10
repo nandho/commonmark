@@ -15,18 +15,18 @@ return new class extends Migration {
         //krs matkuls
         DB::raw("CREATE VIEW vw_matkul_options AS
                 SELECT kode_matkul, nama_matkul_indonesia, nama_matkul_singkat, nama_matkul_english, nama_matkul_singkat_english
-                FROM matkuls
+                FROM matkuls;
                 ");
 
         //create view semester
         DB::raw("CREATE VIEW vw_smester_options AS
-                SELECT nama_semester, status, tanggal_mulai_tanggal_selesai
-                FROM semesters
+                SELECT nama_semester, status, tanggal_mulai, tanggal_selesai
+                FROM semesters;
                 ");
 
         DB::raw("CREATE VIEW vw_kelas_options AS
                 SELECT kelas,dosen
-                FROM kelas_kuliah
+                FROM kelas_kuliah;
                 ");
     }
 
