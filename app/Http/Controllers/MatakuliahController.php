@@ -241,7 +241,7 @@ class MatakuliahController extends Controller
             'ipk_minimal' => 'nullable',
             'abstraksi' => 'nullable',
             // Tambahkan aturan validasi lainnya di sini
-            'file_silabus' => 'mimes:pdf|max:10000', // Aturan validasi untuk file
+            'file_silabus' => 'mimes:pdf|max:10240', // Aturan validasi untuk file
         ]);
 
         if ($validator->fails()) {
