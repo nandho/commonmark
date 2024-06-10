@@ -118,19 +118,20 @@ class MatakuliahController extends Controller
             'satuan_acara_perkulihan' => 'required',
             'bahan_ajar' => 'required',
             'diktat' => 'required',
-            'dosen_pengampu' => 'required',
-            'tanggal_mulai_efektif' => 'required',
-            'tanggal_selesai_efektif' => 'required',
-            'bobot_nilai_minimal' => 'required',
-            'matkul_wajib' => 'required',
-            'matkul_pilihan' => 'required',
-            'total_matkul' => 'required',
-            'sks_matkul_wajib' => 'required',
-            'sks_matkul_pilihan' => 'required',
-            'total_sks_matkul' => 'required',
-            'ipk_minimal' => 'required',
-            'abstraksi' => 'required',
-            'file_silabus' => 'mimes:pdf|max:10000',
+            'dosen_pengampu' => 'nullable',
+            'tanggal_mulai_efektif' => 'nullable',
+            'tanggal_selesai_efektif' => 'nullable',
+            'bobot_nilai_minimal' => 'nullable',
+            'matkul_wajib' => 'nullable',
+            'matkul_pilihan' => 'nullable',
+            'total_matkul' => 'nullable',
+            'sks_matkul_wajib' => 'nullable',
+            'sks_matkul_pilihan' => 'nullable',
+            'total_sks_matkul' => 'nullable',
+            'ipk_minimal' => 'nullable',
+            'abstraksi' => 'nullable',
+            // Tambahkan aturan validasi lainnya di sini
+            'file_silabus' => 'mimes:pdf|max:50000', // Aturan validasi untuk file
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -146,7 +147,7 @@ class MatakuliahController extends Controller
                 return new PostMatkul(false, 'Data Tidak Ditemukan', null);
             }
 
-            $requestData = $request->validated();
+            $requestData = $validator->valid();
 
             if (basename($data->file_silabus) != $requestData['file_silabus']) {
                 $filename_lama = $data->file_silabus;

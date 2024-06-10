@@ -46,6 +46,8 @@ class SemesterController extends Controller
         //update semester
         $semesteraktif->update(['status' => 'Tidak Aktif']);
 
+        Semester::where('status', 'Aktif')->update(['status' => 'Tidak Aktif']);
+
         // Jika validasi berhasil, buat semester baru
         $semester = Semester::create($data);
 
@@ -97,8 +99,15 @@ class SemesterController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
+        $data = $validator->validated();
+
+        if (isset($data['status']) && $data['status'] === 'Aktif') {
+            // Update status lain menjadi 'Tidak Aktif'
+            Semester::where('status', 'Aktif')->update(['status' => 'Tidak Aktif']);
+        }
+
         // Update data semester
-        $semester->update($validator->validated());
+        $semester->update($validator->valid());
 
         // Kembalikan response berhasil dengan data semester yang diperbarui
         return response()->json(['message' => 'Semester berhasil diperbarui', 'data' => $semester]);
