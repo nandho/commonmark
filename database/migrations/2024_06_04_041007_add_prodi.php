@@ -22,11 +22,11 @@ return new class extends Migration {
             $table->string('fakultas');
             $table->string('jurusan');
             $table->string('model_perkuliahan');
-            $table->int('jumlah_sks_lulus');
+            $table->integer('jumlah_sks_lulus');
             $table->string('alamat');
             $table->string('telepon');
             $table->string('fax');
-            $table->email('email');
+            $table->string('email');
             $table->string('website');
             $table->string('kontak_person');
             $table->string('frekuensi_peninjauan_kurikulum');
@@ -42,8 +42,8 @@ return new class extends Migration {
             $table->uuid('nama_operator');
             $table->string('nomor_telepon_operator');
 
-            $table->foreign('kepala_prodi')->references('id')->on('dosen')->onDelete('CASCADE')->onUpdate('CASCADE');
-            $table->foreign('nama_operator')->references('id')->on('backoffice')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->foreign('kepala_prodi')->references('id')->on('dosen_models')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->foreign('nama_operator')->references('id')->on('backoffices')->onDelete('CASCADE')->onUpdate('CASCADE');
 
         });
     }
