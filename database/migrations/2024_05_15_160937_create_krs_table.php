@@ -23,9 +23,14 @@ return new class extends Migration
             $table->string('sks');
             $table->string('semester');
             $table->string('tahun_akademik');
-            $table->string('status_krs');
-            $table->string('status_validasi');
+            $table->string('status_krs')->default('Belum di setujui');
+            $table->string('status_validasi')->default('Belum di setujui');
             $table->string('keterangan');
+            $table->uuid('id_dosen');
+            $table->uuid('id_mahasiswa');
+
+            $table->foreign('id_dosen')->references('id')->on('mahasiswas');
+            $table->foreign('id_mahasiswa')->references('id')->on('dosen_models');
         });
 
         // //creating relation into table pembimbing akademik
