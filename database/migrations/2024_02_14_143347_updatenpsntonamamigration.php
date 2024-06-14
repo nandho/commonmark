@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('pmb', function (Blueprint $table) {
             // $table->changeColumn('npsn', 'nama_sekolah');
-            DB::statement('ALTER TABLE pmb CHANGE npsn nama_sekolah VARCHAR(255)');
+            // DB::statement('ALTER TABLE pmb CHANGE npsn nama_sekolah VARCHAR(255)');
         });
     }
 
@@ -24,7 +24,7 @@ return new class extends Migration
     {
         Schema::table('pmb', function (Blueprint $table) {
             // $table->changeColumn('nama_sekolah', 'npsn');
-            DB::statement('ALTER TABLE pmb CHANGE nama_sekolah npsn VARCHAR(255)');
+            // DB::statement('ALTER TABLE pmb CHANGE nama_sekolah npsn VARCHAR(255)');
         });
     }
 };
