@@ -48,8 +48,7 @@ class MahasiswaPost extends Controller
             $mahasiswaData = [];
 
             foreach ($pmbRecords as $pmbRecord) {
-                $mahasiswaData[] = [
-                    'nik' => $pmbRecord->nik,
+                array_push($mahasiswaData, ['nik' => $pmbRecord->nik,
                     'nama_lengkap' => $pmbRecord->nama_lengkap,
                     'nomor_hp' => $pmbRecord->nomor_hp,
                     'nomor_telp' => $pmbRecord->nomor_telp,
@@ -80,7 +79,7 @@ class MahasiswaPost extends Controller
                     'nama_sekolah' => $pmbRecord->nama_sekolah,
                     'created_at' => now(),
                     'updated_at' => now()
-                ];
+                ]);
             }
 
             // Perform batch insert
@@ -194,5 +193,50 @@ class MahasiswaPost extends Controller
 
         //return response
         return new MahasiswaResource(true, 'Data Post Berhasil Dihapus!', null);
+    }
+
+    public function migrasi_pmb(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'data' => 'array',
+                'data.*.id' => 'array|exists:pmb,id'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menyimpan data',
+                'error' => $validator->errors(),
+            ], 400);
+        }
+
+        $requestData = $validator->valid();
+
+        try {
+            // Buat objek PmbModel baru dengan data dari request
+
+            //TODO sesuaikan data yang masuk ke mahasiswa
+
+
+            $data = new Mahasiswa();
+            $data->fill($requestData);
+
+            // Simpan objek ke database
+            $data->save();
+
+            // Jika penyimpanan berhasil, kirim respons sukses
+            return new MahasiswaResource(true, 'success', $data);
+        } catch (\Exception $e) {
+            // Jika terjadi kesalahan, kirim respons error
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menyimpan data',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+
     }
 }
