@@ -56,9 +56,6 @@ class PmbApiController extends Controller
             'nama_sekolah' => 'required|string', //seharusnya nama sekolah
 
             'tahun_lulus_sekolah' => 'required|string',
-
-            'tahun_lulus_sekolah' => 'nullable|string',
-
             //ditambahkan jurusan asal
             'jurusan_asal' => 'required|string',
             //'jurusan_id' => 'required|string|in:' . implode(',', $daftarJurusan),
