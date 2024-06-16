@@ -23,7 +23,7 @@ class MahasiswaPost extends Controller
         // Validate the input data
         $validator = Validator::make($request->all(), [
             'data' => 'required|array',
-            'data.*.id' => 'required|exists:pmb,id'
+            'data.id' => 'required|exists:pmb,id'
         ]);
 
         if ($validator->fails()) {
@@ -35,14 +35,21 @@ class MahasiswaPost extends Controller
         }
 
         // Retrieve all validated data
-        $validatedData = $validator->validated();
+        $validatedData[] = $validator->valid();
 
         try {
             // Collect all PMB IDs from the request
-            $pmbIds = array_column($validatedData['data'], 'id');
 
+            var_dump($validatedData);
+
+            $pmbIds=[];
+            $pmbRecords=[];
+            foreach($validatedData as $data)
+            {
+                $pmbIds['id'] = $data['data']['id'];
+                $pmbRecords['data'] = PmbModel::whereIn('id', $pmbIds['id'])->get();
+            }
             // Fetch all corresponding PMB records in one query
-            $pmbRecords = PmbModel::whereIn('id', $pmbIds)->get();
 
             // Initialize an array to hold the Mahasiswa data for batch insertion
             $mahasiswaData = [];
@@ -94,6 +101,7 @@ class MahasiswaPost extends Controller
 
         } catch (\Exception $e) {
             // Handle any errors that occur during the save process
+            echo($e);
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to save data',
