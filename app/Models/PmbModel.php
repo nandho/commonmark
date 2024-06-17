@@ -41,7 +41,7 @@ class PmbModel extends Model
         'nama_wali',
         'no_hp_wali',
         'no_telp_wali',
-        'perkerjaan_wali',
+        'pekerjaan_wali',
         'sumber_b_kuliah',
         'npsn',
         'jurusan_id',
@@ -84,7 +84,7 @@ class PmbModel extends Model
     protected function foto(): Attribute
     {
         return Attribute::make(
-            get: fn ($image) => asset('/storage/pmbfoto/' . $image),
+            get: fn($image) => asset('/storage/pmbfoto/' . $image),
         );
     }
 }

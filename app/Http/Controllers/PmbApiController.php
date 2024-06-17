@@ -51,11 +51,17 @@ class PmbApiController extends Controller
             'email' => 'required|email',
             'provinsi' => 'required|string',
             'kabupaten' => 'required|string',
-            'nama_sekolah' => 'required|string',
-            'tahun_lulus_sekolah' => 'required|string',
+            'nama_sekolah' => 'required|string', //seharusnya nama sekolah
+
+            // 'tahun_lulus_sekolah' => 'required|string',
+
+            'tahun_lulus_sekolah' => 'nullable|string',
+            'npsn' => 'nullable|string',
+
+
             //ditambahkan jurusan asal
             'jurusan_asal' => 'required|string',
-            'jurusan_id' => 'required|string|in:' . implode(',', $daftarJurusan),
+            'jurusan_id' => 'required|exists:jurusan,id',
             'nama_wali' => 'required|string',
             'nik_wali' => 'required|string',
             'no_hp_wali' => 'required|string',
