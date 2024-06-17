@@ -4,15 +4,16 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('slot_waktu', function (Blueprint $table) {
+        Schema::create('rencana__pembelajarans', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->time('waktu');
+            $table->timestamps();
         });
     }
 
@@ -21,6 +22,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('slot_waktu');
+        Schema::dropIfExists('rencana__pembelajarans');
     }
 };

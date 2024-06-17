@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('status_nikah');
             $table->string('alamat_rumah');
             $table->string('kota');
+            $table->string('negara');
             $table->string('kode_pos');
             $table->string('telepon_rumah')->nullable();
             $table->string('fax');
@@ -37,10 +38,10 @@ return new class extends Migration
             $table->string('telepon_kantor')->nullable();
             $table->string('jenis_pegawai');
             $table->string('nomor_sk_cpns');
-            $table->string('tanggal_sk_cpns')->nullable();
-            $table->string('tmt_pns')->nullable();
+            $table->string('tanggal_sk_cpns');
+            $table->string('tmt_pns');
             $table->string('golongan_pnd');
-            $table->string('tanggal_masuk_pt')->nullable();
+            $table->string('tanggal_masuk_pt');
             $table->string('sumpah_pns');
             $table->string('nomor_taspen');
             $table->string('instansi_asal');

@@ -122,4 +122,14 @@ class SemesterController extends Controller
         // Kembalikan response berhasil
         return response()->json(['message' => 'Semester berhasil dihapus']);
     }
+    public function getActiveSemester()
+    {
+        $activeSemester = Semester::where('status', 'Aktif')->first();
+
+        if (!$activeSemester) {
+            return response()->json(['message' => 'Tidak ada semester aktif saat ini'], 404);
+        }
+
+        return response()->json($activeSemester);
+    }
 }

@@ -58,11 +58,12 @@
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
+            const baseUrl = window.location.origin;
 
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            axios.post('http://localhost:9000/api/auth/login', {
+            axios.post(`${baseUrl}/api/auth/login`, {
                     username: username,
                     password: password
                 })

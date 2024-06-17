@@ -46,44 +46,21 @@ class PmbApiController extends Controller
         $validator = Validator::make($request->all(), [
             'nama_lengkap' => 'required|string',
             'nik' => 'required|string',
-            'nisn' => 'required|string',
-
-            'jenis_kelamin' => 'required|string|in:"Laki-Laki","Perempuan"',
+            'jenis_kelamin' => 'required|string|in:Laki-Laki,Perempuan',
             'nomor_hp' => 'required|string',
             'email' => 'required|email',
             'provinsi' => 'required|string',
             'kabupaten' => 'required|string',
-            'nama_sekolah' => 'required|string', //seharusnya nama sekolah
-
+            'nama_sekolah' => 'required|string',
             'tahun_lulus_sekolah' => 'required|string',
-
-            'tahun_lulus_sekolah' => 'nullable|string',
-
-            //ditambahkan jurusan asal
             'jurusan_asal' => 'required|string',
-            //'jurusan_id' => 'required|string|in:' . implode(',', $daftarJurusan),
+            'jurusan_id' => 'required|string|in:' . implode(',', $daftarJurusan),
             'nama_wali' => 'required|string',
-            'no_hp_wali' => 'required|string',
-            'no_telp_wali' => 'nullable|string',
-            // tambahkan nik orang tua
             'nik_wali' => 'required|string',
-            'tempat_lahir' => 'nullable|string',
-            'tanggal_lahir' => 'nullable|date',
-            // batas field pendaftaran
-            'alamat' => 'nullable|string|nullable',
-            'agama' => 'nullable|string|nullable',
-            'kewarganegaraan' => 'nullable|string|nullable',
-            'jalur_pendaftaran' => 'nullable|string|nullable',
-            'periode_pendaftaran' => 'nullable|string|nullable',
-            'kode_pos' => 'nullable|string|nullable',
-            'provinsi_sekolah' => 'nullable|string|nullable',
-            'kabupaten_sekolah' => 'nullable|string|nullable',
-            'no_ijazah' => 'nullable|string|nullable',
-            'perkerjaan_wali' => 'nullable|string|nullable',
-            'sumber_b_kuliah' => 'nullable|string|nullable',
-            'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif|dimensions:min_width=100,min_height=100|nullable',
-            'kecamatan' => 'nullable|string|nullable',
-            'kelurahan' => 'nullable|string|nullable',
+            'no_hp_wali' => 'required|string',
+            'provinsi_sekolah' => 'nullable|string',
+            'kabupaten_sekolah' => 'nullable|string',
+            'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif|dimensions:min_width=100,min_height=100',
         ]);
 
         if ($validator->fails()) {
@@ -96,36 +73,24 @@ class PmbApiController extends Controller
 
         $requestData = $request->all();
 
-        //getting jurusan dan kode jurusan
+        // Membuat nomor pendaftaran
         $jurusan = JurusanModel::find($requestData['jurusan_id']);
-
         $requestData['nomor_pendaftaran'] = NomorPendaftaranGenerator::generate($jurusan['kode_jurusan']);
 
         try {
             // Buat objek PmbModel baru dengan data dari request
             $pmb = new PmbModel();
-            // Simpan objek ke database
-            $pmb->jurusan_id = $jurusan->id;
-
-            //mambuat akun dan sending email
-            $name = $pmb->nama_lengkap;
-            $username = $requestData['nomor_pendaftaran'];
-            $password = gpw::generate();
-            //generating user with passing data to user model
-            $user = User::create([
-                'username' => $username,
-                'email' => $requestData['email'],
-                'password' => bcrypt($password),
-            ]);
-
-            $user->assignRole('calonmahasiswa');
-            $requestData['id_akun'] = $user->id;
             $pmb->fill($requestData);
-            $pmb->save();
-            Mail::to($requestData['email'])->send(new SendEmailPMB($name, $password, $username));
 
-            // Jika penyimpanan berhasil, kirim respons sukses
-            return new PmbResource(true, 'success', $pmb);
+            // Simpan objek ke database
+            $pmb->save();
+
+            // Buat respons sukses
+            return response()->json([
+                'success' => true,
+                'message' => 'Data berhasil disimpan',
+                'data' => $pmb,
+            ], 200);
         } catch (\Exception $e) {
             // Jika terjadi kesalahan, kirim respons error
             return response()->json([
@@ -135,6 +100,7 @@ class PmbApiController extends Controller
             ], 500);
         }
     }
+
 
     /**
      * Display the specified resource.

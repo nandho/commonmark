@@ -2,46 +2,28 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class KrsModel extends Model
 {
+    use HasUuids;
+
     protected $table = 'krs';
 
     protected $fillable = [
-        'periode_mulai',
-        'periode_berakhir',
+        'kelas',
+        'kode_mk',
+        'nama_mk',
+        'sks',
         'semester',
-        'status',
-        'pembimbing_akademik',
-        'mata_kuliah',
-        'jumlah_sks'
-
+        // 'tahun_akademik',
+        'status_krs',
+        'keterangan'
     ];
 
-    protected static function boot()
-    {
-        parent::boot();
-        static::creating(function ($model) {
-            if (empty($model->{$model->getKeyName()})) {
-                $model->{$model->getKeyName()} = Str::uuid()->toString();
-            }
-        });
-    }
-
-    public function getIncrementing()
-    {
-        return false;
-    }
-
-    /**
-     * Kita override getKeyType method
-     *
-     * Memberi tahu laravel bahwa model ini menggunakan primary key bertipe string
-     */
-    public function getKeyType()
-    {
-        return 'string';
-    }
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+    protected $keyType = 'string';
 }

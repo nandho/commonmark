@@ -42,10 +42,10 @@ return new class extends Migration
             $table->string('no_telp_wali')->nullable();
             $table->string('pekerjaan_wali')->nullable();
             $table->string('sumber_b_kuliah')->nullable();
-            $table->string('npsn')->nullable();
+            $table->string('npsn')->nullable(); // Mengizinkan kolom npsn untuk bernilai NULL
             $table->uuid('jurusan')->nullable();
             $table->timestamps();
-        });  
+        });
     }
 
     /**
@@ -53,6 +53,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pmb');   
+        Schema::dropIfExists('pmb');
     }
 };

@@ -6,19 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+    <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png') }}" />
     <title>@yield('title')</title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <!-- Nucleo Icons -->
-    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
     <!-- Popper -->
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <!-- <script src="https://unpkg.com/@popperjs/core@2"></script> -->
     <!-- Main Styling -->
-    <link href="../assets/css/argon-dashboard-tailwind.css?v=1.0.1" rel="stylesheet" />
+    <link href="{{ asset('assets/css/argon-dashboard-tailwind.css') }}" rel="stylesheet">
+    <!-- <link href="../assets/css/argon-dashboard-tailwind.css?v=1.0.1" rel="stylesheet" /> -->
     <!-- JavaScript untuk melakukan permintaan data ke API -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- data tables -->
@@ -206,11 +207,11 @@
                 </li>
 
                 <li class="mt-0.5 w-full">
-                    <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="./pages/virtual-reality.html">
+                    <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="{{ url('krs') }}">
                         <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                             <i class="relative top-0 text-sm leading-normal text-cyan-500 ni ni-app"></i>
                         </div>
-                        <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Virtual Reality</span>
+                        <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">KRS</span>
                     </a>
                 </li>
 
@@ -329,7 +330,7 @@
                 <div class="flex flex-wrap -mx-3">
                     <div class="flex-none w-auto max-w-full px-3">
                         <div class="relative inline-flex items-center justify-center text-white transition-all duration-200 ease-in-out text-base h-19 w-19 rounded-xl">
-                            <img src="../assets/img/team-2.jpg" alt="profile_image" class="w-full shadow-2xl rounded-xl" loading="lazy" />
+                            <img src="{{ asset('assets/img/team-2.jpg') }}" alt="profile_image" class="w-full shadow-2xl rounded-xl" loading="lazy" />
                         </div>
                     </div>
                     <div class="flex-none w-auto max-w-full px-3 my-auto">
@@ -381,9 +382,9 @@
 <!-- Plugin data tables -->
 
 <!-- plugin for scrollbar  -->
-<script src="../assets/js/plugins/perfect-scrollbar.min.js" async></script>
+<script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}" async></script>
 <!-- main script file  -->
-<script src="../assets/js/argon-dashboard-tailwind.js?v=1.0.1" async></script>
+<script src="{{ asset('assets/js/argon-dashboard-tailwind.js?v=1.0.1') }}" async></script>
 <script>
     // Mendefinisikan fungsi parseJwt di sini
     function parseJwt(token) {

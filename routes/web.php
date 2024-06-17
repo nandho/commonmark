@@ -131,6 +131,15 @@ Route::get('/editprodi/{id}', function ($id) {
 Route::get('/detailsprodi/{id}', function ($id) {
     return view('detailsprodi', ['id' => $id]);
 });
+
+// KRS
+// Route::get('/krsadd', function () {
+//     return view('addkrs');
+// });
+// kurikulum daftar
+Route::get('/krs', function () {
+    return view('daftarkrs');
+});
 Route::get('/tes', function () {
     return view('tes');
 });
