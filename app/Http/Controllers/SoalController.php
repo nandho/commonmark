@@ -27,18 +27,16 @@ class SoalController extends Controller
 
     public function store(Request $request)
     {
-        //will input jurusan
         $validator = Validator::make($request->all(), [
             'soal' => 'required|string',
+            'deskripsi' => 'required|string',
+            'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif',
             'pilihan1' => 'required|string',
             'pilihan2' => 'required|string',
             'pilihan3' => 'required|string',
             'pilihan4' => 'required|string',
-            'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif',
             'kunci_jawaban' => 'required|string|size:1|in:A,B,C,D',
         ]);
-
-        //add soal picture
 
         if ($validator->fails()) {
             return response()->json([
@@ -56,28 +54,13 @@ class SoalController extends Controller
             $requestData['foto'] = $image->hashName();
         }
 
-
         try {
-            //getting all array
+            $soal = new Soal();
+            $soal->fill($requestData);
+            $soal->save();
 
-            // Buat objek PmbModel baru dengan data dari request
-            $data = new soal();
-            //upload gambar jika ada
-            if($request->getFiles()){
-
-            }
-
-            $data->fill($requestData);
-
-
-
-            // Simpan objek ke database
-            $data->save();
-
-            // Jika penyimpanan berhasil, kirim respons sukses
-            return new soalResource(true, 'success', $data);
+            return new SoalResource(true, 'success', $soal);
         } catch (\Exception $e) {
-            // Jika terjadi kesalahan, kirim respons error
             return response()->json([
                 'success' => false,
                 'message' => 'Gagal menyimpan data',
@@ -148,8 +131,7 @@ class SoalController extends Controller
         $data = soal::findorfail($id);
 
         //delete foto jika ada
-        if($data->foto){
-
+        if ($data->foto) {
         }
 
         //delete post

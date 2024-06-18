@@ -38,11 +38,18 @@ Route::get('biodata/', function () {
 Route::get('biodataedit/', function () {
     return view('biodataedit');
 });
-
+// ----soal
 Route::get('soal/', function () {
     return view('soal');
 });
+// Rute untuk menampilkan daftar semua soal
+Route::get('/listsoal', function () {
+    return view('daftarsoal');
+});
 
+Route::get('/addsoal', function () {
+    return view('addsoal');
+});
 // Rute untuk menampilkan daftar semua semester
 Route::get('/semester', function () {
     return view('daftar_semester');

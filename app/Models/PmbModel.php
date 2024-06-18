@@ -47,7 +47,7 @@ class PmbModel extends Model
         'jurusan_id',
         'foto',
         'jurusan_asal',
-        // 'id_akun',
+        'id_akun',
         'nik_wali'
     ];
 
