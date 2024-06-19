@@ -29,7 +29,6 @@ class SoalController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'soal' => 'required|string',
-            'deskripsi' => 'required|string',
             'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif',
             'pilihan1' => 'required|string',
             'pilihan2' => 'required|string',
@@ -86,7 +85,7 @@ class SoalController extends Controller
     {
         // get data and update data
         $validator = Validator::make($request->all(), [
-            'soal' => 'nullable|string',
+            'soal' => 'required|string',
             'pilihan1' => 'nullable|string',
             'pilihan2' => 'nullable|string',
             'pilihan3' => 'nullable|string',

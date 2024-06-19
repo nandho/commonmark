@@ -50,6 +50,12 @@ Route::get('/listsoal', function () {
 Route::get('/addsoal', function () {
     return view('addsoal');
 });
+Route::get('/soal/{id}', function ($id) {
+    return view('detailssoal', ['id' => $id]);
+});
+Route::get('/edit-soal/{id}', function ($id) {
+    return view('editsoal', ['id' => $id]);
+});
 // Rute untuk menampilkan daftar semua semester
 Route::get('/semester', function () {
     return view('daftar_semester');
