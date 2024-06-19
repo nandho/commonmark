@@ -155,6 +155,7 @@
                 'Authorization': `Bearer ${token}` // Sertakan token yang aman
             }
         });
+
         $(document).ready(function() {
             var table = $('#tabelSoal').DataTable({
                 "paging": true,
@@ -168,24 +169,20 @@
             // Membuat permintaan GET dengan axiosInstance
             axiosInstance.get('/ujian')
                 .then(function(response) {
-                    // console.log('Respons API:', response); // Menampilkan keseluruhan respons ke konsol log
-
                     if (response.data && typeof response.data.data === 'object') {
                         const data = response.data.data;
                         // Iterasi melalui kunci numerik dalam objek data
                         for (const key in data) {
                             if (data.hasOwnProperty(key) && !isNaN(key)) { // Periksa apakah key adalah properti sendiri dan numerik
                                 const item = data[key];
-                                // Menampilkan setiap item ke konsol log
-                                // console.log('Item Data:', item);
-
                                 // Membersihkan input sebelum menambahkan ke tabel
                                 const soal = escapeHtml(item.soal);
 
                                 table.row.add([
                                     soal,
-                                    // Menambahkan tombol details secara dinamis
-                                    '<button class="details-btn" data-id="' + item.id + '">Details</button>'
+                                    // Menambahkan tombol details dan delete secara dinamis
+                                    '<button class="details-btn" data-id="' + item.id + '">Details</button>' +
+                                    ' <button class="delete-btn" data-id="' + item.id + '">Delete</button>'
                                 ]).draw();
                             }
                         }
@@ -204,8 +201,47 @@
                 if (soalID) {
                     window.location.href = '/soal/' + soalID;
                 } else {
-                    console.error('ID dosen tidak valid');
+                    console.error('ID soal tidak valid');
                 }
+            });
+
+            // Event listener untuk tombol delete
+            $('#tabelSoal').on('click', '.delete-btn', function() {
+                var soalID = $(this).data('id');
+                var button = $(this); // Simpan referensi tombol yang diklik
+
+                // Tampilkan konfirmasi penghapusan
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Anda tidak dapat mengembalikan data yang telah dihapus!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, hapus!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Lakukan permintaan DELETE ke server
+                        axiosInstance.delete(`/ujian/${soalID}`)
+                            .then(response => {
+                                // Jika berhasil, hapus baris dari tabel
+                                table.row(button.parents('tr')).remove().draw();
+                                Swal.fire(
+                                    'Terhapus!',
+                                    'Data soal telah dihapus.',
+                                    'success'
+                                );
+                            })
+                            .catch(error => {
+                                console.error('Terjadi kesalahan saat menghapus data soal:', error);
+                                Swal.fire(
+                                    'Gagal!',
+                                    'Data soal gagal dihapus.',
+                                    'error'
+                                );
+                            });
+                    }
+                });
             });
 
             // Fungsi untuk membersihkan input dari karakter yang tidak aman
@@ -217,6 +253,7 @@
                 return unsafe.replace(/</g, "&lt;").replace(/>/g, "&gt;");
             }
         });
+
         // Fungsi untuk membaca cookie
         function getCookie(name) {
             let cookieArr = document.cookie.split(";");
@@ -228,7 +265,7 @@
             }
             return null;
         }
-    })
+    });
 </script>
 
 

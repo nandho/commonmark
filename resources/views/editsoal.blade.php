@@ -165,7 +165,7 @@
 
             const idSoal = soalId; // ID soal yang akan diupdate
 
-            axiosInstance.put(`/ujian/${idSoal}`, data, {
+            axiosInstance.post(`/ujian/${idSoal}`, data, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
@@ -180,7 +180,7 @@
                         showConfirmButton: false
                     }).then(() => {
                         // Lakukan tindakan setelah pesan berhasil ditampilkan (misalnya, reload halaman)
-                        // location.reload();
+                        location.reload();
                     });
                 })
                 .catch(error => {
