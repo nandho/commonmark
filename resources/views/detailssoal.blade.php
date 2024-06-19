@@ -89,8 +89,8 @@
                     </form>
                 </div>
                 <div class="ml-auto">
-                    ${soal.foto ? `<img class="w-auto h-28 rounded-md" src="${soal.foto}" alt="soal image" loading="lazy">` : ''}
-                </div>
+            ${soal.foto ? `<img class=" h-auto max-w-full rounded-lg" src="${soal.foto}" alt="soal image" loading="lazy">` : ''}
+            </div>
             </div>
         </div>
     </div>
