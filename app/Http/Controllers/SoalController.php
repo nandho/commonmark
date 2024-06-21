@@ -69,8 +69,6 @@ class SoalController extends Controller
 
             $data->fill($requestData);
 
-
-
             // Simpan objek ke database
             $data->save();
 
@@ -125,10 +123,24 @@ class SoalController extends Controller
         try {
             // Buat objek soal baru dengan data dari request
             $data = soal::findOrFail($id);
-            $data->fill($requestData);
+            // $data->fill($requestData);
 
-            // Simpan objek ke database
-            $data->save();
+            // // Simpan objek ke database
+            // $data->save();
+
+            if (basename($data->foto) != $requestData['foto']) {
+                $filename_lama = $data->foto;
+                $filename_lama = str_replace('public/', 'storage/', $filename_lama);
+                if (Storage::exists($filename_lama)) {
+                    Storage::delete($filename_lama);
+                }
+                //saving file into db
+
+                $requestData['foto'] = $request->file('foto')->storePublicly('public/soalfoto/');
+                $requestData['foto'] = str_replace('public/', 'storage/', $requestData['foto']);
+            }
+
+            $data->update($requestData);
 
             // Jika penyimpanan berhasil, kirim respons sukses
             return new soalResource(true, 'success', $data);
