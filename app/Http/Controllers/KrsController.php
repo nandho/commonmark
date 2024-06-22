@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\KrsModel;
+use App\Models\Semester;
 use Illuminate\Http\Request;
 use App\Http\Resources\krsresource;
 use Illuminate\Support\Facades\Validator;
@@ -12,23 +13,39 @@ class KrsController extends Controller
 {
     public function index()
     {
-        //will return all data
+        // Mendapatkan semua data KRS
         $data = KrsModel::all();
-        return new krsresource(true,'success',$data);
+
+        return new krsresource(true, 'success', $data);
+    }
+
+    public function create()
+    {
+        // Mendapatkan semester yang aktif
+        $activeSemester = Semester::where('status', 'Aktif')->first();
+        if (!$activeSemester) {
+            return redirect()->back()->with('error', 'Tidak ada semester yang aktif saat ini');
+        }
+
+        // Mengoper variabel ke view
+        return view('addkrs', compact('activeSemester'));
     }
 
     public function store(Request $request)
     {
         //will input jurusan
-        $validator = Validator::make($request->all(),[
-            'kelas'=> 'required',
-            'kode_mk'=> 'required',
-            'nama_mk'=> 'required',
-            'sks'=> 'required',
-            'semester'=> 'required',
-            'tahun_akademik'=> 'required',
-            'status_krs'=> 'required',
-            'keterangan'=> 'required',
+        $validator = Validator::make($request->all(), [
+            'kelas' => 'required',
+            'kode_mk' => 'required',
+            'nama_mk' => 'required',
+            'sks' => 'required',
+            'semester' => 'required',
+            // 'tahun_akademik' => 'required',
+            'status_krs' => 'nullable',
+            'status_validasi' => 'nullable',
+            'keterangan' => 'required',
+            'id_dosen' => 'required|exists:dosen_models,id',
+            'id_mahasiswa' => 'required|exists:mahasiswas,id',
         ]);
 
         if ($validator->fails()) {
@@ -39,7 +56,7 @@ class KrsController extends Controller
             ], 400);
         }
 
-        $requestData = $request->all();
+        $requestData = $validator->valid();
 
         try {
             // Buat objek PmbModel baru dengan data dari request
@@ -77,15 +94,18 @@ class KrsController extends Controller
     public function update(Request $request, $id)
     {
         // get data and update data
-        $validator = Validator::make($request->all(),[
-            'kelas'=> 'required',
-            'kode_mk'=> 'required',
-            'nama_mk'=> 'required',
-            'sks'=> 'required',
-            'semester'=> 'required',
-            'tahun_akademik'=> 'required',
-            'status_krs'=> 'required',
-            'keterangan'=> 'required',
+        $validator = Validator::make($request->all(), [
+            'kelas' => 'nullable',
+            'kode_mk' => 'nullable',
+            'nama_mk' => 'nullable',
+            'sks' => 'nullable',
+            'semester' => 'nullable',
+            // 'tahun_akademik' => 'nullable',
+            'status_krs' => 'nullable',
+            'status_validasi' => 'nullable',
+            'keterangan' => 'nullable',
+            'id_dosen' => 'nullable|exists:dosen_models,id',
+            'id_mahasiswa' => 'nullable|exists:mahasiswas,id',
         ]);
 
         if ($validator->fails()) {

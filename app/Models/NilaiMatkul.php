@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use App\Models\HasUuid; // Perbaikan di sini
 
 class NilaiMatkul extends Model
 {
     use HasFactory;
-    use HasUuids;
+    use HasUuid;
 
     protected $fillable = [
         'kode_matkul',

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\MatakuliahController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('login');
+});
 Route::get('tes/', function () {
     return view('tes');
 });
@@ -27,7 +27,7 @@ Route::get('login/', function () {
 })->name('login');
 
 
-Route::get('dashboard',function () {
+Route::get('dashboard', function () {
     return view('all.dashboard'); // TODO return index dengan authorization berisikan KRS, KHS, disini terdapat 5 user
 });
 
@@ -38,7 +38,121 @@ Route::get('biodata/', function () {
 Route::get('biodataedit/', function () {
     return view('biodataedit');
 });
-
+// ----soal
 Route::get('soal/', function () {
     return view('soal');
+});
+// Rute untuk menampilkan daftar semua soal
+Route::get('/listsoal', function () {
+    return view('daftarsoal');
+});
+
+Route::get('/addsoal', function () {
+    return view('addsoal');
+});
+Route::get('/soal/{id}', function ($id) {
+    return view('detailssoal', ['id' => $id]);
+});
+Route::get('/edit-soal/{id}', function ($id) {
+    return view('editsoal', ['id' => $id]);
+});
+// Rute untuk menampilkan daftar semua semester
+Route::get('/semester', function () {
+    return view('daftar_semester');
+});
+
+// Rute untuk menampilkan detail semester berdasarkan ID
+Route::get('/semester/{id}', function ($id) {
+    return view('semester_detail', ['id' => $id]);
+});
+Route::get('/addsemster', function () {
+    return view('addsemester');
+});
+
+//----------------URL DOSEN----------------------------
+// dosen add
+Route::get('/adddosen', function () {
+    return view('inputdosen');
+});
+
+// dosen daftar
+Route::get('/dosen', function () {
+    return view('daftardosen');
+});
+// dosen details
+Route::get('/dosen/{id}', function ($id) {
+    return view('detailsdosen', ['id' => $id]);
+});
+// dosen edit
+Route::get('/edit-dosen/{id}', function ($id) {
+    return view('editdosen', ['id' => $id]);
+});
+
+// dosen delete
+
+// -----------------Kurikulum-----------------------------
+// kurikulum add
+Route::get('/kurikulumadd', function () {
+    return view('addkurikulum');
+});
+// kurikulum daftar
+Route::get('/kurikulum', function () {
+    return view('kurikulum');
+});
+// kurikulum details
+Route::get('/kurikulum/{id}', function ($id) {
+    return view('detailskurikulum', ['id' => $id]);
+});
+// kurikulum edit
+Route::get('/kurikulumedit/{id}', function ($id) {
+    return view('editkurikulum', ['id' => $id]);
+});
+// matkul daftar
+Route::get('/matkul', function () {
+    return view('daftarmatkul');
+});
+// matkul post
+Route::get('/matkuladd', function () {
+    return view('addmatkul');
+});
+// matkul details
+Route::get('/matkul/{id}', function ($id) {
+    return view('detailsmatkul', ['id' => $id]);
+});
+// dosen edit
+Route::get('/edit-matkul/{id}', function ($id) {
+    return view('editmatkul', ['id' => $id]);
+});
+
+// update data
+Route::put('/Matakuliah/{id}', [MatakuliahController::class, 'update']);
+// ---------------------Prodi-------------------
+// prodi add
+Route::get('/prodiadd', function () {
+    return view('addprodi');
+});
+
+// prodi daftar
+Route::get('/prodi', function () {
+    return view('prodi');
+});
+// edit prodi
+Route::get('/editprodi/{id}', function ($id) {
+    return view('editprodi', ['id' => $id]);
+});
+// prodi details
+Route::get('/detailsprodi/{id}', function ($id) {
+    return view('detailsprodi', ['id' => $id]);
+});
+
+// KRS
+// Route::get('/krsadd', function () {
+//     return view('addkrs');
+// });
+// kurikulum daftar
+Route::get('/krs', function () {
+    return view('daftarkrs');
+});
+Route::get('/tes', function () {
+    return view('tes');
 });

@@ -27,7 +27,7 @@ class JurusanController extends Controller
         $validator = Validator::make($request->all(),[
             'kode_jurusan'=> 'required',
             'jurusan'=> 'required',
-            'ukt'=> 'required',
+            // 'ukt'=> 'required',
         ]);
 
         if ($validator->fails()) {
@@ -79,7 +79,7 @@ class JurusanController extends Controller
         $validator = Validator::make($request->all(),[
             'kode_jurusan'=> 'string',
             'jurusan'=> 'string',
-            'ukt'=> 'integer',
+            // 'ukt'=> 'integer',
         ]);
 
         if ($validator->fails()) {

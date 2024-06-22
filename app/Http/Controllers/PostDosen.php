@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\dosenResource;
+use App\Http\Resources\DosenResource;
 use App\Models\DosenModel;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -10,63 +10,74 @@ use Illuminate\Support\Facades\Validator;
 
 class PostDosen extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $data = DosenModel::all();
+        // Buat query builder untuk model Dosen
+        $query = DosenModel::query();
+
+        // Periksa apakah ada filter untuk id_akun
+        if ($request->has('filter.id_akun')) {
+            $query->where('id_akun', $request->input('filter.id_akun'));
+        }
+
+        // Dapatkan hasil query
+        $data = $query->get();
+
+        // Kembalikan hasil dalam format JSON
         return new DosenResource(true, 'success', $data);
     }
-        public function store(Request $request)
+
+    public function store(Request $request)
     {
         //will input jurusan
-        $validator = Validator::make($request->all(),[
-            'nidn'=> 'required',
-            'nama_lengkap'=> 'required',
-            'gelar_depan'=> 'nullable',
-            'gelar_belakang'=> 'required',
-            'program_studi'=> 'required',
-            'nomor_ktp'=> 'required',
-            'tanggal_lahir'=> 'required',
-            'kotatempat_lahir'=> 'required',
-            'negara_tempat_lahir'=> 'nullable',
-            'kartu_pegawai'=> 'required',
-            'stambuk'=> 'required',
-            'jenis_kelamin'=> 'required',
-            'golongan_darah'=> 'required',
-            'agama'=> 'required',
-            'status_nikah'=> 'required',
-            'alamat_rumah'=> 'required',
-            'kota'=> 'required',
-            'negara'=> 'required',
-            'kode_pos'=> 'required',
-            'telepon_rumah'=> 'required',
-            'fax'=> 'required',
-            'telepon_selular'=> 'required',
-            'telepon_kantor'=> 'required',
-            'jenis_pegawai'=> 'required',
-            'nomor_sk_cpns'=> 'nullable',
-            'tanggal_sk_cpns'=> 'nullable',
-            'tmt_pns'=> 'nullable',
-            'golongan_pnd'=> 'required',
-            'tanggal_masuk_pt'=> 'nullable',
-            'sumpah_pns'=> 'required',
-            'nomor_taspen'=> 'required',
-            'instansi_asal'=> 'required',
-            'catatan'=> 'nullable',
-            'nomor_dosen'=> 'required',
-            'gelar_akademik_tertinggi'=> 'required',
-            'pt_gelar_diperoleh'=> 'required',
-            'jabatan'=> 'required',
-            'status_ikatan_kerja'=> 'required',
-            'bidang_ilmu'=> 'required',
-            'kode_instansi_induk'=> 'required',
-            'status_sertifikat_mengajar'=> 'required',
-            'nomor_sertifikat_mengajar'=> 'required',
-            'status_surat_ijin_mengajar'=> 'required',
-            'nomor_surat_ijin_mengajar'=> 'required',
-            'status_aktifitas'=> 'required',
-            'semester_keluar'=> 'required',
-            'password'=>'required|min:8',
-            'email'=>'required|email',
+        $validator = Validator::make($request->all(), [
+            'nidn' => 'required',
+            'nama_lengkap' => 'required',
+            'gelar_depan' => 'nullable',
+            'gelar_belakang' => 'required',
+            'program_studi' => 'required',
+            'nomor_ktp' => 'required',
+            'tanggal_lahir' => 'required',
+            'kotatempat_lahir' => 'required',
+            'negara_tempat_lahir' => 'nullable',
+            'kartu_pegawai' => 'required',
+            'stambuk' => 'required',
+            'jenis_kelamin' => 'required',
+            'golongan_darah' => 'required',
+            'agama' => 'required',
+            'status_nikah' => 'required',
+            'alamat_rumah' => 'required',
+            'kota' => 'required',
+            'kode_pos' => 'required',
+            'telepon_rumah' => 'required',
+            'fax' => 'required',
+            'telepon_selular' => 'required',
+            'telepon_kantor' => 'required',
+            'jenis_pegawai' => 'required',
+            'nomor_sk_cpns' => 'nullable',
+            'tanggal_sk_cpns' => 'nullable',
+            'tmt_pns' => 'nullable',
+            'golongan_pnd' => 'required',
+            'tanggal_masuk_pt' => 'nullable',
+            'sumpah_pns' => 'required',
+            'nomor_taspen' => 'required',
+            'instansi_asal' => 'required',
+            'catatan' => 'nullable',
+            'nomor_dosen' => 'required',
+            'gelar_akademik_tertinggi' => 'required',
+            'pt_gelar_diperoleh' => 'required',
+            'jabatan' => 'required',
+            'status_ikatan_kerja' => 'required',
+            'bidang_ilmu' => 'required',
+            'kode_instansi_induk' => 'required',
+            'status_sertifikat_mengajar' => 'required',
+            'nomor_sertifikat_mengajar' => 'required',
+            'status_surat_ijin_mengajar' => 'required',
+            'nomor_surat_ijin_mengajar' => 'required',
+            'status_aktifitas' => 'required',
+            'semester_keluar' => 'required',
+            'password' => 'required|min:8',
+            'email' => 'required|email',
         ]);
 
         if ($validator->fails()) {
@@ -129,53 +140,52 @@ class PostDosen extends Controller
     public function update(Request $request, $id)
     {
         // get data and update data
-        $validator = Validator::make($request->all(),[
-            'nidn'=> 'required',
-            'nama_lengkap'=> 'required',
-            'gelar_depan'=> 'nullable',
-            'gelar_belakang'=> 'required',
-            'program_studi'=> 'required',
-            'nomor_ktp'=> 'required',
-            'tanggal_lahir'=> 'required',
-            'kotatempat_lahir'=> 'required',
-            'negara_tempat_lahir'=> 'nullable',
-            'kartu_pegawai'=> 'required',
-            'stambuk'=> 'required',
-            'jenis_kelamin'=> 'required',
-            'golongan_darah'=> 'required',
-            'agama'=> 'required',
-            'status_nikah'=> 'required',
-            'alamat_rumah'=> 'required',
-            'kota'=> 'required',
-            'negara'=> 'required',
-            'kode_pos'=> 'required',
-            'telepon_rumah'=> 'required',
-            'fax'=> 'required',
-            'telepon_selular'=> 'required',
-            'telepon_kantor'=> 'required',
-            'jenis_pegawai'=> 'required',
-            'nomor_sk_cpns'=> 'nullable',
-            'tanggal_sk_cpns'=> 'nullable',
-            'tmt_pns'=> 'nullable',
-            'golongan_pnd'=> 'required',
-            'tanggal_masuk_pt'=> 'nullable',
-            'sumpah_pns'=> 'required',
-            'nomor_taspen'=> 'required',
-            'instansi_asal'=> 'required',
-            'catatan'=> 'nullable',
-            'nomor_dosen'=> 'required',
-            'gelar_akademik_tertinggi'=> 'required',
-            'pt_gelar_diperoleh'=> 'required',
-            'jabatan'=> 'required',
-            'status_ikatan_kerja'=> 'required',
-            'bidang_ilmu'=> 'required',
-            'kode_instansi_induk'=> 'required',
-            'status_sertifikat_mengajar'=> 'required',
-            'nomor_sertifikat_mengajar'=> 'required',
-            'status_surat_ijin_mengajar'=> 'required',
-            'nomor_surat_ijin_mengajar'=> 'required',
-            'status_aktifitas'=> 'required',
-            'semester_keluar'=> 'required',
+        $validator = Validator::make($request->all(), [
+            'nidn' => 'required',
+            'nama_lengkap' => 'required',
+            'gelar_depan' => 'required',
+            'gelar_belakang' => 'required',
+            'program_studi' => 'required',
+            'nomor_ktp' => 'required',
+            'tanggal_lahir' => 'required',
+            'kotatempat_lahir' => 'required',
+            'negara_tempat_lahir' => 'required',
+            'kartu_pegawai' => 'required',
+            'stambuk' => 'required',
+            'jenis_kelamin' => 'required',
+            'golongan_darah' => 'required',
+            'agama' => 'required',
+            'status_nikah' => 'required',
+            'alamat_rumah' => 'required',
+            'kota' => 'required',
+            'kode_pos' => 'required',
+            'telepon_rumah' => 'required',
+            'fax' => 'required',
+            'telepon_selular' => 'required',
+            'telepon_kantor' => 'required',
+            'jenis_pegawai' => 'required',
+            'nomor_sk_cpns' => 'required',
+            'tanggal_sk_cpns' => 'nullable',
+            'tmt_pns' => 'nullable',
+            'golongan_pnd' => 'required',
+            'tanggal_masuk_pt' => 'nullable',
+            'sumpah_pns' => 'required',
+            'nomor_taspen' => 'required',
+            'instansi_asal' => 'required',
+            'catatan' => 'required',
+            'nomor_dosen' => 'required',
+            'gelar_akademik_tertinggi' => 'required',
+            'pt_gelar_diperoleh' => 'required',
+            'jabatan' => 'required',
+            'status_ikatan_kerja' => 'required',
+            'bidang_ilmu' => 'required',
+            'kode_instansi_induk' => 'required',
+            'status_sertifikat_mengajar' => 'required',
+            'nomor_sertifikat_mengajar' => 'required',
+            'status_surat_ijin_mengajar' => 'required',
+            'nomor_surat_ijin_mengajar' => 'required',
+            'status_aktifitas' => 'required',
+            'semester_keluar' => 'required',
         ]);
 
         if ($validator->fails()) {

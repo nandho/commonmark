@@ -23,7 +23,7 @@ class MahasiswaPost extends Controller
         // Validate the input data
         $validator = Validator::make($request->all(), [
             'data' => 'required|array',
-            'data.*.id' => 'required|exists:pmb,id'
+            'data.id' => 'required|exists:pmb,id'
         ]);
 
         if ($validator->fails()) {
@@ -35,21 +35,27 @@ class MahasiswaPost extends Controller
         }
 
         // Retrieve all validated data
-        $validatedData = $validator->validated();
+        $validatedData[] = $validator->valid();
 
         try {
             // Collect all PMB IDs from the request
-            $pmbIds = array_column($validatedData['data'], 'id');
 
+            var_dump($validatedData);
+
+            $pmbIds=[];
+            $pmbRecords=[];
+            foreach($validatedData as $data)
+            {
+                $pmbIds['id'] = $data['data']['id'];
+                $pmbRecords['data'] = PmbModel::whereIn('id', $pmbIds['id'])->get();
+            }
             // Fetch all corresponding PMB records in one query
-            $pmbRecords = PmbModel::whereIn('id', $pmbIds)->get();
 
             // Initialize an array to hold the Mahasiswa data for batch insertion
             $mahasiswaData = [];
 
             foreach ($pmbRecords as $pmbRecord) {
-                $mahasiswaData[] = [
-                    'nik' => $pmbRecord->nik,
+                array_push($mahasiswaData, ['nik' => $pmbRecord->nik,
                     'nama_lengkap' => $pmbRecord->nama_lengkap,
                     'nomor_hp' => $pmbRecord->nomor_hp,
                     'nomor_telp' => $pmbRecord->nomor_telp,
@@ -80,7 +86,7 @@ class MahasiswaPost extends Controller
                     'nama_sekolah' => $pmbRecord->nama_sekolah,
                     'created_at' => now(),
                     'updated_at' => now()
-                ];
+                ]);
             }
 
             // Perform batch insert
@@ -95,6 +101,7 @@ class MahasiswaPost extends Controller
 
         } catch (\Exception $e) {
             // Handle any errors that occur during the save process
+            echo($e);
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to save data',
@@ -194,5 +201,50 @@ class MahasiswaPost extends Controller
 
         //return response
         return new MahasiswaResource(true, 'Data Post Berhasil Dihapus!', null);
+    }
+
+    public function migrasi_pmb(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'data' => 'array',
+                'data.*.id' => 'array|exists:pmb,id'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menyimpan data',
+                'error' => $validator->errors(),
+            ], 400);
+        }
+
+        $requestData = $validator->valid();
+
+        try {
+            // Buat objek PmbModel baru dengan data dari request
+
+            //TODO sesuaikan data yang masuk ke mahasiswa
+
+
+            $data = new Mahasiswa();
+            $data->fill($requestData);
+
+            // Simpan objek ke database
+            $data->save();
+
+            // Jika penyimpanan berhasil, kirim respons sukses
+            return new MahasiswaResource(true, 'success', $data);
+        } catch (\Exception $e) {
+            // Jika terjadi kesalahan, kirim respons error
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menyimpan data',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+
     }
 }

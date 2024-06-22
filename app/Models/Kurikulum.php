@@ -25,6 +25,14 @@ class Kurikulum extends Model
         'studi_ideal',
         'studi_maks',
         'keterangan',
+        'tahun',
+        'nomor',
+        'tanggal',
+        'pihak_acc',
+        'tanggal_acc',
+        'studi_ideal',
+        'studi_maks',
+        'keterangan',
     ];
 
     protected $primaryKey = 'id';

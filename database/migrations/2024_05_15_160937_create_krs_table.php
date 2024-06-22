@@ -15,25 +15,30 @@ return new class extends Migration
         // pembimbing_akademik_id uuid
         // mata_kuliah varchar
         // jumlah_sks int
-        Schema::table('krs', function (Blueprint $table) {
+        Schema::create('krs', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('kelas');
             $table->string('kode_mk');
             $table->string('nama_mk');
             $table->string('sks');
             $table->string('semester');
-            $table->string('tahun_akademik');
-            $table->string('status_krs');
-            $table->string('status_validasi');
+            // $table->string('tahun_akademik');
+            $table->string('status_krs')->default('Belum di setujui');
+            $table->string('status_validasi')->default('Belum di setujui');
             $table->string('keterangan');
+            $table->uuid('id_dosen');
+            $table->uuid('id_mahasiswa');
+
+            $table->foreign('id_dosen')->references('id')->on('mahasiswas');
+            $table->foreign('id_mahasiswa')->references('id')->on('dosen_models');
         });
 
-        //creating relation into table pembimbing akademik
-        Schema::table('krs', function (Blueprint $table) {
-            // $table->foreign('pembimbing_akademik')->references('id')->on('pem__akademik_models');
-            $table->foreign('kelas')->references('id')->on('kelas');
-            $table->foreign('kode_mk')->references('kode_mk')->on('mata_kuliah');
-        });
+        // //creating relation into table pembimbing akademik
+        // Schema::table('krs', function (Blueprint $table) {
+        //     // $table->foreign('pembimbing_akademik')->references('id')->on('pem__akademik_models');
+        //     $table->foreign('kelas')->references('id')->on('kelas_kuliah');
+        //     $table->foreign('kode_mk')->references('id')->on('matkuls');
+        // });
     }
 
     /**

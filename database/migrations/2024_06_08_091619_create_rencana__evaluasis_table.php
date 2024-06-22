@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('rencana__evaluasis', function (Blueprint $table) {
-            $table->uiid('id')->primary();
+            $table->uuid('id')->primary();
             $table->string('aktivitas_partisipatif');
             $table->string('hasil_proyek');
             $table->string('tugas');

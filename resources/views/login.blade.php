@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
     @vite('resources/css/app.css')
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
-    
+
 </head>
 
 <body>
@@ -56,52 +56,28 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        function setCookie(token, tvalue) {
-            let date = new Date();
-            date.setTime(date.getTime() + ( 60 * 60 * 1000));
-            const expires = "expires=" + date.toUTCString();
-            document.cookie = token + "=" + tvalue + "; " + expires + "; path=/";
-        }
-        // Event listener untuk menangani pengiriman form
         document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Mencegah pengiriman form secara default
+            event.preventDefault();
+            const baseUrl = window.location.origin;
 
             const username = document.getElementById('username').value;
-            const pass = document.getElementById('password').value;
+            const password = document.getElementById('password').value;
 
-
-            // Kirim data menggunakan Axios
-            axios.post('http://localhost:9000/api/auth/login', {
+            axios.post(`${baseUrl}/api/auth/login`, {
                     username: username,
-                    password: pass
+                    password: password
                 })
-                .then(function(response) {
-                    console.log(response); // Log respon dari server jika sukses
-
-                    // Data berhasil diterima
-                    var userData = response.data; // Mengambil data user dari respons JSON
-
-                    // Menyimpan data user dalam variabel atau melakukan operasi lainnya
-                    var email = userData.email;
-                    var token = userData.token;
-                    var role = userData.role;
-                    var username = userData.username;
-
-                    // Contoh menyimpan data dalam localStorage
-                    localStorage.setItem('email', email);
-                    setCookie('token',token);
-                    localStorage.setItem('role', role);
-                    localStorage.setItem('username', username);
-
-                    //redirect to page
-                    //redirect to page
-                    window.location.href = "/tes";
+                .then(response => {
+                    console.log('Login successful:', response.data);
+                    // Set HttpOnly, Secure, and SameSite cookie via server-side response
+                    document.cookie = `token=${response.data.token}; path=/; max-age=3600; Secure; SameSite=Strict`;
+                    // Arahkan ke halaman daftar dosen setelah login sukses
+                    window.location.href = '/tes';
                 })
-                .catch(function(error) {
-                    console.error(error); // Log kesalahan jika terjadi
+                .catch(error => {
+                    console.error('Error logging in:', error);
                 });
         });
     </script>
-</body>
 
 </html>

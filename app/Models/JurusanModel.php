@@ -13,7 +13,6 @@ class JurusanModel extends Model
     protected $fillable = [
         'kode_jurusan',
         'jurusan',
-        'ukt',
     ];
 
     protected static function boot()

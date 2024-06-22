@@ -12,9 +12,9 @@ class Tagihan extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $table = 'tagihans';
+    private $table = 'tagihans';
 
-    protected $fillable = [
+    private $fillable = [
         'id_mahasiswa',
         'jenis_tagihan',
         'jumlah_pembayaran',
@@ -25,8 +25,8 @@ class Tagihan extends Model
         'status_pembayaran',
     ];
 
-    protected $primaryKey = "id";
-    protected $keyType = "string";
+    private $primaryKey = "id";
+    private $keyType = "string";
     public function id_mahasiswa():HasMany
     {
         return $this->hasMany(Mahasiswa::class, 'nama_lengkap');

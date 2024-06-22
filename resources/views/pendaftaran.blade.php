@@ -96,7 +96,8 @@
                             </div>
                         </div>
                         <!-- Form inputan untuk nama sekolah -->
-                        <div class="container mx-auto px-4 md:px-6" x-data="{ schoolName: '', schools: [], NamaL : [], NIK:[], NISN:[],jk : [],HP : [], email : [],selectedSchool: '', selectedProvince: '', selectedCity: '', provinces: [], cities: [],selectedType: '',jurusan_asal:[],jurusan:[], lulus:[],NamaW:[], NIKW:[], NOHPW:[],Namaibu:[], NIKibu:[], NOHPibu:[]  }">
+                        <div class="container mx-auto px-4 md:px-6" x-data="{ schoolName: '', schools: [], NamaL: [], NIK: [], NISN: [], jk: [], HP: [], email: [], selectedSchool: '', selectedProvince: '', selectedCity: '', provinces: [], cities: [], selectedType: '', jurusan_asal: [],jurusanList: [], jurusan: '', lulus: [], NamaW: [], NIKW: [], NOHPW: [], Namaibu: [], NIKibu: [], NOHPibu: [] }">
+
                             <form class="mb-4" id="schoolForm">
                                 <div class="container mx-auto px-4 md:px-6">
                                     <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 light:bg-gray-800 light:text-blue-400" role="alert">
@@ -179,7 +180,7 @@
                                         <!-- Tampilkan kotak inputan jika data tidak ditemukan -->
                                         <div x-show="schools.length === 0 && schoolName !== ''" class="mb-4">
                                             <label for="manualInput" class="block text-sm font-medium text-gray-700 mb-2">Masukkan Nama Sekolah:</label>
-                                            <input type="text" x-model="selectedSchool" id="manualInput" name="manualInput" class="border border-gray-300 rounded-md px-4 py-2 w-full">
+                                            <input type="text" x-model="manualInput" id="manualInput" name="manualInput" class="border border-gray-300 rounded-md px-4 py-2 w-full">
                                         </div>
                                         <!-- Dropdown untuk pilihan sekolah -->
                                         <div class="mb-4" x-show="schools.length > 0">
@@ -220,10 +221,12 @@
                                 </div>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="container mx-auto px-4 md:px-6">
-                                        <label for="jurusan" class="block text-sm font-medium text-gray-700 mb-2">Progam Studi: <span class="text-red-500">*</span></label>
+                                        <label for="jurusan" class="block text-sm font-medium text-gray-700 mb-2">Program Studi: <span class="text-red-500">*</span></label>
                                         <select x-model="jurusan" id="jurusan" name="jurusan" class="border border-gray-300 rounded-md px-4 py-2 w-full">
                                             <option value="" selected>Pilih Program Studi</option>
-                                            <option value="D3 perhotelan">D3 - Perhotelan</option>
+                                            <template x-for="item in jurusanList" :key="item.id">
+                                                <option x-text="item.jurusan" :value="item.id"></option>
+                                            </template>
                                         </select>
                                     </div>
                                     <div x-model="Namaibu" class="container mx-auto px-4 md:px-6">
@@ -269,27 +272,30 @@
     <!-- JavaScript untuk melakukan permintaan data ke API -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        const base_url = "http://localhost:9000";
 
-        async function fetchJurusan(){
-            try{
-                const response = await axios.get(base_url+'/jurusan');
-                const jurusanData = response.data.map(data=>({
+        const baseUrl = window.location.origin;
+        // const baseUrl = "http://localhost:9000";
+
+        async function fetchJurusan() {
+            try {
+                const response = await axios.get(`${baseUrl}/api/jurusan`);
+                const jurusanData = response.data.data.map(data => ({
                     id: data.id,
-                    nama: data.jurusan
+                    jurusan: data.jurusan
                 }));
-                document.querySelector('[x-data]').__x.$data.jurusan = jurusanData;
-
-                // Mengosongkan hasil jika ada
-                document.getElementById('result').innerHTML = '';
-            }catch(error){
+                document.querySelector('[x-data]').__x.$data.jurusanList = jurusanData;
+                document.getElementById('result').innerHTML = ''; // Mengosongkan hasil jika ada
+            } catch (error) {
                 document.getElementById('result').innerHTML = 'Data tidak ditemukan';
-
-                // Menyembunyikan dropdown jika data tidak ditemukan
-                document.querySelector('[x-data]').__x.$data.schools = [];
+                document.querySelector('[x-data]').__x.$data.jurusanList = []; // Mengosongkan dropdown jika data tidak ditemukan
             }
         }
-        
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchJurusan();
+        });
+
         // Fungsi untuk mengambil data dari API
         async function fetchData(schoolName) {
             const apiUrl = 'https://api-sekolah-indonesia.vercel.app/sekolah/s?sekolah=' + encodeURIComponent(schoolName);
@@ -397,18 +403,18 @@
 
             // Kirim data menggunakan Axios
             axios
-                .post(`${base_url}/api/pmb`, {
+                .post(`${baseUrl}/api/pmb`, {
                     nama_lengkap: nama_lengkap,
                     nik: nik,
                     nisn: nisn,
                     jenis_kelamin: jenis_kelamin,
                     nomor_hp: nomor_hp,
                     email: email,
-                    nama_sekolah: nama_sekolah,
+                    nama_sekolah: inputsekolah,
                     jenis_sekolah: jenis_sekolah,
                     jurusan_asal: jurusan_asal,
-                    jurusan: jurusan,
-                    tahun_lulus: tahun_lulus,
+                    jurusan_id: jurusan,
+                    tahun_lulus_sekolah: tahun_lulus,
                     nama_wali: nama_wali,
                     nik_wali: nik_wali,
                     no_hp_wali: nomor_hp_wali,
@@ -416,7 +422,7 @@
                     nik_ortu: nik_ortu,
                     nomor_hp_wali: nomor_hp_ortu,
                     schoolName: schoolName,
-                    inputsekolah: inputsekolah,
+                    // inputsekolah: inputsekolah,
                     provinsi: provinsi,
                     kabupaten: kabupaten
                 })

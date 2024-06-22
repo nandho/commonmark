@@ -9,7 +9,6 @@ use Spatie\Permission\Traits\HasRoles;
 class backoffice extends Model
 {
     use HasUuids;
-    use HasRoles;
 
     protected $fillable = [
         'nama_lengkap',

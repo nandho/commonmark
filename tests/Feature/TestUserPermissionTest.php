@@ -8,10 +8,9 @@ use App\Models\nilai;
 
 class TestUserPermissionTest extends TestCase
 {
-    public function  test_UserPermissionAdminTest(): void
+    public function test_UserPermissionAdminTest(): void
     {
         $user = User::where('username','Admin')->firstOrFail();
-
 
         self::assertTrue(!is_null($user));
         // self::assertTrue($user->can("add", nilai::class));

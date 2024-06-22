@@ -6,7 +6,7 @@ use App\Http\Controllers\test;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\LogoutController;
-
+use App\Http\Controllers\KrsController;
 // use App\Http\Controllers\JawabanController;
 // use App\Http\Controllers\JurusanController;
 // use App\Http\Controllers\NilaiController;
@@ -54,8 +54,8 @@ Route::apiResource('ujian', App\Http\Controllers\SoalController::class);
 Route::apiResource('pmb/jawaban', App\Http\Controllers\JawabanController::class);
 Route::apiResource('hasil_ujian/nilai', App\Http\Controllers\NilaiController::class);
 Route::apiResource('mahasiswa', App\Http\Controllers\MahasiswaPost::class);
-Route::apiResource('dosen', App\Http\Controllers\PostDosen::class);//->middleware('auth:api')
-Route::apiResource('dosen', App\Http\Controllers\PostDosen::class);//->middleware('auth:api');
+Route::apiResource('dosen', App\Http\Controllers\PostDosen::class); //->middleware('auth:api')
+Route::apiResource('dosen', App\Http\Controllers\PostDosen::class); //->middleware('auth:api');
 Route::apiResource('pem_akademik', App\Http\Controllers\Pem_AkademikPost::class);
 Route::apiResource('pem_skripsi', App\Http\Controllers\Pem_SkripsiPost::class);
 Route::apiResource('persyaratan_pmb', App\Http\Controllers\persyaratancontroller::class);
@@ -79,7 +79,7 @@ Route::get('user/', loggeduser::class)->middleware('auth:api');
 Route::post('auth/logout', LogoutController::class)->name('logout');
 // Route::apiResource('testing/pmb', PmbApiController::class, ['except' => 'index']);
 
-Route::apiResource('semester',App\Http\Controllers\SemesterController::class);  
+
 
 
 Route::get('test', [test::class, 'index']);
@@ -98,3 +98,7 @@ Route::post('/remove_role', [App\Http\Controllers\rolemanagement::class, 'role_d
 Route::apiResource('permissionmanagement', App\Http\Controllers\permissionmanagement::class);
 Route::post('/addpermissionrole', [App\Http\Controllers\permissionmanagement::class, 'give_permission_into_role']);
 Route::post('/rmpermissionrole', [App\Http\Controllers\permissionmanagement::class, 'remove_permisssions']);
+
+// Route untuk menampilkan form tambah KRS
+Route::get('/krs/create', [KrsController::class, 'create'])->name('krs.create');
+

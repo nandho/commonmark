@@ -30,24 +30,16 @@ class SemesterController extends Controller
             'nama_semester' => 'required|string|max:255',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date',
-            // 'status' => 'required|string|max:255',
+            'status' => 'required|string|max:255',
         ]);
 
         // Jika validasi gagal, kembalikan error
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
-        $data = $request->validated();
-
-        $data['status'] = 'Aktif';
-
-        $semesteraktif = Semester::where('status', 'Aktif')->first();
-
-        //update semester
-        $semesteraktif->update(['status' => 'Tidak Aktif']);
 
         // Jika validasi berhasil, buat semester baru
-        $semester = Semester::create($data);
+        $semester = Semester::create($validator->validated());
 
         // Kembalikan response berhasil dengan data semester
         return response()->json(['message' => 'Semester berhasil dibuat', 'data' => $semester], 201);
@@ -70,7 +62,6 @@ class SemesterController extends Controller
         // Kembalikan response dengan data semester
         return response()->json($semester);
     }
-
     /**
      * Update the specified resource in storage.
      */
@@ -86,10 +77,10 @@ class SemesterController extends Controller
 
         // Validasi request
         $validator = Validator::make($request->all(), [
-            'nama_semester' => 'required|string|max:255',
-            'tanggal_mulai' => 'required|date',
-            'tanggal_selesai' => 'required|date',
-            'status' => 'required|string|max:255',
+            'nama_semester' => 'string|max:255',
+            'tanggal_mulai' => 'date',
+            'tanggal_selesai' => 'date',
+            'status' => 'string|max:255',
         ]);
 
         // Jika validasi gagal, kembalikan error
@@ -97,8 +88,15 @@ class SemesterController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
+        $data = $validator->validated();
+
+        if (isset($data['status']) && $data['status'] === 'Aktif') {
+            // Update status lain menjadi 'Tidak Aktif'
+            Semester::where('status', 'Aktif')->update(['status' => 'Tidak Aktif']);
+        }
+
         // Update data semester
-        $semester->update($validator->validated());
+        $semester->update($validator->valid());
 
         // Kembalikan response berhasil dengan data semester yang diperbarui
         return response()->json(['message' => 'Semester berhasil diperbarui', 'data' => $semester]);
@@ -123,5 +121,15 @@ class SemesterController extends Controller
 
         // Kembalikan response berhasil
         return response()->json(['message' => 'Semester berhasil dihapus']);
+    }
+    public function getActiveSemester()
+    {
+        $activeSemester = Semester::where('status', 'Aktif')->first();
+
+        if (!$activeSemester) {
+            return response()->json(['message' => 'Tidak ada semester aktif saat ini'], 404);
+        }
+
+        return response()->json($activeSemester);
     }
 }

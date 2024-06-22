@@ -18,7 +18,7 @@ class KrsModel extends Model
         'nama_mk',
         'sks',
         'semester',
-        'tahun_akademik',
+        // 'tahun_akademik',
         'status_krs',
         'keterangan'
     ];

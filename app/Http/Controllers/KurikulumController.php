@@ -112,4 +112,3 @@ class KurikulumController extends Controller
         return new PostKurikulum(true,'Data Berhasil Dihapus',null);
     }
 }
-
